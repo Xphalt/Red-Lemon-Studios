@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 
-public class Enemy_Script : MonoBehaviour
+public class Enemy_Script_Zack : MonoBehaviour
 {
     public int HP = 100;
     private int damage = 10;
     private float moveSpeed = 2.2f;
+    private bool chasing = false;
 
     public GameObject target;
 
     void Update()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
-
+        if (chasing)
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        }
+        else if (!chasing)
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        
         if (HP == 0)
         {
             gameObject.SetActive(false);
@@ -29,7 +37,15 @@ public class Enemy_Script : MonoBehaviour
         {
             //collision.gameObject.GetComponent<Player_Script>().HP -= damage;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D bubble)
+    {
+        chasing = true;
+    }
 
+    private void OnTriggerExit2D(Collider2D bubble)
+    {
+        chasing = false;
     }
 }
