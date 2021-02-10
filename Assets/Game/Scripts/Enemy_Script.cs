@@ -7,7 +7,7 @@ public class Enemy_Script : MonoBehaviour
     private float moveSpeed = 2.2f;
 
     public GameObject target;
-   
+
     void Update()
     {
         target = GameObject.FindGameObjectWithTag("Player");
