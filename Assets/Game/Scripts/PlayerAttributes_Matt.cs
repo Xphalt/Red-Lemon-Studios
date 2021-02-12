@@ -28,8 +28,8 @@ public class PlayerAttributes_Matt : MonoBehaviour
 
     void Update()
     {
-        HealthText.text = m_CurHealth.ToString();
-        AmmoText.text = m_CurAmmo.ToString();
+        HealthText.text = "HP: " + m_CurHealth.ToString();
+        AmmoText.text = "Earth Element: " + m_CurAmmo.ToString();
 
         if(m_CurHealth == 0)
         {
