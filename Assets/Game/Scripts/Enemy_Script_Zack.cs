@@ -8,17 +8,23 @@ public class Enemy_Script_Zack : MonoBehaviour
     private bool chasing = false;
 
     public GameObject target;
+    public Rigidbody moving;
+
+    void Start()
+    {
+        moving = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         if (chasing)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+            moving.velocity = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
         }
         else if (!chasing)
         {
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            moving.velocity = Vector3.zero;
         }
         
         if (HP == 0)
