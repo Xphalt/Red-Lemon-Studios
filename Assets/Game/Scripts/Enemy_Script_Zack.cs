@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
+//Zack Pilgrim
+
 public class Enemy_Script_Zack : MonoBehaviour
 {
     public int HP = 100;
     private int damage = 10;
-    private float moveSpeed = 2.2f;
+    public float moveSpeed = 3.0f;
     private bool chasing = false;
 
     public GameObject target;
@@ -20,20 +22,17 @@ public class Enemy_Script_Zack : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         if (chasing)
         {
-            moving.velocity = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+            moving.velocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
         }
         else if (!chasing)
         {
             moving.velocity = Vector3.zero;
         }
         
-        if (HP == 0)
-        {
-            gameObject.SetActive(false);
-        }
+        
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player_Weapon")
         {
@@ -41,17 +40,24 @@ public class Enemy_Script_Zack : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            //collision.gameObject.GetComponent<Player_Script>().HP -= damage;
+            collision.gameObject.GetComponent<PlayerAttributes_Matt>().TakeDamage(damage);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D bubble)
+    private void OnTriggerEnter(Collider bubble)
     {
-        chasing = true;
+        if (bubble.tag == "Player")
+        {
+            chasing = true;
+        }
+        
     }
 
-    private void OnTriggerExit2D(Collider2D bubble)
+    private void OnTriggerExit(Collider bubble)
     {
-        chasing = false;
+        if (bubble.tag == "Player")
+        {
+            chasing = false;
+        }
     }
 }
