@@ -2,7 +2,7 @@
 
 //Zack Pilgrim
 
-public class Enemy_Script_Zack : MonoBehaviour
+public class EnemyScript_Zack : MonoBehaviour
 {
     public int HP = 100;
     private int damage = 10;
