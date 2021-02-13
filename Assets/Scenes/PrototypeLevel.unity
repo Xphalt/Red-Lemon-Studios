@@ -1487,6 +1487,11 @@ Transform:
   m_Father: {fileID: 2102286822}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &851722111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7338099964585652450, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+  m_PrefabInstance: {fileID: 7338099964613616536}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &941665914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,6 +2216,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashDuration: 0.5
   DashSpeed: 20
+--- !u!1 &1284195659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7556397500506076552, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
+  m_PrefabInstance: {fileID: 2128035949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1284195660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284195659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcc1a6e2a6a55d040b0ae37b916058ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletFire: {fileID: 7015762197351387664, guid: 79cada851dd6ef74ba18cd1473b5e6bd, type: 3}
+  BulletWater: {fileID: 7015762197351387664, guid: d3a967e726a36df49b2ddd0ef894631f, type: 3}
+  BulletEarth: {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
+  BulletAir: {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
+  GunPos: {fileID: 851722111}
+  ShootForce: 1500
+  TargetDistance: 50
+--- !u!114 &1284195661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284195659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c49dc17f0e2d14db503395ad5157e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ElementsText: {fileID: 336235395}
+  m_CurElement: 0
 --- !u!1 &1311897658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,16 +3120,84 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2717065246199369988, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369988, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369988, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_FontData.m_Alignment
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 190.99358
+      value: 690.99854
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 254.58292
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -183.7
+      value: -368.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246199369989, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 149.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994001, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 62
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994001, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994001, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 316.7076
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 104.35286
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 202.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717065246492994002, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 92.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
@@ -3101,6 +3212,10 @@ PrefabInstance:
       propertyPath: tool
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 1284195659}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_RootOrder
       value: 0

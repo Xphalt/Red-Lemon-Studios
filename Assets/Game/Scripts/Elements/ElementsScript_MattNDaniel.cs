@@ -16,11 +16,6 @@ public class ElementsScript_MattNDaniel : MonoBehaviour
         m_CurElement = Elements.Fire;
     }
 
-    void Update()
-    {
-        ChangeElement();
-    }
-
     void UpdateElementText()
     {
         ElementsText.text = m_CurElement.ToString();
@@ -42,9 +37,9 @@ public class ElementsScript_MattNDaniel : MonoBehaviour
         }
     }
 
-    void ChangeElement()
+    public void ChangeElement(int mouseScroll)
     {
-        m_CurElement += Mathf.FloorToInt(Input.mouseScrollDelta.y);
+        m_CurElement += mouseScroll;
 
         if (m_CurElement >= Elements.ElementsSize)
         {

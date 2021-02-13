@@ -3,23 +3,16 @@
  */
 
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript_Daniel : MonoBehaviour
 {
-    public GameObject BulletFire;
-    public GameObject BulletWater;
-    public GameObject BulletEarth;
-    public GameObject BulletAir;
-    public GameObject GunPos;
-    private GameObject ChosenBullet;
     internal GameObject tool;
-    internal ToolBase toolActivate;
+    public GameObject weapon;
 
-    public float ShootForce;
-    public float TargetDistance;
+    internal ToolBase toolActivate;
+    internal ElementShooting shooter;
+    internal ElementsScript_MattNDaniel elementChanger;
 
     private float toolTimer = 0;
     public float toolDuration;
@@ -28,17 +21,23 @@ public class PlayerScript_Daniel : MonoBehaviour
     private void Start()
     {
         isToolAvailable = false;
+
+        shooter = weapon.GetComponent<ElementShooting>();
+        elementChanger = weapon.GetComponent<ElementsScript_MattNDaniel>();
     }
 
     void Update()
     {
+        Inputs();
+
+        ToolCooldown();
+    }
+
+    private void Inputs()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            CheckElement();
-            GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-            newBullet.GetComponent<Rigidbody>().AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * TargetDistance) - GunPos.transform.position).normalized * ShootForce);
-            newBullet.transform.SetParent(null);
-            Destroy(newBullet, 2);
+            shooter.Shoot();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -46,28 +45,13 @@ public class PlayerScript_Daniel : MonoBehaviour
             UseTool();
         }
 
-        ToolCooldown();
-        
-    }
-
-    void CheckElement()
-    {
-        switch(GetComponent<ElementsScript_MattNDaniel>().m_CurElement)
+        if (Input.mouseScrollDelta.y != 0)
         {
-            case ElementsScript_MattNDaniel.Elements.Fire:
-                ChosenBullet = BulletFire;
-                break;
-            case ElementsScript_MattNDaniel.Elements.Water:
-                ChosenBullet = BulletWater;
-                break;
-            case ElementsScript_MattNDaniel.Elements.Air:
-                ChosenBullet = BulletAir;
-                break;
-            case ElementsScript_MattNDaniel.Elements.Earth:
-                ChosenBullet = BulletEarth;
-                break;
+            elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
         }
     }
+
+
 
     #region Tool
     private void UseTool()

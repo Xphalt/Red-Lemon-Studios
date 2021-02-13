@@ -31,7 +31,7 @@ public class PlayerAttributes_Matt : MonoBehaviour
         HealthText.text = "HP: " + m_CurHealth.ToString();
         AmmoText.text = "Earth Element: " + m_CurAmmo.ToString();
 
-        if(m_CurHealth == 0)
+        if(m_CurHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
