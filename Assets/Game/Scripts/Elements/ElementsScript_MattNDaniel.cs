@@ -2,39 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static EnumHelper;
 
 public class ElementsScript_MattNDaniel : MonoBehaviour
 {
-    public enum Elements { Fire, Water, Air, Earth, ElementsSize };
+    public GameObject canvas;
+    private UIManager UIScript;
 
-    public Text ElementsText;
+    public GameObject player;
+    internal PlayerScript_Daniel playerScript;
 
-    public Elements m_CurElement;
+    public Elements m_CurElement = (Elements)0;
 
     private void Start()
     {
-        m_CurElement = Elements.Fire;
-    }
-
-    void UpdateElementText()
-    {
-        ElementsText.text = m_CurElement.ToString();
-
-        switch (m_CurElement)
-        {
-            case Elements.Fire:
-                ElementsText.color = Color.red;
-                break;
-            case Elements.Water:
-                ElementsText.color = Color.blue;
-                break;
-            case Elements.Air:
-                ElementsText.color = Color.white;
-                break;
-            case Elements.Earth:
-                ElementsText.color = Color.yellow;
-                break;
-        }
+        UIScript = canvas.GetComponent<UIManager>();
+        playerScript = player.GetComponent<PlayerScript_Daniel>();
     }
 
     public void ChangeElement(int mouseScroll)
@@ -50,6 +33,6 @@ public class ElementsScript_MattNDaniel : MonoBehaviour
             m_CurElement += (int)Elements.ElementsSize;
         }
 
-        UpdateElementText();
+        UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
     }
 }

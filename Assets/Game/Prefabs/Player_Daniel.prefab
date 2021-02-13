@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7338099962747303697}
   - component: {fileID: 7338099962747303696}
   - component: {fileID: 7338099962747303711}
-  - component: {fileID: 7338099962747303709}
   - component: {fileID: 1954041511}
   m_Layer: 0
   m_Name: Player_Daniel
@@ -306,16 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50735f0c0b8198b408488d5e913d9ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletFire: {fileID: 7015762197351387664, guid: 79cada851dd6ef74ba18cd1473b5e6bd, type: 3}
-  BulletWater: {fileID: 7015762197351387664, guid: d3a967e726a36df49b2ddd0ef894631f, type: 3}
-  BulletEarth: {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
-  BulletAir: {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
-  GunPos: {fileID: 7338099964585652450}
-  ShootForce: 1000
-  TargetDistance: 20
-  Tool: 0
-  DashSpeed: 20
-  dashDuration: 0.5
+  canvas: {fileID: 0}
+  weapon: {fileID: 0}
+  m_MaxAmmo: 100
   toolDuration: 3
 --- !u!114 &7338099962747303711
 MonoBehaviour:
@@ -329,23 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e216f4504296f9741b1728bafc48488d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthText: {fileID: 0}
-  AmmoText: {fileID: 0}
-  m_MaxAmmo: 100
---- !u!114 &7338099962747303709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338099962747303707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c49dc17f0e2d14db503395ad5157e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ElementsText: {fileID: 0}
-  m_CurElement: 0
 --- !u!135 &1954041511
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -423,7 +398,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

@@ -40,7 +40,7 @@ public class EnemyScript_Zack : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerAttributes_Matt>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerScript_Daniel>().TakeDamage(damage);
         }
     }
 

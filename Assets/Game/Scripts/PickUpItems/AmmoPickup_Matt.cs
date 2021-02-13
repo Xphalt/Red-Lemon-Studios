@@ -13,7 +13,7 @@ public class AmmoPickup_Matt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerAttributes_Matt>().AddAmmo(AmmoValue);
+            other.GetComponent<PlayerScript_Daniel>().AddAmmo(AmmoValue);
             gameObject.SetActive(false);
         }
     }

@@ -2,17 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnumHelper : MonoBehaviour
+public static class EnumHelper
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public enum Elements { Fire, Water, Air, Earth, ElementsSize };
 }

@@ -13,7 +13,7 @@ public class HealthPickup_Matt : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.GetComponent<PlayerAttributes_Matt>().AddHealth(RestoreValue);
+            other.GetComponent<PlayerScript_Daniel>().AddHealth(RestoreValue);
             gameObject.SetActive(false);
         }
     }
