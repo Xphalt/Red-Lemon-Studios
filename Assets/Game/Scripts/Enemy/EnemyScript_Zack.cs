@@ -28,13 +28,17 @@ public class EnemyScript_Zack : MonoBehaviour
         {
             moving.velocity = Vector3.zero;
         }
-        
+
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player_Weapon")
+        if (collision.gameObject.tag == "bullet")
         {
             HP -= damage;
         }
