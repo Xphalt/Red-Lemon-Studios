@@ -9,42 +9,25 @@ using UnityEngine;
 
 public class PlayerScript_Daniel : MonoBehaviour
 {
-    public enum Tools
-    {
-        noTool,
-        crystalBall
-    }
-
-
     public GameObject BulletFire;
     public GameObject BulletWater;
     public GameObject BulletEarth;
     public GameObject BulletAir;
     public GameObject GunPos;
-    private Rigidbody rb;
-    private CharacterController characterController;
+    private GameObject ChosenBullet;
+    internal GameObject tool;
+    internal ToolBase toolActivate;
 
     public float ShootForce;
     public float TargetDistance;
 
-    private GameObject ChosenBullet;
-
-    public Tools Tool;
-    public float DashSpeed;
-
-    private Vector3 dashDist;
-    private float dashTimer = 0;
-    public float dashDuration;
-    private bool isDashing;
-
     private float toolTimer = 0;
     public float toolDuration;
-    private bool isToolAvailable;
+    internal bool isToolAvailable;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        characterController = GetComponent<CharacterController>();
+        isToolAvailable = false;
     }
 
     void Update()
@@ -53,7 +36,7 @@ public class PlayerScript_Daniel : MonoBehaviour
         {
             CheckElement();
             GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-            newBullet.GetComponent<Rigidbody>().AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward*TargetDistance) - GunPos.transform.position).normalized * ShootForce);
+            newBullet.GetComponent<Rigidbody>().AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * TargetDistance) - GunPos.transform.position).normalized * ShootForce);
             newBullet.transform.SetParent(null);
             Destroy(newBullet, 2);
         }
@@ -63,29 +46,8 @@ public class PlayerScript_Daniel : MonoBehaviour
             UseTool();
         }
 
-        if (isDashing)
-        {
-            dashTimer += Time.deltaTime;
-
-            characterController.Move(dashDist * Time.deltaTime);
-
-            if (dashTimer > dashDuration)
-            {
-                isDashing = false;
-                dashTimer = 0;
-            }
-        }
-
-        if (!isToolAvailable)
-        {
-            toolTimer += Time.deltaTime;
-
-            if (toolTimer > toolDuration)
-            {
-                isToolAvailable = true;
-                toolTimer = 0;
-            }
-        }
+        ToolCooldown();
+        
     }
 
     void CheckElement()
@@ -107,32 +69,28 @@ public class PlayerScript_Daniel : MonoBehaviour
         }
     }
 
+    #region Tool
     private void UseTool()
     {
         if (isToolAvailable)
         {
-            if (Tool == Tools.crystalBall)
-            {
-                CrystalBallTool();
-            }
-
+            toolActivate.Activate();
             isToolAvailable = false;
         }
     }
 
-    private void CrystalBallTool()
+    private void ToolCooldown()
     {
-        isDashing = true;
-
-        dashDist = characterController.velocity.normalized * DashSpeed;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == ("Tool"))
+        if (!isToolAvailable)
         {
-            Tool = Tools.crystalBall;
-            other.gameObject.SetActive(false);
+            toolTimer += Time.deltaTime;
+
+            if (toolTimer > toolDuration)
+            {
+                isToolAvailable = true;
+                toolTimer = 0;
+            }
         }
     }
+    #endregion
 }
