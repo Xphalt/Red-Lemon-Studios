@@ -8,7 +8,7 @@ public class ElementShooting : MonoBehaviour
 {
     private ElementsScript_MattNDaniel elementManager;
 
-    public GameObject player;
+    private GameObject player;
     private PlayerScript_Daniel playerScript;
     
     private GameObject ChosenBullet;
@@ -23,6 +23,7 @@ public class ElementShooting : MonoBehaviour
     private void Start()
     {
         elementManager = GetComponent<ElementsScript_MattNDaniel>();
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerScript_Daniel>();
     }
 

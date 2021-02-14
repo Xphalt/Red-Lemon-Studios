@@ -9,14 +9,15 @@ public class ElementsScript_MattNDaniel : MonoBehaviour
     public GameObject canvas;
     private UIManager UIScript;
 
-    public GameObject player;
-    internal PlayerScript_Daniel playerScript;
+    private GameObject player;
+    private PlayerScript_Daniel playerScript;
 
     public Elements m_CurElement = (Elements)0;
 
     private void Start()
     {
         UIScript = canvas.GetComponent<UIManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerScript_Daniel>();
     }
 

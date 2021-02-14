@@ -15,11 +15,11 @@ public class EnemyScript_Zack : MonoBehaviour
     void Start()
     {
         moving = GetComponent<Rigidbody>();
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
         if (chasing)
         {
             moving.velocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
