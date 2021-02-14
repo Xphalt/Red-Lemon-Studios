@@ -1,16 +1,30 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// 
+/// Script made by Zack
+/// 
+/// Linden added enemy death
+/// when their health reaches 0
+/// 
+/// Daniel added enemies being
+/// effected by ailments from
+/// elemental ammo
+/// 
+/// </summary>
+
+using UnityEngine;
 using static EnumHelper;
 
-//Zack Pilgrim
-
-public class EnemyScript_Zack : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
+    public GameObject target;
+    public Rigidbody moving;
+
+    ElementTypes statusEffect;
+
     public int HP = 100;
     private int damage = 10;
     public float moveSpeed = 3.0f;
     private bool chasing = false;
-
-    Elements statusEffect;
 
     private float statusDuration;
     private float statusTimer;
@@ -19,9 +33,6 @@ public class EnemyScript_Zack : MonoBehaviour
 
     private float DOTTimer;
     private float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
-
-    public GameObject target;
-    public Rigidbody moving;
 
     void Start()
     {
@@ -52,7 +63,7 @@ public class EnemyScript_Zack : MonoBehaviour
 
             else switch(statusEffect)
             {
-                case Elements.Fire:
+                case ElementTypes.Fire:
                     DOTTimer += Time.deltaTime;
                     if (DOTTimer > DOTInterval)
                     {
@@ -61,14 +72,14 @@ public class EnemyScript_Zack : MonoBehaviour
                     }
                     break;
 
-                case Elements.Water:
+                case ElementTypes.Water:
                     break;
 
-                case Elements.Earth:
+                case ElementTypes.Earth:
                     moving.velocity *= statusMagnitude;
                     break;
 
-                case Elements.Air:
+                case ElementTypes.Air:
                     break;
             }
         }
@@ -78,7 +89,7 @@ public class EnemyScript_Zack : MonoBehaviour
     {
         if (collision.gameObject.tag == "bullet")
         {
-            BulletScript bulletInfo = collision.gameObject.GetComponent<BulletScript>();
+            ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
             TakeDamage(bulletInfo.damage);
 
             if (bulletInfo.hasEffect)
@@ -92,7 +103,7 @@ public class EnemyScript_Zack : MonoBehaviour
 
         else if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerScript_Daniel>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
     }
 

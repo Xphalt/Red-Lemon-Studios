@@ -10,7 +10,7 @@ public class HurtBox : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerScript_Daniel>().TakeDamage(DamageValue);
+            other.GetComponent<Player>().TakeDamage(DamageValue);
         }
     }
 }

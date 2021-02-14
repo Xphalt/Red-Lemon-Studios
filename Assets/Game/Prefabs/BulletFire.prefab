@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 851395117764732057}
   - component: {fileID: 8991405446547975128}
   - component: {fileID: 1144444058916440325}
-  - component: {fileID: 6336778472292089383}
-  - component: {fileID: -5955411041121294568}
-  - component: {fileID: -4998487230588207221}
+  - component: {fileID: -5859721176162572917}
+  - component: {fileID: 2328455024044735745}
+  - component: {fileID: -1895152479043099751}
   m_Layer: 0
-  m_Name: BulletWater_Daniel
+  m_Name: BulletFire
   m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77abd6c595f8efe429098f8d7a65f9d4, type: 2}
+  - {fileID: 2100000, guid: 0fe1b84c9c02fcb4a927a73e174011c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!198 &6336778472292089383
+--- !u!198 &-5859721176162572917
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1386,8 +1386,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.19339621, g: 0.9312056, b: 1, a: 1}
-        key1: {r: 0, g: 0.08320022, b: 1, a: 1}
+        key0: {r: 1, g: 0.88337225, b: 0.5613208, a: 1}
+        key1: {r: 1, g: 0.052753434, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4829,7 +4829,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &-5955411041121294568
+--- !u!199 &2328455024044735745
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -4895,7 +4895,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-4998487230588207221
+--- !u!114 &-1895152479043099751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4909,6 +4909,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasEffect: 1
   damage: 10
-  damageType: 1
+  damageType: 0
   statusEffectDuration: 5
-  statusMagnitude: 0
+  statusMagnitude: 5

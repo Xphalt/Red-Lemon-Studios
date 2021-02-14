@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 7338099962747303698}
   - component: {fileID: 7338099962747303697}
   - component: {fileID: 7338099962747303696}
-  - component: {fileID: 7338099962747303711}
   - component: {fileID: 738706843799255103}
   m_Layer: 0
-  m_Name: Player_Daniel
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -309,18 +308,6 @@ MonoBehaviour:
   weapon: {fileID: 0}
   m_MaxAmmo: 100
   toolDuration: 3
---- !u!114 &7338099962747303711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338099962747303707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e216f4504296f9741b1728bafc48488d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &738706843799255103
 CapsuleCollider:
   m_ObjectHideFlags: 0

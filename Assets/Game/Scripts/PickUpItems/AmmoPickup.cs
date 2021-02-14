@@ -1,11 +1,17 @@
-﻿/*
-    Mateusz Szymanski
-*/
+﻿/// <summary>
+/// Script made by Matt
+/// 
+/// This allows for ammo to be
+/// picked up from the ground
+/// for the player to use
+/// 
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPickup_Matt : MonoBehaviour
+public class AmmoPickup : MonoBehaviour
 {
     public int AmmoValue;
 
@@ -13,7 +19,7 @@ public class AmmoPickup_Matt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerScript_Daniel>().AddAmmo(AmmoValue);
+            other.GetComponent<Player>().AddAmmo(AmmoValue);
             gameObject.SetActive(false);
         }
     }

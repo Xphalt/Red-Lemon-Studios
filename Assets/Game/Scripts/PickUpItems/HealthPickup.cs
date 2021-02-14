@@ -1,11 +1,17 @@
-﻿/*
-    Mateusz Szymanski
-*/
+﻿/// <summary>
+/// Script made by Matt
+/// 
+/// This allows for health to be
+/// picked up from the ground
+/// to heal the player
+/// 
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup_Matt : MonoBehaviour
+public class HealthPickup : MonoBehaviour
 {
     public float RestoreValue;
 
@@ -13,7 +19,7 @@ public class HealthPickup_Matt : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.GetComponent<PlayerScript_Daniel>().AddHealth(RestoreValue);
+            other.GetComponent<Player>().AddHealth(RestoreValue);
             gameObject.SetActive(false);
         }
     }

@@ -10,7 +10,7 @@ public class NoAmmoBox : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerScript_Daniel>().SubstractAmmo(AmmoTaken);
+            other.GetComponent<Player>().SubstractAmmo(AmmoTaken);
         }
     }
 }

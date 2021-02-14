@@ -1,20 +1,32 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// 
+/// Script made by Daniel
+/// 
+/// This was initially in the player script
+/// but Linden and Daniel de-coupled the 
+/// shooting from it to allow for a more
+/// modular implementation
+/// 
+/// When adding new ammo's, this script wont
+/// need to be touched due to Linden and
+/// Daniel's refactoring
+/// 
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-
 public class ElementShooting : MonoBehaviour
 {
-    private ElementsScript_MattNDaniel elementManager;
-
     private GameObject player;
-    private PlayerScript_Daniel playerScript;
-    
     private GameObject ChosenBullet;
-    
     public GameObject GunPos;
 
+    private Elements elementManager;
+    private Player playerScript;
+    
     public List<GameObject> BulletPrefabs = new List<GameObject>();
 
     public float ShootForce;
@@ -22,11 +34,12 @@ public class ElementShooting : MonoBehaviour
 
     private void Start()
     {
-        elementManager = GetComponent<ElementsScript_MattNDaniel>();
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<PlayerScript_Daniel>();
+        elementManager = GetComponent<Elements>();
+        playerScript = player.GetComponent<Player>();
     }
 
+    //TODO cache the rigidbody reference to boost performance
     public void Shoot()
     {
         if (playerScript.AmmoCheck())
@@ -39,9 +52,9 @@ public class ElementShooting : MonoBehaviour
 
             playerScript.SubstractAmmo(1);
         }    
-       
     }
 
+    //Assigns the correct prefab to the selected elemental ammo
     void CheckElement()
     {
         ChosenBullet = BulletPrefabs[(int)elementManager.m_CurElement];

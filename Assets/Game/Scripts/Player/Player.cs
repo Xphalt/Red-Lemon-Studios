@@ -1,14 +1,32 @@
-﻿/*
- * DANIEL BIBBY
- */
-
+﻿/// <summary>
+/// 
+/// Script made by Daniel and Daniel
+/// 
+/// Originally we had two scripts, this
+/// one for player inputs, shooting and
+/// using tools which was made primarily
+/// by Daniel with Linden making a few
+/// changes.
+/// 
+/// The other script was called 
+/// "PlayerAttributes" and was created 
+/// by Matt which contained the health
+/// and ammo along with ways to increase
+/// and decrease health, lose and gain ammo.
+/// 
+/// Me and Daniel kept Matts code and added
+/// and refactored it into this script to
+/// keep everything related to the player
+/// together and to help with reusablillty.
+/// 
+/// </summary>
 
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static EnumHelper;
 
-public class PlayerScript_Daniel : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject canvas;
     private UIManager UIScript;
@@ -18,14 +36,14 @@ public class PlayerScript_Daniel : MonoBehaviour
 
     internal ToolBase toolActivate;
     internal ElementShooting shooter;
-    internal ElementsScript_MattNDaniel elementChanger;
+    internal Elements elementChanger;
+
+    internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
     public int m_MaxAmmo;
 
     private const float m_MaxHealth = 100.0f;
     private float m_CurHealth;
-
-    internal Dictionary<Elements, int> Ammo = new Dictionary<Elements, int>();
 
     private float toolTimer = 0;
     public float toolDuration;
@@ -36,12 +54,12 @@ public class PlayerScript_Daniel : MonoBehaviour
         isToolAvailable = false;
 
         shooter = weapon.GetComponent<ElementShooting>();
-        elementChanger = weapon.GetComponent<ElementsScript_MattNDaniel>();
+        elementChanger = weapon.GetComponent<Elements>();
 
         m_CurHealth = m_MaxHealth;
-        for (int ammo = 0; ammo < (int)Elements.ElementsSize; ammo++)
+        for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
         {
-            Ammo.Add((Elements)0 + ammo, m_MaxAmmo);
+            Ammo.Add((ElementTypes)0 + ammo, m_MaxAmmo);
         }
 
         UIScript = canvas.GetComponent<UIManager>();

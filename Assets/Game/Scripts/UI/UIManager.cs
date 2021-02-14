@@ -1,9 +1,20 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// 
+/// Script made by Daniel and Linden
+/// 
+/// Initially we didn't have a script
+/// exclusively for things dislayed on
+/// the UI so this script was created
+/// to keep any UI related logic in
+/// one place
+/// 
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static EnumHelper;
-
 
 public class UIManager : MonoBehaviour
 {
@@ -13,11 +24,10 @@ public class UIManager : MonoBehaviour
     public void UpdateHealthText(int currentHealth)
     {
         HPText.text = "HP: " + currentHealth.ToString();
-        Elements.Fire.ToString();
+        ElementTypes.Fire.ToString();
     }
 
-
-    public void UpdateElementText(Elements ammoType, int ammoAmount, bool newColour=false)
+    public void UpdateElementText(ElementTypes ammoType, int ammoAmount, bool newColour=false)
     {
         ElementalAmmoText.text = ammoType + ": " + ammoAmount.ToString();
 
@@ -25,16 +35,16 @@ public class UIManager : MonoBehaviour
         {
             switch (ammoType)
             {
-                case Elements.Fire:
+                case ElementTypes.Fire:
                     ElementalAmmoText.color = Color.red;
                     break;
-                case Elements.Water:
+                case ElementTypes.Water:
                     ElementalAmmoText.color = Color.blue;
                     break;
-                case Elements.Air:
+                case ElementTypes.Air:
                     ElementalAmmoText.color = Color.white;
                     break;
-                case Elements.Earth:
+                case ElementTypes.Earth:
                     ElementalAmmoText.color = Color.yellow;
                     break;
             }

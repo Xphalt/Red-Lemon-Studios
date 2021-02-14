@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// 
+/// Script made by Linden and Daniel
+/// 
+/// By inheriting from the tool base
+/// script, tools are able to be created
+/// very easily and quickly
+/// 
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
