@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1144444058916440325}
   - component: {fileID: -5859721176162572917}
   - component: {fileID: 2328455024044735745}
+  - component: {fileID: -1895152479043099751}
   m_Layer: 0
   m_Name: BulletFire_Daniel
   m_TagString: bullet
@@ -4894,3 +4895,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-1895152479043099751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015762197351387664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8078954bbff281f4e853ac7390535fcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasEffect: 1
+  damage: 10
+  damageType: 0
+  statusEffectDuration: 5
+  statusMagnitude: 5

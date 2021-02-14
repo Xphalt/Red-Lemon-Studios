@@ -80,7 +80,7 @@ public class PlayerScript_Daniel : MonoBehaviour
     {
         m_CurHealth -= value;
 
-        if (m_CurHealth < 0)
+        if (m_CurHealth <= 0)
         {
             m_CurHealth = 0;
             Respawn();

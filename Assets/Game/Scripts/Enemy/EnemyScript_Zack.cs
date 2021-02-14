@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static EnumHelper;
 
 //Zack Pilgrim
 
@@ -8,6 +9,16 @@ public class EnemyScript_Zack : MonoBehaviour
     private int damage = 10;
     public float moveSpeed = 3.0f;
     private bool chasing = false;
+
+    Elements statusEffect;
+
+    private float statusDuration;
+    private float statusTimer;
+    private bool statusEffectActive;
+    private float statusMagnitude;
+
+    private float DOTTimer;
+    private float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
     public GameObject target;
     public Rigidbody moving;
@@ -29,22 +40,68 @@ public class EnemyScript_Zack : MonoBehaviour
             moving.velocity = Vector3.zero;
         }
 
-        if (HP <= 0)
+        if (statusEffectActive)
         {
-            Destroy(gameObject);
+            statusTimer += Time.deltaTime;
+            if (statusTimer > statusDuration)
+            {
+                statusEffectActive = false;
+                statusTimer = 0;
+                DOTTimer = 0;
+            }
+
+            else switch(statusEffect)
+            {
+                case Elements.Fire:
+                    DOTTimer += Time.deltaTime;
+                    if (DOTTimer > DOTInterval)
+                    {
+                        TakeDamage((int)statusMagnitude);
+                        DOTTimer = 0;
+                    }
+                    break;
+
+                case Elements.Water:
+                    break;
+
+                case Elements.Earth:
+                    moving.velocity *= statusMagnitude;
+                    break;
+
+                case Elements.Air:
+                    break;
+            }
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "bullet")
         {
-            HP -= damage;
+            BulletScript bulletInfo = collision.gameObject.GetComponent<BulletScript>();
+            TakeDamage(bulletInfo.damage);
+
+            if (bulletInfo.hasEffect)
+            {
+                statusEffect = bulletInfo.damageType;
+                statusMagnitude = bulletInfo.statusMagnitude;
+                statusDuration = bulletInfo.statusEffectDuration;
+                statusEffectActive = true;
+            }
         }
+
         else if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerScript_Daniel>().TakeDamage(damage);
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
