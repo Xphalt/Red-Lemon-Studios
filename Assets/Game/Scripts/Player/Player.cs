@@ -160,8 +160,10 @@ public class Player : MonoBehaviour
     {
         if (isToolAvailable)
         {
-            toolActivate.Activate();
-            isToolAvailable = false;
+            if (toolActivate.Activate())
+            {
+                isToolAvailable = false;
+            }
         }
     }
 

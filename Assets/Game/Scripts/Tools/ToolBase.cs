@@ -29,7 +29,10 @@ public class ToolBase : MonoBehaviour
         playerScript = player.GetComponent<Player>();
     }
 
-    virtual public void Activate() {}
+    virtual public bool Activate() 
+    { 
+        return true; 
+    }
 
     private void OnTriggerEnter(Collider other)
     {
