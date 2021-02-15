@@ -26,8 +26,10 @@ public class ElementShooting : MonoBehaviour
 
     private Elements elementManager;
     private Player playerScript;
-    
+
+    public List<ElementTypes> BulletTypes = new List<ElementTypes>();
     public List<GameObject> BulletPrefabs = new List<GameObject>();
+    private Dictionary<ElementTypes, GameObject> BulletDictionary = new Dictionary<ElementTypes, GameObject>();
 
     public float ShootForce;
     public float TargetDistance;
@@ -37,6 +39,11 @@ public class ElementShooting : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         elementManager = GetComponent<Elements>();
         playerScript = player.GetComponent<Player>();
+
+        for (int index = 0; index < BulletPrefabs.Count; index++)
+        {
+            BulletDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
+        }
     }
 
     //TODO cache the rigidbody reference to boost performance
@@ -57,6 +64,6 @@ public class ElementShooting : MonoBehaviour
     //Assigns the correct prefab to the selected elemental ammo
     void CheckElement()
     {
-        ChosenBullet = BulletPrefabs[(int)elementManager.m_CurElement];
+        ChosenBullet = BulletDictionary[elementManager.m_CurElement];
     }
 }

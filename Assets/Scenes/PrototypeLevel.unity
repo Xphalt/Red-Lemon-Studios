@@ -1027,10 +1027,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d4eb94a0091244984f9d9cdd396a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  moveSpeed: 5
   target: {fileID: 1784885375}
   moving: {fileID: 451854967}
+  HP: 100
+  moveSpeed: 5
 --- !u!1 &555508811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,13 +2865,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1784885375}
     - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
+      propertyPath: BulletTypes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
+      propertyPath: BulletTypes.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
+      propertyPath: BulletTypes.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
+      propertyPath: BulletTypes.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
       propertyPath: BulletPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
+      objectReference: {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
     - target: {fileID: 1284195660, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
       propertyPath: BulletPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
+      objectReference: {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
     - target: {fileID: 1284195661, guid: 6f37e8e6bdfe33548a7e92da415df873, type: 3}
       propertyPath: canvas
       value: 
