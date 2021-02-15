@@ -1,8 +1,9 @@
 ﻿/// <summary>
-/// Script made by Daniel
+/// 
+/// Script made by Daniel and Linden
 /// 
 /// Creating a helper class
-/// for enums helps scripts to
+/// for enums that helps scripts to
 /// access and change the currently
 /// selected element
 /// 
