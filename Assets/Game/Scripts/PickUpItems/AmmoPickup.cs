@@ -10,16 +10,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnumHelper;
 
 public class AmmoPickup : MonoBehaviour
 {
     public int AmmoValue;
+    public ElementTypes Type;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<Player>().AddAmmo(AmmoValue);
+            other.GetComponent<Player>().AddAmmo(AmmoValue, Type);
             gameObject.SetActive(false);
         }
     }

@@ -57,7 +57,7 @@ public class ElementShooting : MonoBehaviour
             newBullet.transform.SetParent(null);
             Destroy(newBullet, 2);
 
-            playerScript.SubstractAmmo(1);
+            playerScript.SubstractAmmo(1, elementManager.m_CurElement);
         }    
     }
 

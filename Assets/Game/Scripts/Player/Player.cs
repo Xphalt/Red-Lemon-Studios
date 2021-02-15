@@ -119,26 +119,28 @@ public class Player : MonoBehaviour
         UIScript.UpdateHealthText((int)m_CurHealth);
     }
 
-    public void SubstractAmmo(int value)
+    public void SubstractAmmo(int value, ElementTypes type)
     {
-        Ammo[elementChanger.m_CurElement] -= value;
+        Ammo[type] -= value;
 
-        if (Ammo[elementChanger.m_CurElement] < 0)
+        if (Ammo[type] < 0)
         {
-            Ammo[elementChanger.m_CurElement] = 0;
+            Ammo[type] = 0;
         }
-        UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement]);
+
+        if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
-    public void AddAmmo(int value)
+    public void AddAmmo(int value, ElementTypes type)
     {
-        Ammo[elementChanger.m_CurElement] += value;
+        Ammo[type] += value;
 
-        if (Ammo[elementChanger.m_CurElement] > m_MaxAmmo)
+        if (Ammo[type] > m_MaxAmmo)
         {
-            Ammo[elementChanger.m_CurElement] = m_MaxAmmo;
+            Ammo[type] = m_MaxAmmo;
         }
-        UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement]);
+        
+        if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
     public bool AmmoCheck()
