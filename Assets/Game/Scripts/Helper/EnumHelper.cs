@@ -1,9 +1,12 @@
 ﻿/// <summary>
 /// 
-/// Script made by Daniel and Linden
+/// Enum created by Matt
+/// and was in the ElementShooting
+/// script before refactor
 /// 
-/// Creating a helper class
-/// for enums that helps scripts to
+/// Linden and Daniel refactored that
+/// class and moved the enum to a helper 
+/// class that helps scripts to
 /// access and change the currently
 /// selected element
 /// 
