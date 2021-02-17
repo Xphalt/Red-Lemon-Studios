@@ -103,6 +103,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (currentTool.toolType == ElementTypes.Air) currentTool.EndAbility();
+    }
+
     #region StatManagement
     public void TakeDamage(float value)
     {

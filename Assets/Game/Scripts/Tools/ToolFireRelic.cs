@@ -12,7 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToolCrystalBall : ToolBase
+public class ToolFireRelic : ToolBase
 {
     private CharacterController playerController;
 

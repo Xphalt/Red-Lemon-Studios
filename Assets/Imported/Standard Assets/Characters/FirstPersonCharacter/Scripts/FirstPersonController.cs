@@ -42,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        
+        public bool m_CanDoubleJump;
+        private bool m_HasJumpedTwice;
 
         // Use this for initialization
         private void Start()
@@ -75,6 +78,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
+
+                m_HasJumpedTwice = false;
             }
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
             {
@@ -109,20 +114,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+            m_MoveDir.y = (m_CharacterController.isGrounded) ? -m_StickToGroundForce : m_MoveDir.y;
 
-            if (m_CharacterController.isGrounded)
+            if (m_CharacterController.isGrounded || m_CanDoubleJump && !m_HasJumpedTwice)
             {
-                m_MoveDir.y = -m_StickToGroundForce;
-
                 if (m_Jump)
                 {
                     m_MoveDir.y = m_JumpSpeed;
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
+
+                    m_HasJumpedTwice = !m_CharacterController.isGrounded;
                 }
             }
-            else
+            if (!m_CharacterController.isGrounded)
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }

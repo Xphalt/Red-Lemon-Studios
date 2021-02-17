@@ -15,12 +15,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnumHelper;
 
 public class ToolBase : MonoBehaviour
 {
     protected GameObject player;
     protected Vector3 toolDisplayPos;
     protected Player playerScript;
+    public ElementTypes toolType;
 
     virtual public void Start()
     {
@@ -33,6 +35,8 @@ public class ToolBase : MonoBehaviour
     { 
         return true; 
     }
+
+    virtual public void EndAbility() { }
 
     private void OnTriggerEnter(Collider other)
     {
