@@ -21,6 +21,7 @@
 /// 
 /// </summary>
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,10 +32,14 @@ public class Player : MonoBehaviour
     public GameObject canvas;
     private UIManager UIScript;
 
-    internal GameObject tool;
+    internal List<ToolBase> toolList = new List<ToolBase>();
+    internal ToolBase currentTool = null;
+    private int toolIndex = 0;
+
     public GameObject weapon;
 
-    internal ToolBase toolActivate;
+    private bool switchingTools = false;
+
     internal ElementShooting shooter;
     internal Elements elementChanger;
 
@@ -88,10 +93,15 @@ public class Player : MonoBehaviour
 
         if (Input.mouseScrollDelta.y != 0)
         {
-            elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            if (!switchingTools) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            else ChangeTool(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            switchingTools = !switchingTools;
         }
     }
-
 
     #region StatManagement
     public void TakeDamage(float value)
@@ -160,7 +170,7 @@ public class Player : MonoBehaviour
     {
         if (isToolAvailable)
         {
-            if (toolActivate.Activate())
+            if (currentTool.Activate())
             {
                 isToolAvailable = false;
             }
@@ -178,6 +188,27 @@ public class Player : MonoBehaviour
                 isToolAvailable = true;
                 toolTimer = 0;
             }
+        }
+    }
+
+    private void ChangeTool(int mouseScroll)
+    {
+        if (mouseScroll != toolList.Count && toolList.Count > 0)
+        {
+            currentTool.gameObject.SetActive(false);
+            toolIndex += mouseScroll;
+
+            if (toolIndex >= toolList.Count)
+            {
+                toolIndex -= toolList.Count;
+            }
+            else if (toolIndex < 0)
+            {
+                toolIndex += toolList.Count;
+            }
+
+            currentTool = toolList[toolIndex];
+            currentTool.gameObject.SetActive(true);
         }
     }
     #endregion

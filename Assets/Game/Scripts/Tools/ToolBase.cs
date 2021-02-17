@@ -39,9 +39,9 @@ public class ToolBase : MonoBehaviour
         if (other.gameObject == player)
         {
             transform.position = toolDisplayPos;
-            playerScript.tool = gameObject;
             playerScript.isToolAvailable = true;
-            playerScript.toolActivate = GetComponent<ToolBase>();
+            playerScript.toolList.Add(GetComponent<ToolBase>());
+            if (playerScript.currentTool == null) playerScript.currentTool = GetComponent<ToolBase>();
         }
     }
 }
