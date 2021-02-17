@@ -48,10 +48,15 @@ public class ToolCrystalBall : ToolBase
     {
         base.Activate();
 
-        if (playerController.velocity == Vector3.zero) return false; 
         isDashing = true;
 
-        dashDist = playerController.velocity.normalized * DashSpeed;
+        Vector3 nonVerticalVelocity = playerController.velocity;
+        nonVerticalVelocity.y = 0;
+
+        if (nonVerticalVelocity == Vector3.zero) dashDist = playerController.transform.forward * DashSpeed;
+        else dashDist = nonVerticalVelocity.normalized * DashSpeed;
+
+        dashDist.y = 0;
 
         return true;
     }
