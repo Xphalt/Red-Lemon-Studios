@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         
-        public bool m_CanDoubleJump;
+        internal bool m_CanDoubleJump;
         private bool m_HasJumpedTwice;
 
         // Use this for initialization
@@ -114,6 +114,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+            // Had to play around with this section to enable a double jump. Let me know if it causes future issues -DANIEL
+
             m_MoveDir.y = (m_CharacterController.isGrounded) ? -m_StickToGroundForce : m_MoveDir.y;
 
             if (m_CharacterController.isGrounded || m_CanDoubleJump && !m_HasJumpedTwice)
@@ -128,6 +130,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     m_HasJumpedTwice = !m_CharacterController.isGrounded;
                 }
             }
+            else m_Jump = false;
+
             if (!m_CharacterController.isGrounded)
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;

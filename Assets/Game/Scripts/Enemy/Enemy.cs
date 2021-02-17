@@ -88,7 +88,9 @@ public class Enemy : MonoBehaviour
     {
         if ((target.transform.position - gameObject.transform.position).magnitude < detectionRadius)
         {
-            moving.velocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
+            Vector3 newVelocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
+            newVelocity.y = moving.velocity.y;
+            moving.velocity = newVelocity;
         }
         else
         {
