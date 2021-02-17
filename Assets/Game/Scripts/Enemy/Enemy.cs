@@ -18,13 +18,16 @@ public class Enemy : MonoBehaviour
 {
     public GameObject target;
     public Rigidbody moving;
+    public ElementTypes elementType;
+    private ElementTypes weakAgainst;
+    private ElementTypes strongAgainst;
 
     ElementTypes statusEffect;
 
     public int HP = 100;
     private int damage = 10;
     public float moveSpeed = 3.0f;
-    private bool chasing = false;
+    public float detectionRadius;
 
     private float statusDuration;
     private float statusTimer;
@@ -38,18 +41,14 @@ public class Enemy : MonoBehaviour
     {
         moving = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
+
+        weakAgainst = (elementType == ElementTypes.ElementTypesSize - 1) ? 0 : elementType + 1;
+        strongAgainst = (elementType == 0) ? ElementTypes.ElementTypesSize - 1 : elementType - 1;
     }
 
     void Update()
     {
-        if (chasing)
-        {
-            moving.velocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
-        }
-        else if (!chasing)
-        {
-            moving.velocity = Vector3.zero;
-        }
+        ChasePlayer();
 
         if (statusEffectActive)
         {
@@ -61,27 +60,39 @@ public class Enemy : MonoBehaviour
                 DOTTimer = 0;
             }
 
-            else switch(statusEffect)
-            {
-                case ElementTypes.Fire:
-                    DOTTimer += Time.deltaTime;
-                    if (DOTTimer > DOTInterval)
-                    {
-                        TakeDamage((int)statusMagnitude);
-                        DOTTimer = 0;
-                    }
-                    break;
+            else switch (statusEffect)
+                {
+                    case ElementTypes.Fire:
+                        DOTTimer += Time.deltaTime;
+                        if (DOTTimer > DOTInterval)
+                        {
+                            TakeDamage((int)statusMagnitude);
+                            DOTTimer = 0;
+                        }
+                        break;
 
-                case ElementTypes.Water:
-                    break;
+                    case ElementTypes.Water:
+                        break;
 
-                case ElementTypes.Earth:
-                    moving.velocity *= statusMagnitude;
-                    break;
+                    case ElementTypes.Earth:
+                        moving.velocity *= statusMagnitude;
+                        break;
 
-                case ElementTypes.Air:
-                    break;
-            }
+                    case ElementTypes.Air:
+                        break;
+                }
+        }
+    }
+
+    private void ChasePlayer()
+    {
+        if ((target.transform.position - gameObject.transform.position).magnitude < detectionRadius)
+        {
+            moving.velocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
+        }
+        else
+        {
+            moving.velocity = Vector3.zero;
         }
     }
 
@@ -92,7 +103,7 @@ public class Enemy : MonoBehaviour
             ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
             TakeDamage(bulletInfo.damage);
 
-            if (bulletInfo.hasEffect)
+            if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst)
             {
                 statusEffect = bulletInfo.damageType;
                 statusMagnitude = bulletInfo.statusMagnitude;
@@ -113,23 +124,6 @@ public class Enemy : MonoBehaviour
         if (HP <= 0)
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter(Collider bubble)
-    {
-        if (bubble.tag == "Player")
-        {
-            chasing = true;
-        }
-        
-    }
-
-    private void OnTriggerExit(Collider bubble)
-    {
-        if (bubble.tag == "Player")
-        {
-            chasing = false;
         }
     }
 }

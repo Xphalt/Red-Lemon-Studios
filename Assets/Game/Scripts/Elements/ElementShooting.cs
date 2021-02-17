@@ -29,7 +29,7 @@ public class ElementShooting : MonoBehaviour
 
     public List<ElementTypes> BulletTypes = new List<ElementTypes>();
     public List<GameObject> BulletPrefabs = new List<GameObject>();
-    private Dictionary<ElementTypes, GameObject> BulletDictionary = new Dictionary<ElementTypes, GameObject>();
+    private Dictionary<ElementTypes, GameObject> BulletColourDictionary = new Dictionary<ElementTypes, GameObject>();
 
     public float ShootForce;
     public float TargetDistance;
@@ -40,9 +40,9 @@ public class ElementShooting : MonoBehaviour
         elementManager = GetComponent<Elements>();
         playerScript = player.GetComponent<Player>();
 
-        for (int index = 0; index < BulletPrefabs.Count; index++)
+        for (int index = 0; index < BulletTypes.Count; index++)
         {
-            BulletDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
+            BulletColourDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
         }
     }
 
@@ -64,6 +64,6 @@ public class ElementShooting : MonoBehaviour
     //Assigns the correct prefab to the selected elemental ammo
     void CheckElement()
     {
-        ChosenBullet = BulletDictionary[elementManager.m_CurElement];
+        ChosenBullet = BulletColourDictionary[elementManager.m_CurElement];
     }
 }

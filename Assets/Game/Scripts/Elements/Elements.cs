@@ -19,6 +19,12 @@ using static EnumHelper;
 public class Elements : MonoBehaviour
 {
     public GameObject canvas;
+
+    public List<ElementTypes> WandTypes = new List<ElementTypes>();
+    public List<Material> WandMaterials = new List<Material>();
+    private Dictionary<ElementTypes, Material> WandColourDictionary = new Dictionary<ElementTypes, Material>();
+    private MeshRenderer myRenderer;
+
     private GameObject player;
 
     private UIManager UIScript;
@@ -31,6 +37,14 @@ public class Elements : MonoBehaviour
         UIScript = canvas.GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
+
+        for (int index = 0; index < WandTypes.Count; index++)
+        {
+            WandColourDictionary.Add(WandTypes[index], WandMaterials[index]);
+        }
+
+        myRenderer = GetComponent<MeshRenderer>();
+        myRenderer.material = WandColourDictionary[m_CurElement];
     }
 
     public void ChangeElement(int mouseScroll)
@@ -47,5 +61,7 @@ public class Elements : MonoBehaviour
         }
 
         UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
+
+        myRenderer.material = WandColourDictionary[m_CurElement];
     }
 }
