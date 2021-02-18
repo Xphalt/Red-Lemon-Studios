@@ -28,7 +28,7 @@ public class ToolFireRelic : ToolBase
 
     private void Update()
     {
-        if (isDashing)
+        if (inUse)
         {
             dashTimer += Time.deltaTime;
 
@@ -36,7 +36,7 @@ public class ToolFireRelic : ToolBase
 
             if (dashTimer > dashDuration)
             {
-                isDashing = false;
+                inUse = false;
                 dashTimer = 0;
             }
         }
@@ -46,7 +46,7 @@ public class ToolFireRelic : ToolBase
     {
         base.Activate();
 
-        isDashing = true;
+        inUse = true;
 
         Vector3 nonVerticalVelocity = playerController.velocity;
         nonVerticalVelocity.y = 0;

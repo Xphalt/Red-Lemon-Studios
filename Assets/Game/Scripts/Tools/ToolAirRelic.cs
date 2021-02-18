@@ -25,7 +25,7 @@ public class ToolAirRelic : ToolBase
 
     private void Update()
     {
-        if (isGrappling)
+        if (inUse)
         {
             playerController.Move(grappleDist * Time.deltaTime);
         }
@@ -35,19 +35,21 @@ public class ToolAirRelic : ToolBase
     {
         base.Activate();
 
-        if (!isGrappling)
+        if (!inUse)
         {
-            RaycastHit[] hits = Physics.RaycastAll(Camera.main.ViewportPointToRay(crosshairPos), grappleRange);
-            if (hits.Length > 0)
+            RaycastHit[] grappleHits = Physics.RaycastAll(Camera.main.ViewportPointToRay(crosshairPos), grappleRange);
+            if (grappleHits.Length > 0)
             {
-                RaycastHit target = hits[0];
+                RaycastHit target = grappleHits[0];
 
                 grappleDist = (target.point - player.transform.position).normalized * grappleSpeed;
 
                 savedGravityMultiplier = fpsScript.m_GravityMultiplier;
                 fpsScript.m_GravityMultiplier = 0;
 
-                isGrappling = true;
+                if (playerController.isGrounded) hits++;
+
+                inUse = true;
 
                 return true;
             }
@@ -59,15 +61,15 @@ public class ToolAirRelic : ToolBase
     {
         base.EndAbility();
 
-        if (isGrappling)
+        if (inUse)
         {
             hits--;
             if (hits == 0)
             {
-                isGrappling = false;
                 fpsScript.m_GravityMultiplier = savedGravityMultiplier;
 
                 hits = maxHits;
+                inUse = false;
             }
         }
     }

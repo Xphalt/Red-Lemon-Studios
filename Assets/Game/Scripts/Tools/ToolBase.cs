@@ -27,6 +27,8 @@ public class ToolBase : MonoBehaviour
     protected FirstPersonController fpsScript;
     public ElementTypes toolType;
 
+    internal bool inUse;
+
     virtual public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,7 +39,7 @@ public class ToolBase : MonoBehaviour
     }
 
     virtual public bool Activate() 
-    { 
+    {
         return true; 
     }
 
