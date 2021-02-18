@@ -57,6 +57,9 @@ public class Player : MonoBehaviour
     public float toolCooldownDuration;
     internal bool isToolAvailable;
 
+    private float damageRecievedMultiplier = 1;
+    private float knockbackMultiplier = 1;
+
     private void Start()
     {
         fpsScript = GetComponent<FirstPersonController>();
@@ -99,11 +102,33 @@ public class Player : MonoBehaviour
         {
             if (!switchingTools) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
             else ChangeTool(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            ActivatePassives();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             switchingTools = !switchingTools;
+        }
+    }
+
+    private void ActivatePassives()
+    {
+        fpsScript.m_CanDoubleJump = false;
+
+        switch (elementChanger.m_CurElement)
+        {
+            case ElementTypes.Fire:
+                break;
+            case ElementTypes.Water:
+                break;
+            case ElementTypes.Air:
+                fpsScript.m_CanDoubleJump = true;
+                break;
+            case ElementTypes.Earth:
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -118,7 +143,7 @@ public class Player : MonoBehaviour
     #region StatManagement
     public void TakeDamage(float value)
     {
-        m_CurHealth -= value;
+        m_CurHealth -= value * damageRecievedMultiplier;
 
         if (m_CurHealth <= 0)
         {
