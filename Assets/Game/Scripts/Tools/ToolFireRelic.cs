@@ -14,16 +14,14 @@ using UnityEngine;
 
 public class ToolFireRelic : ToolBase
 {
-    private Vector3 dashDist;
-    private float dashTimer = 0;
+    public float dashSpeed;
     public float dashDuration;
-    private bool isDashing;
-    public float DashSpeed;
+    private float dashTimer = 0;
+    private Vector3 dashDist;
 
     public override void Start()
     {
         base.Start();
-        playerController = player.GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -32,7 +30,7 @@ public class ToolFireRelic : ToolBase
         {
             dashTimer += Time.deltaTime;
 
-            playerController.Move(dashDist * Time.deltaTime);
+            playerRigid.AddForce(dashDist * Time.deltaTime);
 
             if (dashTimer > dashDuration)
             {
@@ -46,15 +44,14 @@ public class ToolFireRelic : ToolBase
     {
         base.Activate();
 
+        Vector3 nonVerticalDirection = playerRigid.velocity;
+        nonVerticalDirection.y = 0;
+
+        if (nonVerticalDirection == Vector3.zero) nonVerticalDirection = player.transform.forward;
+
+        dashDist = nonVerticalDirection.normalized * dashSpeed;
+
         inUse = true;
-
-        Vector3 nonVerticalVelocity = playerController.velocity;
-        nonVerticalVelocity.y = 0;
-
-        if (nonVerticalVelocity == Vector3.zero) dashDist = playerController.transform.forward * DashSpeed;
-        else dashDist = nonVerticalVelocity.normalized * DashSpeed;
-
-        dashDist.y = 0;
 
         return true;
     }

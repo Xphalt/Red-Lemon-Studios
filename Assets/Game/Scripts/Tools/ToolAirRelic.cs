@@ -8,10 +8,9 @@ using UnityEngine;
 public class ToolAirRelic : ToolBase
 {
     public float grappleRange;
-    private Vector3 grappleDist;
-    private bool isGrappling;
+    private Vector3 grappleDir;
     public float grappleSpeed;
-    private float savedGravityMultiplier;
+    public float bounceForce;
     public Vector3 crosshairPos;
 
     public int maxHits;
@@ -21,14 +20,6 @@ public class ToolAirRelic : ToolBase
     {
         base.Start();
         hits = maxHits;
-    }
-
-    private void Update()
-    {
-        if (inUse)
-        {
-            playerController.Move(grappleDist * Time.deltaTime);
-        }
     }
 
     public override bool Activate()
@@ -42,14 +33,13 @@ public class ToolAirRelic : ToolBase
             {
                 RaycastHit target = grappleHits[0];
 
-                grappleDist = (target.point - player.transform.position).normalized * grappleSpeed;
+                grappleDir = (target.point - player.transform.position).normalized * grappleSpeed;
 
-                savedGravityMultiplier = fpsScript.m_GravityMultiplier;
-                fpsScript.m_GravityMultiplier = 0;
-
-                if (playerController.isGrounded) hits++;
+                playerRigid.useGravity = false;
+                playerRigid.velocity = grappleDir * grappleSpeed;
 
                 inUse = true;
+                playerScript.movementLocked = true;
 
                 return true;
             }
@@ -66,10 +56,13 @@ public class ToolAirRelic : ToolBase
             hits--;
             if (hits == 0)
             {
-                fpsScript.m_GravityMultiplier = savedGravityMultiplier;
+                playerRigid.useGravity = true;
+                playerRigid.velocity = Vector3.zero;
+                playerRigid.AddForce(Vector3.up * bounceForce);
 
                 hits = maxHits;
                 inUse = false;
+                playerScript.movementLocked = false;
             }
         }
     }

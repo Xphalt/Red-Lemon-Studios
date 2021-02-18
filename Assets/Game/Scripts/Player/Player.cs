@@ -33,7 +33,19 @@ public class Player : MonoBehaviour
     public GameObject canvas;
     private UIManager UIScript;
 
-    private FirstPersonController fpsScript;
+    public Camera firstPersonCamera;
+
+    private Rigidbody playerRigid;
+
+    public float runSpeed;
+    public float jumpForce;
+    public float gravityMult;
+    public float footOffset;
+
+    internal bool canDoubleJump;
+    private bool hasJumpedTwice;
+    internal bool isGrounded = false;
+    internal bool movementLocked = false;
 
     internal List<ToolBase> toolList = new List<ToolBase>();
     internal ToolBase currentTool = null;
@@ -62,7 +74,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        fpsScript = GetComponent<FirstPersonController>();
+        playerRigid = GetComponent<Rigidbody>();
+
         isToolAvailable = false;
         shooter = weapon.GetComponent<ElementShooting>();
         elementChanger = weapon.GetComponent<Elements>();
@@ -72,6 +85,7 @@ public class Player : MonoBehaviour
         {
             Ammo.Add((ElementTypes)0 + ammo, m_MaxAmmo);
         }
+
 
         UIScript = canvas.GetComponent<UIManager>();
 
@@ -83,11 +97,56 @@ public class Player : MonoBehaviour
         Inputs();
 
         ToolCooldown();
+
+        CheckGround();
     }
 
+    private void FixedUpdate()
+    {
+        if (!movementLocked)
+        {
+            Vector3 newVelocity = Vector3.zero;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+
+            if (horizontal != 0)
+            {
+                newVelocity += ((horizontal > 0) ? transform.right : -transform.right) * runSpeed;
+            }
+
+            if (vertical != 0)
+            {
+                newVelocity += ((vertical > 0) ? transform.forward : -transform.forward) * runSpeed;
+            }
+            newVelocity.y = playerRigid.velocity.y;
+
+            playerRigid.velocity = newVelocity;
+
+            playerRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
+        }
+    }
+
+    private void CheckGround()
+    {
+        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, -Vector3.up), footOffset);
+        isGrounded = false;
+        foreach (RaycastHit floorHit in floorHits)
+        {
+            if (floorHit.transform.CompareTag("Floor"))
+            {
+                isGrounded = true;
+                break;
+            }
+        }
+    }
 
     private void Inputs()
     {
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             shooter.Shoot();
@@ -111,9 +170,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Jump()
+    {
+        if (isGrounded || canDoubleJump && !hasJumpedTwice)
+        {
+            playerRigid.AddForce(Vector3.up * jumpForce);
+
+            hasJumpedTwice = !isGrounded;
+        }
+    }
+
     private void ActivatePassives()
     {
-        fpsScript.m_CanDoubleJump = false;
+        canDoubleJump = false;
 
         switch (elementChanger.m_CurElement)
         {
@@ -122,7 +191,7 @@ public class Player : MonoBehaviour
             case ElementTypes.Water:
                 break;
             case ElementTypes.Air:
-                fpsScript.m_CanDoubleJump = true;
+                canDoubleJump = true;
                 break;
             case ElementTypes.Earth:
                 break;
@@ -132,7 +201,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) //OnCollisionEnter didn't work for some reason
+    private void OnCollisionEnter(Collision collision)
     {
         if (currentTool != null)
         {

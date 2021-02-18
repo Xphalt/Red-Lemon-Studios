@@ -26,6 +26,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private float m_GravityMultiplier;
+        [SerializeField] private float m_RunSpeed;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -40,12 +42,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-
-        public float m_GravityMultiplier;
-        public float m_RunSpeed;
-
-        internal bool m_CanDoubleJump;
-        private bool m_HasJumpedTwice;
 
         // Use this for initialization
         private void Start()
@@ -79,8 +75,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
-
-                m_HasJumpedTwice = false;
             }
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
             {
@@ -117,18 +111,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             // Had to play around with this section to enable a double jump. Let me know if it causes future issues -DANIEL
 
-            m_MoveDir.y = (m_CharacterController.isGrounded) ? -m_StickToGroundForce : m_MoveDir.y;
 
-            if (m_CharacterController.isGrounded || m_CanDoubleJump && !m_HasJumpedTwice)
+            if (m_CharacterController.isGrounded)
             {
+                m_MoveDir.y = -m_StickToGroundForce;
                 if (m_Jump)
                 {
                     m_MoveDir.y = m_JumpSpeed;
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
-
-                    m_HasJumpedTwice = !m_CharacterController.isGrounded;
                 }
             }
             else m_Jump = false;

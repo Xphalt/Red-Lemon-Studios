@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3096689947728228786}
   - component: {fileID: 5313912259567947170}
   m_Layer: 9
-  m_Name: FireRelic
+  m_Name: RelicFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5587617274265408724}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.3269043, y: -576.26, z: -1320.9978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -108,5 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c0f25d791a81542bb9229dc2f66c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolType: 0
+  dashSpeed: 100000
   dashDuration: 0.5
-  DashSpeed: 50

@@ -23,7 +23,7 @@ public class ToolBase : MonoBehaviour
     protected GameObject player;
     protected Vector3 toolDisplayPos;
     protected Player playerScript;
-    protected CharacterController playerController;
+    protected Rigidbody playerRigid;
     protected FirstPersonController fpsScript;
     public ElementTypes toolType;
 
@@ -34,7 +34,7 @@ public class ToolBase : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         toolDisplayPos = GameObject.Find("ToolPlaceHolder").transform.position;
         playerScript = player.GetComponent<Player>();
-        playerController = player.GetComponent<CharacterController>();
+        playerRigid = player.GetComponent<Rigidbody>();
         fpsScript = player.GetComponent<FirstPersonController>();
     }
 
@@ -52,6 +52,7 @@ public class ToolBase : MonoBehaviour
             transform.position = toolDisplayPos;
             playerScript.isToolAvailable = true;
             playerScript.toolList.Add(GetComponent<ToolBase>());
+
             if (playerScript.currentTool == null) playerScript.currentTool = GetComponent<ToolBase>();
             else gameObject.SetActive(false);
         }

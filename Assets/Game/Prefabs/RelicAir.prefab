@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6851398934271870248}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.3269043, y: -576.26, z: -1320.9978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolType: 2
   grappleRange: 100
-  grappleSpeed: 20
-  crosshairPos: {x: 0, y: 0, z: 0}
-  maxHits: 2
+  grappleSpeed: 10
+  bounceForce: 0
+  crosshairPos: {x: 0.5, y: 0.5, z: 0}
+  maxHits: 1
