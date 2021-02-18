@@ -97,8 +97,6 @@ public class Player : MonoBehaviour
         Inputs();
 
         ToolCooldown();
-
-        CheckGround();
     }
 
     private void FixedUpdate()
@@ -172,6 +170,8 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
+        CheckGround();
+
         if (isGrounded || canDoubleJump && !hasJumpedTwice)
         {
             playerRigid.AddForce(Vector3.up * jumpForce);
