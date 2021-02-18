@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 
     private void ToolCooldown()
     {
-        if (!isToolAvailable)
+        if (!isToolAvailable && currentTool != null)
         {
             toolTimer += Time.deltaTime;
 
