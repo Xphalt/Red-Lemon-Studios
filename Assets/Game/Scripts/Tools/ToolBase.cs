@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 using static EnumHelper;
 
 public class ToolBase : MonoBehaviour
@@ -22,6 +23,8 @@ public class ToolBase : MonoBehaviour
     protected GameObject player;
     protected Vector3 toolDisplayPos;
     protected Player playerScript;
+    protected CharacterController playerController;
+    protected FirstPersonController fpsScript;
     public ElementTypes toolType;
 
     virtual public void Start()
@@ -29,6 +32,8 @@ public class ToolBase : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         toolDisplayPos = GameObject.Find("ToolPlaceHolder").transform.position;
         playerScript = player.GetComponent<Player>();
+        playerController = player.GetComponent<CharacterController>();
+        fpsScript = player.GetComponent<FirstPersonController>();
     }
 
     virtual public bool Activate() 
@@ -46,6 +51,7 @@ public class ToolBase : MonoBehaviour
             playerScript.isToolAvailable = true;
             playerScript.toolList.Add(GetComponent<ToolBase>());
             if (playerScript.currentTool == null) playerScript.currentTool = GetComponent<ToolBase>();
+            else gameObject.SetActive(false);
         }
     }
 }

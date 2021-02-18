@@ -25,12 +25,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 using static EnumHelper;
 
 public class Player : MonoBehaviour
 {
     public GameObject canvas;
     private UIManager UIScript;
+
+    private FirstPersonController fpsScript;
 
     internal List<ToolBase> toolList = new List<ToolBase>();
     internal ToolBase currentTool = null;
@@ -51,13 +54,13 @@ public class Player : MonoBehaviour
     private float m_CurHealth;
 
     private float toolTimer = 0;
-    public float toolDuration;
+    public float toolCooldownDuration;
     internal bool isToolAvailable;
 
     private void Start()
     {
+        fpsScript = GetComponent<FirstPersonController>();
         isToolAvailable = false;
-
         shooter = weapon.GetComponent<ElementShooting>();
         elementChanger = weapon.GetComponent<Elements>();
 
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
 
         ToolCooldown();
     }
+
 
     private void Inputs()
     {
@@ -103,9 +107,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnControllerColliderHit(ControllerColliderHit hit) //OnCollisionEnter didn't work for some reason
     {
-        if (currentTool.toolType == ElementTypes.Air) currentTool.EndAbility();
+        if (currentTool != null)
+        {
+            if (currentTool.toolType == ElementTypes.Air) currentTool.EndAbility();
+        }
     }
 
     #region StatManagement
@@ -188,7 +195,7 @@ public class Player : MonoBehaviour
         {
             toolTimer += Time.deltaTime;
 
-            if (toolTimer > toolDuration)
+            if (toolTimer > toolCooldownDuration)
             {
                 isToolAvailable = true;
                 toolTimer = 0;
@@ -200,6 +207,7 @@ public class Player : MonoBehaviour
     {
         if (mouseScroll != toolList.Count && toolList.Count > 0)
         {
+            currentTool.EndAbility();
             currentTool.gameObject.SetActive(false);
             toolIndex += mouseScroll;
 

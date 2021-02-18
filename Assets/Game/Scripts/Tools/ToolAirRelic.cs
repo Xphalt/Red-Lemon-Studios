@@ -1,19 +1,26 @@
-﻿using System.Collections;
+﻿// Made by Daniel
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ToolAirRelic : ToolBase
 {
-    private CharacterController playerController;
-
+    public float grappleRange;
     private Vector3 grappleDist;
     private bool isGrappling;
     public float grappleSpeed;
+    private float savedGravityMultiplier;
+    public Vector3 crosshairPos;
+
+    public int maxHits;
+    private int hits;
 
     public override void Start()
     {
         base.Start();
-        playerController = player.GetComponent<CharacterController>();
+        hits = maxHits;
     }
 
     private void Update()
@@ -28,24 +35,40 @@ public class ToolAirRelic : ToolBase
     {
         base.Activate();
 
-        isGrappling = true;
+        if (!isGrappling)
+        {
+            RaycastHit[] hits = Physics.RaycastAll(Camera.main.ViewportPointToRay(crosshairPos), grappleRange);
+            if (hits.Length > 0)
+            {
+                RaycastHit target = hits[0];
 
-        Vector3 nonVerticalVelocity = playerController.velocity;
-        nonVerticalVelocity.y = 0;
+                grappleDist = (target.point - player.transform.position).normalized * grappleSpeed;
 
-        if (nonVerticalVelocity == Vector3.zero) grappleDist = playerController.transform.forward * grappleSpeed;
-        else grappleDist = nonVerticalVelocity.normalized * grappleSpeed;
+                savedGravityMultiplier = fpsScript.m_GravityMultiplier;
+                fpsScript.m_GravityMultiplier = 0;
 
-        grappleDist.y = 0;
+                isGrappling = true;
 
-        return true;
+                return true;
+            }
+        }
+        return false;
     }
 
     public override void EndAbility()
     {
+        base.EndAbility();
+
         if (isGrappling)
         {
-            isGrappling = false;
+            hits--;
+            if (hits == 0)
+            {
+                isGrappling = false;
+                fpsScript.m_GravityMultiplier = savedGravityMultiplier;
+
+                hits = maxHits;
+            }
         }
     }
 }

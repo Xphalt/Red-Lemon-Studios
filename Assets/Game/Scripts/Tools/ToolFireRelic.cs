@@ -14,8 +14,6 @@ using UnityEngine;
 
 public class ToolFireRelic : ToolBase
 {
-    private CharacterController playerController;
-
     private Vector3 dashDist;
     private float dashTimer = 0;
     public float dashDuration;
