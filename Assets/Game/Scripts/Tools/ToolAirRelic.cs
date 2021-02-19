@@ -57,7 +57,7 @@ public class ToolAirRelic : ToolBase
             if (hits == 0)
             {
                 playerRigid.useGravity = true;
-                playerRigid.velocity = Vector3.zero;
+
                 playerRigid.AddForce(Vector3.up * bounceForce);
 
                 hits = maxHits;

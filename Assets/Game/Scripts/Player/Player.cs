@@ -95,7 +95,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         Inputs();
-
         ToolCooldown();
     }
 
@@ -274,6 +273,8 @@ public class Player : MonoBehaviour
     #region Tool
     private void UseTool()
     {
+        //if (currentTool.inUse) currentTool.EndAbility();
+
         if (isToolAvailable)
         {
             if (currentTool.Activate())
