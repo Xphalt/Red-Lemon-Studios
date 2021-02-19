@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
     {
         if (currentTool != null)
         {
-            if (currentTool.toolType == ElementTypes.Air) currentTool.EndAbility();
+            if (currentTool.toolType == ElementTypes.Air && currentTool.inUse) currentTool.EndAbility();
         }
     }
 
