@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public float runSpeed;
     public float jumpForce;
     public float gravityMult;
-    public float footOffset;
+    public float floorDistance;
 
     internal bool canDoubleJump;
     private bool hasJumpedTwice;
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
     private void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, -Vector3.up), footOffset);
+        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, -Vector3.up), floorDistance);
         isGrounded = false;
         foreach (RaycastHit floorHit in floorHits)
         {

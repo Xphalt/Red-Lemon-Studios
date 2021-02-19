@@ -24,13 +24,13 @@ public class ToolFireRelic : ToolBase
         base.Start();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (inUse)
         {
             dashTimer += Time.deltaTime;
 
-            playerRigid.AddForce(dashDist * Time.deltaTime);
+            playerRigid.AddForce(dashDist);
 
             if (dashTimer > dashDuration)
             {
