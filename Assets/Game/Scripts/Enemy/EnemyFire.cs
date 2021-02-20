@@ -14,7 +14,7 @@ public class EnemyFire : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         
     }

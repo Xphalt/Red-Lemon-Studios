@@ -109,5 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolType: 0
-  dashSpeed: 5000
+  maxCombo: 10
+  percentIncreasePerHit: 10
+  damagePercentRecievedOnMiss: 25
+  doubleJumpEnabled: 0
+  knockBackMultiplier: 1
+  damageRecievedMultiplier: 1
+  speedMultiplier: 1
+  dashSpeed: 250
   dashDuration: 0.35

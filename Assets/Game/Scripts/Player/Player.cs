@@ -158,13 +158,15 @@ public class Player : MonoBehaviour
 
             if (horizontal != 0)
             {
-                newVelocity += ((horizontal > 0) ? transform.right : -transform.right) * currentSpeed;
+                newVelocity += (horizontal > 0) ? transform.right : -transform.right;
             }
 
             if (vertical != 0)
             {
-                newVelocity += ((vertical > 0) ? transform.forward : -transform.forward) * currentSpeed;
+                newVelocity += (vertical > 0) ? transform.forward : -transform.forward;
             }
+
+            newVelocity = newVelocity.normalized * currentSpeed;
             newVelocity.y = playerRigid.velocity.y;
 
             if (!isGrounded) newVelocity = Vector3.Lerp(playerRigid.velocity, newVelocity, airControl);
@@ -283,7 +285,7 @@ public class Player : MonoBehaviour
 
     public float CalculateDamageMult()
     {
-        return 1 + Mathf.Clamp(hitCombo, 1, maxCombo) * percentIncreasePerHit / 100;
+        return 1 + Mathf.Min(hitCombo, maxCombo) * percentIncreasePerHit / 100;
     }
 
     public void IncreaseCombo()
@@ -293,7 +295,7 @@ public class Player : MonoBehaviour
 
     public void MissShot(float bulletDamage)
     {
-        TakeDamage(bulletDamage * (1 + damagePercentRecievedOnMiss / 100));
+        TakeDamage(bulletDamage * (damagePercentRecievedOnMiss / 100));
         hitCombo = 0;
     }
 

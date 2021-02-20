@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 134071963}
   m_Layer: 0
   m_Name: ProtoSafeRoomCeiling (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,14 +353,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 382575341}
     m_Modifications:
-    - target: {fileID: -6747385498247479814, guid: 3026a3143a41f5e4cad20fb8cc20d29f, type: 3}
-      propertyPath: doubleJumpEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6747385498247479814, guid: 3026a3143a41f5e4cad20fb8cc20d29f, type: 3}
-      propertyPath: knockBackMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6332044242660386241, guid: 3026a3143a41f5e4cad20fb8cc20d29f, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -758,7 +750,7 @@ GameObject:
   - component: {fileID: 432884133}
   m_Layer: 0
   m_Name: ProtoSafeRoomCeiling
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -949,7 +941,7 @@ GameObject:
   - component: {fileID: 451854967}
   - component: {fileID: 451854968}
   m_Layer: 0
-  m_Name: ProtoEnemy
+  m_Name: ProtoAirEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -969,8 +961,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!114 &451854968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,10 +982,11 @@ MonoBehaviour:
   HP: 100
   damage: 10
   attackInterval: 2
-  moveSpeed: 3
-  detectionRadius: 100
-  weaponRange: 50
-  knockbackForce: 300
+  moveSpeed: 5
+  playerDetectionRadius: 100
+  wallDetectionRadius: 5
+  weaponRange: 25
+  knockbackForce: 250
   knockBackDuration: 0.2
   stationaryZone: 0.05
 --- !u!135 &451854969
@@ -1067,7 +1060,7 @@ Transform:
   m_GameObject: {fileID: 451854966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.0769043, y: -573.05, z: -1287.1478}
-  m_LocalScale: {x: 4.033514, y: 4.033514, z: 4.033514}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 382575341}
   m_RootOrder: 5
@@ -1122,22 +1115,6 @@ PrefabInstance:
     - target: {fileID: 4990494132804432957, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5313912259567947170, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
-      propertyPath: maxCombo
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5313912259567947170, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
-      propertyPath: dashSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 5313912259567947170, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
-      propertyPath: percentIncreasePerHit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5313912259567947170, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
-      propertyPath: damagePercentRecievedOnMiss
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5587617274265408724, guid: 25243bd952c94b84f87f4d51ee254e74, type: 3}
       propertyPath: m_Name
@@ -1454,7 +1431,7 @@ GameObject:
   - component: {fileID: 807389019}
   m_Layer: 0
   m_Name: ProtoSafeRoomCeiling
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2039,7 +2016,7 @@ GameObject:
   - component: {fileID: 1061584052}
   m_Layer: 0
   m_Name: ProtoSafeRoomCeiling
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3536,10 +3513,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 382575341}
     m_Modifications:
-    - target: {fileID: 1784885376, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: canvas
       value: 
@@ -3548,25 +3521,21 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 1284195659}
-    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
-      propertyPath: airControl
-      value: 0.025
-      objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2768555
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -574.89
+      value: -553.3
       objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1351.8179
+      value: -1327.6
       objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_LocalRotation.w

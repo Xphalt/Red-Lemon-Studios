@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour
     private float attackTimer = 0;
 
     public float moveSpeed = 3.0f;
-    public float detectionRadius;
+    public float playerDetectionRadius;
+    public float wallDetectionRadius;
 
     protected float statusDuration;
     protected float statusTimer;
@@ -51,6 +52,8 @@ public class Enemy : MonoBehaviour
         moving = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
+
+        moving.velocity = transform.forward * moveSpeed;
     }
 
     public virtual void Update()
@@ -66,28 +69,6 @@ public class Enemy : MonoBehaviour
                 statusTimer = 0;
                 DOTTimer = 0;
             }
-
-            else switch (statusEffect)
-                {
-                    case ElementTypes.Fire:
-                        DOTTimer += Time.deltaTime;
-                        if (DOTTimer > DOTInterval)
-                        {
-                            TakeDamage((int)statusMagnitude);
-                            DOTTimer = 0;
-                        }
-                        break;
-
-                    case ElementTypes.Water:
-                        break;
-
-                    case ElementTypes.Earth:
-                        moving.velocity *= statusMagnitude;
-                        break;
-
-                    case ElementTypes.Air:
-                        break;
-                }
         }
     }
 
@@ -110,9 +91,29 @@ public class Enemy : MonoBehaviour
     public bool CanSeePlayer()
     {
         RaycastHit castHit;
-        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit, detectionRadius)) return false;
+        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit)) return false;
 
         return (castHit.transform.gameObject == target);
+    }
+
+    public void Patrol()
+    {
+        if (moving.velocity == Vector3.zero) moving.velocity = transform.forward * moveSpeed;
+
+        if (Physics.Raycast(transform.position, moving.velocity, wallDetectionRadius))
+        {
+            Vector3 newVelocity = Vector3.Cross(moving.velocity, Vector3.up).normalized;
+
+            if (Random.Range(0, 2) == 1) newVelocity *= -1;
+
+            newVelocity *= moveSpeed;
+            newVelocity.y = moving.velocity.y;
+
+            moving.velocity = newVelocity;
+
+        }
+
+        else moving.velocity = moving.velocity.normalized * moveSpeed;
     }
 
     public float GetDistance()
@@ -122,7 +123,7 @@ public class Enemy : MonoBehaviour
 
     public virtual bool Attack()
     {
-        if (attackTimer < attackInterval) return false;
+        if (attackTimer < attackInterval || !CanSeePlayer()) return false;
 
         attackTimer = 0;
         return true;
@@ -138,10 +139,7 @@ public class Enemy : MonoBehaviour
 
             if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst)
             {
-                statusEffect = bulletInfo.damageType;
-                statusMagnitude = bulletInfo.statusMagnitude;
-                statusDuration = bulletInfo.statusEffectDuration;
-                statusEffectActive = true;
+                TriggerStatusEffect(bulletInfo);
             }
         }
 
@@ -159,4 +157,6 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public virtual void TriggerStatusEffect(ElementAmmoAilments effectStats) { }
 }

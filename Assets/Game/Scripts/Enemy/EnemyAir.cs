@@ -37,13 +37,23 @@ public class EnemyAir : Enemy
         float targetDistance = GetDistance();
         bool inAttackRange = targetDistance < weaponRange;
 
-        if (targetDistance > weaponRange != targetDistance < minWeaponRange)
-            ChasePlayer(inAttackRange);
+        if (!statusEffectActive)
+        {
+            if (!CanSeePlayer()) Patrol();
+            //!= is equivalent of XOR
+            else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
+                ChasePlayer(inAttackRange);
+
+            else moving.velocity = Vector3.zero;
+        }
+
         else moving.velocity = Vector3.zero;
 
 
         if (inAttackRange)
         {
+            print(targetDistance);
+
             Attack();
         }
     }
@@ -62,5 +72,14 @@ public class EnemyAir : Enemy
         }
 
         return true;
+    }
+
+    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    {
+        base.TriggerStatusEffect(effectStats);
+
+        statusEffectActive = true;
+        statusDuration = effectStats.statusEffectDuration;
+        statusTimer = 0;
     }
 }
