@@ -20,4 +20,29 @@ public class ElementAmmoAilments : MonoBehaviour
     public ElementTypes damageType;
     public float statusEffectDuration;
     public float statusMagnitude;
+
+    internal Player player;
+    internal bool successfulHit = false;
+
+    public void SetDamage()
+    {
+        damage = Mathf.RoundToInt(damage * player.CalculateDamageMult());
+    }
+
+    public void RegisterHit()
+    {
+        player.IncreaseCombo();
+        successfulHit = true;
+    }
+
+    private void OnDestroy()
+    {
+        if (player.currentTool != null)
+        {
+            if (player.currentTool.toolType == ElementTypes.Fire && !successfulHit)
+            {
+                player.MissShot(damage);
+            }
+        }
+    }
 }

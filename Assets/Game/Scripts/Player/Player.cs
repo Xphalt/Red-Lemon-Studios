@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
     public float gravityMult;
     public float floorDistance;
 
-    internal bool canDoubleJump;
     private bool hasJumpedTwice;
     internal bool isGrounded = false;
     internal bool movementLocked = false;
@@ -53,6 +52,7 @@ public class Player : MonoBehaviour
     private int toolIndex = 0;
 
     public GameObject weapon;
+    internal int hitCombo = 0;
 
     private bool switchingTools = false;
 
@@ -70,8 +70,15 @@ public class Player : MonoBehaviour
     public float toolCooldownDuration;
     internal bool isToolAvailable;
 
+    private int maxCombo = 1;
+    private float percentIncreasePerHit = 0;
+    private float damagePercentRecievedOnMiss = 0;
+
+    private bool doubleJumpEnabled = false;
+    private float knockBackMultiplier = 1;
+
     private float damageRecievedMultiplier = 1;
-    private float knockbackMultiplier = 1;
+    private float speedMultiplier = 1;
 
     private void Start()
     {
@@ -102,6 +109,37 @@ public class Player : MonoBehaviour
         ToolCooldown();
     }
 
+    private void Inputs()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            shooter.Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            UseTool();
+        }
+
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            if (!switchingTools) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            else ChangeTool(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            switchingTools = !switchingTools;
+        }
+    }
+
+    #region Movement
+
     private void FixedUpdate()
     {
         if (!movementLocked)
@@ -110,14 +148,16 @@ public class Player : MonoBehaviour
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
+            float currentSpeed = runSpeed * speedMultiplier;
+
             if (horizontal != 0)
             {
-                newVelocity += ((horizontal > 0) ? transform.right : -transform.right) * runSpeed;
+                newVelocity += ((horizontal > 0) ? transform.right : -transform.right) * currentSpeed;
             }
 
             if (vertical != 0)
             {
-                newVelocity += ((vertical > 0) ? transform.forward : -transform.forward) * runSpeed;
+                newVelocity += ((vertical > 0) ? transform.forward : -transform.forward) * currentSpeed;
             }
             newVelocity.y = playerRigid.velocity.y;
 
@@ -143,39 +183,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Inputs()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            shooter.Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            UseTool();
-        }
-
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            if (!switchingTools) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-            else ChangeTool(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-            ActivatePassives();
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            switchingTools = !switchingTools;
-        }
-    }
-
     private void Jump()
     {
-        if (isGrounded || canDoubleJump && !hasJumpedTwice)
+        if (isGrounded || doubleJumpEnabled && !hasJumpedTwice)
         {
             playerRigid.AddForce(Vector3.up * jumpForce);
 
@@ -183,26 +193,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ActivatePassives()
+    public void KnockBack(Vector3 force)
     {
-        canDoubleJump = false;
-
-        switch (elementChanger.m_CurElement)
-        {
-            case ElementTypes.Fire:
-                break;
-            case ElementTypes.Water:
-                break;
-            case ElementTypes.Air:
-                canDoubleJump = true;
-                break;
-            case ElementTypes.Earth:
-                break;
-
-            default:
-                break;
-        }
+        playerRigid.AddForce(force * knockBackMultiplier);
     }
+    #endregion
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -260,6 +255,22 @@ public class Player : MonoBehaviour
         }
         
         if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
+    }
+
+    public float CalculateDamageMult()
+    {
+        return 1 + Mathf.Clamp(hitCombo, 1, maxCombo) * percentIncreasePerHit / 100;
+    }
+
+    public void IncreaseCombo()
+    {
+        if (hitCombo < maxCombo) hitCombo++;
+    }
+
+    public void MissShot(float bulletDamage)
+    {
+        TakeDamage(bulletDamage * (1 + damagePercentRecievedOnMiss / 100));
+        hitCombo = 0;
     }
 
     public bool AmmoCheck()
@@ -321,7 +332,24 @@ public class Player : MonoBehaviour
 
             currentTool = toolList[toolIndex];
             currentTool.gameObject.SetActive(true);
+
+            ActivatePassives();
         }
     }
+
+    private void ActivatePassives()
+    {
+        maxCombo = currentTool.maxCombo;
+        percentIncreasePerHit = currentTool.percentIncreasePerHit;
+        damagePercentRecievedOnMiss = currentTool.damagePercentRecievedOnMiss;
+
+        doubleJumpEnabled = currentTool.doubleJumpEnabled;
+        knockBackMultiplier = currentTool.knockBackMultiplier;
+
+        damageRecievedMultiplier = currentTool.damageRecievedMultiplier;
+        speedMultiplier = currentTool.speedMultiplier;
+
+        hitCombo = 0;
+}
     #endregion
 }

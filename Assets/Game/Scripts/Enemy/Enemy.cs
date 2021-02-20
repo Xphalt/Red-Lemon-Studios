@@ -19,31 +19,32 @@ public class Enemy : MonoBehaviour
     public GameObject target;
     public Rigidbody moving;
     public ElementTypes elementType;
-    private ElementTypes weakAgainst;
-    private ElementTypes strongAgainst;
+    protected ElementTypes weakAgainst;
+    protected ElementTypes strongAgainst;
+
+    public float strongDamageResist;
+    public float weakDamageIncrease;
 
     ElementTypes statusEffect;
 
     public int HP = 100;
-    private int damage = 10;
+    public int damage = 10;
+    public float attackInterval;
     public float moveSpeed = 3.0f;
     public float detectionRadius;
 
-    private float statusDuration;
-    private float statusTimer;
-    private bool statusEffectActive;
-    private float statusMagnitude;
+    protected float statusDuration;
+    protected float statusTimer;
+    protected bool statusEffectActive;
+    protected float statusMagnitude;
 
     private float DOTTimer;
     private float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
-    void Start()
+    public virtual void Start()
     {
         moving = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
-
-        weakAgainst = (elementType == ElementTypes.ElementTypesSize - 1) ? 0 : elementType + 1;
-        strongAgainst = (elementType == 0) ? ElementTypes.ElementTypesSize - 1 : elementType - 1;
     }
 
     void Update()
@@ -104,6 +105,7 @@ public class Enemy : MonoBehaviour
         {
             ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
             TakeDamage(bulletInfo.damage);
+            bulletInfo.RegisterHit();
 
             if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst)
             {

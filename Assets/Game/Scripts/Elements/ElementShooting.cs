@@ -55,6 +55,11 @@ public class ElementShooting : MonoBehaviour
             GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
             newBullet.GetComponent<Rigidbody>().AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * TargetDistance) - GunPos.transform.position).normalized * ShootForce);
             newBullet.transform.SetParent(null);
+
+            ElementAmmoAilments newBulletInfo = newBullet.GetComponent<ElementAmmoAilments>();
+            newBulletInfo.player = playerScript;
+            newBulletInfo.SetDamage(); 
+
             Destroy(newBullet, 2);
 
             playerScript.SubstractAmmo(1, elementManager.m_CurElement);

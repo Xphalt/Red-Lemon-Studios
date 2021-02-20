@@ -29,6 +29,17 @@ public class ToolBase : MonoBehaviour
 
     internal bool inUse;
 
+    public int maxCombo = 1;
+    public float percentIncreasePerHit = 0;
+    public float damagePercentRecievedOnMiss = 0;
+
+    public bool doubleJumpEnabled = false;
+    public float knockBackMultiplier = 1;
+
+    public float damageRecievedMultiplier = 1;
+    public float speedMultiplier = 1;
+
+
     virtual public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
