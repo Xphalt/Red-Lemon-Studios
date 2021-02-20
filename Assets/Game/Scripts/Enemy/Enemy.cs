@@ -27,17 +27,16 @@ public class Enemy : MonoBehaviour
     public float strongDamageResist;
     public float weakDamageIncrease;
 
-    ElementTypes statusEffect;
-
     public int HP = 100;
     public int damage = 10;
 
     public float attackInterval;
     private float attackTimer = 0;
 
-    public float moveSpeed = 3.0f;
-    public float playerDetectionRadius;
-    public float wallDetectionRadius;
+    public float chaseSpeed = 5;
+    public float patrolSpeed = 2;
+    public float playerDetectionRadius = 50;
+    public float wallDetectionRadius = 5;
 
     protected float statusDuration;
     protected float statusTimer;
@@ -53,7 +52,7 @@ public class Enemy : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
 
-        moving.velocity = transform.forward * moveSpeed;
+        moving.velocity = transform.forward * chaseSpeed;
     }
 
     public virtual void Update()
@@ -76,7 +75,7 @@ public class Enemy : MonoBehaviour
     {
         if (CanSeePlayer())
         {
-            Vector3 newVelocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
+            Vector3 newVelocity = (target.transform.position - gameObject.transform.position).normalized * chaseSpeed;
 
             if (runAway) newVelocity *= -1;
             newVelocity.y = moving.velocity.y;
@@ -98,7 +97,7 @@ public class Enemy : MonoBehaviour
 
     public void Patrol()
     {
-        if (moving.velocity == Vector3.zero) moving.velocity = transform.forward * moveSpeed;
+        if (moving.velocity == Vector3.zero) moving.velocity = transform.forward * chaseSpeed;
 
         if (Physics.Raycast(transform.position, moving.velocity, wallDetectionRadius))
         {
@@ -106,14 +105,14 @@ public class Enemy : MonoBehaviour
 
             if (Random.Range(0, 2) == 1) newVelocity *= -1;
 
-            newVelocity *= moveSpeed;
+            newVelocity *= patrolSpeed;
             newVelocity.y = moving.velocity.y;
 
             moving.velocity = newVelocity;
 
         }
 
-        else moving.velocity = moving.velocity.normalized * moveSpeed;
+        else moving.velocity = moving.velocity.normalized * patrolSpeed;
     }
 
     public float GetDistance()
