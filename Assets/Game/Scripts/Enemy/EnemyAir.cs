@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-//Raycast to player to check line of sight - Complete
-//
-//If can't see player, patrol through series of nodes
-//Else
-//  Check if player is in range
-//  
-
 public class EnemyAir : Enemy
 {
     public float weaponRange;
@@ -52,8 +45,6 @@ public class EnemyAir : Enemy
 
         if (inAttackRange)
         {
-            print(targetDistance);
-
             Attack();
         }
     }
