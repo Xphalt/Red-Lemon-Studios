@@ -64,7 +64,11 @@ public class ToolBase : MonoBehaviour
             playerScript.isToolAvailable = true;
             playerScript.toolList.Add(GetComponent<ToolBase>());
 
-            if (playerScript.currentTool == null) playerScript.currentTool = GetComponent<ToolBase>();
+            if (playerScript.currentTool == null)
+            {
+                playerScript.currentTool = GetComponent<ToolBase>();
+                playerScript.ActivatePassives();
+            }
             else gameObject.SetActive(false);
         }
     }

@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ActivatePassives()
+    public void ActivatePassives()
     {
         maxCombo = currentTool.maxCombo;
         percentIncreasePerHit = currentTool.percentIncreasePerHit;
