@@ -147,13 +147,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   firstPersonCamera: {fileID: 7338099964422291514}
-  runSpeed: 5
-  jumpForce: 400
+  runSpeed: 10
+  jumpForce: 600
   gravityMult: 2
-  footOffset: 1
+  floorDistance: 1
+  airControl: 0.025
   weapon: {fileID: 0}
   m_MaxAmmo: 100
-  toolCooldownDuration: 0
+  toolCooldownDuration: 1
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0

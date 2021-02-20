@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     private bool hasJumpedTwice;
     internal bool isGrounded = false;
     internal bool movementLocked = false;
+    public float airControl;
 
     internal List<ToolBase> toolList = new List<ToolBase>();
     internal ToolBase currentTool = null;
@@ -76,6 +77,8 @@ public class Player : MonoBehaviour
     {
         playerRigid = GetComponent<Rigidbody>();
 
+        airControl = Mathf.Clamp(airControl, 0, 1);
+
         isToolAvailable = false;
         shooter = weapon.GetComponent<ElementShooting>();
         elementChanger = weapon.GetComponent<Elements>();
@@ -95,6 +98,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Inputs();
+        CheckGround();
         ToolCooldown();
     }
 
@@ -116,6 +120,8 @@ public class Player : MonoBehaviour
                 newVelocity += ((vertical > 0) ? transform.forward : -transform.forward) * runSpeed;
             }
             newVelocity.y = playerRigid.velocity.y;
+
+            if (!isGrounded) newVelocity = Vector3.Lerp(playerRigid.velocity, newVelocity, airControl);
 
             playerRigid.velocity = newVelocity;
 
@@ -169,8 +175,6 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        CheckGround();
-
         if (isGrounded || canDoubleJump && !hasJumpedTwice)
         {
             playerRigid.AddForce(Vector3.up * jumpForce);
