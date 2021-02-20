@@ -16,28 +16,12 @@ public class ToolFireRelic : ToolBase
 {
     public float dashSpeed;
     public float dashDuration;
-    private float dashTimer = 0;
+
     private Vector3 dashDist;
 
     public override void Start()
     {
         base.Start();
-    }
-
-    private void FixedUpdate()
-    {
-        if (inUse)
-        {
-            dashTimer += Time.deltaTime;
-
-            playerRigid.AddForce(dashDist);
-
-            if (dashTimer > dashDuration)
-            {
-                inUse = false;
-                dashTimer = 0;
-            }
-        }
     }
 
     public override bool Activate()
@@ -50,6 +34,8 @@ public class ToolFireRelic : ToolBase
         if (nonVerticalDirection == Vector3.zero) nonVerticalDirection = player.transform.forward;
 
         dashDist = nonVerticalDirection.normalized * dashSpeed;
+
+        playerScript.Shift(dashDist, dashDuration);
 
         inUse = true;
 

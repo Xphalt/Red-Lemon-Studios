@@ -45,6 +45,12 @@ public class Player : MonoBehaviour
     private bool hasJumpedTwice;
     internal bool isGrounded = false;
     internal bool movementLocked = false;
+
+    internal bool shifting;
+    internal Vector3 shiftingVector;
+    internal float shiftingDuration;
+    internal float shiftingTimer;
+
     public float airControl;
 
     internal List<ToolBase> toolList = new List<ToolBase>();
@@ -167,6 +173,19 @@ public class Player : MonoBehaviour
 
             playerRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
         }
+
+        else if (shifting)
+        {
+            shiftingTimer += Time.deltaTime;
+
+            playerRigid.AddForce(shiftingVector);
+
+            if (shiftingTimer > shiftingDuration)
+            {
+                movementLocked = false;
+                shiftingTimer = 0;
+            }
+        }
     }
 
     private void CheckGround()
@@ -193,9 +212,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void KnockBack(Vector3 force)
+    public void Shift(Vector3 force, float duration, bool hostile = false)
     {
-        playerRigid.AddForce(force * knockBackMultiplier);
+        movementLocked = true;
+        shifting = true;
+        shiftingDuration = duration;
+        shiftingVector = force;
+
+        if (hostile) shiftingVector *= knockBackMultiplier;
     }
     #endregion
 
@@ -350,6 +374,6 @@ public class Player : MonoBehaviour
         speedMultiplier = currentTool.speedMultiplier;
 
         hitCombo = 0;
-}
+    }
     #endregion
 }

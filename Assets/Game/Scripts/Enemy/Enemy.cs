@@ -17,10 +17,12 @@ using static EnumHelper;
 public class Enemy : MonoBehaviour
 {
     public GameObject target;
-    public Rigidbody moving;
+    protected Rigidbody moving;
     public ElementTypes elementType;
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
+
+    protected Player playerScript;
 
     public float strongDamageResist;
     public float weakDamageIncrease;
@@ -29,7 +31,10 @@ public class Enemy : MonoBehaviour
 
     public int HP = 100;
     public int damage = 10;
+
     public float attackInterval;
+    private float attackTimer = 0;
+
     public float moveSpeed = 3.0f;
     public float detectionRadius;
 
@@ -45,11 +50,12 @@ public class Enemy : MonoBehaviour
     {
         moving = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
+        playerScript = target.GetComponent<Player>();
     }
 
-    void Update()
+    public virtual void Update()
     {
-        ChasePlayer();
+        attackTimer += Time.deltaTime;
 
         if (statusEffectActive)
         {
@@ -85,11 +91,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void ChasePlayer()
+    public void ChasePlayer(bool runAway = false)
     {
-        if ((target.transform.position - gameObject.transform.position).magnitude < detectionRadius)
+        if (CanSeePlayer())
         {
             Vector3 newVelocity = (target.transform.position - gameObject.transform.position).normalized * moveSpeed;
+
+            if (runAway) newVelocity *= -1;
             newVelocity.y = moving.velocity.y;
             moving.velocity = newVelocity;
         }
@@ -97,6 +105,27 @@ public class Enemy : MonoBehaviour
         {
             moving.velocity = Vector3.zero;
         }
+    }
+
+    public bool CanSeePlayer()
+    {
+        RaycastHit castHit;
+        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit, detectionRadius)) return false;
+
+        return (castHit.transform.gameObject == target);
+    }
+
+    public float GetDistance()
+    {
+        return (target.transform.position - transform.position).magnitude;
+    }
+
+    public virtual bool Attack()
+    {
+        if (attackTimer < attackInterval) return false;
+
+        attackTimer = 0;
+        return true;
     }
 
     private void OnCollisionEnter(Collision collision)
