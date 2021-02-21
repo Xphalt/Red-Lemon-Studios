@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6747385498247479814}
   m_Layer: 9
   m_Name: RelicAir
-  m_TagString: Untagged
+  m_TagString: Relic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,10 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8a148806f73c04aa1aee031fd01966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolType: 2
+  relicType: 2
   maxCombo: 1
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
+  missPenalty: 0
   doubleJumpEnabled: 1
   knockBackMultiplier: 2
   damageRecievedMultiplier: 1

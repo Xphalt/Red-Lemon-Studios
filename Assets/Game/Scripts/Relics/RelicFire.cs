@@ -2,8 +2,8 @@
 /// 
 /// Script made by Linden and Daniel
 /// 
-/// By inheriting from the tool base
-/// script, tools are able to be created
+/// By inheriting from the relic base
+/// script, relics are able to be created
 /// very easily and quickly
 /// 
 /// </summary>
@@ -11,31 +11,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnumHelper;
 
-public class ToolFireRelic : ToolBase
+public class RelicFire : RelicBase
 {
     public float dashSpeed;
     public float dashDuration;
 
     private Vector3 dashDist;
 
-    public override void Start()
+    private void Start()
     {
-        base.Start();
+        relicType = ElementTypes.Fire;
     }
 
     public override bool Activate()
     {
         base.Activate();
 
-        Vector3 nonVerticalDirection = playerRigid.velocity;
+        Vector3 nonVerticalDirection = characterRigid.velocity;
         nonVerticalDirection.y = 0;
 
-        if (nonVerticalDirection == Vector3.zero) nonVerticalDirection = player.transform.forward;
+        if (nonVerticalDirection == Vector3.zero) nonVerticalDirection = user.transform.forward;
 
         dashDist = nonVerticalDirection.normalized * dashSpeed;
 
-        playerScript.Shift(dashDist, dashDuration);
+        characterScript.Shift(dashDist, dashDuration);
 
         inUse = true;
 

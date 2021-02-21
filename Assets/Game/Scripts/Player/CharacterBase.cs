@@ -7,6 +7,8 @@ public class CharacterBase : MonoBehaviour
 {
     protected Rigidbody characterRigid;
 
+    public Transform relicPlaceHolder;
+
     public float jumpForce;
     public float gravityMult = 1;
     public float floorDistance;
@@ -31,6 +33,14 @@ public class CharacterBase : MonoBehaviour
 
     public float maxHealth = 100.0f;
     protected float curHealth;
+
+    internal List<RelicBase> relicList = new List<RelicBase>();
+    protected int relicIndex = 0;
+    internal RelicBase currentRelic = null;
+    
+    protected float relicTimer = 0;
+    public float relicCooldownDuration;
+    internal bool isRelicAvailable;
 
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -62,7 +72,7 @@ public class CharacterBase : MonoBehaviour
         if (shifting)
         {
             shiftingTimer += Time.deltaTime;
-            characterRigid.AddForce(shiftingVector);
+            characterRigid.velocity = shiftingVector;
 
             if (shiftingTimer > shiftingDuration)
             {
@@ -90,6 +100,11 @@ public class CharacterBase : MonoBehaviour
                 TakeDamage(bulletInfo.damage);
                 bulletInfo.RegisterHit();
             }
+        }
+
+        if (currentRelic != null)
+        {
+            if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse) currentRelic.EndAbility();
         }
     }
 
@@ -127,9 +142,9 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void Shift(Vector3 force, float duration, bool hostile = false, bool lockMovement = false)
+    public void Shift(Vector3 force, float duration, bool hostile = false)
     {
-        movementLocked = lockMovement;
+        movementLocked = true;
         shifting = true;
         shiftingDuration = duration;
         shiftingVector = force;
@@ -169,4 +184,93 @@ public class CharacterBase : MonoBehaviour
             curHealth = maxHealth;
         }
     }
+
+    #region Relic
+
+    public void AddRelic(GameObject newRelic)
+    {
+        RelicBase relicScript = newRelic.GetComponent<RelicBase>();
+
+        newRelic.transform.position = relicPlaceHolder.position;
+        relicScript.SetUser(gameObject);
+
+        isRelicAvailable = true;
+        relicList.Add(relicScript);
+
+        if (currentRelic == null)
+        {
+            currentRelic = relicScript;
+            ActivatePassives();
+        }
+        else newRelic.SetActive(false);
+    }
+
+    public void ChangeRelic(int cycleAmount = 1)
+    {
+        if (cycleAmount != relicList.Count && relicList.Count > 0)
+        {
+            currentRelic.EndAbility();
+            currentRelic.gameObject.SetActive(false);
+            relicIndex += cycleAmount;
+
+            if (relicIndex >= relicList.Count)
+            {
+                relicIndex -= relicList.Count;
+            }
+            else if (relicIndex < 0)
+            {
+                relicIndex += relicList.Count;
+            }
+
+            currentRelic = relicList[relicIndex];
+            currentRelic.gameObject.SetActive(true);
+
+            ActivatePassives();
+        }
+    }
+
+    public void UseRelic()
+    {
+        if (currentRelic.inUse) currentRelic.EndAbility();
+
+        else if (isRelicAvailable)
+        {
+            if (currentRelic.Activate())
+            {
+                isRelicAvailable = false;
+            }
+        }
+    }
+
+    public void RelicCooldown()
+    {
+        if (!isRelicAvailable && currentRelic != null)
+        {
+            relicTimer += Time.deltaTime;
+
+            if (relicTimer > relicCooldownDuration)
+            {
+                isRelicAvailable = true;
+                relicTimer = 0;
+            }
+        }
+    }
+
+    public void ActivatePassives()
+    {
+        maxCombo = currentRelic.maxCombo;
+        percentIncreasePerHit = currentRelic.percentIncreasePerHit;
+        damagePercentRecievedOnMiss = currentRelic.damagePercentRecievedOnMiss;
+        missPenalty = currentRelic.missPenalty;
+
+        doubleJumpEnabled = currentRelic.doubleJumpEnabled;
+        knockBackMultiplier = currentRelic.knockBackMultiplier;
+
+        damageRecievedMultiplier = currentRelic.damageRecievedMultiplier;
+        speedMultiplier = currentRelic.speedMultiplier;
+
+        hitCombo = 0;
+    }
+    #endregion
+
 }

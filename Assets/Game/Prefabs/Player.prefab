@@ -150,12 +150,13 @@ MonoBehaviour:
   floorDistance: 1
   airControl: 0.025
   weapon: {fileID: 0}
-  toolCooldownDuration: 1
+  maxHealth: 100
   canvas: {fileID: 0}
   firstPersonCamera: {fileID: 7338099964422291514}
   runSpeed: 10
   shootTargetDistance: 20
   maxAmmo: 100
+  toolCooldownDuration: 1
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0

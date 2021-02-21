@@ -1,0 +1,55 @@
+﻿/// <summary>
+/// 
+/// Script made by Linden and Daniel
+/// 
+/// This script is a base for any
+/// future relics added in the future
+/// and shouldn't need to be changed
+/// unless something is required for
+/// all relics. relics can override
+/// the activate function to have
+/// their own abillities
+/// 
+/// </summary>
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
+using static EnumHelper;
+
+public class RelicBase : MonoBehaviour
+{
+    internal GameObject user;
+    protected CharacterBase characterScript;
+    protected Rigidbody characterRigid;
+    public ElementTypes relicType;
+
+    internal bool inUse;
+
+    public int maxCombo = 1;
+    public float percentIncreasePerHit = 0;
+    public float damagePercentRecievedOnMiss = 0;
+    public bool missPenalty = false;
+
+    public bool doubleJumpEnabled = false;
+    public float knockBackMultiplier = 1;
+
+    public float damageRecievedMultiplier = 1;
+    public float speedMultiplier = 1;
+
+
+    public void SetUser(GameObject newUser)
+    {
+        user = newUser;
+        characterScript = user.GetComponent<CharacterBase>();
+        characterRigid = user.GetComponent<Rigidbody>();
+    }
+
+    virtual public bool Activate() 
+    {
+        return true; 
+    }
+
+    virtual public void EndAbility() { }
+}

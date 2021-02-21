@@ -6,7 +6,7 @@ using static EnumHelper;
 public class EnemyAir : Enemy
 {
     public float weaponRange;
-    public int knockbackForce;
+    public int knockbackSpeed;
     public float knockBackDuration;
 
     public float stationaryZone;
@@ -45,6 +45,11 @@ public class EnemyAir : Enemy
             }
 
             else actionState = EnemyStates.Idle;
+
+            if (inAttackRange)
+            {
+                Attack();
+            }
         }
 
         else
@@ -58,12 +63,6 @@ public class EnemyAir : Enemy
                 DOTTimer = 0;
             }
         }
-
-
-        if (inAttackRange)
-        {
-            Attack();
-        }
     }
 
     public override bool Attack()
@@ -74,7 +73,7 @@ public class EnemyAir : Enemy
 
             if (!playerScript.movementLocked)
             {
-                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackForce), knockBackDuration, true, true);
+                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockBackDuration, true);
             }
         }
 

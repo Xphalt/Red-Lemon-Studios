@@ -4,8 +4,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnumHelper;
 
-public class ToolAirRelic : ToolBase
+public class RelicAir : RelicBase
 {
     public float grappleRange;
     private Vector3 grappleDir;
@@ -16,10 +17,10 @@ public class ToolAirRelic : ToolBase
     public int maxHits;
     private int hits;
 
-    public override void Start()
+    private void Start()
     {
-        base.Start();
         hits = maxHits;
+        relicType = ElementTypes.Air;
     }
 
     public override bool Activate()
@@ -33,13 +34,13 @@ public class ToolAirRelic : ToolBase
             {
                 RaycastHit target = grappleHits[0];
 
-                grappleDir = (target.point - player.transform.position).normalized * grappleSpeed;
+                grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
 
-                playerRigid.useGravity = false;
-                playerRigid.velocity = grappleDir * grappleSpeed;
+                characterRigid.useGravity = false;
+                characterRigid.velocity = grappleDir * grappleSpeed;
 
                 inUse = true;
-                playerScript.movementLocked = true;
+                characterScript.movementLocked = true;
 
                 return true;
             }
@@ -56,13 +57,13 @@ public class ToolAirRelic : ToolBase
             hits--;
             if (hits == 0)
             {
-                playerRigid.useGravity = true;
+                characterRigid.useGravity = true;
 
-                playerRigid.AddForce(Vector3.up * bounceForce);
+                characterRigid.AddForce(Vector3.up * bounceForce);
 
                 hits = maxHits;
                 inUse = false;
-                playerScript.movementLocked = false;
+                characterScript.movementLocked = false;
             }
         }
     }

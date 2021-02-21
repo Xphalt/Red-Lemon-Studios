@@ -4,7 +4,7 @@
 /// 
 /// Originally we had two scripts, this
 /// one for player inputs, shooting and
-/// using tools which was made primarily
+/// using relics which was made primarily
 /// by Daniel with Linden making a few
 /// changes.
 /// 
@@ -37,10 +37,7 @@ public class Player : CharacterBase
     public float runSpeed;
     public float shootTargetDistance;
 
-    internal List<ToolBase> toolList = new List<ToolBase>();
-    private int toolIndex = 0;
-
-    private bool switchingTools = false;
+    private bool switchingRelics = false;
 
     internal Elements elementChanger;
 
@@ -48,17 +45,14 @@ public class Player : CharacterBase
 
     public int maxAmmo;
 
-    internal ToolBase currentTool = null;
-    protected float toolTimer = 0;
-    public float toolCooldownDuration;
-    internal bool isToolAvailable;
+
 
     public override void Start()
     {
         base.Start();
 
         team = Teams.Player;
-        isToolAvailable = false;
+        isRelicAvailable = false;
         elementChanger = weapon.GetComponent<Elements>();
 
         for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
@@ -75,7 +69,7 @@ public class Player : CharacterBase
         base.Update();
 
         Inputs();
-        ToolCooldown();
+        RelicCooldown();
     }
 
     private void Inputs()
@@ -92,18 +86,18 @@ public class Player : CharacterBase
 
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
         {
-            UseTool();
+            UseRelic();
         }
 
         if (Input.mouseScrollDelta.y != 0)
         {
-            if (!switchingTools) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-            else ChangeTool(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            if (!switchingRelics) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            switchingTools = !switchingTools;
+            switchingRelics = !switchingRelics;
         }
     }
 
@@ -122,14 +116,9 @@ public class Player : CharacterBase
         }
     }
 
-    public override void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        base.OnCollisionEnter(collision);
-
-        if (currentTool != null)
-        {
-            if (currentTool.toolType == ElementTypes.Air && currentTool.inUse) currentTool.EndAbility();
-        }
+        if (other.CompareTag("Relic")) AddRelic(other.gameObject);
     }
 
     private void Shoot()
@@ -194,73 +183,4 @@ public class Player : CharacterBase
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    #region Tool
-
-    private void ChangeTool(int cycleAmount = 1)
-    {
-        if (cycleAmount != toolList.Count && toolList.Count > 0)
-        {
-            currentTool.EndAbility();
-            currentTool.gameObject.SetActive(false);
-            toolIndex += cycleAmount;
-
-            if (toolIndex >= toolList.Count)
-            {
-                toolIndex -= toolList.Count;
-            }
-            else if (toolIndex < 0)
-            {
-                toolIndex += toolList.Count;
-            }
-
-            currentTool = toolList[toolIndex];
-            currentTool.gameObject.SetActive(true);
-
-            ActivatePassives();
-        }
-    }
-
-    public void UseTool()
-    {
-        //if (currentTool.inUse) currentTool.EndAbility();
-
-        if (isToolAvailable)
-        {
-            if (currentTool.Activate())
-            {
-                isToolAvailable = false;
-            }
-        }
-    }
-
-    public void ToolCooldown()
-    {
-        if (!isToolAvailable && currentTool != null)
-        {
-            toolTimer += Time.deltaTime;
-
-            if (toolTimer > toolCooldownDuration)
-            {
-                isToolAvailable = true;
-                toolTimer = 0;
-            }
-        }
-    }
-
-    public void ActivatePassives()
-    {
-        maxCombo = currentTool.maxCombo;
-        percentIncreasePerHit = currentTool.percentIncreasePerHit;
-        damagePercentRecievedOnMiss = currentTool.damagePercentRecievedOnMiss;
-        missPenalty = currentTool.missPenalty;
-
-        doubleJumpEnabled = currentTool.doubleJumpEnabled;
-        knockBackMultiplier = currentTool.knockBackMultiplier;
-
-        damageRecievedMultiplier = currentTool.damageRecievedMultiplier;
-        speedMultiplier = currentTool.speedMultiplier;
-
-        hitCombo = 0;
-    }
-    #endregion
 }
