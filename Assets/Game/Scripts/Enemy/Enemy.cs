@@ -159,6 +159,7 @@ public class Enemy : CharacterBase
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
 
         base.TakeDamage(damage, damageType);
+
         if (curHealth <= 0)
         {
             Destroy(gameObject);

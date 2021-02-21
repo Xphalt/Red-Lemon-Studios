@@ -7,7 +7,6 @@ public class EnemyEarth : Enemy
 {
     private bool rolling = false;
 
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
@@ -16,7 +15,6 @@ public class EnemyEarth : Enemy
         strongAgainst = ElementTypes.Water;
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         

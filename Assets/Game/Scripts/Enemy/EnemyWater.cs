@@ -13,7 +13,6 @@ public class EnemyWater : Enemy
         strongAgainst = ElementTypes.Fire;
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();

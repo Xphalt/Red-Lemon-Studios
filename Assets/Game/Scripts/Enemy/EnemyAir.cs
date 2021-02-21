@@ -52,7 +52,11 @@ public class EnemyAir : Enemy
             actionState = EnemyStates.Idle;
 
             DOTTimer += Time.deltaTime;
-            if (DOTTimer > DOTInterval) TakeDamage(statusMagnitude);
+            if (DOTTimer > DOTInterval)
+            {
+                TakeDamage(statusMagnitude);
+                DOTTimer = 0;
+            }
         }
 
 

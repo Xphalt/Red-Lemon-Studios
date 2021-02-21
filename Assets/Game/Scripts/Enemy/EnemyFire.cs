@@ -9,7 +9,6 @@ public class EnemyFire : Enemy
     public float explosionRadius;
     private bool canExplode = true;
 
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
@@ -18,7 +17,6 @@ public class EnemyFire : Enemy
         strongAgainst = ElementTypes.Air;
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();

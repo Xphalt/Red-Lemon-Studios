@@ -34,7 +34,7 @@ public class CharacterBase : MonoBehaviour
     public float toolCooldownDuration;
     internal bool isToolAvailable;
 
-    public const float maxHealth = 100.0f;
+    public float maxHealth = 100.0f;
     protected float curHealth;
 
     protected int maxCombo = 1;
