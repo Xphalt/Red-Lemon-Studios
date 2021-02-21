@@ -69,7 +69,6 @@ public class Player : CharacterBase
         base.Update();
 
         Inputs();
-        RelicCooldown();
     }
 
     private void Inputs()

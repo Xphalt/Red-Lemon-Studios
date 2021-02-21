@@ -40,7 +40,7 @@ public class CharacterBase : MonoBehaviour
     
     protected float relicTimer = 0;
     public float relicCooldownDuration;
-    internal bool isRelicAvailable;
+    internal bool isRelicAvailable = false;
 
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -65,6 +65,7 @@ public class CharacterBase : MonoBehaviour
     public virtual void Update()
     {
         CheckGround();
+        RelicCooldown();
     }
 
     public virtual void FixedUpdate()
@@ -231,15 +232,18 @@ public class CharacterBase : MonoBehaviour
 
     public void UseRelic()
     {
-        if (currentRelic.inUse) currentRelic.EndAbility();
-
-        else if (isRelicAvailable)
+        if (currentRelic != null)
         {
-            if (currentRelic.Activate())
+            if (currentRelic.inUse) currentRelic.EndAbility();
+
+            else if (isRelicAvailable)
             {
-                isRelicAvailable = false;
+                if (currentRelic.Activate())
+                {
+                    isRelicAvailable = false;
+                }
             }
-        }
+        }        
     }
 
     public void RelicCooldown()
