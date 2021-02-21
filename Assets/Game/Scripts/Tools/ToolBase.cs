@@ -32,6 +32,7 @@ public class ToolBase : MonoBehaviour
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
     public float damagePercentRecievedOnMiss = 0;
+    public bool missPenalty = false;
 
     public bool doubleJumpEnabled = false;
     public float knockBackMultiplier = 1;

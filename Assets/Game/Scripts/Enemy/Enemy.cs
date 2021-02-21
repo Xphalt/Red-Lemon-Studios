@@ -14,49 +14,54 @@
 using UnityEngine;
 using static EnumHelper;
 
-public class Enemy : MonoBehaviour
+public class Enemy : CharacterBase
 {
+    public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
+
     public GameObject target;
-    protected Rigidbody moving;
     public ElementTypes elementType;
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
     protected Player playerScript;
 
-    public float strongDamageResist;
-    public float weakDamageIncrease;
-
-    public int HP = 100;
-    public int damage = 10;
+    public float strongAgainstResist = 0.7f;
+    public float weakAgainstIncrease = 1.5f;
 
     public float attackInterval;
-    private float attackTimer = 0;
+    protected float attackTimer = 0;
+
+    protected EnemyStates actionState;
 
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
+    public bool canFly = false;
 
     protected float statusDuration;
     protected float statusTimer;
     protected bool statusEffectActive;
     protected float statusMagnitude;
 
-    private float DOTTimer;
-    private float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
+    protected float DOTTimer;
+    protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
-    public virtual void Start()
+    public override void Start()
     {
-        moving = GetComponent<Rigidbody>();
+        base.Start();
+        team = Teams.Enemy;
+
         target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
 
-        moving.velocity = transform.forward * chaseSpeed;
+        characterRigid.velocity = transform.forward * chaseSpeed;
     }
 
-    public virtual void Update()
+    public override void Update()
     {
+        base.Update();
+
         attackTimer += Time.deltaTime;
 
         if (statusEffectActive)
@@ -64,27 +69,52 @@ public class Enemy : MonoBehaviour
             statusTimer += Time.deltaTime;
             if (statusTimer > statusDuration)
             {
-                statusEffectActive = false;
-                statusTimer = 0;
-                DOTTimer = 0;
+                EndSatusEffect();
             }
         }
     }
 
-    public void ChasePlayer(bool runAway = false)
+    public override void FixedUpdate()
     {
-        if (CanSeePlayer())
-        {
-            Vector3 newVelocity = (target.transform.position - gameObject.transform.position).normalized * chaseSpeed;
+        base.FixedUpdate();
 
-            if (runAway) newVelocity *= -1;
-            newVelocity.y = moving.velocity.y;
-            moving.velocity = newVelocity;
-        }
-        else
+        Vector3 newVelocity = characterRigid.velocity;
+
+        switch(actionState)
         {
-            moving.velocity = Vector3.zero;
+            case EnemyStates.Chasing:
+                newVelocity = (target.transform.position - transform.position).normalized * chaseSpeed;
+                break;
+
+            case EnemyStates.Fleeing:
+                newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
+                break;
+
+            case EnemyStates.Patrolling:
+                Vector3 patrolDirection = characterRigid.velocity;
+                patrolDirection.y = 0;
+
+                patrolDirection.Normalize();
+
+                if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
+
+                if (Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius))
+                {
+                    newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
+                    if (Random.Range(0, 2) == 1) newVelocity *= -1;
+                }
+                else newVelocity = patrolDirection * patrolSpeed;
+                
+                break;
+
+            case EnemyStates.Idle:
+                newVelocity = Vector3.zero;
+                break;
         }
+
+        if (!canFly) newVelocity.y = characterRigid.velocity.y;
+        
+        SetVelocity(newVelocity);
     }
 
     public bool CanSeePlayer()
@@ -93,26 +123,6 @@ public class Enemy : MonoBehaviour
         if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit)) return false;
 
         return (castHit.transform.gameObject == target);
-    }
-
-    public void Patrol()
-    {
-        if (moving.velocity == Vector3.zero) moving.velocity = transform.forward * chaseSpeed;
-
-        if (Physics.Raycast(transform.position, moving.velocity, wallDetectionRadius))
-        {
-            Vector3 newVelocity = Vector3.Cross(moving.velocity, Vector3.up).normalized;
-
-            if (Random.Range(0, 2) == 1) newVelocity *= -1;
-
-            newVelocity *= patrolSpeed;
-            newVelocity.y = moving.velocity.y;
-
-            moving.velocity = newVelocity;
-
-        }
-
-        else moving.velocity = moving.velocity.normalized * patrolSpeed;
     }
 
     public float GetDistance()
@@ -128,34 +138,46 @@ public class Enemy : MonoBehaviour
         return true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
+
         if (collision.gameObject.tag == "bullet")
         {
             ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
-            TakeDamage(bulletInfo.damage);
-            bulletInfo.RegisterHit();
 
-            if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst)
+            if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst && bulletInfo.team != team)
             {
                 TriggerStatusEffect(bulletInfo);
             }
         }
-
-        else if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-        }
     }
 
-    void TakeDamage(int damage)
+    public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
     {
-        HP -= damage;
-        if (HP <= 0)
+        if (damageType == weakAgainst) damage *= weakAgainstIncrease;
+        else if (damageType == strongAgainst) damage *= strongAgainstResist;
+
+        base.TakeDamage(damage, damageType);
+        if (curHealth <= 0)
         {
             Destroy(gameObject);
         }
     }
 
-    public virtual void TriggerStatusEffect(ElementAmmoAilments effectStats) { }
+    public virtual void TriggerStatusEffect(ElementAmmoAilments effectStats) 
+    {
+        statusEffectActive = true;
+        statusTimer = 0;
+        statusDuration = effectStats.statusEffectDuration;
+        statusMagnitude = effectStats.statusMagnitude;
+    }
+
+    public virtual void EndSatusEffect()
+    {
+        statusEffectActive = false;
+        statusTimer = 0;
+        statusMagnitude = 0;
+        statusDuration = 0;
+    }
 }

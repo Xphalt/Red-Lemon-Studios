@@ -19,4 +19,5 @@ using UnityEngine;
 public static class EnumHelper
 {
     public enum ElementTypes { Fire, Water, Air, Earth, ElementTypesSize };
+    public enum Teams { Player, Enemy, TeamsSize };
 }

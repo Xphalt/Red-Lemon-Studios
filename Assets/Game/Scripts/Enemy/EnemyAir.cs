@@ -12,13 +12,17 @@ public class EnemyAir : Enemy
     public float stationaryZone;
     private float minWeaponRange;
 
+    public float snipeDamage;
+
+    private bool stunned;
+
     public override void Start()
     {
         base.Start();
 
         elementType = ElementTypes.Air;
-        weakAgainst = ElementTypes.Earth;
-        strongAgainst = ElementTypes.Water;
+        weakAgainst = ElementTypes.Fire;
+        strongAgainst = ElementTypes.Earth;
 
         minWeaponRange = weaponRange * (1 - stationaryZone);
     }
@@ -30,17 +34,26 @@ public class EnemyAir : Enemy
         float targetDistance = GetDistance();
         bool inAttackRange = targetDistance < weaponRange;
 
-        if (!statusEffectActive)
+        if (!stunned)
         {
-            if (!CanSeePlayer()) Patrol();
+            if (!CanSeePlayer()) actionState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
             else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
-                ChasePlayer(inAttackRange);
+            {
+                if (inAttackRange) actionState = EnemyStates.Fleeing;
+                else actionState = EnemyStates.Chasing;
+            }
 
-            else moving.velocity = Vector3.zero;
+            else actionState = EnemyStates.Idle;
         }
 
-        else moving.velocity = Vector3.zero;
+        else
+        {
+            actionState = EnemyStates.Idle;
+
+            DOTTimer += Time.deltaTime;
+            if (DOTTimer > DOTInterval) TakeDamage(statusMagnitude);
+        }
 
 
         if (inAttackRange)
@@ -53,13 +66,12 @@ public class EnemyAir : Enemy
     {
         if (base.Attack())
         {
-            playerScript.TakeDamage(damage);
+            playerScript.TakeDamage(snipeDamage);
 
             if (!playerScript.movementLocked)
             {
-                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackForce), knockBackDuration, true);
+                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackForce), knockBackDuration, true, true);
             }
-
         }
 
         return true;
@@ -68,9 +80,13 @@ public class EnemyAir : Enemy
     public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
+        stunned = true;
+    }
 
-        statusEffectActive = true;
-        statusDuration = effectStats.statusEffectDuration;
-        statusTimer = 0;
+    public override void EndSatusEffect()
+    {
+        base.EndSatusEffect();
+        stunned = false;
+        DOTTimer = 0;
     }
 }

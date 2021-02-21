@@ -20,25 +20,23 @@ using static EnumHelper;
 
 public class ElementShooting : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject wielder;
     private GameObject ChosenBullet;
     public GameObject GunPos;
 
-    private Elements elementManager;
-    private Player playerScript;
+    private CharacterBase wielderScript;
+
+    public float damage;
 
     public List<ElementTypes> BulletTypes = new List<ElementTypes>();
     public List<GameObject> BulletPrefabs = new List<GameObject>();
     private Dictionary<ElementTypes, GameObject> BulletColourDictionary = new Dictionary<ElementTypes, GameObject>();
 
     public float ShootForce;
-    public float TargetDistance;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        elementManager = GetComponent<Elements>();
-        playerScript = player.GetComponent<Player>();
+        wielderScript = wielder.GetComponent<CharacterBase>();
 
         for (int index = 0; index < BulletTypes.Count; index++)
         {
@@ -47,28 +45,23 @@ public class ElementShooting : MonoBehaviour
     }
 
     //TODO cache the rigidbody reference to boost performance
-    public void Shoot()
+    public void Shoot(ElementTypes shotType, Vector3 target)
     {
-        if (playerScript.AmmoCheck())
-        {
-            CheckElement();
-            GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-            newBullet.GetComponent<Rigidbody>().AddForce((Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * TargetDistance) - GunPos.transform.position).normalized * ShootForce);
-            newBullet.transform.SetParent(null);
+        CheckElement(shotType);
+        GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
+        newBullet.GetComponent<Rigidbody>().AddForce((target - GunPos.transform.position).normalized * ShootForce);
+        newBullet.transform.SetParent(null);
 
-            ElementAmmoAilments newBulletInfo = newBullet.GetComponent<ElementAmmoAilments>();
-            newBulletInfo.player = playerScript;
-            newBulletInfo.SetDamage(); 
+        ElementAmmoAilments newBulletInfo = newBullet.GetComponent<ElementAmmoAilments>();
+        newBulletInfo.user = wielderScript;
+        newBulletInfo.Initialise(damage); 
 
-            Destroy(newBullet, 2);
-
-            playerScript.SubstractAmmo(1, elementManager.m_CurElement);
-        }    
+        Destroy(newBullet, 2);
     }
 
     //Assigns the correct prefab to the selected elemental ammo
-    void CheckElement()
+    void CheckElement(ElementTypes shotType)
     {
-        ChosenBullet = BulletColourDictionary[elementManager.m_CurElement];
+        ChosenBullet = BulletColourDictionary[shotType];
     }
 }

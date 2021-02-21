@@ -47,9 +47,9 @@ public class Elements : MonoBehaviour
         myRenderer.material = WandColourDictionary[m_CurElement];
     }
 
-    public void ChangeElement(int mouseScroll)
+    public void ChangeElement(int cycleAmount = 1)
     {
-        m_CurElement += mouseScroll;
+        m_CurElement += cycleAmount;
 
         if (m_CurElement >= ElementTypes.ElementTypesSize)
         {

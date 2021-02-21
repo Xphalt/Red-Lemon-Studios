@@ -145,16 +145,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50735f0c0b8198b408488d5e913d9ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  firstPersonCamera: {fileID: 7338099964422291514}
-  runSpeed: 10
   jumpForce: 800
   gravityMult: 2
   floorDistance: 1
   airControl: 0.025
   weapon: {fileID: 0}
-  m_MaxAmmo: 100
   toolCooldownDuration: 1
+  canvas: {fileID: 0}
+  firstPersonCamera: {fileID: 7338099964422291514}
+  runSpeed: 10
+  shootTargetDistance: 20
+  maxAmmo: 100
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0

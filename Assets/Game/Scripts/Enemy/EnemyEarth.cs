@@ -11,13 +11,21 @@ public class EnemyEarth : Enemy
     public override void Start()
     {
         base.Start();
-        weakAgainst = ElementTypes.Fire;
-        strongAgainst = ElementTypes.Air;
+        elementType = ElementTypes.Earth;
+        weakAgainst = ElementTypes.Air;
+        strongAgainst = ElementTypes.Water;
     }
 
     // Update is called once per frame
     public override void Update()
     {
         
+    }
+
+    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    {
+        base.TriggerStatusEffect(effectStats);
+
+        Shift((effectStats.gameObject.transform.position - transform.position) * effectStats.statusMagnitude, effectStats.statusEffectDuration, true);
     }
 }

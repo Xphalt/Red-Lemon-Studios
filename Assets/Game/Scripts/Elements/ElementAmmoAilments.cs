@@ -21,28 +21,28 @@ public class ElementAmmoAilments : MonoBehaviour
     public float statusEffectDuration;
     public float statusMagnitude;
 
-    internal Player player;
+    internal CharacterBase user;
     internal bool successfulHit = false;
+    internal Teams team;
 
-    public void SetDamage()
+    public void Initialise(float weaponDamage)
     {
-        damage = Mathf.RoundToInt(damage * player.CalculateDamageMult());
+        damage = Mathf.RoundToInt(weaponDamage * user.CalculateDamageMult());
+
+        team = user.team;
     }
 
     public void RegisterHit()
     {
-        player.IncreaseCombo();
+        user.IncreaseCombo();
         successfulHit = true;
     }
 
     private void OnDestroy()
     {
-        if (player.currentTool != null)
+        if (!successfulHit)
         {
-            if (player.currentTool.toolType == ElementTypes.Fire && !successfulHit)
-            {
-                player.MissShot(damage);
-            }
+            user.MissShot(damage);
         }
     }
 }
