@@ -48,7 +48,10 @@ public class Player : CharacterBase
 
     public int maxAmmo;
 
-
+    internal ToolBase currentTool = null;
+    protected float toolTimer = 0;
+    public float toolCooldownDuration;
+    internal bool isToolAvailable;
 
     public override void Start()
     {
@@ -191,6 +194,8 @@ public class Player : CharacterBase
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    #region Tool
+
     private void ChangeTool(int cycleAmount = 1)
     {
         if (cycleAmount != toolList.Count && toolList.Count > 0)
@@ -214,4 +219,48 @@ public class Player : CharacterBase
             ActivatePassives();
         }
     }
+
+    public void UseTool()
+    {
+        //if (currentTool.inUse) currentTool.EndAbility();
+
+        if (isToolAvailable)
+        {
+            if (currentTool.Activate())
+            {
+                isToolAvailable = false;
+            }
+        }
+    }
+
+    public void ToolCooldown()
+    {
+        if (!isToolAvailable && currentTool != null)
+        {
+            toolTimer += Time.deltaTime;
+
+            if (toolTimer > toolCooldownDuration)
+            {
+                isToolAvailable = true;
+                toolTimer = 0;
+            }
+        }
+    }
+
+    public void ActivatePassives()
+    {
+        maxCombo = currentTool.maxCombo;
+        percentIncreasePerHit = currentTool.percentIncreasePerHit;
+        damagePercentRecievedOnMiss = currentTool.damagePercentRecievedOnMiss;
+        missPenalty = currentTool.missPenalty;
+
+        doubleJumpEnabled = currentTool.doubleJumpEnabled;
+        knockBackMultiplier = currentTool.knockBackMultiplier;
+
+        damageRecievedMultiplier = currentTool.damageRecievedMultiplier;
+        speedMultiplier = currentTool.speedMultiplier;
+
+        hitCombo = 0;
+    }
+    #endregion
 }

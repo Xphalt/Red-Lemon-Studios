@@ -29,11 +29,6 @@ public class CharacterBase : MonoBehaviour
     internal ElementShooting shooter;
     internal Teams team;
 
-    internal ToolBase currentTool = null;
-    protected float toolTimer = 0;
-    public float toolCooldownDuration;
-    internal bool isToolAvailable;
-
     public float maxHealth = 100.0f;
     protected float curHealth;
 
@@ -48,8 +43,6 @@ public class CharacterBase : MonoBehaviour
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
 
-
-    // Start is called before the first frame update
     public virtual void Start()
     {
         characterRigid = GetComponent<Rigidbody>();
@@ -69,7 +62,6 @@ public class CharacterBase : MonoBehaviour
         if (shifting)
         {
             shiftingTimer += Time.deltaTime;
-
             characterRigid.AddForce(shiftingVector);
 
             if (shiftingTimer > shiftingDuration)
@@ -176,48 +168,5 @@ public class CharacterBase : MonoBehaviour
         {
             curHealth = maxHealth;
         }
-    }
-
-    public void UseTool()
-    {
-        //if (currentTool.inUse) currentTool.EndAbility();
-
-        if (isToolAvailable)
-        {
-            if (currentTool.Activate())
-            {
-                isToolAvailable = false;
-            }
-        }
-    }
-
-    public void ToolCooldown()
-    {
-        if (!isToolAvailable && currentTool != null)
-        {
-            toolTimer += Time.deltaTime;
-
-            if (toolTimer > toolCooldownDuration)
-            {
-                isToolAvailable = true;
-                toolTimer = 0;
-            }
-        }
-    }
-
-    public void ActivatePassives()
-    {
-        maxCombo = currentTool.maxCombo;
-        percentIncreasePerHit = currentTool.percentIncreasePerHit;
-        damagePercentRecievedOnMiss = currentTool.damagePercentRecievedOnMiss;
-        missPenalty = currentTool.missPenalty;
-
-        doubleJumpEnabled = currentTool.doubleJumpEnabled;
-        knockBackMultiplier = currentTool.knockBackMultiplier;
-
-        damageRecievedMultiplier = currentTool.damageRecievedMultiplier;
-        speedMultiplier = currentTool.speedMultiplier;
-
-        hitCombo = 0;
     }
 }
