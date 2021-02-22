@@ -25,7 +25,7 @@ public class RelicAir : RelicBase
 
     public override bool Activate()
     {
-        base.Activate();
+        if (!base.Activate()) return false;
 
         if (!inUse)
         {
@@ -40,6 +40,7 @@ public class RelicAir : RelicBase
                 characterRigid.velocity = grappleDir * grappleSpeed;
 
                 inUse = true;
+                readyToUse = false;
                 characterScript.movementLocked = true;
 
                 return true;
@@ -50,8 +51,6 @@ public class RelicAir : RelicBase
 
     public override void EndAbility()
     {
-        base.EndAbility();
-
         if (inUse)
         {
             hits--;
@@ -62,8 +61,8 @@ public class RelicAir : RelicBase
                 characterRigid.AddForce(Vector3.up * bounceForce);
 
                 hits = maxHits;
-                inUse = false;
                 characterScript.movementLocked = false;
+                base.EndAbility();
             }
         }
     }

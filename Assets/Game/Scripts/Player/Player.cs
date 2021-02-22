@@ -52,7 +52,6 @@ public class Player : CharacterBase
         base.Start();
 
         team = Teams.Player;
-        isRelicAvailable = false;
         elementChanger = weapon.GetComponent<Elements>();
 
         for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)

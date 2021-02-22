@@ -20,7 +20,7 @@ using static EnumHelper;
 
 public class RelicBase : MonoBehaviour
 {
-    internal GameObject user;
+    internal GameObject user = null;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
     public ElementTypes relicType;
@@ -38,18 +38,44 @@ public class RelicBase : MonoBehaviour
     public float damageRecievedMultiplier = 1;
     public float speedMultiplier = 1;
 
+    protected float cooldownTimer = 0;
+    public float relicCooldownDuration;
+    internal bool readyToUse = false;
 
     public void SetUser(GameObject newUser)
     {
         user = newUser;
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
+        readyToUse = true;
+    }
+
+    public void Update()
+    {
+        Cooldown();
     }
 
     virtual public bool Activate() 
     {
-        return true; 
+        return readyToUse; 
     }
 
-    virtual public void EndAbility() { }
+    virtual public void EndAbility()
+    {
+        inUse = false;
+    }
+
+    public void Cooldown()
+    {
+        if (!readyToUse && user != null)
+        {
+            cooldownTimer += Time.deltaTime;
+
+            if (cooldownTimer > relicCooldownDuration)
+            {
+                readyToUse = true;
+                cooldownTimer = 0;
+            }
+        }
+    }
 }

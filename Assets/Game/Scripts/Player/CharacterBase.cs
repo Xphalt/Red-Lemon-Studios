@@ -38,9 +38,7 @@ public class CharacterBase : MonoBehaviour
     protected int relicIndex = 0;
     internal RelicBase currentRelic = null;
     
-    protected float relicTimer = 0;
-    public float relicCooldownDuration;
-    internal bool isRelicAvailable = false;
+
 
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -65,7 +63,6 @@ public class CharacterBase : MonoBehaviour
     public virtual void Update()
     {
         CheckGround();
-        RelicCooldown();
     }
 
     public virtual void FixedUpdate()
@@ -195,7 +192,6 @@ public class CharacterBase : MonoBehaviour
         newRelic.transform.position = relicPlaceHolder.position;
         relicScript.SetUser(gameObject);
 
-        isRelicAvailable = true;
         relicList.Add(relicScript);
 
         if (currentRelic == null)
@@ -203,7 +199,7 @@ public class CharacterBase : MonoBehaviour
             currentRelic = relicScript;
             ActivatePassives();
         }
-        else newRelic.SetActive(false);
+        else newRelic.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void ChangeRelic(int cycleAmount = 1)
@@ -211,7 +207,7 @@ public class CharacterBase : MonoBehaviour
         if (cycleAmount != relicList.Count && relicList.Count > 0)
         {
             currentRelic.EndAbility();
-            currentRelic.gameObject.SetActive(false);
+            currentRelic.GetComponent<MeshRenderer>().enabled = false;
             relicIndex += cycleAmount;
 
             if (relicIndex >= relicList.Count)
@@ -224,7 +220,7 @@ public class CharacterBase : MonoBehaviour
             }
 
             currentRelic = relicList[relicIndex];
-            currentRelic.gameObject.SetActive(true);
+            currentRelic.GetComponent<MeshRenderer>().enabled = true;
 
             ActivatePassives();
         }
@@ -236,29 +232,11 @@ public class CharacterBase : MonoBehaviour
         {
             if (currentRelic.inUse) currentRelic.EndAbility();
 
-            else if (isRelicAvailable)
-            {
-                if (currentRelic.Activate())
-                {
-                    isRelicAvailable = false;
-                }
-            }
+            else currentRelic.Activate();
         }        
     }
 
-    public void RelicCooldown()
-    {
-        if (!isRelicAvailable && currentRelic != null)
-        {
-            relicTimer += Time.deltaTime;
-
-            if (relicTimer > relicCooldownDuration)
-            {
-                isRelicAvailable = true;
-                relicTimer = 0;
-            }
-        }
-    }
+    
 
     public void ActivatePassives()
     {

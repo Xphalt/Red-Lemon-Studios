@@ -27,7 +27,7 @@ public class RelicFire : RelicBase
 
     public override bool Activate()
     {
-        base.Activate();
+        if (!base.Activate()) return false;
 
         Vector3 nonVerticalDirection = characterRigid.velocity;
         nonVerticalDirection.y = 0;
@@ -39,6 +39,7 @@ public class RelicFire : RelicBase
         characterScript.Shift(dashDist, dashDuration);
 
         inUse = true;
+        readyToUse = false;
 
         return true;
     }
