@@ -236,7 +236,10 @@ public class CharacterBase : MonoBehaviour
         }        
     }
 
-    
+    public virtual Ray GetForwardRay()
+    {
+        return new Ray();
+    }
 
     public void ActivatePassives()
     {

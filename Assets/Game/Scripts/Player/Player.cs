@@ -33,6 +33,8 @@ public class Player : CharacterBase
     public GameObject canvas;
     private UIManager UIScript;
 
+    public Vector3 crosshairPos;
+
     public Camera firstPersonCamera;
     public float runSpeed;
     public float shootTargetDistance;
@@ -126,6 +128,11 @@ public class Player : CharacterBase
             shooter.Shoot(elementChanger.m_CurElement, (Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
             SubstractAmmo(1, elementChanger.m_CurElement);
         }
+    }
+
+    public override Ray GetForwardRay()
+    {
+        return Camera.main.ViewportPointToRay(crosshairPos);
     }
 
     public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)

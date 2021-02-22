@@ -12,7 +12,6 @@ public class RelicAir : RelicBase
     private Vector3 grappleDir;
     public float grappleSpeed;
     public float bounceForce;
-    public Vector3 crosshairPos;
 
     public int maxHits;
     private int hits;
@@ -29,7 +28,7 @@ public class RelicAir : RelicBase
 
         if (!inUse)
         {
-            RaycastHit[] grappleHits = Physics.RaycastAll(Camera.main.ViewportPointToRay(crosshairPos), grappleRange);
+            RaycastHit[] grappleHits = Physics.RaycastAll(characterScript.GetForwardRay(), grappleRange);
             if (grappleHits.Length > 0)
             {
                 RaycastHit target = grappleHits[0];
