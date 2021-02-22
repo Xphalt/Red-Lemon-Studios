@@ -30,7 +30,11 @@ public class EnemyFire : Enemy
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject == target) Destroy(gameObject);
+        if (collision.gameObject == target)
+        {
+            canExplode = true;
+            Destroy(gameObject);
+        }
     }
 
     public void OnDestroy()
