@@ -7,10 +7,11 @@ public class EnemyAir : Enemy
 {
     public float weaponRange;
     public int knockbackSpeed;
-    public float knockBackDuration;
+    public float knockbackDuration;
+    public float postKnockbackMomentum; //Velocity retained by target after being knocked back (0-1)
 
-    public float stationaryZone;
-    private float minWeaponRange;
+    public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
+    private float minWeaponRange; //Point at which enemy runs away^
 
     public float snipeDamage;
 
@@ -36,15 +37,15 @@ public class EnemyAir : Enemy
 
         if (!stunned)
         {
-            if (!CanSeePlayer()) actionState = EnemyStates.Patrolling;
+            if (!CanSeePlayer()) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
             else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
             {
-                if (inAttackRange) actionState = EnemyStates.Fleeing;
-                else actionState = EnemyStates.Chasing;
+                if (inAttackRange) movementState = EnemyStates.Fleeing;
+                else movementState = EnemyStates.Chasing;
             }
 
-            else actionState = EnemyStates.Idle;
+            else movementState = EnemyStates.Idle;
 
             if (inAttackRange)
             {
@@ -54,7 +55,7 @@ public class EnemyAir : Enemy
 
         else
         {
-            actionState = EnemyStates.Idle;
+            movementState = EnemyStates.Idle;
 
             DOTTimer += Time.deltaTime;
             if (DOTTimer > DOTInterval)
@@ -73,14 +74,14 @@ public class EnemyAir : Enemy
 
             if (!playerScript.movementLocked)
             {
-                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockBackDuration, true);
+                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, true);
             }
         }
 
         return true;
     }
 
-    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
         stunned = true;

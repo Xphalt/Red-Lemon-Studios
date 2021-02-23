@@ -17,11 +17,11 @@ public class EnemyWater : Enemy
     {
         base.Update();
 
-        if (CanSeePlayer()) actionState = EnemyStates.Chasing;
-        else actionState = EnemyStates.Patrolling;
+        if (CanSeePlayer()) movementState = EnemyStates.Chasing;
+        else movementState = EnemyStates.Patrolling;
     }
 
-    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
 

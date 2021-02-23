@@ -12,6 +12,7 @@ public class RelicAir : RelicBase
     private Vector3 grappleDir;
     public float grappleSpeed;
     public float bounceForce;
+    public float damage;
 
     public int maxHits;
     private int hits;
@@ -26,25 +27,24 @@ public class RelicAir : RelicBase
     {
         if (!base.Activate()) return false;
 
-        if (!inUse)
+        RaycastHit[] grappleHits = Physics.RaycastAll(characterScript.GetForwardRay(), grappleRange);
+        if (grappleHits.Length > 0)
         {
-            RaycastHit[] grappleHits = Physics.RaycastAll(characterScript.GetForwardRay(), grappleRange);
-            if (grappleHits.Length > 0)
-            {
-                RaycastHit target = grappleHits[0];
+            RaycastHit target = grappleHits[0];
 
-                grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
+            grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
 
-                characterRigid.useGravity = false;
-                characterRigid.velocity = grappleDir * grappleSpeed;
+            characterRigid.useGravity = false;
+            characterRigid.velocity = grappleDir * grappleSpeed;
 
-                inUse = true;
-                readyToUse = false;
-                characterScript.movementLocked = true;
+            inUse = true;
+            readyToUse = false;
+            characterScript.movementLocked = true;
+            characterScript.impactDamage = damage;
 
-                return true;
-            }
+            return true;
         }
+
         return false;
     }
 

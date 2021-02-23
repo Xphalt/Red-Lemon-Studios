@@ -21,8 +21,8 @@ public class EnemyFire : Enemy
     {
         base.Update();
 
-        if (CanSeePlayer()) actionState = EnemyStates.Chasing;
-        else actionState = EnemyStates.Patrolling;
+        if (CanSeePlayer()) movementState = EnemyStates.Chasing;
+        else movementState = EnemyStates.Patrolling;
         Jump();
     }
 
@@ -42,7 +42,7 @@ public class EnemyFire : Enemy
         if (canExplode && GetDistance() < explosionRadius) playerScript.TakeDamage(explosionDamage);
     }
 
-    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
         canExplode = false;

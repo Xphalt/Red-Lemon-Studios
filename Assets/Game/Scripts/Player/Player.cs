@@ -48,7 +48,6 @@ public class Player : CharacterBase
     public int maxAmmo;
 
 
-
     public override void Start()
     {
         base.Start();
@@ -135,7 +134,7 @@ public class Player : CharacterBase
         return Camera.main.ViewportPointToRay(crosshairPos);
     }
 
-    public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
+    public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
 
@@ -148,9 +147,15 @@ public class Player : CharacterBase
         UIScript.UpdateHealthText((int)curHealth);
     }
 
-    public override void AddHealth(float value)
+    public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
     {
-        base.AddHealth(value);
+        if (cost == 0) base.AddHealth(value);
+        else if (Ammo[costType] >= cost)
+        {
+            base.AddHealth(value);
+            SubstractAmmo(cost, costType);
+        }
+
         UIScript.UpdateHealthText((int)curHealth);
     }
 
@@ -178,9 +183,14 @@ public class Player : CharacterBase
         if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
-    public bool AmmoCheck()
+    public bool AmmoCheck(int requiredAmount = 1)
     {
-        return Ammo[elementChanger.m_CurElement] > 0;
+        return Ammo[elementChanger.m_CurElement] >= requiredAmount;
+    }
+
+    public override bool IsPlayer()
+    {
+        return true;
     }
 
     public void Respawn()

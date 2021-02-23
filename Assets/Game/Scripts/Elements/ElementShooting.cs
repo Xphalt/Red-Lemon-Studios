@@ -52,9 +52,8 @@ public class ElementShooting : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce((target - GunPos.transform.position).normalized * ShootForce);
         newBullet.transform.SetParent(null);
 
-        ElementAmmoAilments newBulletInfo = newBullet.GetComponent<ElementAmmoAilments>();
-        newBulletInfo.user = wielderScript;
-        newBulletInfo.Initialise(damage); 
+        ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
+        newBulletInfo.Initialise(damage, wielderScript); 
 
         Destroy(newBullet, 2);
     }

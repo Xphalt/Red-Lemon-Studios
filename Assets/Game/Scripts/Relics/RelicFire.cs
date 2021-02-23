@@ -17,6 +17,9 @@ public class RelicFire : RelicBase
 {
     public float dashSpeed;
     public float dashDuration;
+    public float postDashMomentum; //Veclocity retained by user after dash (0-1)
+
+    public float damage;
 
     private Vector3 dashDist;
 
@@ -36,7 +39,8 @@ public class RelicFire : RelicBase
 
         dashDist = nonVerticalDirection.normalized * dashSpeed;
 
-        characterScript.Shift(dashDist, dashDuration);
+        characterScript.Shift(dashDist, dashDuration, postDashMomentum);
+        characterScript.impactDamage = damage;
 
         inUse = true;
         readyToUse = false;

@@ -31,7 +31,7 @@ public class Enemy : CharacterBase
     public float attackInterval;
     protected float attackTimer = 0;
 
-    protected EnemyStates actionState;
+    protected EnemyStates movementState;
 
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
@@ -80,7 +80,7 @@ public class Enemy : CharacterBase
 
         Vector3 newVelocity = characterRigid.velocity;
 
-        switch(actionState)
+        switch(movementState)
         {
             case EnemyStates.Chasing:
                 newVelocity = (target.transform.position - transform.position).normalized * chaseSpeed;
@@ -142,13 +142,13 @@ public class Enemy : CharacterBase
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.tag == "bullet")
+        if (collision.gameObject.tag == "Hazard")
         {
-            ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
+            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
 
-            if (bulletInfo.hasEffect && bulletInfo.damageType == weakAgainst && bulletInfo.team != team)
+            if (hazardInfo.hasEffect && hazardInfo.damageType == weakAgainst && hazardInfo.team != team)
             {
-                TriggerStatusEffect(bulletInfo);
+                TriggerStatusEffect(hazardInfo);
             }
         }
     }
@@ -166,7 +166,7 @@ public class Enemy : CharacterBase
         }
     }
 
-    public virtual void TriggerStatusEffect(ElementAmmoAilments effectStats) 
+    public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
     {
         statusEffectActive = true;
         statusTimer = 0;

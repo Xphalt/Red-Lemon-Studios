@@ -112,10 +112,13 @@ MonoBehaviour:
   maxCombo: 10
   percentIncreasePerHit: 10
   damagePercentRecievedOnMiss: 25
-  missPenalty: 0
+  missPenalty: 1
   doubleJumpEnabled: 0
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1
   speedMultiplier: 1
+  relicCooldownDuration: 3
   dashSpeed: 100
   dashDuration: 0.35
+  postDashMomentum: 0.1
+  damage: 25

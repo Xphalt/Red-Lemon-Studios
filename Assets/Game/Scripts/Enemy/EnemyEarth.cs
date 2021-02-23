@@ -6,6 +6,7 @@ using static EnumHelper;
 public class EnemyEarth : Enemy
 {
     private bool rolling = false;
+    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
     public override void Start()
     {
@@ -20,10 +21,10 @@ public class EnemyEarth : Enemy
         
     }
 
-    public override void TriggerStatusEffect(ElementAmmoAilments effectStats)
+    public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
 
-        Shift((effectStats.gameObject.transform.position - transform.position) * effectStats.statusMagnitude, effectStats.statusEffectDuration, true);
+        Shift((effectStats.gameObject.transform.position - transform.position) * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), true);
     }
 }

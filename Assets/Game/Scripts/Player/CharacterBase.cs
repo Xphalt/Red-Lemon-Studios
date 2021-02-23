@@ -22,6 +22,7 @@ public class CharacterBase : MonoBehaviour
     internal Vector3 shiftingVector;
     internal float shiftingDuration;
     internal float shiftingTimer;
+    internal float postShiftMomentum;
 
     public float airControl;
 
@@ -37,8 +38,6 @@ public class CharacterBase : MonoBehaviour
     internal List<RelicBase> relicList = new List<RelicBase>();
     protected int relicIndex = 0;
     internal RelicBase currentRelic = null;
-    
-
 
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -50,6 +49,8 @@ public class CharacterBase : MonoBehaviour
 
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
+
+    internal float impactDamage = 0;
 
     public virtual void Start()
     {
@@ -74,9 +75,7 @@ public class CharacterBase : MonoBehaviour
 
             if (shiftingTimer > shiftingDuration)
             {
-                movementLocked = false;
-                shifting = false;
-                shiftingTimer = 0;
+                EndShift();
             }
         }
 
@@ -89,20 +88,26 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("bullet"))
+        if (collision.gameObject.CompareTag("Hazard"))
         {
-            ElementAmmoAilments bulletInfo = collision.gameObject.GetComponent<ElementAmmoAilments>();
+            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
 
-            if (bulletInfo.team != team)
+            if (hazardInfo.team != team)
             {
-                TakeDamage(bulletInfo.damage);
-                bulletInfo.RegisterHit();
+                TakeDamage(hazardInfo.damage);
+                hazardInfo.RegisterHit();
             }
         }
 
         if (currentRelic != null)
         {
             if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse) currentRelic.EndAbility();
+        }
+
+        CharacterBase collisionCharacter;
+        if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
+        {
+            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(impactDamage);
         }
     }
 
@@ -140,7 +145,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void Shift(Vector3 force, float duration, bool hostile = false)
+    public void Shift(Vector3 force, float duration, float momentumCarryOver = 1, bool hostile = false)
     {
         movementLocked = true;
         shifting = true;
@@ -148,6 +153,16 @@ public class CharacterBase : MonoBehaviour
         shiftingVector = force;
 
         if (hostile) shiftingVector *= knockBackMultiplier;
+        postShiftMomentum = momentumCarryOver;
+    }
+
+    public void EndShift()
+    {
+        movementLocked = false;
+        shifting = false;
+        shiftingTimer = 0;
+
+        characterRigid.velocity *= postShiftMomentum;
     }
 
     public float CalculateDamageMult()
@@ -169,18 +184,23 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float value, ElementTypes damageType = ElementTypes.ElementTypesSize)
+    public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         curHealth -= value * damageRecievedMultiplier;        
     }
 
-    public virtual void AddHealth(float value)
+    public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
     {
         curHealth += value;
         if (curHealth > maxHealth)
         {
             curHealth = maxHealth;
         }
+    }
+
+    public virtual bool IsPlayer() 
+    {
+        return false;
     }
 
     #region Relic
@@ -238,7 +258,7 @@ public class CharacterBase : MonoBehaviour
 
     public virtual Ray GetForwardRay()
     {
-        return new Ray();
+        return new Ray(transform.position, transform.forward);
     }
 
     public void ActivatePassives()

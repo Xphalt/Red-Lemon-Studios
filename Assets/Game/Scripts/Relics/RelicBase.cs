@@ -42,7 +42,7 @@ public class RelicBase : MonoBehaviour
     public float relicCooldownDuration;
     internal bool readyToUse = false;
 
-    public void SetUser(GameObject newUser)
+    public virtual void SetUser(GameObject newUser)
     {
         user = newUser;
         characterScript = user.GetComponent<CharacterBase>();
@@ -50,14 +50,14 @@ public class RelicBase : MonoBehaviour
         readyToUse = true;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         Cooldown();
     }
 
     virtual public bool Activate() 
     {
-        return readyToUse; 
+        return readyToUse && !inUse; 
     }
 
     virtual public void EndAbility()

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-public class ElementAmmoAilments : MonoBehaviour
+public class ElementHazardAilments : MonoBehaviour
 {
     public bool hasEffect;
     public int damage;
@@ -21,20 +21,20 @@ public class ElementAmmoAilments : MonoBehaviour
     public float statusEffectDuration;
     public float statusMagnitude;
 
-    internal CharacterBase user;
+    internal CharacterBase userScript;
     internal bool successfulHit = false;
     internal Teams team;
 
-    public void Initialise(float weaponDamage)
+    public void Initialise(float weaponDamage, CharacterBase newUser)
     {
-        damage = Mathf.RoundToInt(weaponDamage * user.CalculateDamageMult());
-
-        team = user.team;
+        userScript = newUser;
+        damage = Mathf.RoundToInt(weaponDamage * userScript.CalculateDamageMult());
+        team = userScript.team;
     }
 
     public void RegisterHit()
     {
-        user.IncreaseCombo();
+        userScript.IncreaseCombo();
         successfulHit = true;
     }
 
@@ -42,7 +42,7 @@ public class ElementAmmoAilments : MonoBehaviour
     {
         if (!successfulHit)
         {
-            user.MissShot(damage);
+            userScript.MissShot(damage);
         }
     }
 }
