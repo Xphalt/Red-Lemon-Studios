@@ -61,7 +61,7 @@ public class RelicEarth : RelicBase
             {
                 pillar.SetActive(true);
 
-                float startScale = (user.transform.position.y - characterScript.floorDistance - floorHit.point.y) / 2;
+                float startScale = 0;   //(user.transform.position.y - characterScript.floorDistance - floorHit.point.y) / 2; (To start pillar at player height)
 
                 pillarScript.Activate(startScale, floorHit.point + Vector3.up * startScale);
 
