@@ -61,6 +61,7 @@ public class RelicAir : RelicBase
 
                 hits = maxHits;
                 characterScript.movementLocked = false;
+                characterScript.impactDamage = 0;
                 base.EndAbility();
             }
         }

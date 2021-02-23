@@ -32,6 +32,7 @@ public class Enemy : CharacterBase
     protected float attackTimer = 0;
 
     protected EnemyStates movementState;
+    public bool sentryMode = false;
 
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
@@ -55,7 +56,8 @@ public class Enemy : CharacterBase
         target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
 
-        characterRigid.velocity = transform.forward * chaseSpeed;
+        if (sentryMode) movementState = EnemyStates.Idle;
+        else characterRigid.velocity = transform.forward * chaseSpeed;
     }
 
     public override void Update()
@@ -78,51 +80,62 @@ public class Enemy : CharacterBase
     {
         base.FixedUpdate();
 
-        Vector3 newVelocity = characterRigid.velocity;
-
-        switch(movementState)
+        if (!movementLocked)
         {
-            case EnemyStates.Chasing:
-                newVelocity = (target.transform.position - transform.position).normalized * chaseSpeed;
-                break;
+            Vector3 newVelocity = characterRigid.velocity;
 
-            case EnemyStates.Fleeing:
-                newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
-                break;
+            switch (movementState)
+            {
+                case EnemyStates.Chasing:
+                    newVelocity = (target.transform.position - transform.position).normalized * chaseSpeed;
+                    break;
 
-            case EnemyStates.Patrolling:
-                Vector3 patrolDirection = characterRigid.velocity;
-                patrolDirection.y = 0;
+                case EnemyStates.Fleeing:
+                    newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
+                    break;
 
-                patrolDirection.Normalize();
+                case EnemyStates.Patrolling:
+                    Vector3 patrolDirection = characterRigid.velocity;
+                    patrolDirection.y = 0;
 
-                if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
+                    patrolDirection.Normalize();
 
-                if (Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius))
-                {
-                    newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
-                    if (Random.Range(0, 2) == 1) newVelocity *= -1;
-                }
-                else newVelocity = patrolDirection * patrolSpeed;
-                
-                break;
+                    if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
 
-            case EnemyStates.Idle:
-                newVelocity = Vector3.zero;
-                break;
+                    if (Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius))
+                    {
+                        newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
+                        if (Random.Range(0, 2) == 1) newVelocity *= -1;
+                    }
+                    else newVelocity = patrolDirection * patrolSpeed;
+
+                    break;
+
+                case EnemyStates.Idle:
+                    newVelocity = Vector3.zero;
+                    break;
+            }
+
+            if (!canFly) newVelocity.y = characterRigid.velocity.y;
+
+            if (newVelocity != Vector3.zero) transform.rotation = Quaternion.LookRotation(newVelocity);
+
+            SetVelocity(newVelocity);
         }
-
-        if (!canFly) newVelocity.y = characterRigid.velocity.y;
-        
-        SetVelocity(newVelocity);
     }
 
     public bool CanSeePlayer()
     {
         RaycastHit castHit;
-        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit)) return false;
+        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit, playerDetectionRadius)) return false;
 
-        return (castHit.transform.gameObject == target);
+        if (castHit.transform.gameObject == target)
+        {
+            sentryMode = false;
+            return true;
+        }
+
+        return false;
     }
 
     public float GetDistance()

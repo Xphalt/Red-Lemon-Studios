@@ -22,8 +22,9 @@ public class EnemyFire : Enemy
         base.Update();
 
         if (CanSeePlayer()) movementState = EnemyStates.Chasing;
-        else movementState = EnemyStates.Patrolling;
-        Jump();
+        else if (!sentryMode) movementState = EnemyStates.Patrolling;
+        
+        if (!sentryMode) Jump();
     }
 
     public override void OnCollisionEnter(Collision collision)

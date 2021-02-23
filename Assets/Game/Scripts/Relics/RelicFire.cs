@@ -47,4 +47,10 @@ public class RelicFire : RelicBase
 
         return true;
     }
+
+    public override void EndAbility()
+    {
+        base.EndAbility();
+        characterScript.impactDamage = 0;
+    }
 }

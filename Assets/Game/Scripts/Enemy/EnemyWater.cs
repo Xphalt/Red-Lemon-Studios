@@ -5,6 +5,9 @@ using static EnumHelper;
 
 public class EnemyWater : Enemy
 {
+    public float meleeDamage;
+    public float meleeRange;
+
     public override void Start()
     {
         base.Start();
@@ -18,7 +21,35 @@ public class EnemyWater : Enemy
         base.Update();
 
         if (CanSeePlayer()) movementState = EnemyStates.Chasing;
-        else movementState = EnemyStates.Patrolling;
+        else if (!sentryMode) movementState = EnemyStates.Patrolling;
+
+        if (TargetInFront())
+        {
+            Attack();
+            movementState = EnemyStates.Idle;
+        }
+    }
+
+    public bool TargetInFront()
+    {
+        if (!CanSeePlayer()) return false;
+
+        foreach (RaycastHit targetScan in Physics.RaycastAll(transform.position, transform.forward, meleeRange))
+        {
+            if (targetScan.transform.gameObject == target) return true;
+        }
+
+        return false;
+    }
+
+    public override bool Attack()
+    {
+        if (base.Attack())
+        {
+            playerScript.TakeDamage(meleeDamage);
+            return true;
+        }
+        return false;
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)

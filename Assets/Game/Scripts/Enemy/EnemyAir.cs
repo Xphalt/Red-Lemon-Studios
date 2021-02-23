@@ -37,7 +37,7 @@ public class EnemyAir : Enemy
 
         if (!stunned)
         {
-            if (!CanSeePlayer()) movementState = EnemyStates.Patrolling;
+            if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
             else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
             {
@@ -76,9 +76,9 @@ public class EnemyAir : Enemy
             {
                 playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, true);
             }
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
