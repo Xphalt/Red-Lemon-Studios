@@ -7,27 +7,12 @@ using System.IO;
 
 //Zack Pilgrim
 
-public class SaveManager : MonoBehaviour
+public static class SaveManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Save save = new Save();
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    [Serializable]
-    class Save
-    {
-
-    }
-
-    void Saving()
+    public static void Saving()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
@@ -35,12 +20,21 @@ public class SaveManager : MonoBehaviour
         file.Close();
     }
 
-    void Loading()
+    public static void Loading()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-        Save save = (Save)bf.Deserialize(file); //Save class is created by us and stores all game data
-        file.Close();
+        if (File.Exists(Application.persistentDataPath + "/MySaveData.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file); //Save class is created by us and stores all game data
+            file.Close();
+        }        
     }
 
+}
+
+[Serializable]
+public class Save
+{
+    
 }
