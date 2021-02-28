@@ -27,6 +27,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 using static EnumHelper;
+using static SaveManager;
 
 public class Player : CharacterBase
 {
@@ -197,5 +198,4 @@ public class Player : CharacterBase
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
