@@ -13,8 +13,8 @@ public class ArenaManager : MonoBehaviour
     private void Awake()
     {
         SaveManager.LoadFromFile();
-        Debug.Log(SaveManager.GetVector2("TestData"));
-        SaveManager.AddNewData("TestData", new Vector2(6, 9));
+        Debug.Log(SaveManager.GetElementType("TestData").ToString());
+        SaveManager.AddNewElementType("TestData", ElementTypes.Earth);
     }
 
     // Start is called before the first frame update

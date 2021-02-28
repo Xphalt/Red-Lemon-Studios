@@ -11,6 +11,7 @@ using static EnumHelper;
 //
 //Intention is to have all variables stored and referenced through dicts. Dicts must be converted to pairs of lists to be serialised.
 //Vector2/3 are non-serialisable, hence the custom structs.
+//Current variable data types are only a baseline. More can be added, possibly including storing entire lists.
 
 public static class SaveManager
 {
@@ -25,6 +26,8 @@ public static class SaveManager
     public static Dictionary<string, string> stringDict = new Dictionary<string, string>();
     public static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
     public static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
+    
+    public static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
 
     public static void SaveToFile(string path="")
     {
@@ -61,16 +64,18 @@ public static class SaveManager
 
     public static void PrintOverrideWarning(string key, string dataType)
     {
-        Debug.LogWarning(dataType.ToUpper() + " value for " + key + " already exists. Use 'UpdateSaveData()' to replace it.");
+        dataType = dataType[0].ToString().ToUpper() + dataType.Substring(1);
+        Debug.LogWarning(dataType + " value for " + key + " already exists. Use 'UpdateSaved" + dataType + "()' to replace it.");
     }
 
     public static void PrintMissingDataWarning(string key, string dataType)
     {
-        Debug.LogWarning("No " + dataType.ToUpper() + " value for " + key + " exists. Use 'AddNewData()' to create it.");
+        dataType = dataType[0].ToString().ToUpper() + dataType.Substring(1);
+        Debug.LogWarning("No " + dataType + " value for " + key + " exists. Use 'AddNew" + dataType + "()' to create it.");
     }
 
     #region AddData
-    public static bool AddNewData(string key, int value)
+    public static bool AddNewInt(string key, int value)
     {
         if (intDict.ContainsKey(key))
         {
@@ -81,7 +86,7 @@ public static class SaveManager
         return true;    
     }
 
-    public static bool AddNewData(string key, float value)
+    public static bool AddNewFloat(string key, float value)
     {
         if (floatDict.ContainsKey(key))
         {
@@ -92,7 +97,7 @@ public static class SaveManager
         return true;
     }
 
-    public static bool AddNewData(string key, bool value)
+    public static bool AddNewBool(string key, bool value)
     {
         if (boolDict.ContainsKey(key))
         {
@@ -103,7 +108,7 @@ public static class SaveManager
         return true;
     }
 
-    public static bool AddNewData(string key, string value)
+    public static bool AddNewString(string key, string value)
     {
         if (stringDict.ContainsKey(key))
         {
@@ -114,7 +119,7 @@ public static class SaveManager
         return true;
     }
 
-    public static bool AddNewData(string key, Vector2 value)
+    public static bool AddNewVector2(string key, Vector2 value)
     {
         if (vector2Dict.ContainsKey(key))
         {
@@ -124,7 +129,7 @@ public static class SaveManager
         else vector2Dict.Add(key, value);
         return true;
     }
-    public static bool AddNewData(string key, Vector3 value)
+    public static bool AddNewVector3(string key, Vector3 value)
     {
         if (vector3Dict.ContainsKey(key))
         {
@@ -134,36 +139,52 @@ public static class SaveManager
         else vector3Dict.Add(key, value);
         return true;
     }
+
+    public static bool AddNewElementType(string key, ElementTypes value)
+    {
+        if (elementDict.ContainsKey(key))
+        {
+            PrintOverrideWarning(key, "ElementType");
+            return false;
+        }
+        else elementDict.Add(key, value);
+        return true;
+    }
     #endregion
     #region UpdateData
-    public static void UpdateSaveData(string key, int value)
+    public static void UpdateSavedInt(string key, int value)
     {
         intDict[key] = value;
     }
 
-    public static void UpdateSaveData(string key, float value)
+    public static void UpdateSavedFloat(string key, float value)
     {
         floatDict[key] = value;
     }
 
-    public static void UpdateSaveData(string key, bool value)
+    public static void UpdateSavedBool(string key, bool value)
     {
         boolDict[key] = value;
     }
 
-    public static void UpdateSaveData(string key, string value)
+    public static void UpdateSavedString(string key, string value)
     {
         stringDict[key] = value;
     }
 
-    public static void UpdateSaveData(string key, Vector2 value)
+    public static void UpdateSavedVector2(string key, Vector2 value)
     {
         vector2Dict[key] = value;
     }
 
-    public static void UpdateSaveData(string key, Vector3 value)
+    public static void UpdateSavedVector3(string key, Vector3 value)
     {
         vector3Dict[key] = value;
+    }
+
+    public static void UpdateSavedElementType(string key, ElementTypes value)
+    {
+        elementDict[key] = value;
     }
     #endregion
     #region GetData
@@ -214,102 +235,126 @@ public static class SaveManager
          
         return Vector3.zero;
     }
+
+    public static ElementTypes GetElementType(string key)
+    {
+        if (elementDict.ContainsKey(key)) return elementDict[key];
+        else PrintMissingDataWarning(key, "ElementType");
+
+        return ElementTypes.ElementTypesSize;
+    }
     #endregion
 
     public static void SaveDictsToLists()
     {
         int dictIndex = 0;
-        foreach (KeyValuePair<string, int> element in intDict)
+        foreach (KeyValuePair<string, int> pair in intDict)
         {
-            if (saveData.intKeys.Contains(element.Key))
+            if (saveData.intKeys.Contains(pair.Key))
             {
-                saveData.intKeys[dictIndex] = element.Key;
-                saveData.intValues[dictIndex] = element.Value;
+                saveData.intKeys[dictIndex] = pair.Key;
+                saveData.intValues[dictIndex] = pair.Value;
             }
             else
             {
-                saveData.intKeys.Add(element.Key);
-                saveData.intValues.Add(element.Value);
+                saveData.intKeys.Add(pair.Key);
+                saveData.intValues.Add(pair.Value);
             }
             dictIndex++;
         }
 
         dictIndex = 0;
-        foreach (KeyValuePair<string, float> element in floatDict)
+        foreach (KeyValuePair<string, float> pair in floatDict)
         {
-            if (saveData.floatKeys.Contains(element.Key))
+            if (saveData.floatKeys.Contains(pair.Key))
             {
-                saveData.floatKeys[dictIndex] = element.Key;
-                saveData.floatValues[dictIndex] = element.Value;
+                saveData.floatKeys[dictIndex] = pair.Key;
+                saveData.floatValues[dictIndex] = pair.Value;
             }
             else
             {
-                saveData.floatKeys.Add(element.Key);
-                saveData.floatValues.Add(element.Value);
+                saveData.floatKeys.Add(pair.Key);
+                saveData.floatValues.Add(pair.Value);
             }
             dictIndex++;
         }
 
         dictIndex = 0;
-        foreach (KeyValuePair<string, bool> element in boolDict)
+        foreach (KeyValuePair<string, bool> pair in boolDict)
         {
-            if (saveData.boolKeys.Contains(element.Key))
+            if (saveData.boolKeys.Contains(pair.Key))
             {
-                saveData.boolKeys[dictIndex] = element.Key;
-                saveData.boolValues[dictIndex] = element.Value;
+                saveData.boolKeys[dictIndex] = pair.Key;
+                saveData.boolValues[dictIndex] = pair.Value;
             }
             else
             {
-                saveData.boolKeys.Add(element.Key);
-                saveData.boolValues.Add(element.Value);
+                saveData.boolKeys.Add(pair.Key);
+                saveData.boolValues.Add(pair.Value);
             }
             dictIndex++;
         }
 
         dictIndex = 0;
-        foreach (KeyValuePair<string, string> element in stringDict)
+        foreach (KeyValuePair<string, string> pair in stringDict)
         {
-            if (saveData.stringKeys.Contains(element.Key))
+            if (saveData.stringKeys.Contains(pair.Key))
             {
-                saveData.stringKeys[dictIndex] = element.Key;
-                saveData.stringValues[dictIndex] = element.Value;
+                saveData.stringKeys[dictIndex] = pair.Key;
+                saveData.stringValues[dictIndex] = pair.Value;
             }
             else
             {
-                saveData.stringKeys.Add(element.Key);
-                saveData.stringValues.Add(element.Value);
+                saveData.stringKeys.Add(pair.Key);
+                saveData.stringValues.Add(pair.Value);
             }
             dictIndex++;
         }
 
         dictIndex = 0;
-        foreach (KeyValuePair<string, Vector2> element in vector2Dict)
+        foreach (KeyValuePair<string, Vector2> pair in vector2Dict)
         {
-            if (saveData.vector2Keys.Contains(element.Key))
+            if (saveData.vector2Keys.Contains(pair.Key))
             {
-                saveData.vector2Keys[dictIndex] = element.Key;
-                saveData.vector2Values[dictIndex] = new myVector2(element.Value.x, element.Value.y);
+                saveData.vector2Keys[dictIndex] = pair.Key;
+                saveData.vector2Values[dictIndex] = new myVector2(pair.Value.x, pair.Value.y);
             }
             else
             {
-                saveData.vector2Keys.Add(element.Key);
-                saveData.vector2Values.Add(new myVector2(element.Value.x, element.Value.y));
+                saveData.vector2Keys.Add(pair.Key);
+                saveData.vector2Values.Add(new myVector2(pair.Value.x, pair.Value.y));
             }
             dictIndex++;
         }
 
         dictIndex = 0;
-        foreach (KeyValuePair<string, Vector3> element in vector3Dict)
+        foreach (KeyValuePair<string, Vector3> pair in vector3Dict)
         {
-            if (saveData.vector3Keys.Contains(element.Key))
+            if (saveData.vector3Keys.Contains(pair.Key))
             {
-                saveData.vector3Keys[dictIndex] = element.Key;
-                saveData.vector3Values[dictIndex] = new myVector3(element.Value.x, element.Value.y, element.Value.z);
+                saveData.vector3Keys[dictIndex] = pair.Key;
+                saveData.vector3Values[dictIndex] = new myVector3(pair.Value.x, pair.Value.y, pair.Value.z);
             }
             else
             {
-                saveData.vector3Keys.Add(element.Key);
-                saveData.vector3Values.Add(new myVector3(element.Value.x, element.Value.y, element.Value.z));
+                saveData.vector3Keys.Add(pair.Key);
+                saveData.vector3Values.Add(new myVector3(pair.Value.x, pair.Value.y, pair.Value.z));
+            }
+            dictIndex++;
+        }
+
+        dictIndex = 0;
+        foreach (KeyValuePair<string, ElementTypes> pair in elementDict)
+        {
+            if (saveData.elementKeys.Contains(pair.Key))
+            {
+                saveData.elementKeys[dictIndex] = pair.Key;
+                saveData.elementValues[dictIndex] = pair.Value;
+            }
+            else
+            {
+                saveData.elementKeys.Add(pair.Key);
+                saveData.elementValues.Add(pair.Value);
             }
             dictIndex++;
         }
@@ -326,6 +371,8 @@ public static class SaveManager
 
         for (int index = 0; index < saveData.vector3Keys.Count; index++)
             vector3Dict[saveData.vector3Keys[index]] = new Vector3(saveData.vector3Values[index].x, saveData.vector3Values[index].y, saveData.vector3Values[index].z);
+
+        for (int index = 0; index < saveData.elementKeys.Count; index++) elementDict[saveData.elementKeys[index]] = saveData.elementValues[index];
     }
 }
 
@@ -349,6 +396,11 @@ public class Save
 
     public List<string> vector3Keys = new List<string>();
     public List<myVector3> vector3Values = new List<myVector3>();
+
+    public List<string> elementKeys = new List<string>();
+    public List<ElementTypes> elementValues = new List<ElementTypes>();
+
+    //On creating new lists, either delete and replace saved file, or add function to check for null lists and create new instances.
 }
 
 
