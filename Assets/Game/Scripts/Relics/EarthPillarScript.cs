@@ -36,7 +36,7 @@ public class EarthPillarScript : MonoBehaviour
         if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
         {
             if (collisionCharacter.team != team) collisionCharacter.TakeDamage(damage);
-            collisionCharacter.Shift(Vector3.up * sizePerSecond * 2, lifeTime, 0);
+            collisionCharacter.Shift(Vector3.up * sizePerSecond * 2, lifeTime, 0.1f);
         }
     }
 }

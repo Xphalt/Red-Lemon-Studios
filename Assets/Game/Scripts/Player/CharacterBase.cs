@@ -19,9 +19,10 @@ public class CharacterBase : MonoBehaviour
     internal bool movementLocked = false;
 
     internal bool shifting;
-    internal Vector3 shiftingVector;
-    internal float shiftingDuration;
+    internal Vector3 shiftVector;
+    internal float shiftDuration;
     internal float shiftingTimer;
+    internal float shiftTransition;
     internal float postShiftMomentum;
 
     public float airControl;
@@ -71,9 +72,9 @@ public class CharacterBase : MonoBehaviour
         if (shifting)
         {
             shiftingTimer += Time.deltaTime;
-            characterRigid.velocity = shiftingVector;
+            characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, shiftVector, shiftTransition);
 
-            if (shiftingTimer > shiftingDuration)
+            if (shiftingTimer > shiftDuration)
             {
                 EndShift();
             }
@@ -145,14 +146,15 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void Shift(Vector3 force, float duration, float momentumCarryOver = 1, bool hostile = false)
+    public void Shift(Vector3 force, float duration, float momentumCarryOver = 1, float transition = 1, bool hostile = false)
     {
         movementLocked = true;
         shifting = true;
-        shiftingDuration = duration;
-        shiftingVector = force;
+        shiftDuration = duration;
+        shiftVector = force;
+        shiftTransition = transition;
 
-        if (hostile) shiftingVector *= knockBackMultiplier;
+        if (hostile) shiftVector *= knockBackMultiplier;
         postShiftMomentum = momentumCarryOver;
     }
 

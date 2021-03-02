@@ -8,19 +8,31 @@ using static EnumHelper;
 
 public class RelicAir : RelicBase
 {
-    public float grappleRange;
+    public float grappleRange = 100;
     private Vector3 grappleDir;
-    public float grappleSpeed;
-    public float bounceForce;
-    public float damage;
+    public float grappleSpeed = 5;
+    public float grappleSwing = 1;
+    public float bounceForce = 500;
+    public float damage = 10;
 
-    public int maxHits;
+    public int maxHits = 1;
     private int hits;
 
     private void Start()
     {
+        grappleSwing = Mathf.Clamp(grappleSwing, 0, 1);
         hits = maxHits;
         relicType = ElementTypes.Air;
+    }
+
+    private void FixedUpdate()
+    {
+        base.Update();
+
+        if (inUse && grappleSwing < 1)
+        {
+            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+        }
     }
 
     public override bool Activate()
@@ -35,7 +47,7 @@ public class RelicAir : RelicBase
             grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
 
             characterRigid.useGravity = false;
-            characterRigid.velocity = grappleDir * grappleSpeed;
+            characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
 
             inUse = true;
             readyToUse = false;

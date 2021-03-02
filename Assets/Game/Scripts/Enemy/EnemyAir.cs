@@ -74,7 +74,7 @@ public class EnemyAir : Enemy
 
             if (!playerScript.movementLocked)
             {
-                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, true);
+                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
             }
             return true;
         }
