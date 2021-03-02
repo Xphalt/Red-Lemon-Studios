@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicPlaceHolder: {fileID: 0}
-  jumpForce: 1000
+  jumpForce: 0
   gravityMult: 2
   floorDistance: 1.01
   airControl: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   canFly: 0
   weaponRange: 25
   knockbackSpeed: 50
-  knockbackDuration: 0
+  knockbackDuration: 0.15
   postKnockbackMomentum: 0
   stationaryZone: 0.05
   snipeDamage: 10
