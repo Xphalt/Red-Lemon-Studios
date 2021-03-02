@@ -353,6 +353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1379060975}
     m_Modifications:
+    - target: {fileID: -6747385498247479814, guid: 3026a3143a41f5e4cad20fb8cc20d29f, type: 3}
+      propertyPath: grappleSwing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6332044242660386241, guid: 3026a3143a41f5e4cad20fb8cc20d29f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2133,7 +2137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1232789163
 Transform:
   m_ObjectHideFlags: 0
