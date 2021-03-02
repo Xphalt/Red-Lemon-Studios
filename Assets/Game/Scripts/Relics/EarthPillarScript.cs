@@ -8,14 +8,18 @@ public class EarthPillarScript : MonoBehaviour
     private float damage;
     private float sizePerSecond;
     private float lifeTime;
+    private float userMomentumResidue;
+    private float hostileMomentumResidue;
     internal Teams team;
 
-    public void Initialise(float pillarDamage, float growthRate, float pillarLifeTime, Teams userTeam)
+    public void Initialise(float pillarDamage, float growthRate, float pillarLifeTime, Teams userTeam, float userMomentum, float hostileMomentum)
     {
         damage = pillarDamage;
         sizePerSecond = growthRate;
         lifeTime = pillarLifeTime;
         team = userTeam;
+        userMomentumResidue = userMomentum;
+        hostileMomentumResidue = hostileMomentum;
     }
 
     void Update()
@@ -36,7 +40,9 @@ public class EarthPillarScript : MonoBehaviour
         if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
         {
             if (collisionCharacter.team != team) collisionCharacter.TakeDamage(damage);
-            collisionCharacter.Shift(Vector3.up * sizePerSecond * 2, lifeTime, 0.1f);
+
+            float momentumResidue = (collisionCharacter.team == team) ? userMomentumResidue : hostileMomentumResidue;
+            collisionCharacter.Shift(Vector3.up * sizePerSecond * 2, lifeTime, momentumResidue);
         }
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1538245284360931053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalScale: {x: 8, y: 1, z: 8}
   m_Children: []
   m_Father: {fileID: 1538245285186874233}
   m_RootOrder: 0
@@ -231,4 +231,6 @@ MonoBehaviour:
   pillar: {fileID: 1538245284360931053}
   maxPillarSize: 5
   pillarDamage: 50
+  userMomentumResidue: 0.1
+  hostileMomentumResidue: 1
   pillarLifeTime: 0.5

@@ -232,15 +232,8 @@ public class CharacterBase : MonoBehaviour
             currentRelic.GetComponent<MeshRenderer>().enabled = false;
             relicIndex += cycleAmount;
 
-            if (relicIndex >= relicList.Count)
-            {
-                relicIndex -= relicList.Count;
-            }
-            else if (relicIndex < 0)
-            {
-                relicIndex += relicList.Count;
-            }
-
+            relicIndex %= relicList.Count;
+            
             currentRelic = relicList[relicIndex];
             currentRelic.GetComponent<MeshRenderer>().enabled = true;
 
