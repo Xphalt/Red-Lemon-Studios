@@ -191,7 +191,6 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        print(immortal);
         if (!immortal) curHealth -= value * damageRecievedMultiplier;        
     }
 
