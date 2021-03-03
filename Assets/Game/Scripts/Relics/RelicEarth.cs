@@ -57,8 +57,6 @@ public class RelicEarth : RelicBase
     {
         if (!base.Activate()) return false;
 
-        //pillar.transform.position = user.transform.position - Vector3.down * characterScript.floorDistance;
-
         RaycastHit[] floorHits = Physics.RaycastAll(new Ray(user.transform.position, -Vector3.up));
         foreach (RaycastHit floorHit in floorHits)
         {
@@ -66,9 +64,10 @@ public class RelicEarth : RelicBase
             {
                 pillar.SetActive(true);
 
-                float startScale = 0;   //(user.transform.position.y - characterScript.floorDistance - floorHit.point.y) / 2; (To start pillar at player height)
+                float startScale = 0;
 
                 pillarScript.Activate(startScale, floorHit.point + Vector3.up * startScale);
+                characterScript.immortal = true;
 
                 pillarTimer = 0;
                 readyToUse = false;
@@ -86,6 +85,7 @@ public class RelicEarth : RelicBase
 
         pillar.SetActive(false);
 
+        characterScript.immortal = false;
         characterScript.EndShift();
     }
 }

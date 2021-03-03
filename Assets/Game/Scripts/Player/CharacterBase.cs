@@ -35,6 +35,7 @@ public class CharacterBase : MonoBehaviour
 
     public float maxHealth = 100.0f;
     protected float curHealth;
+    internal bool immortal = false;
 
     internal List<RelicBase> relicList = new List<RelicBase>();
     protected int relicIndex = 0;
@@ -190,7 +191,8 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        curHealth -= value * damageRecievedMultiplier;        
+        print(immortal);
+        if (!immortal) curHealth -= value * damageRecievedMultiplier;        
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
