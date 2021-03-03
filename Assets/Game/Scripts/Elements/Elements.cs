@@ -55,9 +55,9 @@ public class Elements : MonoBehaviour
         {
             m_CurElement = (ElementTypes)((int)m_CurElement % (int)ElementTypes.ElementTypesSize);
         }
-        else while (m_CurElement < 0)
+        else if (m_CurElement < 0)
         {
-            m_CurElement += (int)ElementTypes.ElementTypesSize;
+            m_CurElement -= (int)ElementTypes.ElementTypesSize * Mathf.FloorToInt((float)m_CurElement / (float)ElementTypes.ElementTypesSize);
         }
 
         UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);

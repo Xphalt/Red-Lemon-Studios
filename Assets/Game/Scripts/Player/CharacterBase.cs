@@ -236,9 +236,9 @@ public class CharacterBase : MonoBehaviour
             {
                 relicIndex %= relicList.Count;
             }
-            else while (relicIndex < 0)
+            else if (relicIndex < 0)
             {
-                relicIndex += relicList.Count;
+                relicIndex -= relicList.Count * Mathf.FloorToInt((float)relicIndex / (float)relicList.Count); // Add at least one lot of total relic number
             }
 
             currentRelic = relicList[relicIndex];
