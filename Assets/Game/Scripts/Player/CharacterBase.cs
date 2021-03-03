@@ -40,6 +40,8 @@ public class CharacterBase : MonoBehaviour
     protected int relicIndex = 0;
     internal RelicBase currentRelic = null;
 
+    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
+
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
     protected float damagePercentRecievedOnMiss = 0;

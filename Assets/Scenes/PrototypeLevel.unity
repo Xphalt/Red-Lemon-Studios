@@ -3187,6 +3187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFire
       objectReference: {fileID: 0}
+    - target: {fileID: 1296724980272786847, guid: 2171561bdcdc4134c8f0ad26903ce3e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2171561bdcdc4134c8f0ad26903ce3e1, type: 3}
 --- !u!1001 &1538245284103053869
@@ -3305,10 +3309,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1784885375}
-    - target: {fileID: 1887174811526350812, guid: 93ce2ec2808c00f4cac708f3229323c9, type: 3}
-      propertyPath: knockbackDuration
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93ce2ec2808c00f4cac708f3229323c9, type: 3}
 --- !u!1001 &2717065245864450695
@@ -3634,6 +3634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyEarth
       objectReference: {fileID: 0}
+    - target: {fileID: 4380585020505453013, guid: 97379cf2421d77846b9c6746a8aea306, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4380585020505453015, guid: 97379cf2421d77846b9c6746a8aea306, type: 3}
       propertyPath: target
       value: 
@@ -3813,6 +3817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyWater
       objectReference: {fileID: 0}
+    - target: {fileID: 6944536703825417462, guid: 2f321aafff5173649899d55ef690803a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f321aafff5173649899d55ef690803a, type: 3}
 --- !u!1001 &7338099964613616536
@@ -3834,6 +3842,10 @@ PrefabInstance:
       propertyPath: relicPlaceHolder
       value: 
       objectReference: {fileID: 1738793499}
+    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: knockbackRecovery
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -121,6 +121,19 @@ public class Player : CharacterBase
         if (other.CompareTag("Relic")) AddRelic(other.gameObject);
     }
 
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        if (collision.gameObject.CompareTag("Hazard"))
+        {
+            ElementHazardAilments effectStats = collision.gameObject.GetComponent<ElementHazardAilments>();
+
+            if (effectStats.damageType == ElementTypes.Air)
+                Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+        }
+    }
+
     private void Shoot()
     {
         if (AmmoCheck())
