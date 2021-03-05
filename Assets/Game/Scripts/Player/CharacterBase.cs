@@ -127,7 +127,7 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, -Vector3.up), floorDistance);
+        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
         isGrounded = false;
         foreach (RaycastHit floorHit in floorHits)
         {
