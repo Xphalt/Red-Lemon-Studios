@@ -53,6 +53,7 @@ public class RelicAir : RelicBase
             readyToUse = false;
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
+            characterScript.immortal = true;
 
             return true;
         }
@@ -74,6 +75,7 @@ public class RelicAir : RelicBase
                 hits = maxHits;
                 characterScript.movementLocked = false;
                 characterScript.impactDamage = 0;
+                characterScript.immortal = false;
                 base.EndAbility();
             }
         }

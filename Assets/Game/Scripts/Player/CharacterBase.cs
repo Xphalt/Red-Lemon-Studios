@@ -35,10 +35,13 @@ public class CharacterBase : MonoBehaviour
 
     public float maxHealth = 100.0f;
     protected float curHealth;
+    internal bool immortal = false;
 
     internal List<RelicBase> relicList = new List<RelicBase>();
     protected int relicIndex = 0;
     internal RelicBase currentRelic = null;
+
+    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -124,7 +127,7 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, -Vector3.up), floorDistance);
+        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
         isGrounded = false;
         foreach (RaycastHit floorHit in floorHits)
         {
@@ -188,7 +191,7 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        curHealth -= value * damageRecievedMultiplier;        
+        if (!immortal) curHealth -= value * damageRecievedMultiplier;        
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)

@@ -45,7 +45,11 @@ public class EnemyAir : Enemy
                 else movementState = EnemyStates.Chasing;
             }
 
-            else movementState = EnemyStates.Idle;
+            else
+            {
+                movementState = EnemyStates.Idle;
+                transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            }
 
             if (inAttackRange)
             {
@@ -70,12 +74,14 @@ public class EnemyAir : Enemy
     {
         if (base.Attack())
         {
-            playerScript.TakeDamage(snipeDamage);
+            shooter.Shoot(elementType, target.transform.position);
 
-            if (!playerScript.movementLocked)
-            {
-                playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
-            }
+            //playerScript.TakeDamage(snipeDamage);
+
+            //if (!playerScript.movementLocked)
+            //{
+            //    playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
+            //}
             return true;
         }
         return false;

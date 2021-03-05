@@ -10,7 +10,6 @@ public class EnemyEarth : Enemy
     public float rollDuration = 1;
     public float rollDamage = 25;
 
-    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
     public override void Start()
     {

@@ -18,6 +18,7 @@ public class RelicFire : RelicBase
     public float dashSpeed;
     public float dashDuration;
     public float postDashMomentum; //Veclocity retained by user after dash (0-1)
+    private float dashTimer;
 
     public float damage;
 
@@ -26,6 +27,18 @@ public class RelicFire : RelicBase
     private void Start()
     {
         relicType = ElementTypes.Fire;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (inUse)
+        {
+            dashTimer += Time.deltaTime;
+
+            if (dashTimer > dashDuration) EndAbility();
+        }
     }
 
     public override bool Activate()
@@ -41,6 +54,7 @@ public class RelicFire : RelicBase
 
         characterScript.Shift(dashDist, dashDuration, postDashMomentum);
         characterScript.impactDamage = damage;
+        characterScript.immortal = true;
 
         inUse = true;
         readyToUse = false;
@@ -51,6 +65,8 @@ public class RelicFire : RelicBase
     public override void EndAbility()
     {
         base.EndAbility();
+        dashTimer = 0;
         characterScript.impactDamage = 0;
+        characterScript.immortal = false;
     }
 }
