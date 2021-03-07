@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GUI_Manager : MonoBehaviour
 {
     public Player player;
-    public Slider healthSlider, relicSlider;
-    public Image healthBarFill, relicBarFill;
+    public Slider healthSlider, relicSlider, ammoSlider;
+    public Image healthBarFill, relicBarFill, ammoBarFill;
     
     /*__________________________________________________________
     Health Bar code
@@ -37,5 +37,20 @@ public class GUI_Manager : MonoBehaviour
     public void UpdateRelicTimer(float cooldownValue)
     {
         relicSlider.value = cooldownValue;
+    }
+
+    /*__________________________________________________________
+    Ammo code
+    ____________________________________________________________*/
+
+    public void SetMaxAmmo(float maxAmmo)
+    {
+         ammoSlider.maxValue = maxAmmo;
+         ammoSlider.value = maxAmmo;
+    }
+
+    public void UpdateAmmoCount(float curAmmoCount)
+    {
+         ammoSlider.value = curAmmoCount;
     }
 }

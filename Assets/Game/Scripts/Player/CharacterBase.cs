@@ -70,9 +70,7 @@ public class CharacterBase : MonoBehaviour
             characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, shiftVector, shiftTransition);
 
             if (shiftingTimer > shiftDuration)
-            {
                 EndShift();
-            }
         }
 
         if (jumping)
@@ -202,7 +200,7 @@ public class CharacterBase : MonoBehaviour
 
     #region Relic
 
-    public void AddRelic(GameObject newRelic)
+    public virtual void AddRelic(GameObject newRelic)
     {
         RelicBase relicScript = newRelic.GetComponent<RelicBase>();
 

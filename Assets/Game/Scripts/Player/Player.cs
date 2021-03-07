@@ -65,6 +65,7 @@ public class Player : CharacterBase
         User Interface  initialisation
         ________________________________________________________________________________________*/
         userInterface.SetMaxHealth(maxHealth);
+        userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
     }
 
@@ -78,9 +79,12 @@ public class Player : CharacterBase
         if (currentRelic != null)
         {
             if (!currentRelic.readyToUse)
-                userInterface.UpdateRelicTimer(currentRelic.relicCooldownDuration - currentRelic.cooldownTimer);
+                userInterface.UpdateRelicTimer(currentRelic.cooldownTimer);
         }
     }
+    /*_______________________________________________________________________________________________________________
+    Player movement code
+    _________________________________________________________________________________________________________________*/
 
     private void Inputs()
     {
@@ -101,7 +105,11 @@ public class Player : CharacterBase
 
         if (Input.mouseScrollDelta.y != 0)
         {
-            if (!switchingRelics) elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            if (!switchingRelics)
+            {
+                elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+            }
             else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
         }
 
@@ -126,6 +134,9 @@ public class Player : CharacterBase
         }
     }
 
+    /*_______________________________________________________________________________________________________________
+    Relic use and shooting code
+    _________________________________________________________________________________________________________________*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Relic")) AddRelic(other.gameObject);
@@ -158,6 +169,10 @@ public class Player : CharacterBase
         return Camera.main.ViewportPointToRay(crosshairPos);
     }
 
+    /*_______________________________________________________________________________________________________________
+    Player health code
+    _________________________________________________________________________________________________________________*/
+
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
@@ -186,6 +201,9 @@ public class Player : CharacterBase
         userInterface.UpdateHealth(curHealth);
     }
 
+    /*_______________________________________________________________________________________________________________
+    Ammo code
+    _________________________________________________________________________________________________________________*/
     public void SubstractAmmo(int value, ElementTypes type)
     {
         Ammo[type] -= value;
@@ -195,6 +213,7 @@ public class Player : CharacterBase
             Ammo[type] = 0;
         }
 
+        userInterface.UpdateAmmoCount(Ammo[type]);
         //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
@@ -206,7 +225,8 @@ public class Player : CharacterBase
         {
             Ammo[type] = maxAmmo;
         }
-        
+
+        userInterface.UpdateAmmoCount(Ammo[type]);
         //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
@@ -214,6 +234,8 @@ public class Player : CharacterBase
     {
         return Ammo[elementChanger.m_CurElement] >= requiredAmount;
     }
+
+    //_______________________________________________________________________________________________________________
 
     public override bool IsPlayer()
     {
@@ -223,5 +245,12 @@ public class Player : CharacterBase
     public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public override void AddRelic(GameObject newRelic)
+    {
+        base.AddRelic(newRelic);
+        //Resets the relic 
+        userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
     }
 }
