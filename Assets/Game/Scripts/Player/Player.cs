@@ -48,21 +48,26 @@ public class Player : CharacterBase
 
     public int maxAmmo;
 
+    private bool saved = false;
+
 
     public override void Start()
     {
         base.Start();
-
         team = Teams.Player;
         elementChanger = weapon.GetComponent<Elements>();
-
-        for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
-        {
-            Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
-        }
-
         UIScript = canvas.GetComponent<UIManager>();
-        UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
+        LoadStats();
+
+        if (!saved)
+        {
+            for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
+            {
+                Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
+            }
+
+            UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
+        }
     }
 
     public override void Update()
@@ -119,6 +124,7 @@ public class Player : CharacterBase
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Relic")) AddRelic(other.gameObject);
+        if (other.CompareTag("Checkpoint")) SaveStats();
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -210,5 +216,47 @@ public class Player : CharacterBase
     public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SaveStats()
+    {
+        SaveManager.UpdateSavedVector3("PlayerPos", transform.position);
+        SaveManager.UpdateSavedFloat("PlayerYRot", transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedFloat("PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
+
+        foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
+        {
+            SaveManager.UpdateSavedInt(ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
+        }
+
+        SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
+
+        SaveManager.UpdateSavedBool("PlayerSaved", true);
+
+        for (int r = 0; r < relicList.Count; r++)
+        {
+            relicList[r].SaveRelic(r);
+        }
+    }
+
+    public void LoadStats()
+    {
+        if (SaveManager.HasBool("PlayerSaved"))
+        {
+            transform.position = SaveManager.GetVector3("PlayerPos");
+            transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerYRot"), 0);
+            firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerCameraYRot"), 0);
+
+            Ammo[ElementTypes.Fire] = SaveManager.GetInt(ElementTypes.Fire.ToString() + "Ammo");
+            Ammo[ElementTypes.Water] = SaveManager.GetInt(ElementTypes.Water.ToString() + "Ammo");
+            Ammo[ElementTypes.Air] = SaveManager.GetInt(ElementTypes.Air.ToString() + "Ammo");
+            Ammo[ElementTypes.Earth] = SaveManager.GetInt(ElementTypes.Earth.ToString() + "Ammo");
+
+            elementChanger.SetElement(SaveManager.GetElementType("PlayerElement"));
+
+            saved = true;
+        }
+
+        else saved = false;
     }
 }

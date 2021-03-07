@@ -78,4 +78,20 @@ public class RelicBase : MonoBehaviour
             }
         }
     }
+
+    public void SaveRelic(int id)
+    {
+        string identifier = "Relic" + id.ToString();
+        SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
+        SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
+        SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
+    }
+
+    public void LoadRelic(int id)
+    {
+        string identifier = "Relic" + id.ToString();
+        inUse = SaveManager.GetBool(identifier + "InUse");
+        readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
+        cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
+    }
 }

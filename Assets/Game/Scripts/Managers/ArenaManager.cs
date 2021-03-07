@@ -8,13 +8,13 @@ using static SaveManager;
 
 public class ArenaManager : MonoBehaviour
 {
-    public List<GameObject> enemies;
+    public List<GameObject> arenaEnemies;
+    public List<GameObject> arenaRelics;
+    public GameObject arenaPlayer;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
-        Debug.Log(SaveManager.GetElementType("TestData").ToString());
-        SaveManager.AddNewElementType("TestData", ElementTypes.Earth);
     }
 
     // Start is called before the first frame update

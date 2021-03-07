@@ -245,6 +245,14 @@ public static class SaveManager
     }
     #endregion
 
+    public static bool HasInt(string key) { return saveData.intKeys.Contains(key); }
+    public static bool HasFloat(string key) { return saveData.floatKeys.Contains(key); }
+    public static bool HasBool(string key) { return saveData.boolKeys.Contains(key); }
+    public static bool HasString(string key) { return saveData.stringKeys.Contains(key); }
+    public static bool HasVector2(string key) { return saveData.vector2Keys.Contains(key); }
+    public static bool HasVector3(string key) { return saveData.vector3Keys.Contains(key); }
+    public static bool HasElelmentType(string key) { return saveData.elementKeys.Contains(key); }
+
     public static void SaveDictsToLists()
     {
         int dictIndex = 0;
