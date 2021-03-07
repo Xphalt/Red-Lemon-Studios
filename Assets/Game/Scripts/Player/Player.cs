@@ -232,11 +232,6 @@ public class Player : CharacterBase
         SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
 
         SaveManager.UpdateSavedBool("PlayerSaved", true);
-
-        for (int r = 0; r < relicList.Count; r++)
-        {
-            relicList[r].SaveRelic(r);
-        }
     }
 
     public void LoadStats()

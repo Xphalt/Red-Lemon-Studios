@@ -26,6 +26,7 @@ public class RelicBase : MonoBehaviour
     public ElementTypes relicType;
 
     internal bool inUse;
+    internal bool collected = false;
 
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
@@ -44,6 +45,7 @@ public class RelicBase : MonoBehaviour
 
     public virtual void SetUser(GameObject newUser)
     {
+        collected = true;
         user = newUser;
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
@@ -82,16 +84,20 @@ public class RelicBase : MonoBehaviour
     public void SaveRelic(int id)
     {
         string identifier = "Relic" + id.ToString();
+        SaveManager.UpdateSavedBool(identifier + "Collected", collected);
         SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
         SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
         SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
+        SaveManager.UpdateSavedVector3(identifier + "Position", transform.position);
     }
 
     public void LoadRelic(int id)
     {
         string identifier = "Relic" + id.ToString();
+        collected = SaveManager.GetBool(identifier + "Collected");
         inUse = SaveManager.GetBool(identifier + "InUse");
         readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
         cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
+        transform.position = SaveManager.GetVector3(identifier + "Position");
     }
 }
