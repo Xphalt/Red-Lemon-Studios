@@ -23,32 +23,32 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthText(int currentHealth)
     {
-        HPText.text = "HP: " + currentHealth.ToString();
+        //HPText.text = "HP: " + currentHealth.ToString();
         ElementTypes.Fire.ToString();
     }
 
-    public void UpdateElementText(ElementTypes ammoType, int ammoAmount, bool newColour=false)
-    {
-        ElementalAmmoText.text = ammoType + ": " + ammoAmount.ToString();
+    //public void UpdateElementText(ElementTypes ammoType, int ammoAmount, bool newColour=false)
+    //{
+        //ElementalAmmoText.text = ammoType + ": " + ammoAmount.ToString();
 
-        if (newColour)
-        {
-            switch (ammoType)
-            {
-                case ElementTypes.Fire:
-                    ElementalAmmoText.color = Color.red;
-                    break;
-                case ElementTypes.Water:
-                    ElementalAmmoText.color = Color.blue;
-                    break;
-                case ElementTypes.Air:
-                    ElementalAmmoText.color = Color.white;
-                    break;
-                case ElementTypes.Earth:
-                    ElementalAmmoText.color = Color.yellow;
-                    break;
-            }
-        }
+        //if (newColour)
+        //{
+        //    switch (ammoType)
+        //    {
+        //        case ElementTypes.Fire:
+        //            ElementalAmmoText.color = Color.red;
+        //            break;
+        //        case ElementTypes.Water:
+        //            ElementalAmmoText.color = Color.blue;
+        //            break;
+        //        case ElementTypes.Air:
+        //            ElementalAmmoText.color = Color.white;
+        //            break;
+        //        case ElementTypes.Earth:
+        //            ElementalAmmoText.color = Color.yellow;
+        //            break;
+        //    }
+        //}
         
-    }
+    //}
 }

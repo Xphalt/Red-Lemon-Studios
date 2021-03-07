@@ -8,53 +8,44 @@ public class CharacterBase : MonoBehaviour
     protected Rigidbody characterRigid;
 
     public Transform relicPlaceHolder;
+    public GameObject weapon = null;
 
     public float jumpForce;
     public float gravityMult = 1;
     public float floorDistance;
+    public float airControl;
+    public float maxHealth = 100.0f;
+    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
-    protected bool hasJumpedTwice;
-    protected bool isGrounded = false;
-    protected bool jumping = false;
     internal bool movementLocked = false;
-
-    internal bool shifting;
-    internal Vector3 shiftVector;
+    internal bool shifting; 
+    internal bool immortal = false;
     internal float shiftDuration;
     internal float shiftingTimer;
     internal float shiftTransition;
     internal float postShiftMomentum;
-
-    public float airControl;
-
+    internal float curHealth; 
+    internal float impactDamage = 0;
     internal int hitCombo = 0;
 
-    public GameObject weapon = null;
-    internal ElementShooting shooter;
     internal Teams team;
-
-    public float maxHealth = 100.0f;
-    protected float curHealth;
-    internal bool immortal = false;
-
+    internal ElementShooting shooter;
     internal List<RelicBase> relicList = new List<RelicBase>();
-    protected int relicIndex = 0;
     internal RelicBase currentRelic = null;
+    internal Vector3 shiftVector;
 
-    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
-
+    protected bool missPenalty = false;
+    protected bool doubleJumpEnabled = false;
+    protected bool hasJumpedTwice;
+    protected bool isGrounded = false;
+    protected bool jumping = false;
+    protected int relicIndex = 0;
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
     protected float damagePercentRecievedOnMiss = 0;
-    protected bool missPenalty = false;
-
-    protected bool doubleJumpEnabled = false;
     protected float knockBackMultiplier = 1;
-
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
-
-    internal float impactDamage = 0;
 
     public virtual void Start()
     {
@@ -63,6 +54,7 @@ public class CharacterBase : MonoBehaviour
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
 
         curHealth = maxHealth;
+        
     }
     
     public virtual void Update()

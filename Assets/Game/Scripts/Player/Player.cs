@@ -32,22 +32,19 @@ using static SaveManager;
 public class Player : CharacterBase
 {
     public GameObject canvas;
-    private UIManager UIScript;
-
     public Vector3 crosshairPos;
-
     public Camera firstPersonCamera;
+    public GUI_Manager userInterface;
+
     public float runSpeed;
     public float shootTargetDistance;
-
-    private bool switchingRelics = false;
-
-    internal Elements elementChanger;
-
-    internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
-
     public int maxAmmo;
 
+    private bool switchingRelics = false;
+    private UIManager UIScript;
+
+    internal Elements elementChanger;
+    internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
     public override void Start()
     {
@@ -62,7 +59,9 @@ public class Player : CharacterBase
         }
 
         UIScript = canvas.GetComponent<UIManager>();
-        UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
+        // UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
+
+        userInterface.SetMaxHealth(maxHealth);
     }
 
     public override void Update()
@@ -158,7 +157,9 @@ public class Player : CharacterBase
             Respawn();
         }
 
-        UIScript.UpdateHealthText((int)curHealth);
+        //UIScript.UpdateHealthText((int)curHealth);
+
+        userInterface.UpdateHealth(curHealth);
     }
 
     public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
@@ -182,7 +183,7 @@ public class Player : CharacterBase
             Ammo[type] = 0;
         }
 
-        if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
+        //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
     public void AddAmmo(int value, ElementTypes type)
@@ -194,7 +195,7 @@ public class Player : CharacterBase
             Ammo[type] = maxAmmo;
         }
         
-        if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
+        //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
     }
 
     public bool AmmoCheck(int requiredAmount = 1)
