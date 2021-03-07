@@ -224,10 +224,19 @@ public class Player : CharacterBase
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /*_______________________________________________________________________________________________________________
+    Relic override code
+    _________________________________________________________________________________________________________________*/
     public override void AddRelic(GameObject newRelic)
     {
         base.AddRelic(newRelic);
         //Resets the relic 
         userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
     }
+
+    //public override void ChangeRelic(int cycleAmount = 1)
+    //{
+    //    base.ChangeRelic(cycleAmount);
+    //    //call function for new relic icon
+    //}
 }

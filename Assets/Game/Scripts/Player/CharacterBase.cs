@@ -217,7 +217,7 @@ public class CharacterBase : MonoBehaviour
         else newRelic.GetComponent<MeshRenderer>().enabled = false;
     }
 
-    public void ChangeRelic(int cycleAmount = 1)
+    public virtual void ChangeRelic(int cycleAmount = 1)
     {
         if (Mathf.Abs(cycleAmount) != relicList.Count && relicList.Count > 0)
         {
