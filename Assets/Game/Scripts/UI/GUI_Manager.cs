@@ -5,20 +5,13 @@ using UnityEngine.UI;
 
 public class GUI_Manager : MonoBehaviour
 {
-    //Variables
-    public Slider healthSlider;
     public Player player;
-    public Image fill;
+    public Slider healthSlider, relicSlider;
+    public Image healthBarFill, relicBarFill;
     
-
-    private CharacterBase charBase;
-    private float health;
-
-    //Functions
-    void Start()
-    {
-        charBase = player.GetComponent<CharacterBase>();
-    }
+    /*__________________________________________________________
+    Health Bar code
+    ____________________________________________________________*/
 
     public void SetMaxHealth(float maxHealth)
     {
@@ -31,5 +24,18 @@ public class GUI_Manager : MonoBehaviour
         healthSlider.value = curHealth;
     }
 
+    /*__________________________________________________________
+    Relic Bar code
+    ____________________________________________________________*/
 
+    public void RefillRelicTimer(float maxTimeValue)
+    {
+        relicSlider.maxValue = maxTimeValue;
+        relicSlider.value = maxTimeValue;
+    }
+
+    public void UpdateRelicTimer(float cooldownValue)
+    {
+        relicSlider.value = cooldownValue;
+    }
 }

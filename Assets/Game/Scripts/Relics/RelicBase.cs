@@ -38,7 +38,7 @@ public class RelicBase : MonoBehaviour
     public float damageRecievedMultiplier = 1;
     public float speedMultiplier = 1;
 
-    protected float cooldownTimer = 0;
+    internal float cooldownTimer = 0;
     public float relicCooldownDuration;
     internal bool readyToUse = false;
 
@@ -70,7 +70,7 @@ public class RelicBase : MonoBehaviour
         if (!readyToUse && user != null)
         {
             cooldownTimer += Time.deltaTime;
-
+           
             if (cooldownTimer > relicCooldownDuration)
             {
                 readyToUse = true;

@@ -61,7 +61,11 @@ public class Player : CharacterBase
         UIScript = canvas.GetComponent<UIManager>();
         // UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
 
+        /*______________________________________________________________________________________
+        User Interface  initialisation
+        ________________________________________________________________________________________*/
         userInterface.SetMaxHealth(maxHealth);
+        //______________________________________________________________________________________
     }
 
     public override void Update()
@@ -69,6 +73,13 @@ public class Player : CharacterBase
         base.Update();
 
         Inputs();
+
+        //If relic is in use
+        if (currentRelic != null)
+        {
+            if (!currentRelic.readyToUse)
+                userInterface.UpdateRelicTimer(currentRelic.relicCooldownDuration - currentRelic.cooldownTimer);
+        }
     }
 
     private void Inputs()
@@ -171,7 +182,8 @@ public class Player : CharacterBase
             SubstractAmmo(cost, costType);
         }
 
-        UIScript.UpdateHealthText((int)curHealth);
+        //UIScript.UpdateHealthText((int)curHealth);
+        userInterface.UpdateHealth(curHealth);
     }
 
     public void SubstractAmmo(int value, ElementTypes type)
