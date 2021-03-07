@@ -1,27 +1,4 @@
-﻿/// <summary>
-/// 
-/// Script made by Daniel and Daniel
-/// 
-/// Originally we had two scripts, this
-/// one for player inputs, shooting and
-/// using relics which was made primarily
-/// by Daniel with Linden making a few
-/// changes.
-/// 
-/// The other script was called 
-/// "PlayerAttributes" and was created 
-/// by Matt which contained the health
-/// and ammo along with ways to increase
-/// and decrease health, lose and gain ammo.
-/// 
-/// Me and Daniel kept Matts code and added
-/// and refactored it into this script to
-/// keep everything related to the player
-/// together and to help with reusablillty.
-/// 
-/// </summary> 
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

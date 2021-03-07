@@ -1,18 +1,4 @@
-﻿/// <summary>
-/// 
-/// Script made by Linden and Daniel
-/// 
-/// This script is a base for any
-/// future relics added in the future
-/// and shouldn't need to be changed
-/// unless something is required for
-/// all relics. relics can override
-/// the activate function to have
-/// their own abillities
-/// 
-/// </summary>
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;

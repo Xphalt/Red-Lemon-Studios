@@ -784,6 +784,18 @@ MonoBehaviour:
   healthBarFill: {fileID: 1637174513}
   relicBarFill: {fileID: 1980660398}
   ammoBarFill: {fileID: 1074411224}
+  airImage: {fileID: 12655650}
+  waterImage: {fileID: 630010512}
+  fireImage: {fileID: 1637965094}
+  earthImage: {fileID: 483041981}
+  airIcon: {fileID: 21300000, guid: d25dee5601348904bb7f31f595df9a5c, type: 3}
+  waterIcon: {fileID: 21300000, guid: d5357afff3ddcf64399da296a8c059ab, type: 3}
+  fireIcon: {fileID: 21300000, guid: 4723558af9378ae4d8240f3ebd556f87, type: 3}
+  earthIcon: {fileID: 21300000, guid: 531680224591d38478ebb2257a2bf3da, type: 3}
+  selectedAirIcon: {fileID: 21300000, guid: 455992f850033cc448b1421225986763, type: 3}
+  selectedWaterIcon: {fileID: 21300000, guid: 0e185136aa958fc4b8254c356c470ec4, type: 3}
+  selectedEarthIcon: {fileID: 21300000, guid: b6f108f4d4571f843a3f37813e3f841b, type: 3}
+  selectedFireIcon: {fileID: 21300000, guid: ed8cfd0117119a44e8684c7f991fbc6e, type: 3}
 --- !u!224 &241489826 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2717065245910232801, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
@@ -2006,7 +2018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6038271, b: 0.1745283, a: 1}
+  m_Color: {r: 1, g: 0.40361288, b: 0.17647058, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3979,7 +3991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.66530865, b: 0.16509432, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
