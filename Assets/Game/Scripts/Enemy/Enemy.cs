@@ -103,7 +103,7 @@ public class Enemy : CharacterBase
                     if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
                     bool turn = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
                     if (!turn && isGrounded && !canFly)
-                        turn = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // FIre enemy is spesh but oh well
+                        turn = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
 
                     if (turn)
                     {
