@@ -221,8 +221,6 @@ public class CharacterBase : MonoBehaviour
     {
         if (Mathf.Abs(cycleAmount) != relicList.Count && relicList.Count > 0)
         {
-            currentRelic.EndAbility();
-            currentRelic.GetComponent<MeshRenderer>().enabled = false;
             relicIndex += cycleAmount;
 
             if (relicIndex >= relicList.Count)
@@ -234,11 +232,19 @@ public class CharacterBase : MonoBehaviour
                 relicIndex -= relicList.Count * Mathf.FloorToInt((float)relicIndex / (float)relicList.Count); // Add at least one lot of total relic number
             }
 
-            currentRelic = relicList[relicIndex];
-            currentRelic.GetComponent<MeshRenderer>().enabled = true;
-
-            ActivatePassives();
+            SetRelic(relicIndex);
         }
+    }
+
+    public void SetRelic(int index)
+    {
+        currentRelic.EndAbility();
+        currentRelic.GetComponent<MeshRenderer>().enabled = false;
+
+        relicIndex = index;
+        currentRelic = relicList[relicIndex];
+        currentRelic.GetComponent<MeshRenderer>().enabled = true;
+        ActivatePassives();
     }
 
     public void UseRelic()
