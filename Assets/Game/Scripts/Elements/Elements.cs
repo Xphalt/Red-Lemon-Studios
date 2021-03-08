@@ -60,17 +60,14 @@ public class Elements : MonoBehaviour
             m_CurElement -= (int)ElementTypes.ElementTypesSize * Mathf.FloorToInt((float)m_CurElement / (float)ElementTypes.ElementTypesSize);
         }
 
-<<<<<<< HEAD
         //UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
-=======
         SetElement(m_CurElement);
     }
->>>>>>> Feature-Checkpoint
 
     public void SetElement(ElementTypes newElement)
     {
         m_CurElement = newElement;
-        UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
+        //UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
         myRenderer.material = WandColourDictionary[m_CurElement];
     }
 }
