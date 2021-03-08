@@ -24,6 +24,9 @@ public class ElementShooting : MonoBehaviour
     private GameObject ChosenBullet;
     public GameObject GunPos;
 
+    public GameObject SFXManager;
+    private SFXScript sfxScript;
+
     private CharacterBase wielderScript;
 
     public float damage;
@@ -31,6 +34,10 @@ public class ElementShooting : MonoBehaviour
     public List<ElementTypes> BulletTypes = new List<ElementTypes>();
     public List<GameObject> BulletPrefabs = new List<GameObject>();
     private Dictionary<ElementTypes, GameObject> BulletColourDictionary = new Dictionary<ElementTypes, GameObject>();
+
+    public List<ElementTypes> soundTypes = new List<ElementTypes>();
+    public List<string> soundNames = new List<string>();
+    private Dictionary<ElementTypes, string> shootSoundsDictionary = new Dictionary<ElementTypes, string>();
 
     public float ShootForce;
 
@@ -42,6 +49,13 @@ public class ElementShooting : MonoBehaviour
         {
             BulletColourDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
         }
+
+        for (int index = 0; index < soundTypes.Count; index++)
+        {
+            shootSoundsDictionary.Add(soundTypes[index], soundNames[index]);
+        }
+
+        sfxScript = SFXManager.GetComponent<SFXScript>();
     }
 
     //TODO cache the rigidbody reference to boost performance
@@ -53,7 +67,9 @@ public class ElementShooting : MonoBehaviour
         newBullet.transform.SetParent(null);
 
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
-        newBulletInfo.Initialise(damage, wielderScript); 
+        newBulletInfo.Initialise(damage, wielderScript);
+
+        sfxScript.PlaySFX(shootSoundsDictionary[shotType]);
 
         Destroy(newBullet, 2);
     }
