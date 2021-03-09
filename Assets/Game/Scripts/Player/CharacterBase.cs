@@ -9,6 +9,8 @@ public class CharacterBase : MonoBehaviour
 
     public Transform relicPlaceHolder;
     public GameObject weapon = null;
+    
+    public bool canFly = false;
 
     public float jumpForce;
     public float gravityMult = 1;
@@ -53,6 +55,7 @@ public class CharacterBase : MonoBehaviour
     public virtual void Start()
     {
         characterRigid = GetComponent<Rigidbody>();
+        characterRigid.useGravity = !canFly;
         airControl = Mathf.Clamp(airControl, 0, 1);
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
 
@@ -83,6 +86,8 @@ public class CharacterBase : MonoBehaviour
             characterRigid.AddForce(Vector3.up * (jumpForce + characterRigid.velocity.y * characterRigid.mass));
             jumping = false;
         }
+
+        if (!canFly) characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
     }
 
     public virtual void OnCollisionEnter(Collision collision)

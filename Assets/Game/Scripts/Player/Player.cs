@@ -109,8 +109,6 @@ public class Player : CharacterBase
 
             newVelocity.y = characterRigid.velocity.y;
             SetVelocity(newVelocity);
-
-            characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
         }
     }
 

@@ -38,7 +38,6 @@ public class Enemy : CharacterBase
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
-    public bool canFly = false;
 
     protected float statusDuration;
     protected float statusTimer;
@@ -83,6 +82,7 @@ public class Enemy : CharacterBase
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
+            bool directionSet = false;
 
             switch (movementState)
             {
@@ -92,6 +92,16 @@ public class Enemy : CharacterBase
 
                 case EnemyStates.Fleeing:
                     newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
+                    if (isGrounded && !canFly)
+                    {
+                        bool stop = !Physics.Raycast(transform.position + newVelocity.normalized * wallDetectionRadius, Vector3.down, floorDistance);
+                        if (stop)
+                        {
+                            newVelocity = Vector3.zero;
+                            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                            directionSet = true;
+                        }
+                    }
                     break;
 
                 case EnemyStates.Patrolling:
@@ -121,7 +131,7 @@ public class Enemy : CharacterBase
 
             if (!canFly) newVelocity.y = characterRigid.velocity.y;
 
-            if (newVelocity != Vector3.zero) transform.rotation = Quaternion.LookRotation(newVelocity);
+            if (newVelocity != Vector3.zero && !directionSet) transform.rotation = Quaternion.LookRotation(newVelocity);
 
             SetVelocity(newVelocity);
         }
