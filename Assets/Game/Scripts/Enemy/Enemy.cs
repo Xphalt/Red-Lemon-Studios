@@ -94,8 +94,7 @@ public class Enemy : CharacterBase
                     newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
                     if (isGrounded && !canFly)
                     {
-                        bool stop = !Physics.Raycast(transform.position + newVelocity.normalized * wallDetectionRadius, Vector3.down, floorDistance);
-                        if (stop)
+                        if (CheckObstruction(newVelocity))
                         {
                             newVelocity = Vector3.zero;
                             transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
@@ -111,11 +110,8 @@ public class Enemy : CharacterBase
                     patrolDirection.Normalize();
 
                     if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
-                    bool turn = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
-                    if (!turn && isGrounded && !canFly)
-                        turn = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
 
-                    if (turn)
+                    if (CheckObstruction(patrolDirection))
                     {
                         newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
                         if (Random.Range(0, 2) == 1) newVelocity *= -1;
@@ -135,6 +131,15 @@ public class Enemy : CharacterBase
 
             SetVelocity(newVelocity);
         }
+    }
+
+    private bool CheckObstruction(Vector3 patrolDirection)
+    {
+        bool obstruction = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
+        if (!obstruction && isGrounded && !canFly)
+            obstruction = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
+        
+        return obstruction;
     }
 
     public bool CanSeePlayer()
