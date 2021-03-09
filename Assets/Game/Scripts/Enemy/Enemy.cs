@@ -18,7 +18,7 @@ public class Enemy : CharacterBase
 {
     public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
 
-    public GameObject target;
+    public GameObject target = null;
     public ElementTypes elementType;
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
@@ -53,7 +53,7 @@ public class Enemy : CharacterBase
         base.Start();
         team = Teams.Enemy;
 
-        target = GameObject.FindGameObjectWithTag("Player");
+        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
 
         if (sentryMode) movementState = EnemyStates.Idle;
@@ -178,7 +178,7 @@ public class Enemy : CharacterBase
 
         if (curHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

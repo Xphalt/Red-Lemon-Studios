@@ -158,12 +158,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicPlaceHolder: {fileID: 0}
+  weapon: {fileID: 4460503913441505782}
   jumpForce: 0
   gravityMult: 2
   floorDistance: 1.01
   airControl: 0
-  weapon: {fileID: 4460503913441505782}
   maxHealth: 100
+  knockbackRecovery: 0
+  SFXManager: {fileID: 0}
   target: {fileID: 0}
   elementType: 2
   strongAgainstResist: 0.7
@@ -261,12 +263,28 @@ PrefabInstance:
       value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: soundNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: soundTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: BulletTypes.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: BulletPrefabs.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: soundNames.Array.data[0]
+      value: AirAmmoShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: soundTypes.Array.data[0]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: BulletTypes.Array.data[0]

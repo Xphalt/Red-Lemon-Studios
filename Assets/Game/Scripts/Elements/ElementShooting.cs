@@ -24,7 +24,7 @@ public class ElementShooting : MonoBehaviour
     private GameObject ChosenBullet;
     public GameObject GunPos;
 
-    public GameObject SFXManager;
+    public GameObject SFXManager = null;
     private SFXScript sfxScript;
 
     private CharacterBase wielderScript;
@@ -55,6 +55,7 @@ public class ElementShooting : MonoBehaviour
             shootSoundsDictionary.Add(soundTypes[index], soundNames[index]);
         }
 
+        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
         sfxScript = SFXManager.GetComponent<SFXScript>();
     }
 
@@ -69,7 +70,7 @@ public class ElementShooting : MonoBehaviour
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
         newBulletInfo.Initialise(damage, wielderScript);
 
-        sfxScript.PlaySFX(shootSoundsDictionary[shotType]);
+        if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX(shootSoundsDictionary[shotType]);
 
         Destroy(newBullet, 2);
     }

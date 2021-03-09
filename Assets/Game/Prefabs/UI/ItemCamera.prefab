@@ -30,6 +30,31 @@ Transform:
   m_Father: {fileID: 7556397501567951786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5199125817687260517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665273004504595350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcc1a6e2a6a55d040b0ae37b916058ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wielder: {fileID: 0}
+  GunPos: {fileID: 0}
+  SFXManager: {fileID: 0}
+  damage: 10
+  BulletTypes: 00000000010000000300000002000000
+  BulletPrefabs:
+  - {fileID: 7015762197351387664, guid: 79cada851dd6ef74ba18cd1473b5e6bd, type: 3}
+  - {fileID: 7015762197351387664, guid: d3a967e726a36df49b2ddd0ef894631f, type: 3}
+  - {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
+  - {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
+  soundTypes: 
+  soundNames: []
+  ShootForce: 1500
 --- !u!114 &5879440347458978357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,28 +75,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 34bbb029e4e22af4daba30de61f21659, type: 2}
   - {fileID: 2100000, guid: 5497abaf9787e564cadde791c2db82ee, type: 2}
   m_CurElement: 0
---- !u!114 &5199125817687260517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5665273004504595350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc1a6e2a6a55d040b0ae37b916058ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wielder: {fileID: 0}
-  GunPos: {fileID: 0}
-  damage: 10
-  BulletTypes: 00000000010000000300000002000000
-  BulletPrefabs:
-  - {fileID: 7015762197351387664, guid: 79cada851dd6ef74ba18cd1473b5e6bd, type: 3}
-  - {fileID: 7015762197351387664, guid: d3a967e726a36df49b2ddd0ef894631f, type: 3}
-  - {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
-  - {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
-  ShootForce: 1500
 --- !u!1 &7556397501567951789
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +136,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 768

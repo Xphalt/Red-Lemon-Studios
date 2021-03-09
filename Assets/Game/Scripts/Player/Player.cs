@@ -11,14 +11,13 @@ public class Player : CharacterBase
     public GameObject canvas;
     public Vector3 crosshairPos;
     public Camera firstPersonCamera;
-    public GUI_Manager userInterface;
+    private GUI_Manager userInterface;
 
     public float runSpeed;
     public float shootTargetDistance;
     public int maxAmmo;
 
     private bool switchingRelics = false;
-    private UIManager UIScript;
 
     internal Elements elementChanger;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
@@ -30,7 +29,6 @@ public class Player : CharacterBase
         base.Start();
         team = Teams.Player;
         elementChanger = weapon.GetComponent<Elements>();
-        UIScript = canvas.GetComponent<UIManager>();
         LoadStats();
 
         if (!saved)
@@ -39,18 +37,16 @@ public class Player : CharacterBase
             {
                 Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
             }
-
-        UIScript = canvas.GetComponent<UIManager>();
-        // UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
+        }
 
         /*______________________________________________________________________________________
-        User Interface  initialisation
-        ________________________________________________________________________________________*/
+            User Interface  initialisation
+            ________________________________________________________________________________________*/
+
+        userInterface = canvas.GetComponent<GUI_Manager>();
         userInterface.SetMaxHealth(maxHealth);
         userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
-            //UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[elementChanger.m_CurElement], true);
-        }
     }
 
     public override void Update()
@@ -168,8 +164,6 @@ public class Player : CharacterBase
             Respawn();
         }
 
-        //UIScript.UpdateHealthText((int)curHealth);
-
         userInterface.UpdateHealth(curHealth);
     }
 
@@ -182,7 +176,6 @@ public class Player : CharacterBase
             SubstractAmmo(cost, costType);
         }
 
-        //UIScript.UpdateHealthText((int)curHealth);
         userInterface.UpdateHealth(curHealth);
     }
 
@@ -198,8 +191,7 @@ public class Player : CharacterBase
             Ammo[type] = 0;
         }
 
-        userInterface.UpdateAmmoCount(Ammo[type]);
-        //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
+        if (elementChanger.m_CurElement == type) userInterface.UpdateAmmoCount(Ammo[type]);
     }
 
     public void AddAmmo(int value, ElementTypes type)
@@ -211,8 +203,7 @@ public class Player : CharacterBase
             Ammo[type] = maxAmmo;
         }
 
-        userInterface.UpdateAmmoCount(Ammo[type]);
-        //if (elementChanger.m_CurElement == type) UIScript.UpdateElementText(elementChanger.m_CurElement, Ammo[type]);
+        if (elementChanger.m_CurElement == type) userInterface.UpdateAmmoCount(Ammo[type]);
     }
 
     public bool AmmoCheck(int requiredAmount = 1)
@@ -242,11 +233,14 @@ public class Player : CharacterBase
         userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
     }
 
-    //public override void ChangeRelic(int cycleAmount = 1)
-    //{
-    //    base.ChangeRelic(cycleAmount);
-    //    //call function for new relic icon
-    //}
+    public override void ChangeRelic(int cycleAmount = 1)
+    {
+        base.ChangeRelic(cycleAmount);
+        //Reset timer max in UI
+        userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
+
+        //call function for new relic icon
+    }
     public void SaveStats()
     {
         SaveManager.UpdateSavedVector3("PlayerPos", transform.position);

@@ -47,14 +47,19 @@ public class CharacterBase : MonoBehaviour
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
 
+    public GameObject SFXManager = null;
+    protected SFXScript sfxSctipt;
+
     public virtual void Start()
     {
         characterRigid = GetComponent<Rigidbody>();
         airControl = Mathf.Clamp(airControl, 0, 1);
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
 
+        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
+        sfxSctipt = SFXManager.GetComponent<SFXScript>();
+
         curHealth = maxHealth;
-        
     }
     
     public virtual void Update()
