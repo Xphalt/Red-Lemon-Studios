@@ -35,13 +35,13 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX(string sfx, string name, bool loop = false)
+    public void PlaySFX(string sfx, string instanceName, bool loop = false)
     {
         if (SFXDict.ContainsKey(sfx))
         {
             AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
             newSFX.PlayOneShot(SFXDict[sfx]);
-            newSFX.name = name;
+            newSFX.name = instanceName;
             newSFX.loop = loop;
             if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
         }

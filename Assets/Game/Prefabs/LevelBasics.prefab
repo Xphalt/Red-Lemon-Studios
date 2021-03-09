@@ -124,6 +124,14 @@ PrefabInstance:
       propertyPath: relicPlaceHolder
       value: 
       objectReference: {fileID: 5524924017487980418}
+    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: equippedRelicPlaceHolder
+      value: 
+      objectReference: {fileID: 5524924017487980418}
+    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: unequippedRelicPlaceHolder
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -171,6 +179,18 @@ PrefabInstance:
     - target: {fileID: 7338099962747303707, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338099964422291514, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1847
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338099964585652451, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338099964585652451, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
@@ -274,18 +294,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3331455516436599721}
     m_Modifications:
-    - target: {fileID: 1284195660, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: GunPos
-      value: 
-      objectReference: {fileID: 5524924017213365571}
-    - target: {fileID: 1284195660, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: wielder
-      value: 
-      objectReference: {fileID: 5524924018667674298}
-    - target: {fileID: 1284195661, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: GunPos
       value: 
@@ -298,42 +306,6 @@ PrefabInstance:
       propertyPath: SFXManager
       value: 
       objectReference: {fileID: 1729546069}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundNames.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundTypes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundNames.Array.data[0]
-      value: FireAmmoShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundNames.Array.data[1]
-      value: WaterAmmoShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundNames.Array.data[2]
-      value: AirAmmoShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundNames.Array.data[3]
-      value: EarthAmmoShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundTypes.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundTypes.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5199125817687260517, guid: f721784f6123fa046869621e06837097, type: 3}
-      propertyPath: soundTypes.Array.data[3]
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5879440347458978357, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: canvas
       value: 
@@ -356,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalRotation.x
@@ -364,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalRotation.z
@@ -376,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7556397501567951786, guid: f721784f6123fa046869621e06837097, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

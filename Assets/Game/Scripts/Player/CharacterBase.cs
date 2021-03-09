@@ -219,7 +219,7 @@ public class CharacterBase : MonoBehaviour
             currentRelic = relicScript;
             ActivatePassives();
         }
-        else newRelic.GetComponent<MeshRenderer>().enabled = false;
+        else newRelic.SetActive(false);
     }
 
     public virtual void ChangeRelic(int cycleAmount = 1)
@@ -244,11 +244,13 @@ public class CharacterBase : MonoBehaviour
     public void SetRelic(int index)
     {
         currentRelic.EndAbility();
-        currentRelic.GetComponent<MeshRenderer>().enabled = false;
+        currentRelic.Unequip();
+        currentRelic.gameObject.SetActive(false);
 
         relicIndex = index;
         currentRelic = relicList[relicIndex];
-        currentRelic.GetComponent<MeshRenderer>().enabled = true;
+        currentRelic.ReEquip();
+        currentRelic.gameObject.SetActive(true); 
         ActivatePassives();
     }
 

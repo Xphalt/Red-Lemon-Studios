@@ -27,6 +27,8 @@ public class RelicBase : MonoBehaviour
 
     internal float cooldownTimer = 0;
     public float relicCooldownDuration;
+    private float lastEquippedTime;
+
     internal bool readyToUse = false;
 
     public virtual void SetUser(GameObject newUser)
@@ -65,6 +67,21 @@ public class RelicBase : MonoBehaviour
                 cooldownTimer = 0;
             }
         }
+    }
+
+    public void ReEquip()
+    {
+        cooldownTimer += Time.time - lastEquippedTime;
+        if (cooldownTimer > relicCooldownDuration)
+        {
+            readyToUse = true;
+            cooldownTimer = 0;
+        }
+    }
+
+    public void Unequip()
+    {
+        lastEquippedTime = Time.time;
     }
 
     public void SaveRelic(int id)
