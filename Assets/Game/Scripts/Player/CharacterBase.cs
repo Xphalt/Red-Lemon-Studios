@@ -22,6 +22,7 @@ public class CharacterBase : MonoBehaviour
     internal bool movementLocked = false;
     internal bool shifting; 
     internal bool immortal = false;
+    internal bool killed = false;
     internal float shiftDuration;
     internal float shiftingTimer;
     internal float shiftTransition;
@@ -50,17 +51,21 @@ public class CharacterBase : MonoBehaviour
     protected float speedMultiplier = 1;
 
     public GameObject SFXManager = null;
-    protected SFXScript sfxSctipt;
+    protected SFXScript sfxScript;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
-        characterRigid = GetComponent<Rigidbody>();
-        characterRigid.useGravity = !canFly;
-        airControl = Mathf.Clamp(airControl, 0, 1);
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
 
         if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxSctipt = SFXManager.GetComponent<SFXScript>();
+        sfxScript = SFXManager.GetComponent<SFXScript>();
+        characterRigid = GetComponent<Rigidbody>();
+    }
+
+    public virtual void Start()
+    {
+        characterRigid.useGravity = !canFly;
+        airControl = Mathf.Clamp(airControl, 0, 1);
 
         curHealth = maxHealth;
     }
@@ -191,7 +196,12 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        if (!immortal) curHealth -= value * damageRecievedMultiplier;        
+        if (!immortal) curHealth -= value * damageRecievedMultiplier;     
+        if (curHealth <= 0)
+        {
+            curHealth = 0;
+            killed = true;
+        }
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)

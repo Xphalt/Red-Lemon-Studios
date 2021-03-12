@@ -206,7 +206,7 @@ public static class SaveManager
 
     public static bool GetBool(string key)
     {
-        if (stringDict.ContainsKey(key)) return boolDict[key];
+        if (boolDict.ContainsKey(key)) return boolDict[key];
         else PrintMissingDataWarning(key, "bool");
         
         return false;

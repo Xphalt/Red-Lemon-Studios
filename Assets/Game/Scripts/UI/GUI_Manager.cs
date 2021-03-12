@@ -21,11 +21,6 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    private void Update()
-    {
-        HighlightSelectedAmmo();
-    }
-
     /*__________________________________________________________
     Health Bar code
     ____________________________________________________________*/
@@ -75,10 +70,10 @@ public class GUI_Manager : MonoBehaviour
     Ammo Selection panel code
     ____________________________________________________________*/
 
-    private void HighlightSelectedAmmo()
+    public void HighlightSelectedAmmo(ElementTypes newElement)
     {
         ResetElementalImages();
-        switch (player.elementChanger.m_CurElement)
+        switch (newElement)
         {
             case ElementTypes.Air:
                 airImage.sprite = selectedAirIcon;

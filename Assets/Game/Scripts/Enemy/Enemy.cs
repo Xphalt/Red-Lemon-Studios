@@ -23,8 +23,6 @@ public class Enemy : CharacterBase
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
-    internal bool killed = false;
-
     protected Player playerScript;
 
     public float strongAgainstResist = 0.7f;
@@ -49,13 +47,17 @@ public class Enemy : CharacterBase
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
+    public override void Awake()
+    {
+        base.Awake();
+        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
+        playerScript = target.GetComponent<Player>();
+    }
+
     public override void Start()
     {
         base.Start();
         team = Teams.Enemy;
-
-        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
-        playerScript = target.GetComponent<Player>();
 
         if (sentryMode) movementState = EnemyStates.Idle;
         else characterRigid.velocity = transform.forward * chaseSpeed;
@@ -193,11 +195,7 @@ public class Enemy : CharacterBase
 
         base.TakeDamage(damage, damageType);
 
-        if (curHealth <= 0)
-        {
-            killed = true;
-            gameObject.SetActive(false);
-        }
+        if (killed) gameObject.SetActive(false);
     }
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
@@ -233,6 +231,6 @@ public class Enemy : CharacterBase
         transform.rotation = Quaternion.Euler(SaveManager.GetVector3(identifier + "Rot"));
         killed = SaveManager.GetBool(identifier + "Killed");
 
-        gameObject.SetActive(killed);
+        gameObject.SetActive(!killed);
     }
 }

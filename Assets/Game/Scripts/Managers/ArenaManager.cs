@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static EnumHelper;
 using static SaveManager;
 public class ArenaManager : MonoBehaviour
 {
     public string ArenaName;
     private bool checkpointed = false;
+
+    public bool forceRestart;
 
     public List<Enemy> arenaEnemies;
     public List<RelicBase> arenaRelics;
@@ -20,7 +23,7 @@ public class ArenaManager : MonoBehaviour
 
     void Start()
     {
-        
+        if (!forceRestart) Load();
     }
 
     void Update()
@@ -39,6 +42,12 @@ public class ArenaManager : MonoBehaviour
             }
 
             if (arenaFinished) Save();
+        }
+
+        if (arenaPlayer.killed)
+        {
+            if (checkpointed) Load();
+            else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -69,29 +78,32 @@ public class ArenaManager : MonoBehaviour
 
     public void Load()
     {
-        checkpointed = SaveManager.GetBool(ArenaName + "Checkpointed");
-
-        for (int e = 0; e < arenaEnemies.Count; e++)
+        if (SaveManager.HasBool(ArenaName + "Checkpointed"))
         {
-            arenaEnemies[e].LoadEnemy(e.ToString() + ArenaName);
-        }
+            checkpointed = true;
 
-        for (int r = 0; r < arenaRelics.Count; r++)
-        {
-            arenaRelics[r].LoadRelic(r.ToString() + ArenaName);
-        }
+            for (int e = 0; e < arenaEnemies.Count; e++)
+            {
+                arenaEnemies[e].LoadEnemy(e.ToString() + ArenaName);
+            }
 
-        for (int p = 0; p < arenaPickUps.Count; p++)
-        {
-            arenaPickUps[p].LoadPickUp(p.ToString() + ArenaName);
-        }
+            for (int r = 0; r < arenaRelics.Count; r++)
+            {
+                arenaRelics[r].LoadRelic(r.ToString() + ArenaName);
+            }
 
-        arenaPlayer.LoadStats();
+            for (int p = 0; p < arenaPickUps.Count; p++)
+            {
+                arenaPickUps[p].LoadPickUp(p.ToString() + ArenaName);
+            }
+
+            arenaPlayer.LoadStats();
+        }
+        else checkpointed = false;
     }
 
     private void OnDestroy()
     {
-        Save();
         SaveManager.SaveToFile();
     }
 }
