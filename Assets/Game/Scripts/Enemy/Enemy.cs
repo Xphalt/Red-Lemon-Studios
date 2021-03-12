@@ -23,6 +23,8 @@ public class Enemy : CharacterBase
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
+    internal bool killed = false;
+
     protected Player playerScript;
 
     public float strongAgainstResist = 0.7f;
@@ -193,6 +195,7 @@ public class Enemy : CharacterBase
 
         if (curHealth <= 0)
         {
+            killed = true;
             gameObject.SetActive(false);
         }
     }
@@ -211,5 +214,25 @@ public class Enemy : CharacterBase
         statusTimer = 0;
         statusMagnitude = 0;
         statusDuration = 0;
+    }
+
+    public void SaveEnemy(string identifier)
+    {
+        identifier = "Enemy" + identifier;
+
+        SaveManager.UpdateSavedVector3(identifier + "Pos", transform.position);
+        SaveManager.UpdateSavedVector3(identifier + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(identifier + "Killed", killed);
+    }
+
+    public void LoadEnemy(string identifier)
+    {
+        identifier = "Enemy" + identifier;
+
+        transform.position = SaveManager.GetVector3(identifier + "Pos");
+        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(identifier + "Rot"));
+        killed = SaveManager.GetBool(identifier + "Killed");
+
+        gameObject.SetActive(killed);
     }
 }

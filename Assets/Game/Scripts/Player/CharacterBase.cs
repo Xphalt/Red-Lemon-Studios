@@ -248,15 +248,18 @@ public class CharacterBase : MonoBehaviour
 
     public void SetRelic(int index)
     {
-        currentRelic.EndAbility();
-        currentRelic.Unequip();
-        currentRelic.gameObject.SetActive(false);
+        if (relicList.Count > 0)
+        {
+            currentRelic.EndAbility();
+            currentRelic.Unequip();
+            currentRelic.gameObject.SetActive(false);
 
-        relicIndex = index;
-        currentRelic = relicList[relicIndex];
-        currentRelic.ReEquip();
-        currentRelic.gameObject.SetActive(true); 
-        ActivatePassives();
+            relicIndex = index;
+            currentRelic = relicList[relicIndex];
+            currentRelic.ReEquip();
+            currentRelic.gameObject.SetActive(true);
+            ActivatePassives();
+        }
     }
 
     public void UseRelic()

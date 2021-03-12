@@ -7,6 +7,7 @@ using static EnumHelper;
 public class RelicBase : MonoBehaviour
 {
     internal GameObject user = null;
+    internal string userName;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
     public ElementTypes relicType;
@@ -35,6 +36,7 @@ public class RelicBase : MonoBehaviour
     {
         collected = true;
         user = newUser;
+        userName = newUser.name;
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
@@ -84,9 +86,10 @@ public class RelicBase : MonoBehaviour
         lastEquippedTime = Time.time;
     }
 
-    public void SaveRelic(int id)
+    public void SaveRelic(string identifier)
     {
-        string identifier = "Relic" + id.ToString();
+        identifier = "Relic" + identifier;
+        SaveManager.UpdateSavedString(identifier + "User", userName);
         SaveManager.UpdateSavedBool(identifier + "Collected", collected);
         SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
         SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
@@ -94,13 +97,21 @@ public class RelicBase : MonoBehaviour
         SaveManager.UpdateSavedVector3(identifier + "Position", transform.position);
     }
 
-    public void LoadRelic(int id)
+    public void LoadRelic(string identifier)
     {
-        string identifier = "Relic" + id.ToString();
+        identifier = "Relic" + identifier;
+        userName = SaveManager.GetString(identifier + "User");
         collected = SaveManager.GetBool(identifier + "Collected");
         inUse = SaveManager.GetBool(identifier + "InUse");
         readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
         cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
         transform.position = SaveManager.GetVector3(identifier + "Position");
+
+        if (collected)
+        {
+            GameObject newUser = GameObject.Find(userName);
+            SetUser(newUser);
+            newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
+        }
     }
 }

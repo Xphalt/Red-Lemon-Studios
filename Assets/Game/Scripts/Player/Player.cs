@@ -251,6 +251,7 @@ public class Player : CharacterBase
         }
 
         SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
+        SaveManager.UpdateSavedInt("PlayerRelicIndex", relicIndex);
 
         SaveManager.UpdateSavedBool("PlayerSaved", true);
     }
@@ -263,12 +264,14 @@ public class Player : CharacterBase
             transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerYRot"), 0);
             firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerCameraYRot"), 0);
 
-            Ammo[ElementTypes.Fire] = SaveManager.GetInt(ElementTypes.Fire.ToString() + "Ammo");
-            Ammo[ElementTypes.Water] = SaveManager.GetInt(ElementTypes.Water.ToString() + "Ammo");
-            Ammo[ElementTypes.Air] = SaveManager.GetInt(ElementTypes.Air.ToString() + "Ammo");
-            Ammo[ElementTypes.Earth] = SaveManager.GetInt(ElementTypes.Earth.ToString() + "Ammo");
+            Ammo[ElementTypes.Fire] = SaveManager.GetInt("Player" + ElementTypes.Fire.ToString() + "Ammo");
+            Ammo[ElementTypes.Water] = SaveManager.GetInt("Player" + ElementTypes.Water.ToString() + "Ammo");
+            Ammo[ElementTypes.Air] = SaveManager.GetInt("Player" + ElementTypes.Air.ToString() + "Ammo");
+            Ammo[ElementTypes.Earth] = SaveManager.GetInt("Player" + ElementTypes.Earth.ToString() + "Ammo");
 
             elementChanger.SetElement(SaveManager.GetElementType("PlayerElement"));
+            relicIndex = SaveManager.GetInt("PlayerRelicIndex");
+            SetRelic(relicIndex);
 
             saved = true;
         }

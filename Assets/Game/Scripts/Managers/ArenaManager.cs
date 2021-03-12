@@ -3,49 +3,90 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 using static SaveManager;
-
-//Created with some example code to test saving functionality - DANIEL BIBBY
-
 public class ArenaManager : MonoBehaviour
 {
-    public List<GameObject> arenaEnemies;
-    public List<GameObject> arenaRelics;
-    public GameObject arenaPlayer;
+    public string ArenaName;
+    private bool checkpointed = false;
+
+    public List<Enemy> arenaEnemies;
+    public List<RelicBase> arenaRelics;
+    public List<PickUpBase> arenaPickUps;
+    public Player arenaPlayer;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (!checkpointed)
+        {
+            bool arenaFinished = true;
+
+            foreach (Enemy arenaenemy in arenaEnemies)
+            {
+                if (arenaenemy.gameObject.activeInHierarchy)
+                {
+                    arenaFinished = false;
+                    break;
+                }
+            }
+
+            if (arenaFinished) Save();
+        }
     }
 
 
     public void Save()
     {
+        SaveManager.UpdateSavedBool(ArenaName + "Checkpointed", true);
+
+        for (int e = 0; e < arenaEnemies.Count; e++)
+        {
+            arenaEnemies[e].SaveEnemy(e.ToString() + ArenaName);
+        }
+
         for (int r = 0; r < arenaRelics.Count; r++)
         {
-            arenaRelics[r].GetComponent<RelicBase>().SaveRelic(r);
+            arenaRelics[r].SaveRelic(r.ToString() + ArenaName);
         }
+
+        for (int p = 0; p < arenaPickUps.Count; p++)
+        {
+            arenaPickUps[p].SavePickUp(p.ToString() + ArenaName);
+        }
+
+        arenaPlayer.SaveStats();
+
+        checkpointed = true;
     }
 
     public void Load()
     {
+        checkpointed = SaveManager.GetBool(ArenaName + "Checkpointed");
+
+        for (int e = 0; e < arenaEnemies.Count; e++)
+        {
+            arenaEnemies[e].LoadEnemy(e.ToString() + ArenaName);
+        }
+
         for (int r = 0; r < arenaRelics.Count; r++)
         {
-            RelicBase relicScript = arenaRelics[r].GetComponent<RelicBase>();
-            relicScript.LoadRelic(r);
-            if (relicScript.collected) relicScript.SetUser(arenaPlayer); //if other characters use relics, an identification method will be needed.
+            arenaRelics[r].LoadRelic(r.ToString() + ArenaName);
         }
+
+        for (int p = 0; p < arenaPickUps.Count; p++)
+        {
+            arenaPickUps[p].LoadPickUp(p.ToString() + ArenaName);
+        }
+
+        arenaPlayer.LoadStats();
     }
 
     private void OnDestroy()

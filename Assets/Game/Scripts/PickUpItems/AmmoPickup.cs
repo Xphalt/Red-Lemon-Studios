@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-public class AmmoPickup : MonoBehaviour
+public class AmmoPickup : PickUpBase
 {
     public int AmmoValue;
     public ElementTypes Type;
