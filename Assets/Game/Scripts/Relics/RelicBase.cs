@@ -14,6 +14,7 @@ public class RelicBase : MonoBehaviour
 
     internal bool inUse;
     internal bool collected = false;
+    public bool inArena;
 
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
@@ -31,6 +32,11 @@ public class RelicBase : MonoBehaviour
     private float lastEquippedTime;
 
     internal bool readyToUse = false;
+
+    public virtual void Awake()
+    {
+        gameObject.SetActive(inArena);
+    }
 
     public virtual void SetUser(GameObject newUser)
     {
@@ -86,26 +92,24 @@ public class RelicBase : MonoBehaviour
         lastEquippedTime = Time.time;
     }
 
-    public void SaveRelic(string identifier)
+    public void SaveRelic()
     {
-        identifier = "Relic" + identifier;
+        string identifier = relicType.ToString() + "Relic";
         SaveManager.UpdateSavedString(identifier + "User", userName);
         SaveManager.UpdateSavedBool(identifier + "Collected", collected);
         SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
         SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
         SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
-        SaveManager.UpdateSavedVector3(identifier + "Position", transform.position);
     }
 
-    public void LoadRelic(string identifier)
+    public void LoadRelic()
     {
-        identifier = "Relic" + identifier;
+        string identifier = relicType.ToString() + "Relic";
         userName = SaveManager.GetString(identifier + "User");
         collected = SaveManager.GetBool(identifier + "Collected");
         inUse = SaveManager.GetBool(identifier + "InUse");
         readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
         cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
-        transform.position = SaveManager.GetVector3(identifier + "Position");
 
         if (collected)
         {

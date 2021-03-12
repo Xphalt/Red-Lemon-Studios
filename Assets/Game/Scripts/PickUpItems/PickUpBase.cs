@@ -6,29 +6,23 @@ public class PickUpBase : MonoBehaviour
 {
     protected bool collected = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Collect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        collected = true;
+        gameObject.SetActive(false);
     }
 
     public void SavePickUp(string identifier)
     {
         identifier = "Pickup" + identifier;
-        SaveManager.AddNewBool(identifier + collected, collected);
+        SaveManager.AddNewBool(identifier + "Collected", collected);
     }
 
     public void LoadPickUp(string identifier)
     {
         identifier = "Pickup" + identifier;
-        collected = SaveManager.GetBool(identifier + collected);
+        collected = SaveManager.GetBool(identifier + "Collected");
 
-        gameObject.SetActive(collected);
+        gameObject.SetActive(!collected);
     }
 }

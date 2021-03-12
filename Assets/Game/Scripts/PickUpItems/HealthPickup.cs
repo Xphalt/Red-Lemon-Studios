@@ -20,7 +20,7 @@ public class HealthPickup : PickUpBase
         if(other.tag == "Player")
         {
             other.GetComponent<Player>().AddHealth(RestoreValue);
-            gameObject.SetActive(false);
+            Collect();
         }
     }
 }

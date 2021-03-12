@@ -22,7 +22,7 @@ public class AmmoPickup : PickUpBase
         if (other.tag == "Player")
         {
             other.GetComponent<Player>().AddAmmo(AmmoValue, Type);
-            gameObject.SetActive(false);
+            Collect();
         }
     }
 }

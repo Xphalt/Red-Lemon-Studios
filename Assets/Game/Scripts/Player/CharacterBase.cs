@@ -132,17 +132,19 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
-        isGrounded = false;
-        foreach (RaycastHit floorHit in floorHits)
-        {
-            if (floorHit.transform.CompareTag("Floor"))
-            {
-                isGrounded = true;
-                hasJumpedTwice = false;
-                break;
-            }
-        }
+        //RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
+        //isGrounded = false;
+        //foreach (RaycastHit floorHit in floorHits)
+        //{
+        //    if (floorHit.transform.CompareTag("Floor"))
+        //    {
+        //        isGrounded = true;
+        //        hasJumpedTwice = false;
+        //        break;
+        //    }
+        //}
+
+        isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
     }
 
     protected void Jump()

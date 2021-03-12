@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1538245284360931049}
   - component: {fileID: 1538245284360931054}
   - component: {fileID: 1538245284360931055}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EarthPillar
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1538245285186874232}
   - component: {fileID: 1538245285186874229}
   m_Layer: 9
-  m_Name: RelicEarth
+  m_Name: RelicEarthPrimitive
   m_TagString: Relic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicType: 0
+  inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0

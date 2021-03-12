@@ -1113,6 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicType: 0
+  inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
@@ -1526,7 +1527,7 @@ GameObject:
   - component: {fileID: 6984414929851687238}
   - component: {fileID: 6984414929851687241}
   - component: {fileID: 6984414929851687240}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EarthPillar
   m_TagString: Floor
   m_Icon: {fileID: 0}

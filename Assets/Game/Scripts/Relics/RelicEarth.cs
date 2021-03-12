@@ -16,8 +16,10 @@ public class RelicEarth : RelicBase
     private float pillarTimer = 0;
     private float sizePerSecond;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         pillarScript = pillar.GetComponent<EarthPillarScript>();
         pillarTransform = pillar.GetComponent<Transform>();
     }

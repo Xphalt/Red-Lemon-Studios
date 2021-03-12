@@ -9,7 +9,10 @@ public class ArenaManager : MonoBehaviour
     public string ArenaName;
     private bool checkpointed = false;
 
-    public bool forceRestart;
+    public bool restart;
+    public bool clearCheckpoint;
+
+    public bool autoFind = true;
 
     public List<Enemy> arenaEnemies;
     public List<RelicBase> arenaRelics;
@@ -23,7 +26,13 @@ public class ArenaManager : MonoBehaviour
 
     void Start()
     {
-        if (!forceRestart) Load();
+        if (autoFind)
+        {
+            foreach (GameObject newEnemy in GameObject.FindGameObjectsWithTag("Enemy")) arenaEnemies.Add(newEnemy.GetComponent<Enemy>());
+            foreach (GameObject newPickup in GameObject.FindGameObjectsWithTag("PickUp")) arenaPickUps.Add(newPickup.GetComponent<PickUpBase>());
+        }
+        
+        if (!restart) Load();
     }
 
     void Update()
@@ -63,7 +72,7 @@ public class ArenaManager : MonoBehaviour
 
         for (int r = 0; r < arenaRelics.Count; r++)
         {
-            arenaRelics[r].SaveRelic(r.ToString() + ArenaName);
+            arenaRelics[r].SaveRelic();
         }
 
         for (int p = 0; p < arenaPickUps.Count; p++)
@@ -71,14 +80,14 @@ public class ArenaManager : MonoBehaviour
             arenaPickUps[p].SavePickUp(p.ToString() + ArenaName);
         }
 
-        arenaPlayer.SaveStats();
+        arenaPlayer.SaveStats(ArenaName);
 
         checkpointed = true;
     }
 
     public void Load()
     {
-        if (SaveManager.HasBool(ArenaName + "Checkpointed"))
+        if (SaveManager.HasBool(ArenaName + "Checkpointed") && !clearCheckpoint)
         {
             checkpointed = true;
 
@@ -87,19 +96,19 @@ public class ArenaManager : MonoBehaviour
                 arenaEnemies[e].LoadEnemy(e.ToString() + ArenaName);
             }
 
-            for (int r = 0; r < arenaRelics.Count; r++)
-            {
-                arenaRelics[r].LoadRelic(r.ToString() + ArenaName);
-            }
-
             for (int p = 0; p < arenaPickUps.Count; p++)
             {
                 arenaPickUps[p].LoadPickUp(p.ToString() + ArenaName);
             }
 
-            arenaPlayer.LoadStats();
         }
         else checkpointed = false;
+
+        for (int r = 0; r < arenaRelics.Count; r++)
+        {
+            if (!(clearCheckpoint && arenaRelics[r].inArena)) arenaRelics[r].LoadRelic();
+        }
+        arenaPlayer.LoadStats(checkpointed, ArenaName);
     }
 
     private void OnDestroy()
