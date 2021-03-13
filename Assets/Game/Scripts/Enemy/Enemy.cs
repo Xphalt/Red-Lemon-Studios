@@ -154,6 +154,11 @@ public class Enemy : CharacterBase
         return true;
     }
 
+    public virtual void Animate()
+    {
+       
+    }
+
     public override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);

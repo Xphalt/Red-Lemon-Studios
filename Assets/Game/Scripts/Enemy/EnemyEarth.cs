@@ -50,6 +50,11 @@ public class EnemyEarth : Enemy
         return false;
     }
 
+    public override void Animate()
+    {
+        base.Animate();
+    }
+
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
