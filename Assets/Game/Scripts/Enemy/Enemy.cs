@@ -82,11 +82,11 @@ public class Enemy : CharacterBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        bool directionSet = false;
 
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
-            bool directionSet = false;
 
             switch (movementState)
             {
@@ -131,10 +131,11 @@ public class Enemy : CharacterBase
 
             if (!canFly) newVelocity.y = characterRigid.velocity.y;
 
-            if (newVelocity != Vector3.zero && !directionSet) transform.rotation = Quaternion.LookRotation(newVelocity);
-
             SetVelocity(newVelocity);
         }
+
+        if (characterRigid.velocity != Vector3.zero && !directionSet) transform.rotation = Quaternion.LookRotation(characterRigid.velocity);
+
     }
 
     private bool CheckObstruction(Vector3 patrolDirection)

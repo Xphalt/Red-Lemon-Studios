@@ -45,7 +45,7 @@ public class ArenaManager : MonoBehaviour
 
             foreach (Enemy arenaenemy in arenaEnemies)
             {
-                if (arenaenemy.gameObject.activeInHierarchy)
+                if (!arenaenemy.killed)
                 {
                     arenaFinished = false;
                     break;
