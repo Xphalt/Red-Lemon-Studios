@@ -28,6 +28,8 @@ public class ArenaManager : MonoBehaviour
     {
         if (autoFind)
         {
+            arenaEnemies.Clear();
+            arenaPickUps.Clear();
             foreach (GameObject newEnemy in GameObject.FindGameObjectsWithTag("Enemy")) arenaEnemies.Add(newEnemy.GetComponent<Enemy>());
             foreach (GameObject newPickup in GameObject.FindGameObjectsWithTag("PickUp")) arenaPickUps.Add(newPickup.GetComponent<PickUpBase>());
         }
@@ -83,6 +85,9 @@ public class ArenaManager : MonoBehaviour
         arenaPlayer.SaveStats(ArenaName);
 
         checkpointed = true;
+
+        SaveManager.UpdateSavedString("LastSavedLevel", SceneManager.GetActiveScene().name);
+        SaveManager.UpdateSavedInt("LastSavedLevel", SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Load()

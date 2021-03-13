@@ -115,10 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69d91e7c8094f04ca991d49b5772e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArenaName: Test
-  forceRestart: 0
-  arenaEnemies:
-  - {fileID: 0}
+  ArenaName: 
+  restart: 0
+  clearCheckpoint: 0
+  autoFind: 1
+  arenaEnemies: []
   arenaRelics:
   - {fileID: 3010659490006979909}
   - {fileID: 6874663890964765157}
