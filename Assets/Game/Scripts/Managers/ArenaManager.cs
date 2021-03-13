@@ -22,6 +22,9 @@ public class ArenaManager : MonoBehaviour
     private void Awake()
     {
         SaveManager.LoadFromFile();
+        if (ArenaName == "") ArenaName = SceneManager.GetActiveScene().name;
+
+        foreach (RelicBase arenarelic in arenaRelics) arenarelic.gameObject.SetActive(true);
     }
 
     void Start()
