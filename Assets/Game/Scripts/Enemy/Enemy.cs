@@ -38,7 +38,6 @@ public class Enemy : CharacterBase
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
-    public bool canFly = false;
 
     protected float statusDuration;
     protected float statusTimer;
@@ -48,13 +47,17 @@ public class Enemy : CharacterBase
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
+    public override void Awake()
+    {
+        base.Awake();
+        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
+        playerScript = target.GetComponent<Player>();
+    }
+
     public override void Start()
     {
         base.Start();
         team = Teams.Enemy;
-
-        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
-        playerScript = target.GetComponent<Player>();
 
         if (sentryMode) movementState = EnemyStates.Idle;
         else characterRigid.velocity = transform.forward * chaseSpeed;
@@ -83,6 +86,7 @@ public class Enemy : CharacterBase
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
+            bool directionSet = false;
 
             switch (movementState)
             {
@@ -92,6 +96,15 @@ public class Enemy : CharacterBase
 
                 case EnemyStates.Fleeing:
                     newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
+                    if (isGrounded && !canFly)
+                    {
+                        if (CheckObstruction(newVelocity))
+                        {
+                            newVelocity = Vector3.zero;
+                            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                            directionSet = true;
+                        }
+                    }
                     break;
 
                 case EnemyStates.Patrolling:
@@ -101,11 +114,8 @@ public class Enemy : CharacterBase
                     patrolDirection.Normalize();
 
                     if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
-                    bool turn = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
-                    if (!turn && isGrounded && !canFly)
-                        turn = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
 
-                    if (turn)
+                    if (CheckObstruction(patrolDirection))
                     {
                         newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
                         if (Random.Range(0, 2) == 1) newVelocity *= -1;
@@ -121,10 +131,19 @@ public class Enemy : CharacterBase
 
             if (!canFly) newVelocity.y = characterRigid.velocity.y;
 
-            if (newVelocity != Vector3.zero) transform.rotation = Quaternion.LookRotation(newVelocity);
+            if (newVelocity != Vector3.zero && !directionSet) transform.rotation = Quaternion.LookRotation(newVelocity);
 
             SetVelocity(newVelocity);
         }
+    }
+
+    private bool CheckObstruction(Vector3 patrolDirection)
+    {
+        bool obstruction = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
+        if (!obstruction && isGrounded && !canFly)
+            obstruction = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
+        
+        return obstruction;
     }
 
     public bool CanSeePlayer()
@@ -176,10 +195,7 @@ public class Enemy : CharacterBase
 
         base.TakeDamage(damage, damageType);
 
-        if (curHealth <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+        if (killed) gameObject.SetActive(false);
     }
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
@@ -196,5 +212,25 @@ public class Enemy : CharacterBase
         statusTimer = 0;
         statusMagnitude = 0;
         statusDuration = 0;
+    }
+
+    public void SaveEnemy(string identifier)
+    {
+        identifier = "Enemy" + identifier;
+
+        SaveManager.UpdateSavedVector3(identifier + "Pos", transform.position);
+        SaveManager.UpdateSavedVector3(identifier + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(identifier + "Killed", killed);
+    }
+
+    public void LoadEnemy(string identifier)
+    {
+        identifier = "Enemy" + identifier;
+
+        transform.position = SaveManager.GetVector3(identifier + "Pos");
+        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(identifier + "Rot"));
+        killed = SaveManager.GetBool(identifier + "Killed");
+
+        gameObject.SetActive(!killed);
     }
 }

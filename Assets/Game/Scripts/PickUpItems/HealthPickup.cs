@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour
+public class HealthPickup : PickUpBase
 {
     public float RestoreValue;
 
@@ -20,7 +20,7 @@ public class HealthPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             other.GetComponent<Player>().AddHealth(RestoreValue);
-            gameObject.SetActive(false);
+            Collect();
         }
     }
 }

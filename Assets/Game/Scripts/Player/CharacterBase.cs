@@ -9,6 +9,8 @@ public class CharacterBase : MonoBehaviour
 
     public Transform relicPlaceHolder;
     public GameObject weapon = null;
+    
+    public bool canFly = false;
 
     public float jumpForce;
     public float gravityMult = 1;
@@ -20,6 +22,7 @@ public class CharacterBase : MonoBehaviour
     internal bool movementLocked = false;
     internal bool shifting; 
     internal bool immortal = false;
+    internal bool killed = false;
     internal float shiftDuration;
     internal float shiftingTimer;
     internal float shiftTransition;
@@ -48,16 +51,21 @@ public class CharacterBase : MonoBehaviour
     protected float speedMultiplier = 1;
 
     public GameObject SFXManager = null;
-    protected SFXScript sfxSctipt;
+    protected SFXScript sfxScript;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
-        characterRigid = GetComponent<Rigidbody>();
-        airControl = Mathf.Clamp(airControl, 0, 1);
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
 
         if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxSctipt = SFXManager.GetComponent<SFXScript>();
+        sfxScript = SFXManager.GetComponent<SFXScript>();
+        characterRigid = GetComponent<Rigidbody>();
+    }
+
+    public virtual void Start()
+    {
+        characterRigid.useGravity = !canFly;
+        airControl = Mathf.Clamp(airControl, 0, 1);
 
         curHealth = maxHealth;
     }
@@ -83,6 +91,8 @@ public class CharacterBase : MonoBehaviour
             characterRigid.AddForce(Vector3.up * (jumpForce + characterRigid.velocity.y * characterRigid.mass));
             jumping = false;
         }
+
+        if (!canFly) characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
     }
 
     public virtual void OnCollisionEnter(Collision collision)
@@ -122,17 +132,19 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
-        isGrounded = false;
-        foreach (RaycastHit floorHit in floorHits)
-        {
-            if (floorHit.transform.CompareTag("Floor"))
-            {
-                isGrounded = true;
-                hasJumpedTwice = false;
-                break;
-            }
-        }
+        //RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
+        //isGrounded = false;
+        //foreach (RaycastHit floorHit in floorHits)
+        //{
+        //    if (floorHit.transform.CompareTag("Floor"))
+        //    {
+        //        isGrounded = true;
+        //        hasJumpedTwice = false;
+        //        break;
+        //    }
+        //}
+
+        isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
     }
 
     protected void Jump()
@@ -186,7 +198,12 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        if (!immortal) curHealth -= value * damageRecievedMultiplier;        
+        if (!immortal) curHealth -= value * damageRecievedMultiplier;     
+        if (curHealth <= 0)
+        {
+            curHealth = 0;
+            killed = true;
+        }
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
@@ -243,15 +260,18 @@ public class CharacterBase : MonoBehaviour
 
     public void SetRelic(int index)
     {
-        currentRelic.EndAbility();
-        currentRelic.Unequip();
-        currentRelic.gameObject.SetActive(false);
+        if (relicList.Count > 0)
+        {
+            currentRelic.EndAbility();
+            currentRelic.Unequip();
+            currentRelic.gameObject.SetActive(false);
 
-        relicIndex = index;
-        currentRelic = relicList[relicIndex];
-        currentRelic.ReEquip();
-        currentRelic.gameObject.SetActive(true); 
-        ActivatePassives();
+            relicIndex = index;
+            currentRelic = relicList[relicIndex];
+            currentRelic.ReEquip();
+            currentRelic.gameObject.SetActive(true);
+            ActivatePassives();
+        }
     }
 
     public void UseRelic()

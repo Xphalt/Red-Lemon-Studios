@@ -34,13 +34,21 @@ public class EnemyFire : Enemy
         if (collision.gameObject == target)
         {
             canExplode = true;
-            Destroy(gameObject);
+            Explode();
         }
     }
 
-    public void OnDestroy()
+    public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
+    {
+        base.TakeDamage(damage, damageType);
+
+        if (killed) Explode();
+    }
+
+    public void Explode()
     {
         if (canExplode && GetDistance() < explosionRadius) playerScript.TakeDamage(explosionDamage);
+        gameObject.SetActive(false);
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)

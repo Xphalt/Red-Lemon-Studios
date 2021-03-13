@@ -7,12 +7,14 @@ using static EnumHelper;
 public class RelicBase : MonoBehaviour
 {
     internal GameObject user = null;
+    internal string userName;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
     public ElementTypes relicType;
 
     internal bool inUse;
     internal bool collected = false;
+    public bool inArena;
 
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
@@ -31,10 +33,16 @@ public class RelicBase : MonoBehaviour
 
     internal bool readyToUse = false;
 
+    public virtual void Awake()
+    {
+        gameObject.SetActive(inArena);
+    }
+
     public virtual void SetUser(GameObject newUser)
     {
         collected = true;
         user = newUser;
+        userName = newUser.name;
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
@@ -84,23 +92,30 @@ public class RelicBase : MonoBehaviour
         lastEquippedTime = Time.time;
     }
 
-    public void SaveRelic(int id)
+    public void SaveRelic()
     {
-        string identifier = "Relic" + id.ToString();
+        string identifier = relicType.ToString() + "Relic";
+        SaveManager.UpdateSavedString(identifier + "User", userName);
         SaveManager.UpdateSavedBool(identifier + "Collected", collected);
         SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
         SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
         SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
-        SaveManager.UpdateSavedVector3(identifier + "Position", transform.position);
     }
 
-    public void LoadRelic(int id)
+    public void LoadRelic()
     {
-        string identifier = "Relic" + id.ToString();
+        string identifier = relicType.ToString() + "Relic";
+        userName = SaveManager.GetString(identifier + "User");
         collected = SaveManager.GetBool(identifier + "Collected");
         inUse = SaveManager.GetBool(identifier + "InUse");
         readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
         cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
-        transform.position = SaveManager.GetVector3(identifier + "Position");
+
+        if (collected)
+        {
+            GameObject newUser = GameObject.Find(userName);
+            SetUser(newUser);
+            newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
+        }
     }
 }

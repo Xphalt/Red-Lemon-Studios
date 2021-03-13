@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-public class AmmoPickup : MonoBehaviour
+public class AmmoPickup : PickUpBase
 {
     public int AmmoValue;
     public ElementTypes Type;
@@ -22,7 +22,7 @@ public class AmmoPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<Player>().AddAmmo(AmmoValue, Type);
-            gameObject.SetActive(false);
+            Collect();
         }
     }
 }
