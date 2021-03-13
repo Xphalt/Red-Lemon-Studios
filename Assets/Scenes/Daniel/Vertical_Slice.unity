@@ -557,6 +557,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1166587324847619899, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: ArenaName
+      value: VerticalSlice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166587324847619899, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: arenaEnemies.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
       value: 1
