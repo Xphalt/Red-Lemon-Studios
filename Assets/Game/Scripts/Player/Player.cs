@@ -52,6 +52,8 @@ public class Player : CharacterBase
                 Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
             }
         }
+
+        userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
     }
 
     public override void Update()
@@ -246,47 +248,48 @@ public class Player : CharacterBase
 
         //call function for new relic icon
     }
-    public void SaveStats(string arena)
+    public void SaveStats(string saveID)
     {
-        SaveManager.UpdateSavedVector3(arena + "PlayerPos", transform.position);
-        SaveManager.UpdateSavedFloat(arena + "PlayerYRot", transform.rotation.eulerAngles.y);
-        SaveManager.UpdateSavedFloat(arena + "PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerYRot", transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
-            SaveManager.UpdateSavedInt("Player" + ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
+            SaveManager.UpdateSavedInt(saveID + "Player" + ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
         }
 
-        SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
-        SaveManager.UpdateSavedInt("PlayerRelicIndex", relicIndex);
+        SaveManager.UpdateSavedElementType(saveID + "PlayerElement", elementChanger.m_CurElement);
+        SaveManager.UpdateSavedInt(saveID + "PlayerRelicIndex", relicIndex);
 
         SaveManager.UpdateSavedBool("PlayerSaved", true);
     }
 
-    public void LoadStats(bool loadTransform, string arena)
+    public void LoadStats(string loadID, string loadTransform="")
     {
         if (SaveManager.HasBool("PlayerSaved"))
         {
-            if (loadTransform)
+            if (loadTransform != "")
             {
-                transform.position = SaveManager.GetVector3(arena + "PlayerPos");
-                transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(arena + "PlayerYRot"), 0);
-                firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(arena + "PlayerCameraYRot"), 0);
+                transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
+                transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(loadTransform + "PlayerYRot"), 0);
+                firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(loadTransform + "PlayerCameraYRot"), 0);
             }
 
-            Ammo[ElementTypes.Fire] = SaveManager.GetInt("Player" + ElementTypes.Fire.ToString() + "Ammo");
-            Ammo[ElementTypes.Water] = SaveManager.GetInt("Player" + ElementTypes.Water.ToString() + "Ammo");
-            Ammo[ElementTypes.Air] = SaveManager.GetInt("Player" + ElementTypes.Air.ToString() + "Ammo");
-            Ammo[ElementTypes.Earth] = SaveManager.GetInt("Player" + ElementTypes.Earth.ToString() + "Ammo");
+            Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
+            Ammo[ElementTypes.Water] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Water.ToString() + "Ammo");
+            Ammo[ElementTypes.Air] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Air.ToString() + "Ammo");
+            Ammo[ElementTypes.Earth] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Earth.ToString() + "Ammo");
             
-            elementChanger.SetElement(SaveManager.GetElementType("PlayerElement"));
+            elementChanger.SetElement(SaveManager.GetElementType(loadID + "PlayerElement"));
             userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
             userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
             
-            relicIndex = Mathf.Min(SaveManager.GetInt("PlayerRelicIndex"), relicList.Count - 1);
+            relicIndex = Mathf.Min(SaveManager.GetInt(loadID + "PlayerRelicIndex"), relicList.Count - 1);
             SetRelic(relicIndex);
 
             saved = true;
+            movementLocked = false;
         }
 
         else saved = false;

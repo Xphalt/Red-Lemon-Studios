@@ -26,6 +26,8 @@ public static class SaveManager
     public static Dictionary<string, string> stringDict = new Dictionary<string, string>();
     public static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
     public static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
+
+    public static Dictionary<string, List<string>> stringListDict = new Dictionary<string, List<string>>();
     
     public static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
 
@@ -54,6 +56,48 @@ public static class SaveManager
             FileStream file = File.Open(defaultSavePath, FileMode.Open);
             saveData = (Save)bf.Deserialize(file);
             file.Close();
+
+            if (saveData.intKeys == null)
+            {
+                saveData.intKeys = new List<string>();
+                saveData.intValues = new List<int>();
+            }
+            if (saveData.floatKeys == null)
+            {
+                saveData.floatKeys = new List<string>();
+                saveData.floatValues = new List<float>();
+            }
+            if (saveData.boolKeys == null)
+            {
+                saveData.boolKeys = new List<string>();
+                saveData.boolValues = new List<bool>();
+            }
+            if (saveData.stringKeys == null)
+            {
+                saveData.stringKeys = new List<string>();
+                saveData.stringValues = new List<string>();
+            }
+            if (saveData.vector2Keys == null)
+            {
+                saveData.vector2Keys = new List<string>();
+                saveData.vector2Values = new List<myVector2>();
+            }
+            if (saveData.vector3Keys == null)
+            {
+                saveData.vector3Keys = new List<string>();
+                saveData.vector3Values = new List<myVector3>();
+            }
+            if (saveData.elementKeys == null)
+            {
+                saveData.elementKeys = new List<string>();
+                saveData.elementValues = new List<ElementTypes>();
+            }
+            if (saveData.stringListKeys == null)
+            {
+                saveData.stringListKeys = new List<string>();
+                saveData.stringListValues = new List<List<string>>();
+            }
+
             LoadDictsFromLists();
 
             return true;
@@ -116,6 +160,17 @@ public static class SaveManager
             return false;
         }
         else stringDict.Add(key, value);
+        return true;
+    }
+
+    public static bool AddNewStringList(string key, List<string> value)
+    {
+        if (stringListDict.ContainsKey(key))
+        {
+            PrintOverrideWarning(key, "List<string>");
+            return false;
+        }
+        else stringListDict.Add(key, value);
         return true;
     }
 
@@ -182,6 +237,11 @@ public static class SaveManager
         vector3Dict[key] = value;
     }
 
+    public static void UpdateSavedStringList(string key, List<string> value)
+    {
+        stringListDict[key] = value;
+    }
+
     public static void UpdateSavedElementType(string key, ElementTypes value)
     {
         elementDict[key] = value;
@@ -236,6 +296,14 @@ public static class SaveManager
         return Vector3.zero;
     }
 
+    public static List<string> GetStringList(string key)
+    {
+        if (stringListDict.ContainsKey(key)) return stringListDict[key];
+        else PrintMissingDataWarning(key, "List<string>");
+
+        return new List<string>();
+    }
+
     public static ElementTypes GetElementType(string key)
     {
         if (elementDict.ContainsKey(key)) return elementDict[key];
@@ -251,7 +319,8 @@ public static class SaveManager
     public static bool HasString(string key) { return saveData.stringKeys.Contains(key); }
     public static bool HasVector2(string key) { return saveData.vector2Keys.Contains(key); }
     public static bool HasVector3(string key) { return saveData.vector3Keys.Contains(key); }
-    public static bool HasElelmentType(string key) { return saveData.elementKeys.Contains(key); }
+    public static bool HasStringList(string key) { return saveData.stringListKeys.Contains(key); }
+    public static bool HasElementType(string key) { return saveData.elementKeys.Contains(key); }
 
     public static void SaveDictsToLists()
     {
@@ -352,6 +421,22 @@ public static class SaveManager
         }
 
         dictIndex = 0;
+        foreach (KeyValuePair<string, List<string>> pair in stringListDict)
+        {
+            if (saveData.stringListKeys.Contains(pair.Key))
+            {
+                saveData.stringListKeys[dictIndex] = pair.Key;
+                saveData.stringListValues[dictIndex] = pair.Value;
+            }
+            else
+            {
+                saveData.stringListKeys.Add(pair.Key);
+                saveData.stringListValues.Add(pair.Value);
+            }
+            dictIndex++;
+        }
+
+        dictIndex = 0;
         foreach (KeyValuePair<string, ElementTypes> pair in elementDict)
         {
             if (saveData.elementKeys.Contains(pair.Key))
@@ -379,6 +464,8 @@ public static class SaveManager
 
         for (int index = 0; index < saveData.vector3Keys.Count; index++)
             vector3Dict[saveData.vector3Keys[index]] = new Vector3(saveData.vector3Values[index].x, saveData.vector3Values[index].y, saveData.vector3Values[index].z);
+        
+        for (int index = 0; index < saveData.stringListKeys.Count; index++) stringListDict[saveData.stringListKeys[index]] = saveData.stringListValues[index];
 
         for (int index = 0; index < saveData.elementKeys.Count; index++) elementDict[saveData.elementKeys[index]] = saveData.elementValues[index];
     }
@@ -404,6 +491,9 @@ public class Save
 
     public List<string> vector3Keys = new List<string>();
     public List<myVector3> vector3Values = new List<myVector3>();
+
+    public List<string> stringListKeys = new List<string>();
+    public List<List<string>> stringListValues = new List<List<string>>();
 
     public List<string> elementKeys = new List<string>();
     public List<ElementTypes> elementValues = new List<ElementTypes>();

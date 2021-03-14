@@ -12,16 +12,16 @@ public class PickUpBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SavePickUp(string identifier)
+    public void SavePickUp(string saveID)
     {
-        identifier = "Pickup" + identifier;
-        SaveManager.AddNewBool(identifier + "Collected", collected);
+        saveID = "Pickup" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Collected", collected);
     }
 
-    public void LoadPickUp(string identifier)
+    public void LoadPickUp(string loadID)
     {
-        identifier = "Pickup" + identifier;
-        collected = SaveManager.GetBool(identifier + "Collected");
+        loadID = "Pickup" + loadID;
+        collected = SaveManager.GetBool(loadID + "Collected");
 
         gameObject.SetActive(!collected);
     }

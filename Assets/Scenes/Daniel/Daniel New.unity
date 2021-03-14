@@ -144,7 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1166587324847619899, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: autoFind
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166587324847619899, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: resetArena
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1166587324847619899, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: forceRestart
@@ -154,6 +158,10 @@ PrefabInstance:
       propertyPath: arenaEnemies.Array.data[0]
       value: 
       objectReference: {fileID: 2006759353}
+    - target: {fileID: 2265825113294858872, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3010659490006979909, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: inArena
       value: 1
@@ -256,6 +264,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572958274822740046, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736377063897170779, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
