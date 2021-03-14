@@ -25,8 +25,7 @@ public class EnemyEarth : Enemy
 
         if (attackTimer > rollDuration)
         {
-            rolling = false;
-            impactDamage = 0;
+            EndRoll();
         }
 
         if (!rolling)
@@ -50,10 +49,26 @@ public class EnemyEarth : Enemy
         return false;
     }
 
+    private void EndRoll()
+    {
+        rolling = false;
+        impactDamage = 0;
+    }
+
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
 
         Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), 1, true);
+    }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        CharacterBase collisionCharacter;
+        if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
+        {
+            if (collisionCharacter.team != team) EndRoll();
+        }
     }
 }

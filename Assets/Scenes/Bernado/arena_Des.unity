@@ -12473,10 +12473,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4105402323816430218, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
-      propertyPath: wallDetectionRadius
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -3851667731492021794, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -12514,12 +12510,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 248.8
       objectReference: {fileID: 0}
     - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.9
+      value: -2.48
       objectReference: {fileID: 0}
     - target: {fileID: 3799239140173178684, guid: f6a2e543f113a754eb69759ad62efc4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16361,6 +16369,18 @@ PrefabInstance:
     - target: {fileID: 2463119102881636663, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988791559438916900, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: startLocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988791559438916900, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: XSensitivity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988791559438916900, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: YSensitivity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder

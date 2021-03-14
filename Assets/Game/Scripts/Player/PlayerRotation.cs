@@ -1,4 +1,4 @@
-﻿//THIS IS A DUPLICATE OF THE FIRST PERSON CHARACTER 'MOUSE LOOK' SCRIPT
+﻿//THIS IS A MODIFIED VERSION OF THE FIRST PERSON CHARACTER 'MOUSE LOOK' SCRIPT
 
 using System;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class PlayerRotation : MonoBehaviour
     public float MaximumX = 90F;
     public bool smooth;
     public float smoothTime = 5f;
-    public bool lockCursor = true;
+    public bool startLocked = true;
 
     public Camera firstPersonCamera;
 
@@ -23,7 +23,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void Start()
     {
-        SetCursorLock(true);
+        SetCursorLock(startLocked);
 
         m_CharacterTargetRot = transform.localRotation;
         m_CameraTargetRot = firstPersonCamera.transform.localRotation;
@@ -32,10 +32,12 @@ public class PlayerRotation : MonoBehaviour
 
     public void Update()
     {
+        InternalLockUpdate();
+        
         Transform camera = firstPersonCamera.transform;
 
-        float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
-        float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+        float yRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : 0;
+        float xRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : 0;
 
         m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
         m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
@@ -55,48 +57,28 @@ public class PlayerRotation : MonoBehaviour
             transform.localRotation = m_CharacterTargetRot;
             camera.localRotation = m_CameraTargetRot;
         }
-
-        UpdateCursorLock();
     }
 
-    public void SetCursorLock(bool value)
+    public void SetCursorLock(bool cursorLock)
     {
-        lockCursor = value;
-        if (!lockCursor)
-        {//we force unlock the cursor if the user disable the cursor locking helper
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-    }
+        if (cursorLock) Cursor.lockState = CursorLockMode.Locked;
+        else Cursor.lockState = CursorLockMode.None;
 
-    public void UpdateCursorLock()
-    {
-        //if the user set "lockCursor" we check & properly lock the cursos
-        if (lockCursor)
-            InternalLockUpdate();
+        Cursor.visible = !cursorLock;
+
+        m_cursorIsLocked = cursorLock;
     }
 
     private void InternalLockUpdate()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            m_cursorIsLocked = false;
+            SetCursorLock(false);
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            m_cursorIsLocked = true;
-        }
-
-        if (m_cursorIsLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else if (!m_cursorIsLocked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+            SetCursorLock(true);
+        }        
     }
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
