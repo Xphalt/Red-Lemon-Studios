@@ -126,12 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicPlaceHolder: {fileID: 0}
+  weapon: {fileID: 0}
+  canFly: 0
   jumpForce: 500
   gravityMult: 1
   floorDistance: 1.01
   airControl: 0
-  weapon: {fileID: 0}
   maxHealth: 100
+  knockbackRecovery: 0
+  SFXManager: {fileID: 0}
   target: {fileID: 0}
   elementType: 0
   strongAgainstResist: 0.7
@@ -142,6 +145,5 @@ MonoBehaviour:
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
-  canFly: 0
   explosionDamage: 50
   explosionRadius: 30
