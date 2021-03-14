@@ -11,11 +11,14 @@ public class Player : CharacterBase
     public Camera firstPersonCamera;
     private GUI_Manager userInterface;
 
+    PlayerRotation rotationScript;
+
     public float runSpeed;
     public float shootTargetDistance;
     public int maxAmmo;
 
     private bool switchingRelics = false;
+    private bool paused = false;
 
     internal Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
@@ -26,12 +29,12 @@ public class Player : CharacterBase
     {
         base.Awake();
         elementChanger = weapon.GetComponent<Elements>();
-        userInterface = canvas.GetComponent<GUI_Manager>();
-
+        rotationScript = GetComponent<PlayerRotation>();
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
 
+        userInterface = canvas.GetComponent<GUI_Manager>();
         userInterface.SetMaxHealth(maxHealth);
         userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
@@ -70,36 +73,49 @@ public class Player : CharacterBase
 
     private void Inputs()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!paused)
         {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            UseRelic();
-        }
-
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            if (!switchingRelics)
+            if (Input.GetButtonDown("Jump"))
             {
-                elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-                userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
-                userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                Jump();
             }
-            else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                UseRelic();
+            }
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                if (!switchingRelics)
+                {
+                    elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                    userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
+                    userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                }
+                else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                switchingRelics = !switchingRelics;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            switchingRelics = !switchingRelics;
-        }
+        if (Input.GetKeyDown(KeyCode.P)) TogglePause();
+    }
+
+    private void TogglePause()
+    {
+        paused = !paused;
+
+        Time.timeScale = (paused) ? 0 : 1;
+        rotationScript.SetCursorLock(!paused, paused);
     }
 
     public override void FixedUpdate()

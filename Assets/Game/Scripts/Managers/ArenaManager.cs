@@ -65,7 +65,6 @@ public class ArenaManager : MonoBehaviour
         }
     }
 
-
     public void Save()
     {
         SaveManager.UpdateSavedBool(ArenaName + "Checkpointed", true);

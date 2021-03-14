@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296724980272786847}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.664429, y: -5.9447565, z: 25.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -126,12 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicPlaceHolder: {fileID: 0}
+  weapon: {fileID: 0}
+  canFly: 0
   jumpForce: 500
   gravityMult: 1
   floorDistance: 1.01
   airControl: 0
-  weapon: {fileID: 0}
   maxHealth: 100
+  knockbackRecovery: 0
+  SFXManager: {fileID: 0}
   target: {fileID: 0}
   elementType: 0
   strongAgainstResist: 0.7
@@ -142,6 +145,5 @@ MonoBehaviour:
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
-  canFly: 0
   explosionDamage: 50
   explosionRadius: 30
