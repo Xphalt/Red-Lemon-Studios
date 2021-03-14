@@ -218,22 +218,22 @@ public class Enemy : CharacterBase
         statusDuration = 0;
     }
 
-    public void SaveEnemy(string identifier)
+    public void SaveEnemy(string saveID)
     {
-        identifier = "Enemy" + identifier;
+        saveID = "Enemy" + saveID;
 
-        SaveManager.UpdateSavedVector3(identifier + "Pos", transform.position);
-        SaveManager.UpdateSavedVector3(identifier + "Rot", transform.rotation.eulerAngles);
-        SaveManager.UpdateSavedBool(identifier + "Killed", killed);
+        SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
+        SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(saveID + "Killed", killed);
     }
 
-    public void LoadEnemy(string identifier)
+    public void LoadEnemy(string loadID)
     {
-        identifier = "Enemy" + identifier;
+        loadID = "Enemy" + loadID;
 
-        transform.position = SaveManager.GetVector3(identifier + "Pos");
-        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(identifier + "Rot"));
-        killed = SaveManager.GetBool(identifier + "Killed");
+        transform.position = SaveManager.GetVector3(loadID + "Pos");
+        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
+        killed = SaveManager.GetBool(loadID + "Killed");
 
         gameObject.SetActive(!killed);
     }

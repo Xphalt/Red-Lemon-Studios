@@ -20,6 +20,7 @@ public class PlayerRotation : MonoBehaviour
     private Quaternion m_CharacterTargetRot;
     private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
+    private bool m_inputIsLocked = false;
 
     private void Start()
     {
@@ -59,7 +60,7 @@ public class PlayerRotation : MonoBehaviour
         }
     }
 
-    public void SetCursorLock(bool cursorLock)
+    public void SetCursorLock(bool cursorLock, bool inputLock=false)
     {
         if (cursorLock) Cursor.lockState = CursorLockMode.Locked;
         else Cursor.lockState = CursorLockMode.None;
@@ -67,18 +68,22 @@ public class PlayerRotation : MonoBehaviour
         Cursor.visible = !cursorLock;
 
         m_cursorIsLocked = cursorLock;
+        m_inputIsLocked = inputLock;
     }
 
     private void InternalLockUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (!m_inputIsLocked)
         {
-            SetCursorLock(false);
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                SetCursorLock(false);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                SetCursorLock(true);
+            }
         }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            SetCursorLock(true);
-        }        
     }
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
