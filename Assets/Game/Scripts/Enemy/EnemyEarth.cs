@@ -53,6 +53,23 @@ public class EnemyEarth : Enemy
     public override void Animate()
     {
         base.Animate();
+        Animator MyAnim = gameObject.GetComponent<Animator>();
+        Rigidbody rigi = gameObject.GetComponent<Rigidbody>();
+        if (movementState == EnemyStates.Chasing)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", true);
+        }
+        else if (movementState == EnemyStates.Idle)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Patrolling)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+        }
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
