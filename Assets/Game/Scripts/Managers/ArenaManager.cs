@@ -53,7 +53,7 @@ public class ArenaManager : MonoBehaviour
             }
         }
         if (!restart) Load();
-        if (resetArena)
+        if (resetArena || restart)
         {
             Save();
             resetArena = false;
