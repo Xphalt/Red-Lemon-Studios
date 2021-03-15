@@ -11,7 +11,7 @@ public class ArenaManager : MonoBehaviour
     private string checkpointID;
 
     private List<string> previousCheckpoints = new List<string>();
-    private string previousLevelCheckpoint;
+    private string checkpointAtStart;
 
     public bool restart; //Clears all saved values
     public bool resetArena; //Clears all checkpoints saved in current arena
@@ -48,9 +48,9 @@ public class ArenaManager : MonoBehaviour
 
             for (int checkpointIndex = previousCheckpoints.Count - 1; checkpointIndex >= 0; checkpointIndex--)
             {
-                previousLevelCheckpoint = previousCheckpoints[checkpointIndex];
-                if (!previousLevelCheckpoint.Contains(ArenaName)) break;
-                else previousLevelCheckpoint = "";
+                checkpointAtStart = previousCheckpoints[checkpointIndex];
+                if (!checkpointAtStart.Contains(ArenaName)) break;
+                else checkpointAtStart = "";
             }
         }
         if (!restart) Load();
@@ -86,7 +86,7 @@ public class ArenaManager : MonoBehaviour
         checkpointID = ArenaName + checkpointCounter.ToString();
         previousCheckpoints.Add(checkpointID);
 
-        SaveManager.UpdateSavedInt(ArenaName + "CheckpointCounter", checkpointCounter);
+        SaveManager.UpdateSavedInt(checkpointID + "CheckpointCounter", checkpointCounter);
         SaveManager.UpdateSavedString(ArenaName + "LastCheckpointID", checkpointID);
         SaveManager.UpdateSavedString("LastOverallCheckpointID", checkpointID);
         SaveManager.UpdateSavedStringList("PreviousCheckpoints", previousCheckpoints);
@@ -121,8 +121,8 @@ public class ArenaManager : MonoBehaviour
 
         if (!resetArena && SaveManager.HasString(ArenaName + "LastCheckpointID"))
         {
-            arenaLoadID = SaveManager.GetString(ArenaName + "LastCheckpointID");
-            checkpointCounter = SaveManager.GetInt(ArenaName + "CheckpointCounter");
+            arenaLoadID = (loadID.Contains(ArenaName)) ? loadID : SaveManager.GetString(ArenaName + "LastCheckpointID");
+            checkpointCounter = SaveManager.GetInt(arenaLoadID + "CheckpointCounter");
 
             for (int e = 0; e < arenaEnemies.Count; e++)
             {
@@ -136,7 +136,7 @@ public class ArenaManager : MonoBehaviour
         }
         else checkpointCounter = 0;
 
-        string playerLoadID = (resetArena) ? previousLevelCheckpoint : loadID;
+        string playerLoadID = (resetArena) ? checkpointAtStart : loadID;
 
         if (playerLoadID != "")
         {
