@@ -25,6 +25,8 @@ public class ElementHazardAilments : MonoBehaviour
     internal bool successfulHit = false;
     internal Teams team;
 
+    public bool dieOnHit = false;
+
     public void Initialise(float weaponDamage, CharacterBase newUser)
     {
         userScript = newUser;
@@ -36,6 +38,11 @@ public class ElementHazardAilments : MonoBehaviour
     {
         userScript.IncreaseCombo();
         successfulHit = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (dieOnHit) Destroy(gameObject);
     }
 
     private void OnDestroy()
