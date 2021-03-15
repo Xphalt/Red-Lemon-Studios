@@ -45,7 +45,6 @@ public class ArenaManager : MonoBehaviour
         if (SaveManager.HasStringList("PreviousCheckpoints"))
         {
             previousCheckpoints = SaveManager.GetStringList("PreviousCheckpoints");
-
             for (int checkpointIndex = previousCheckpoints.Count - 1; checkpointIndex >= 0; checkpointIndex--)
             {
                 checkpointAtStart = previousCheckpoints[checkpointIndex];
@@ -54,6 +53,11 @@ public class ArenaManager : MonoBehaviour
             }
         }
         if (!restart) Load();
+        if (resetArena)
+        {
+            Save();
+            resetArena = false;
+        }
     }
 
     void Update()
@@ -82,7 +86,6 @@ public class ArenaManager : MonoBehaviour
 
     public void Save()
     {
-        checkpointCounter++;
         checkpointID = ArenaName + checkpointCounter.ToString();
         previousCheckpoints.Add(checkpointID);
 
@@ -110,6 +113,8 @@ public class ArenaManager : MonoBehaviour
 
         SaveManager.UpdateSavedString("LastSavedLevel", SceneManager.GetActiveScene().name);
         SaveManager.UpdateSavedInt("LastSavedLevel", SceneManager.GetActiveScene().buildIndex);
+
+        checkpointCounter++;
     }
 
     public void Load(string checkpointOverride="")

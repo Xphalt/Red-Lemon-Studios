@@ -293,5 +293,9 @@ public class Player : CharacterBase
         }
 
         else saved = false;
+
+        curHealth = maxHealth;
+        userInterface.UpdateHealth(curHealth);
+        killed = false;
     }
 }
