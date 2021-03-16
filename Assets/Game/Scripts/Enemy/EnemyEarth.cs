@@ -28,7 +28,7 @@ public class EnemyEarth : Enemy
             rolling = false;
             impactDamage = 0;
         }
-
+        Animate();
         if (!rolling)
         {
             if (CanSeePlayer()) movementState = EnemyStates.Chasing;
@@ -54,7 +54,6 @@ public class EnemyEarth : Enemy
     {
         base.Animate();
         Animator MyAnim = gameObject.GetComponent<Animator>();
-        Rigidbody rigi = gameObject.GetComponent<Rigidbody>();
         if (movementState == EnemyStates.Chasing)
         {
             MyAnim.SetBool("Motion", true);
