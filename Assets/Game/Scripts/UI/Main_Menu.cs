@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public List<string> SceneName = new List<string>();
+    public List<GameObject> ButtonGOs = new List<GameObject>();
+    public GameObject ExitGO;
+
+    public void SceneSelect(int SceneID)
     {
-        
+        ButtonGOs[SceneID].SetActive(true);
+        SceneManager.LoadScene(SceneName[SceneID]);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExitScene()
     {
-        
+        ExitGO.SetActive(true);
+        print("exited scene");
+        Application.Quit();
     }
 }
+
