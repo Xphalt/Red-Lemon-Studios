@@ -248,11 +248,14 @@ public class Player : CharacterBase
 
         //call function for new relic icon
     }
+
+
+    #region Saving
     public void SaveStats(string saveID)
     {
         SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
-        SaveManager.UpdateSavedFloat(saveID + "PlayerYRot", transform.rotation.eulerAngles.y);
-        SaveManager.UpdateSavedFloat(saveID + "PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerYRot", transform.localRotation.eulerAngles.y);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerCameraXRot", firstPersonCamera.transform.localRotation.eulerAngles.x);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
@@ -272,8 +275,8 @@ public class Player : CharacterBase
             if (loadTransform != "")
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
-                transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(loadTransform + "PlayerYRot"), 0);
-                firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(loadTransform + "PlayerCameraYRot"), 0);
+                transform.Rotate(0, SaveManager.GetFloat(loadTransform + "PlayerYRot"), 0, Space.Self);
+                firstPersonCamera.transform.Rotate(SaveManager.GetFloat(loadTransform + "PlayerCameraXRot"), 0, 0, Space.Self);
             }
 
             Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
@@ -298,4 +301,5 @@ public class Player : CharacterBase
         userInterface.UpdateHealth(curHealth);
         killed = false;
     }
+    #endregion
 }

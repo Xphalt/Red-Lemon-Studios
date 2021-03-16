@@ -30,18 +30,41 @@ public class ArenaManager : MonoBehaviour
         if (ArenaName == "") ArenaName = SceneManager.GetActiveScene().name;
 
         foreach (RelicBase arenarelic in arenaRelics) arenarelic.Awake();
+
+        if (autoFind)
+        {
+            FindArenaItems();
+        }
     }
 
     void Start()
     {
-        if (autoFind)
-        {
-            arenaEnemies.Clear();
-            arenaPickUps.Clear();
-            foreach (GameObject newEnemy in GameObject.FindGameObjectsWithTag("Enemy")) arenaEnemies.Add(newEnemy.GetComponent<Enemy>());
-            foreach (GameObject newPickup in GameObject.FindGameObjectsWithTag("PickUp")) arenaPickUps.Add(newPickup.GetComponent<PickUpBase>());
-        }
+        GetCheckpointAtStart();
 
+        if (!restart) Load();
+        if (resetArena || restart)
+        {
+            checkpointCounter = -1;
+            Save();
+            resetArena = false;
+        }
+        else checkpointCounter = 0;
+    }
+
+    private void FindArenaItems()
+    {
+        Scene thisScene = SceneManager.GetActiveScene();
+        arenaEnemies.Clear();
+        arenaPickUps.Clear();
+        foreach (Enemy newEnemy in Resources.FindObjectsOfTypeAll<Enemy>())
+            if (newEnemy.gameObject.scene == thisScene) arenaEnemies.Add(newEnemy);
+
+        foreach (PickUpBase newPickup in Resources.FindObjectsOfTypeAll<PickUpBase>())
+            if (newPickup.gameObject.scene == thisScene) arenaPickUps.Add(newPickup);
+    }
+
+    private void GetCheckpointAtStart()
+    {
         if (SaveManager.HasStringList("PreviousCheckpoints"))
         {
             previousCheckpoints = SaveManager.GetStringList("PreviousCheckpoints");
@@ -51,12 +74,6 @@ public class ArenaManager : MonoBehaviour
                 if (!checkpointAtStart.Contains(ArenaName)) break;
                 else checkpointAtStart = "";
             }
-        }
-        if (!restart) Load();
-        if (resetArena || restart)
-        {
-            Save();
-            resetArena = false;
         }
     }
 
@@ -78,10 +95,7 @@ public class ArenaManager : MonoBehaviour
             if (arenaFinished) Save();
         }
 
-        if (arenaPlayer.killed)
-        {
-            Load();
-        }
+        if (arenaPlayer.killed) Load();
     }
 
     public void Save()
@@ -89,7 +103,7 @@ public class ArenaManager : MonoBehaviour
         checkpointID = ArenaName + checkpointCounter.ToString();
         previousCheckpoints.Add(checkpointID);
 
-        SaveManager.UpdateSavedInt(checkpointID + "CheckpointCounter", checkpointCounter);
+        SaveManager.UpdateSavedInt(checkpointID + "CheckpointCounter", ++checkpointCounter);
         SaveManager.UpdateSavedString(ArenaName + "LastCheckpointID", checkpointID);
         SaveManager.UpdateSavedString("LastOverallCheckpointID", checkpointID);
         SaveManager.UpdateSavedStringList("PreviousCheckpoints", previousCheckpoints);
@@ -114,7 +128,7 @@ public class ArenaManager : MonoBehaviour
         SaveManager.UpdateSavedString("LastSavedLevel", SceneManager.GetActiveScene().name);
         SaveManager.UpdateSavedInt("LastSavedLevel", SceneManager.GetActiveScene().buildIndex);
 
-        checkpointCounter++;
+        SaveManager.SaveToFile();
     }
 
     public void Load(string checkpointOverride="")

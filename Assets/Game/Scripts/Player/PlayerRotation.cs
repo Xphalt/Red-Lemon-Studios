@@ -16,7 +16,7 @@ public class PlayerRotation : MonoBehaviour
     public bool startLocked = true;
 
     public Camera firstPersonCamera;
-
+    private Transform cameraTransform;
     private Quaternion m_CharacterTargetRot;
     private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
@@ -28,6 +28,7 @@ public class PlayerRotation : MonoBehaviour
 
         m_CharacterTargetRot = transform.localRotation;
         m_CameraTargetRot = firstPersonCamera.transform.localRotation;
+        cameraTransform = firstPersonCamera.transform;
     }
 
 
@@ -35,7 +36,6 @@ public class PlayerRotation : MonoBehaviour
     {
         InternalLockUpdate();
         
-        Transform camera = firstPersonCamera.transform;
 
         float yRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : 0;
         float xRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : 0;
@@ -50,13 +50,13 @@ public class PlayerRotation : MonoBehaviour
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot,
                 smoothTime * Time.deltaTime);
-            camera.localRotation = Quaternion.Slerp(camera.localRotation, m_CameraTargetRot,
+            cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, m_CameraTargetRot,
                 smoothTime * Time.deltaTime);
         }
         else
         {
             transform.localRotation = m_CharacterTargetRot;
-            camera.localRotation = m_CameraTargetRot;
+            cameraTransform.localRotation = m_CameraTargetRot;
         }
     }
 
@@ -101,5 +101,4 @@ public class PlayerRotation : MonoBehaviour
 
         return q;
     }
-
 }

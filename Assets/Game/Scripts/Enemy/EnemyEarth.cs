@@ -53,6 +53,7 @@ public class EnemyEarth : Enemy
     {
         rolling = false;
         impactDamage = 0;
+        EndShift();
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
@@ -70,5 +71,23 @@ public class EnemyEarth : Enemy
         {
             if (collisionCharacter.team != team) EndRoll();
         }
+    }
+
+    public override void SaveEnemy(string saveID)
+    {
+        base.SaveEnemy(saveID);
+
+        saveID = "Enemy" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Rolling", rolling);
+
+        if (!rolling && shifting) EndShift();
+    }
+
+    public override void LoadEnemy(string loadID)
+    {
+        base.LoadEnemy(loadID);
+
+        loadID = "Enemy" + loadID;
+        rolling = SaveManager.GetBool(loadID + "Rolling");
     }
 }

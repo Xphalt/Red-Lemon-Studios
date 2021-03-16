@@ -23,6 +23,10 @@ public class Enemy : CharacterBase
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
+    public GameObject ammoDrop;
+    private PickUpBase dropScript;
+    public float dropChance;
+
     protected Player playerScript;
 
     public float strongAgainstResist = 0.7f;
@@ -33,6 +37,8 @@ public class Enemy : CharacterBase
 
     protected EnemyStates movementState;
     public bool sentryMode = false;
+
+    public bool spawned;
 
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
@@ -52,6 +58,8 @@ public class Enemy : CharacterBase
         base.Awake();
         if (target == null) target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
+        dropScript = ammoDrop.GetComponent<PickUpBase>();
+        dropChance = Mathf.Clamp(dropChance, 0, 1);
     }
 
     public override void Start()
@@ -199,7 +207,11 @@ public class Enemy : CharacterBase
 
         base.TakeDamage(damage, damageType);
 
-        if (killed) gameObject.SetActive(false);
+        if (killed)
+        {
+            if (Random.value < dropChance) dropScript.Spawn();
+            gameObject.SetActive(false);
+        }
     }
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
@@ -218,22 +230,24 @@ public class Enemy : CharacterBase
         statusDuration = 0;
     }
 
-    public void SaveEnemy(string saveID)
+    public virtual void SaveEnemy(string saveID)
     {
         saveID = "Enemy" + saveID;
 
         SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
         SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
         SaveManager.UpdateSavedBool(saveID + "Killed", killed);
+        SaveManager.UpdateSavedFloat(saveID + "AttackTimer", attackTimer);
     }
 
-    public void LoadEnemy(string loadID)
+    public virtual void LoadEnemy(string loadID)
     {
         loadID = "Enemy" + loadID;
 
         transform.position = SaveManager.GetVector3(loadID + "Pos");
         transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
         killed = SaveManager.GetBool(loadID + "Killed");
+        attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
 
         gameObject.SetActive(!killed);
     }
