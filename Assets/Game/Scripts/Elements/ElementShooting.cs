@@ -62,6 +62,8 @@ public class ElementShooting : MonoBehaviour
     //TODO cache the rigidbody reference to boost performance
     public void Shoot(ElementTypes shotType, Vector3 target)
     {
+        Debug.Log(target);
+        
         CheckElement(shotType);
         GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
         newBullet.GetComponent<Rigidbody>().velocity = (target - GunPos.transform.position).normalized * ShootSpeed;
