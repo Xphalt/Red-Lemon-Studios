@@ -16,20 +16,20 @@ using static EnumHelper;
 public static class SaveManager
 {
     public static string fileType = ".LEMON";
-    public static string defaultSavePath = Application.persistentDataPath + "/GameSave" + fileType;
+    private static string defaultSavePath = Application.persistentDataPath + "/GameSave" + fileType;
 
-    public static Save saveData = new Save();
+    private static Save saveData = new Save();
 
-    public static Dictionary<string, int> intDict = new Dictionary<string, int>();
-    public static Dictionary<string, float> floatDict = new Dictionary<string, float>();
-    public static Dictionary<string, bool> boolDict = new Dictionary<string, bool>();
-    public static Dictionary<string, string> stringDict = new Dictionary<string, string>();
-    public static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
-    public static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
+    private static Dictionary<string, int> intDict = new Dictionary<string, int>();
+    private static Dictionary<string, float> floatDict = new Dictionary<string, float>();
+    private static Dictionary<string, bool> boolDict = new Dictionary<string, bool>();
+    private static Dictionary<string, string> stringDict = new Dictionary<string, string>();
+    private static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
+    private static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
 
-    public static Dictionary<string, List<string>> stringListDict = new Dictionary<string, List<string>>();
-    
-    public static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
+    private static Dictionary<string, List<string>> stringListDict = new Dictionary<string, List<string>>();
+
+    private static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
 
     public static void SaveToFile(string path="")
     {
@@ -312,7 +312,17 @@ public static class SaveManager
         return ElementTypes.ElementTypesSize;
     }
     #endregion
-
+    #region RemoveData
+    public static void RemoveInt(string key) { if (HasInt(key)) intDict.Remove(key); }
+    public static void RemoveFloat(string key) { if (HasFloat(key)) floatDict.Remove(key); }
+    public static void RemoveBool(string key) { if (HasBool(key)) boolDict.Remove(key); }
+    public static void RemoveString(string key) { if (HasString(key)) stringDict.Remove(key); }
+    public static void RemoveVector2(string key) { if (HasVector2(key)) vector2Dict.Remove(key); }
+    public static void RemoveVector3(string key) { if (HasVector3(key)) vector3Dict.Remove(key); }
+    public static void RemoveStringList(string key) { if (HasStringList(key)) stringListDict.Remove(key); }
+    public static void RemoveElementType(string key) { if (HasElementType(key)) elementDict.Remove(key); }
+    #endregion
+    #region CheckForData
     public static bool HasInt(string key) { return saveData.intKeys.Contains(key); }
     public static bool HasFloat(string key) { return saveData.floatKeys.Contains(key); }
     public static bool HasBool(string key) { return saveData.boolKeys.Contains(key); }
@@ -321,6 +331,7 @@ public static class SaveManager
     public static bool HasVector3(string key) { return saveData.vector3Keys.Contains(key); }
     public static bool HasStringList(string key) { return saveData.stringListKeys.Contains(key); }
     public static bool HasElementType(string key) { return saveData.elementKeys.Contains(key); }
+    #endregion
 
     public static void SaveDictsToLists()
     {
@@ -468,6 +479,18 @@ public static class SaveManager
         for (int index = 0; index < saveData.stringListKeys.Count; index++) stringListDict[saveData.stringListKeys[index]] = saveData.stringListValues[index];
 
         for (int index = 0; index < saveData.elementKeys.Count; index++) elementDict[saveData.elementKeys[index]] = saveData.elementValues[index];
+    }
+
+    public static void ClearSaves()
+    {
+        intDict.Clear();
+        floatDict.Clear();
+        boolDict.Clear();
+        stringDict.Clear();
+        vector2Dict.Clear();
+        vector3Dict.Clear();
+        stringListDict.Clear();
+        elementDict.Clear();
     }
 }
 

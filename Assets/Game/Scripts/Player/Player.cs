@@ -158,7 +158,7 @@ public class Player : CharacterBase
     {
         if (AmmoCheck())
         {
-            shooter.Shoot(elementChanger.m_CurElement, (Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
+            shooter.Shoot(elementChanger.m_CurElement, (firstPersonCamera.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
             SubstractAmmo(1, elementChanger.m_CurElement);
         }
     }
@@ -287,8 +287,8 @@ public class Player : CharacterBase
             elementChanger.SetElement(SaveManager.GetElementType(loadID + "PlayerElement"));
             userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
             userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
-            
-            relicIndex = Mathf.Min(SaveManager.GetInt(loadID + "PlayerRelicIndex"), relicList.Count - 1);
+
+            relicIndex = Mathf.Clamp(SaveManager.GetInt(loadID + "PlayerRelicIndex"), 0, relicList.Count - 1);
             SetRelic(relicIndex);
 
             saved = true;
