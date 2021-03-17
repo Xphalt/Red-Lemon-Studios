@@ -39,7 +39,7 @@ public class ElementShooting : MonoBehaviour
     public List<string> soundNames = new List<string>();
     private Dictionary<ElementTypes, string> shootSoundsDictionary = new Dictionary<ElementTypes, string>();
 
-    public float ShootForce;
+    public float ShootSpeed;
 
     private void Start()
     {
@@ -64,7 +64,7 @@ public class ElementShooting : MonoBehaviour
     {
         CheckElement(shotType);
         GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-        newBullet.GetComponent<Rigidbody>().AddForce((target - GunPos.transform.position).normalized * ShootForce);
+        newBullet.GetComponent<Rigidbody>().velocity = (target - GunPos.transform.position).normalized * ShootSpeed;
         newBullet.transform.SetParent(null);
 
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();

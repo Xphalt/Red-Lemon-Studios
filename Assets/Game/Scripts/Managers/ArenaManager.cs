@@ -6,11 +6,15 @@ using static EnumHelper;
 using static SaveManager;
 public class ArenaManager : MonoBehaviour
 {
+    Scene thisScene;
     public string ArenaName;
-    private bool checkpointed = false;
+    private int checkpointsReached = 0;
 
-    public bool restart;
-    public bool clearCheckpoint;
+    private List<string> previousCheckpoints = new List<string>();
+    private string checkpointAtStart;
+
+    public bool newGame = false; //If true, clears all saved values
+    public bool resetArena = false; //If true, clears all checkpoints saved in current arena
 
     public bool autoFind = true;
 
@@ -21,99 +25,153 @@ public class ArenaManager : MonoBehaviour
 
     private void Awake()
     {
+        thisScene = SceneManager.GetActiveScene();
+        if (ArenaName == "") ArenaName = thisScene.name;
+        
         SaveManager.LoadFromFile();
+
+        checkpointAtStart = GetCheckpointAtStart();
+        
+        if (!newGame) newGame = !SaveManager.HasString("LastOverallCheckpointID");
+        if (!resetArena) resetArena = !SaveManager.HasString(ArenaName + "LastCheckpointID");
+
+        foreach (RelicBase arenarelic in arenaRelics) arenarelic.Awake();
+
+        if (autoFind)
+        {
+            FindArenaItems();
+        }
     }
 
     void Start()
     {
-        if (autoFind)
+        if (!newGame) Load(!resetArena);
+        if (resetArena || newGame)
         {
-            arenaEnemies.Clear();
-            arenaPickUps.Clear();
-            foreach (GameObject newEnemy in GameObject.FindGameObjectsWithTag("Enemy")) arenaEnemies.Add(newEnemy.GetComponent<Enemy>());
-            foreach (GameObject newPickup in GameObject.FindGameObjectsWithTag("PickUp")) arenaPickUps.Add(newPickup.GetComponent<PickUpBase>());
+            checkpointsReached = -1;
+            Save();
         }
-        
-        if (!restart) Load();
+    }
+
+    private void FindArenaItems()
+    {
+        arenaEnemies.Clear();
+        arenaPickUps.Clear();
+        foreach (Enemy newEnemy in Resources.FindObjectsOfTypeAll<Enemy>())
+            if (newEnemy.gameObject.scene == thisScene) arenaEnemies.Add(newEnemy);
+
+        foreach (PickUpBase newPickup in Resources.FindObjectsOfTypeAll<PickUpBase>())
+            if (newPickup.gameObject.scene == thisScene) arenaPickUps.Add(newPickup);
+    }
+
+    private string GetCheckpointAtStart()
+    {
+        string previousSceneCheckpoint = "";
+        if (SaveManager.HasStringList("PreviousCheckpoints"))
+        {
+            previousCheckpoints = SaveManager.GetStringList("PreviousCheckpoints");
+            for (int checkpointIndex = previousCheckpoints.Count - 1; checkpointIndex >= 0; checkpointIndex--)
+            {
+                previousSceneCheckpoint = previousCheckpoints[checkpointIndex];
+                if (!previousSceneCheckpoint.Contains(ArenaName)) return previousSceneCheckpoint;
+                else previousSceneCheckpoint = "";
+            }
+        }
+        return previousSceneCheckpoint;
     }
 
     void Update()
     {
-        if (!checkpointed)
+        if (checkpointsReached == 0)
         {
-            bool arenaFinished = true;
+            bool enemiesRemaining = false;
 
             foreach (Enemy arenaenemy in arenaEnemies)
             {
-                if (arenaenemy.gameObject.activeInHierarchy)
+                if (!arenaenemy.killed)
                 {
-                    arenaFinished = false;
+                    enemiesRemaining = true;
                     break;
                 }
             }
 
-            if (arenaFinished) Save();
+            if (!enemiesRemaining) Save();
         }
 
-        if (arenaPlayer.killed)
-        {
-            if (checkpointed) Load();
-            else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        if (arenaPlayer.killed) Load();
     }
 
-
-    public void Save()
+    public void Save(string checkpointOverride = "")
     {
-        SaveManager.UpdateSavedBool(ArenaName + "Checkpointed", true);
+        string saveID = (checkpointOverride == "") ? ArenaName + checkpointsReached.ToString() : checkpointOverride;
+        if (previousCheckpoints.Contains(saveID)) previousCheckpoints.Remove(saveID);
+        previousCheckpoints.Add(saveID);
+
+        SaveManager.UpdateSavedInt(saveID + "CheckpointsReached", ++checkpointsReached);
+        SaveManager.UpdateSavedString(saveID + "Scene", thisScene.name);
+        SaveManager.UpdateSavedInt(saveID + "Scene", thisScene.buildIndex);
+
+        SaveManager.UpdateSavedString(ArenaName + "LastCheckpointID", saveID);
+        SaveManager.UpdateSavedString("LastOverallCheckpointID", saveID);
+        SaveManager.UpdateSavedStringList("PreviousCheckpoints", previousCheckpoints);
 
         for (int e = 0; e < arenaEnemies.Count; e++)
         {
-            arenaEnemies[e].SaveEnemy(e.ToString() + ArenaName);
-        }
-
-        for (int r = 0; r < arenaRelics.Count; r++)
-        {
-            arenaRelics[r].SaveRelic();
+            arenaEnemies[e].SaveEnemy(e.ToString() + saveID);
         }
 
         for (int p = 0; p < arenaPickUps.Count; p++)
         {
-            arenaPickUps[p].SavePickUp(p.ToString() + ArenaName);
+            arenaPickUps[p].SavePickUp(p.ToString() + saveID);
         }
 
-        arenaPlayer.SaveStats(ArenaName);
+        for (int r = 0; r < arenaRelics.Count; r++)
+        {
+            arenaRelics[r].SaveRelic(saveID);
+        }
 
-        checkpointed = true;
+        arenaPlayer.SaveStats(saveID);
 
-        SaveManager.UpdateSavedString("LastSavedLevel", SceneManager.GetActiveScene().name);
-        SaveManager.UpdateSavedInt("LastSavedLevel", SceneManager.GetActiveScene().buildIndex);
+        SaveManager.UpdateSavedString("LastSavedScene", thisScene.name);
+        SaveManager.UpdateSavedInt("LastSavedScene", thisScene.buildIndex);
+
+        SaveManager.SaveToFile();
     }
 
-    public void Load()
+    public void Load(bool loadArena=true, string checkpointOverride="")
     {
-        if (SaveManager.HasBool(ArenaName + "Checkpointed") && !clearCheckpoint)
+        if (!SaveManager.HasString("LastOverallCheckpointID")) return;
+
+        string loadID = (checkpointOverride == "") ? SaveManager.GetString("LastOverallCheckpointID") : checkpointOverride;
+        string arenaLoadID = "";
+
+        if (loadArena)
         {
-            checkpointed = true;
+            arenaLoadID = (loadID.Contains(ArenaName)) ? loadID : SaveManager.GetString(ArenaName + "LastCheckpointID");
+            checkpointsReached = SaveManager.GetInt(arenaLoadID + "CheckpointsReached");
 
             for (int e = 0; e < arenaEnemies.Count; e++)
             {
-                arenaEnemies[e].LoadEnemy(e.ToString() + ArenaName);
+                arenaEnemies[e].LoadEnemy(e.ToString() + arenaLoadID);
             }
 
             for (int p = 0; p < arenaPickUps.Count; p++)
             {
-                arenaPickUps[p].LoadPickUp(p.ToString() + ArenaName);
+                arenaPickUps[p].LoadPickUp(p.ToString() + arenaLoadID);
             }
-
         }
-        else checkpointed = false;
+        else checkpointsReached = 0;
 
-        for (int r = 0; r < arenaRelics.Count; r++)
+        string playerLoadID = (loadArena) ? loadID : checkpointAtStart;
+
+        if (playerLoadID != "")
         {
-            if (!(clearCheckpoint && arenaRelics[r].inArena)) arenaRelics[r].LoadRelic();
+            for (int r = 0; r < arenaRelics.Count; r++)
+            {
+                arenaRelics[r].LoadRelic(playerLoadID); // if (!(resetArena && arenaRelics[r].inArena)) IN CASE RELICS GET RESET WITH ARENA
+            }
+            arenaPlayer.LoadStats(playerLoadID, arenaLoadID);
         }
-        arenaPlayer.LoadStats(checkpointed, ArenaName);
     }
 
     private void OnDestroy()

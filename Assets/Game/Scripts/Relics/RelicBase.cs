@@ -35,7 +35,7 @@ public class RelicBase : MonoBehaviour
 
     public virtual void Awake()
     {
-        gameObject.SetActive(inArena);
+        if (user == null) gameObject.SetActive(inArena);
     }
 
     public virtual void SetUser(GameObject newUser)
@@ -92,24 +92,24 @@ public class RelicBase : MonoBehaviour
         lastEquippedTime = Time.time;
     }
 
-    public void SaveRelic()
+    public void SaveRelic(string saveID)
     {
-        string identifier = relicType.ToString() + "Relic";
-        SaveManager.UpdateSavedString(identifier + "User", userName);
-        SaveManager.UpdateSavedBool(identifier + "Collected", collected);
-        SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
-        SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
-        SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
+        saveID = saveID + relicType.ToString() + "Relic";
+        SaveManager.UpdateSavedString(saveID + "User", userName);
+        SaveManager.UpdateSavedBool(saveID + "Collected", collected);
+        SaveManager.UpdateSavedBool(saveID + "InUse", inUse);
+        SaveManager.UpdateSavedBool(saveID + "ReadyToUse", readyToUse);
+        SaveManager.UpdateSavedFloat(saveID + "CooldownTimer", cooldownTimer);
     }
 
-    public void LoadRelic()
+    public void LoadRelic(string loadID)
     {
-        string identifier = relicType.ToString() + "Relic";
-        userName = SaveManager.GetString(identifier + "User");
-        collected = SaveManager.GetBool(identifier + "Collected");
-        inUse = SaveManager.GetBool(identifier + "InUse");
-        readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
-        cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
+        loadID = loadID + relicType.ToString() + "Relic";
+        userName = SaveManager.GetString(loadID + "User");
+        collected = SaveManager.GetBool(loadID + "Collected");
+        inUse = SaveManager.GetBool(loadID + "InUse");
+        readyToUse = SaveManager.GetBool(loadID + "ReadyToUse");
+        cooldownTimer = SaveManager.GetFloat(loadID + "CooldownTimer");
 
         if (collected)
         {

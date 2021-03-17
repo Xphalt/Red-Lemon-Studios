@@ -11,11 +11,14 @@ public class Player : CharacterBase
     public Camera firstPersonCamera;
     private GUI_Manager userInterface;
 
+    PlayerRotation rotationScript;
+
     public float runSpeed;
     public float shootTargetDistance;
     public int maxAmmo;
 
     private bool switchingRelics = false;
+    private bool paused = false;
 
     internal Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
@@ -26,12 +29,12 @@ public class Player : CharacterBase
     {
         base.Awake();
         elementChanger = weapon.GetComponent<Elements>();
-        userInterface = canvas.GetComponent<GUI_Manager>();
-
+        rotationScript = GetComponent<PlayerRotation>();
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
 
+        userInterface = canvas.GetComponent<GUI_Manager>();
         userInterface.SetMaxHealth(maxHealth);
         userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
@@ -49,6 +52,8 @@ public class Player : CharacterBase
                 Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
             }
         }
+
+        userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
     }
 
     public override void Update()
@@ -70,36 +75,49 @@ public class Player : CharacterBase
 
     private void Inputs()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!paused)
         {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            UseRelic();
-        }
-
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            if (!switchingRelics)
+            if (Input.GetButtonDown("Jump"))
             {
-                elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-                userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
-                userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                Jump();
             }
-            else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                UseRelic();
+            }
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                if (!switchingRelics)
+                {
+                    elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                    userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
+                    userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                }
+                else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                switchingRelics = !switchingRelics;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            switchingRelics = !switchingRelics;
-        }
+        if (Input.GetKeyDown(KeyCode.P)) TogglePause();
+    }
+
+    private void TogglePause()
+    {
+        paused = !paused;
+
+        Time.timeScale = (paused) ? 0 : 1;
+        rotationScript.SetCursorLock(!paused, paused);
     }
 
     public override void FixedUpdate()
@@ -140,7 +158,7 @@ public class Player : CharacterBase
     {
         if (AmmoCheck())
         {
-            shooter.Shoot(elementChanger.m_CurElement, (Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
+            shooter.Shoot(elementChanger.m_CurElement, (firstPersonCamera.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
             SubstractAmmo(1, elementChanger.m_CurElement);
         }
     }
@@ -230,49 +248,58 @@ public class Player : CharacterBase
 
         //call function for new relic icon
     }
-    public void SaveStats(string arena)
+
+
+    #region Saving
+    public void SaveStats(string saveID)
     {
-        SaveManager.UpdateSavedVector3(arena + "PlayerPos", transform.position);
-        SaveManager.UpdateSavedFloat(arena + "PlayerYRot", transform.rotation.eulerAngles.y);
-        SaveManager.UpdateSavedFloat(arena + "PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerYRot", transform.localRotation.eulerAngles.y);
+        SaveManager.UpdateSavedFloat(saveID + "PlayerCameraXRot", firstPersonCamera.transform.localRotation.eulerAngles.x);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
-            SaveManager.UpdateSavedInt("Player" + ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
+            SaveManager.UpdateSavedInt(saveID + "Player" + ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
         }
 
-        SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
-        SaveManager.UpdateSavedInt("PlayerRelicIndex", relicIndex);
+        SaveManager.UpdateSavedElementType(saveID + "PlayerElement", elementChanger.m_CurElement);
+        SaveManager.UpdateSavedInt(saveID + "PlayerRelicIndex", relicIndex);
 
         SaveManager.UpdateSavedBool("PlayerSaved", true);
     }
 
-    public void LoadStats(bool loadTransform, string arena)
+    public void LoadStats(string loadID, string loadTransform="")
     {
         if (SaveManager.HasBool("PlayerSaved"))
         {
-            if (loadTransform)
+            if (loadTransform != "")
             {
-                transform.position = SaveManager.GetVector3(arena + "PlayerPos");
-                transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(arena + "PlayerYRot"), 0);
-                firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat(arena + "PlayerCameraYRot"), 0);
+                transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
+                transform.Rotate(0, SaveManager.GetFloat(loadTransform + "PlayerYRot"), 0, Space.Self);
+                firstPersonCamera.transform.Rotate(SaveManager.GetFloat(loadTransform + "PlayerCameraXRot"), 0, 0, Space.Self);
             }
 
-            Ammo[ElementTypes.Fire] = SaveManager.GetInt("Player" + ElementTypes.Fire.ToString() + "Ammo");
-            Ammo[ElementTypes.Water] = SaveManager.GetInt("Player" + ElementTypes.Water.ToString() + "Ammo");
-            Ammo[ElementTypes.Air] = SaveManager.GetInt("Player" + ElementTypes.Air.ToString() + "Ammo");
-            Ammo[ElementTypes.Earth] = SaveManager.GetInt("Player" + ElementTypes.Earth.ToString() + "Ammo");
+            Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
+            Ammo[ElementTypes.Water] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Water.ToString() + "Ammo");
+            Ammo[ElementTypes.Air] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Air.ToString() + "Ammo");
+            Ammo[ElementTypes.Earth] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Earth.ToString() + "Ammo");
             
-            elementChanger.SetElement(SaveManager.GetElementType("PlayerElement"));
+            elementChanger.SetElement(SaveManager.GetElementType(loadID + "PlayerElement"));
             userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
             userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
-            
-            relicIndex = Mathf.Min(SaveManager.GetInt("PlayerRelicIndex"), relicList.Count - 1);
+
+            relicIndex = Mathf.Clamp(SaveManager.GetInt(loadID + "PlayerRelicIndex"), 0, relicList.Count - 1);
             SetRelic(relicIndex);
 
             saved = true;
+            movementLocked = false;
         }
 
         else saved = false;
+
+        curHealth = maxHealth;
+        userInterface.UpdateHealth(curHealth);
+        killed = false;
     }
+    #endregion
 }

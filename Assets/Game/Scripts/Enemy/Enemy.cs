@@ -23,6 +23,10 @@ public class Enemy : CharacterBase
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
+    public GameObject ammoDrop;
+    private PickUpBase dropScript;
+    public float dropChance;
+
     protected Player playerScript;
 
     public float strongAgainstResist = 0.7f;
@@ -33,6 +37,8 @@ public class Enemy : CharacterBase
 
     protected EnemyStates movementState;
     public bool sentryMode = false;
+
+    public bool spawned;
 
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
@@ -52,6 +58,8 @@ public class Enemy : CharacterBase
         base.Awake();
         if (target == null) target = GameObject.FindGameObjectWithTag("Player");
         playerScript = target.GetComponent<Player>();
+        dropScript = ammoDrop.GetComponent<PickUpBase>();
+        dropChance = Mathf.Clamp(dropChance, 0, 1);
     }
 
     public override void Start()
@@ -83,10 +91,10 @@ public class Enemy : CharacterBase
     {
         base.FixedUpdate();
 
+        bool directionSet = false;
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
-            bool directionSet = false;
 
             switch (movementState)
             {
@@ -131,9 +139,13 @@ public class Enemy : CharacterBase
 
             if (!canFly) newVelocity.y = characterRigid.velocity.y;
 
-            if (newVelocity != Vector3.zero && !directionSet) transform.rotation = Quaternion.LookRotation(newVelocity);
-
             SetVelocity(newVelocity);
+        }
+
+        if (!directionSet)
+        {
+            Vector3 lookDirection = characterRigid.velocity - Vector3.up * characterRigid.velocity.y; //Set Y component to 0
+            if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
         }
     }
 
@@ -195,7 +207,11 @@ public class Enemy : CharacterBase
 
         base.TakeDamage(damage, damageType);
 
-        if (killed) gameObject.SetActive(false);
+        if (killed)
+        {
+            if (Random.value < dropChance) dropScript.Spawn();
+            gameObject.SetActive(false);
+        }
     }
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
@@ -214,22 +230,24 @@ public class Enemy : CharacterBase
         statusDuration = 0;
     }
 
-    public void SaveEnemy(string identifier)
+    public virtual void SaveEnemy(string saveID)
     {
-        identifier = "Enemy" + identifier;
+        saveID = "Enemy" + saveID;
 
-        SaveManager.UpdateSavedVector3(identifier + "Pos", transform.position);
-        SaveManager.UpdateSavedVector3(identifier + "Rot", transform.rotation.eulerAngles);
-        SaveManager.UpdateSavedBool(identifier + "Killed", killed);
+        SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
+        SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(saveID + "Killed", killed);
+        SaveManager.UpdateSavedFloat(saveID + "AttackTimer", attackTimer);
     }
 
-    public void LoadEnemy(string identifier)
+    public virtual void LoadEnemy(string loadID)
     {
-        identifier = "Enemy" + identifier;
+        loadID = "Enemy" + loadID;
 
-        transform.position = SaveManager.GetVector3(identifier + "Pos");
-        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(identifier + "Rot"));
-        killed = SaveManager.GetBool(identifier + "Killed");
+        transform.position = SaveManager.GetVector3(loadID + "Pos");
+        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
+        killed = SaveManager.GetBool(loadID + "Killed");
+        attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
 
         gameObject.SetActive(!killed);
     }

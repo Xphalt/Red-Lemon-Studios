@@ -54,7 +54,6 @@ public class RelicEarth : RelicBase
     public override void SetUser(GameObject newUser)
     {
         base.SetUser(newUser);
-
         pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript.team, userMomentumResidue, hostileMomentumResidue);
     }
 

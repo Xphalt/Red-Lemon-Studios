@@ -15,11 +15,11 @@ public class HealthPickup : PickUpBase
 {
     public float RestoreValue;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<Player>().AddHealth(RestoreValue);
+            other.gameObject.GetComponent<Player>().AddHealth(RestoreValue);
             Collect();
         }
     }

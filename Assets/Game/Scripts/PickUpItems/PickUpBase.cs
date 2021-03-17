@@ -5,6 +5,24 @@ using UnityEngine;
 public class PickUpBase : MonoBehaviour
 {
     protected bool collected = false;
+    public bool enemyDrop;
+    public bool spawned;
+
+    private void Start()
+    {
+        gameObject.SetActive(spawned);
+    }
+
+    public void Spawn()
+    {
+        spawned = true;
+        gameObject.SetActive(true);
+        if (enemyDrop)
+        {
+            transform.SetParent(null);
+            transform.localScale = Vector3.one;
+        }
+    }
 
     public void Collect()
     {
@@ -12,17 +30,21 @@ public class PickUpBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SavePickUp(string identifier)
+    public void SavePickUp(string saveID)
     {
-        identifier = "Pickup" + identifier;
-        SaveManager.AddNewBool(identifier + "Collected", collected);
+        saveID = "Pickup" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Collected", collected);
+        SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
     }
 
-    public void LoadPickUp(string identifier)
+    public void LoadPickUp(string loadID)
     {
-        identifier = "Pickup" + identifier;
-        collected = SaveManager.GetBool(identifier + "Collected");
+        loadID = "Pickup" + loadID;
+        collected = SaveManager.GetBool(loadID + "Collected");
+        spawned = SaveManager.GetBool(loadID + "Spawned");
 
-        gameObject.SetActive(!collected);
+        if (spawned) Spawn();
+
+        gameObject.SetActive(spawned && !collected);
     }
 }
