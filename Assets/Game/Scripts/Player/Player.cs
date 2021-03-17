@@ -165,7 +165,7 @@ public class Player : CharacterBase
 
     public override Ray GetForwardRay()
     {
-        return Camera.main.ViewportPointToRay(crosshairPos);
+        return firstPersonCamera.ViewportPointToRay(crosshairPos);
     }
 
     /*_______________________________________________________________________________________________________________

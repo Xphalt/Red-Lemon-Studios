@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static EnumHelper;
 using static SaveManager;
-public class ArenaManager : MonoBehaviour
+public class CheckpointManager : MonoBehaviour
 {
     Scene thisScene;
     public string ArenaName;
