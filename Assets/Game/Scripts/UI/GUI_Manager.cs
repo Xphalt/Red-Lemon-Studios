@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static EnumHelper;
 
@@ -21,9 +22,19 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
+    //Pause Panel variables
+    public string homeMenu;
+    public GameObject pausePanel;
+
+    private void Awake()
+    {
+        pausePanel.SetActive(false);
+    }
+
     private void Update()
     {
         HighlightSelectedAmmo();
+        Pause();
     }
 
     /*__________________________________________________________
@@ -108,4 +119,29 @@ public class GUI_Manager : MonoBehaviour
         fireImage.sprite = fireIcon;
         earthImage.sprite = earthIcon;
     }
+
+    /*__________________________________________________________
+    Pause menu code
+    ____________________________________________________________*/
+
+    private void Pause()
+    {
+        /* if input.key = esc
+         * pausePanel. set active = true
+         * pause game */
+
+    }
+
+    public void Play()
+    {
+        /* pausePanel. set active = false
+         * un-pause game */
+    }
+
+    public void MainMenu()
+    {
+        //maybe display a warning message about unsaved data being lose?
+        SceneManager.LoadScene(homeMenu);
+    }
+
 }
