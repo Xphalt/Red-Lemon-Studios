@@ -23,7 +23,6 @@ public class ArenaSpawnTrigger : MonoBehaviour
         if (bCanSpawnEnemies)
         {
             enemies.SetActive(true);
-            Debug.Log("Active");
 
             bCanSpawnEnemies = false;
         }
@@ -33,7 +32,6 @@ public class ArenaSpawnTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collision");
             bCanSpawnEnemies = true;
         }
     }
