@@ -145,12 +145,13 @@ public class Player : CharacterBase
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.CompareTag("Hazard"))
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments effectStats = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (effectStats.damageType == ElementTypes.Air)
-                Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+            if (effectStats.team != team)
+            {
+                if (effectStats.damageType == ElementTypes.Air)
+                    Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+            } 
         }
     }
 

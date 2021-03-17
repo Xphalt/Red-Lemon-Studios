@@ -189,13 +189,11 @@ public class Enemy : CharacterBase
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.tag == "Hazard")
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (hazardInfo.hasEffect && hazardInfo.damageType == weakAgainst && hazardInfo.team != team)
+            if (effectStats.hasEffect && effectStats.damageType == weakAgainst && effectStats.team != team)
             {
-                TriggerStatusEffect(hazardInfo);
+                TriggerStatusEffect(effectStats);
             }
         }
     }

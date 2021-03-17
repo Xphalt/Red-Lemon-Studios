@@ -97,14 +97,12 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Hazard"))
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (hazardInfo.team != team)
+            if (effectStats.team != team)
             {
-                TakeDamage(hazardInfo.damage);
-                hazardInfo.RegisterHit();
+                TakeDamage(effectStats.damage);
+                effectStats.RegisterHit();
             }
         }
 

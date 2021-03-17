@@ -172,6 +172,9 @@ public class CheckpointManager : MonoBehaviour
             }
             arenaPlayer.LoadStats(playerLoadID, arenaLoadID);
         }
+
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bullet);
+        foreach (GameObject sfx in GameObject.FindGameObjectsWithTag("SFX")) Destroy(sfx);
     }
 
     private void OnDestroy()
