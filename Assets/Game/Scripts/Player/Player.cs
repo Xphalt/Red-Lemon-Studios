@@ -244,7 +244,7 @@ public class Player : CharacterBase
     {
         base.ChangeRelic(cycleAmount);
         //Reset timer max in UI
-        userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
+        if (currentRelic) userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
 
         //call function for new relic icon
     }
