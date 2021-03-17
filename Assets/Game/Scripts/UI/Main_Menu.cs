@@ -16,6 +16,11 @@ public class Main_Menu : MonoBehaviour
         SceneManager.LoadScene(SceneName[SceneID]);
     }
 
+    public void Continue()
+    {
+
+    }
+
     public void ExitScene()
     {
         ExitGO.SetActive(true);

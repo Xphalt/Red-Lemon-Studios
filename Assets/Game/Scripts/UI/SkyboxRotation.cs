@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class SkyboxRotation : MonoBehaviour
 {
@@ -12,14 +11,7 @@ public class SkyboxRotation : MonoBehaviour
     private float colourChangeTimer = 0;
     private int index;
 
-    private void Start()
-    {
-        for (int i = 0; i < ColourList.Count; i++)
-        {
-            ColourList.Add(ColourList[i]);
-        }
-    }
-
+    //_____________________________________________________________________________________________________________________________
     void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", Time.time * cameraSpeed);
@@ -32,7 +24,7 @@ public class SkyboxRotation : MonoBehaviour
     {
         colourChangeTimer += Time.deltaTime;
 
-        float lerp = Mathf.PingPong(Time.time, colourDuration) / colourDuration;
+        float lerp = colourChangeTimer / colourDuration;
         RenderSettings.skybox.SetColor("_Tint", Color.Lerp(ColourList[index], ColourList[(index + 1) % ColourList.Count], lerp));
 
         if (colourChangeTimer >= colourDuration)
