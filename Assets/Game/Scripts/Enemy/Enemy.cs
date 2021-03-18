@@ -23,6 +23,10 @@ public class Enemy : CharacterBase
     protected ElementTypes weakAgainst;
     protected ElementTypes strongAgainst;
 
+    public GameObject ammoDrop;
+    private PickUpBase dropScript;
+    public float dropChance;
+
     protected Player playerScript;
 
     public float strongAgainstResist = 0.7f;
@@ -34,11 +38,12 @@ public class Enemy : CharacterBase
     protected EnemyStates movementState;
     public bool sentryMode = false;
 
+    public bool spawned;
+
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
-    public bool canFly = false;
 
     protected float statusDuration;
     protected float statusTimer;
@@ -48,13 +53,19 @@ public class Enemy : CharacterBase
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
+    public override void Awake()
+    {
+        base.Awake();
+        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
+        playerScript = target.GetComponent<Player>();
+        dropScript = ammoDrop.GetComponent<PickUpBase>();
+        dropChance = Mathf.Clamp(dropChance, 0, 1);
+    }
+
     public override void Start()
     {
         base.Start();
         team = Teams.Enemy;
-
-        if (target == null) target = GameObject.FindGameObjectWithTag("Player");
-        playerScript = target.GetComponent<Player>();
 
         if (sentryMode) movementState = EnemyStates.Idle;
         else characterRigid.velocity = transform.forward * chaseSpeed;
@@ -80,6 +91,7 @@ public class Enemy : CharacterBase
     {
         base.FixedUpdate();
 
+        bool directionSet = false;
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
@@ -92,6 +104,15 @@ public class Enemy : CharacterBase
 
                 case EnemyStates.Fleeing:
                     newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
+                    if (isGrounded && !canFly)
+                    {
+                        if (CheckObstruction(newVelocity))
+                        {
+                            newVelocity = Vector3.zero;
+                            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                            directionSet = true;
+                        }
+                    }
                     break;
 
                 case EnemyStates.Patrolling:
@@ -101,11 +122,8 @@ public class Enemy : CharacterBase
                     patrolDirection.Normalize();
 
                     if (patrolDirection == Vector3.zero) patrolDirection = transform.forward;
-                    bool turn = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
-                    if (!turn && isGrounded && !canFly)
-                        turn = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
 
-                    if (turn)
+                    if (CheckObstruction(patrolDirection))
                     {
                         newVelocity = Vector3.Cross(patrolDirection, Vector3.up).normalized * patrolSpeed;
                         if (Random.Range(0, 2) == 1) newVelocity *= -1;
@@ -121,10 +139,23 @@ public class Enemy : CharacterBase
 
             if (!canFly) newVelocity.y = characterRigid.velocity.y;
 
-            if (newVelocity != Vector3.zero) transform.rotation = Quaternion.LookRotation(newVelocity);
-
             SetVelocity(newVelocity);
         }
+
+        if (!directionSet)
+        {
+            Vector3 lookDirection = characterRigid.velocity - Vector3.up * characterRigid.velocity.y; //Set Y component to 0
+            if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
+        }
+    }
+
+    private bool CheckObstruction(Vector3 patrolDirection)
+    {
+        bool obstruction = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
+        if (!obstruction && isGrounded && !canFly)
+            obstruction = !Physics.Raycast(transform.position + patrolDirection * wallDetectionRadius, Vector3.down, floorDistance); // Fire enemy is spesh but oh well
+        
+        return obstruction;
     }
 
     public bool CanSeePlayer()
@@ -158,13 +189,11 @@ public class Enemy : CharacterBase
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.tag == "Hazard")
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (hazardInfo.hasEffect && hazardInfo.damageType == weakAgainst && hazardInfo.team != team)
+            if (effectStats.hasEffect && effectStats.damageType == weakAgainst && effectStats.team != team)
             {
-                TriggerStatusEffect(hazardInfo);
+                TriggerStatusEffect(effectStats);
             }
         }
     }
@@ -176,8 +205,9 @@ public class Enemy : CharacterBase
 
         base.TakeDamage(damage, damageType);
 
-        if (curHealth <= 0)
+        if (killed)
         {
+            if (Random.value < dropChance) dropScript.Spawn();
             gameObject.SetActive(false);
         }
     }
@@ -196,5 +226,27 @@ public class Enemy : CharacterBase
         statusTimer = 0;
         statusMagnitude = 0;
         statusDuration = 0;
+    }
+
+    public virtual void SaveEnemy(string saveID)
+    {
+        saveID = "Enemy" + saveID;
+
+        SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
+        SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(saveID + "Killed", killed);
+        SaveManager.UpdateSavedFloat(saveID + "AttackTimer", attackTimer);
+    }
+
+    public virtual void LoadEnemy(string loadID)
+    {
+        loadID = "Enemy" + loadID;
+
+        transform.position = SaveManager.GetVector3(loadID + "Pos");
+        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
+        killed = SaveManager.GetBool(loadID + "Killed");
+        attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
+
+        gameObject.SetActive(!killed);
     }
 }

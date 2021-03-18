@@ -31,6 +31,7 @@ public class SFXScript : MonoBehaviour
             AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
             newSFX.PlayOneShot(SFXDict[sfx]);
             newSFX.loop = loop;
+            newSFX.tag = "SFX";
             if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
         }
     }
@@ -43,6 +44,7 @@ public class SFXScript : MonoBehaviour
             newSFX.PlayOneShot(SFXDict[sfx]);
             newSFX.name = instanceName;
             newSFX.loop = loop;
+            newSFX.tag = "SFX";
             if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
         }
     }
@@ -54,6 +56,7 @@ public class SFXScript : MonoBehaviour
             AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
             newSFX.PlayOneShot(SFXDict[sfx]);
             newSFX.loop = loop;
+            newSFX.tag = "SFX";
             if (!loop) Destroy(newSFX.gameObject, playTime);
         }
     }

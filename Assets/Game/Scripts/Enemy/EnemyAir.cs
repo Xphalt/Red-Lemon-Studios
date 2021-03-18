@@ -72,16 +72,9 @@ public class EnemyAir : Enemy
 
     public override bool Attack()
     {
-        if (base.Attack())
+        if (base.Attack() && Physics.Raycast(transform.position, transform.forward))
         {
             shooter.Shoot(elementType, target.transform.position);
-
-            //playerScript.TakeDamage(snipeDamage);
-
-            //if (!playerScript.movementLocked)
-            //{
-            //    playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
-            //}
             return true;
         }
         return false;

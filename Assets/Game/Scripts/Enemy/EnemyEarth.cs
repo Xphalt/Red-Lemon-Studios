@@ -25,8 +25,7 @@ public class EnemyEarth : Enemy
 
         if (attackTimer > rollDuration)
         {
-            rolling = false;
-            impactDamage = 0;
+            EndRoll();
         }
 
         if (!rolling)
@@ -50,10 +49,44 @@ public class EnemyEarth : Enemy
         return false;
     }
 
+    private void EndRoll()
+    {
+        rolling = false;
+        impactDamage = 0;
+        EndShift();
+    }
+
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
 
         Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), 1, true);
+    }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
+        {
+            if (collisionCharacter.team != team) EndRoll();
+        }
+    }
+
+    public override void SaveEnemy(string saveID)
+    {
+        base.SaveEnemy(saveID);
+
+        saveID = "Enemy" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Rolling", rolling);
+
+        if (!rolling && shifting) EndShift();
+    }
+
+    public override void LoadEnemy(string loadID)
+    {
+        base.LoadEnemy(loadID);
+
+        loadID = "Enemy" + loadID;
+        rolling = SaveManager.GetBool(loadID + "Rolling");
     }
 }

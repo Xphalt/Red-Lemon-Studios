@@ -25,19 +25,10 @@ public class Elements : MonoBehaviour
     private Dictionary<ElementTypes, Material> WandColourDictionary = new Dictionary<ElementTypes, Material>();
     private MeshRenderer myRenderer;
 
-    private GameObject player;
-
-    private UIManager UIScript;
-    private Player playerScript;
-
     public ElementTypes m_CurElement = (ElementTypes)0;
 
-    private void Start()
+    private void Awake()
     {
-        UIScript = canvas.GetComponent<UIManager>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<Player>();
-
         for (int index = 0; index < WandTypes.Count; index++)
         {
             WandColourDictionary.Add(WandTypes[index], WandMaterials[index]);
@@ -60,14 +51,13 @@ public class Elements : MonoBehaviour
             m_CurElement -= (int)ElementTypes.ElementTypesSize * Mathf.FloorToInt((float)m_CurElement / (float)ElementTypes.ElementTypesSize);
         }
 
-        //UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
         SetElement(m_CurElement);
     }
 
     public void SetElement(ElementTypes newElement)
     {
         m_CurElement = newElement;
-        //UIScript.UpdateElementText(m_CurElement, playerScript.Ammo[m_CurElement], true);
+
         myRenderer.material = WandColourDictionary[m_CurElement];
     }
 }

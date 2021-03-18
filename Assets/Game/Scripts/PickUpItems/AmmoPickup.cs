@@ -12,17 +12,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
-public class AmmoPickup : MonoBehaviour
+public class AmmoPickup : PickUpBase
 {
     public int AmmoValue;
     public ElementTypes Type;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<Player>().AddAmmo(AmmoValue, Type);
-            gameObject.SetActive(false);
+            other.gameObject.GetComponent<Player>().AddAmmo(AmmoValue, Type);
+            Collect();
         }
     }
 }

@@ -19,6 +19,7 @@ public class RelicWater : RelicBase
     void Start()
     {
         relicType = ElementTypes.Water;
+        defaultSpeedMultiplier = speedMultiplier;
     }
 
     public override void Update()

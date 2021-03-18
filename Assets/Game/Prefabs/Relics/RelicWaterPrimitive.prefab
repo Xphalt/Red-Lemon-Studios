@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 695673271457619081}
   - component: {fileID: 695673271457619080}
   m_Layer: 9
-  m_Name: RelicWater
+  m_Name: RelicWaterPrimitive
   m_TagString: Relic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695673271457619082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.58, y: -6.414795, z: -42.49707}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicType: 1
+  inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
@@ -122,3 +123,4 @@ MonoBehaviour:
   ammoCost: 10
   healDuration: 3
   healTickInterval: 0.5
+  inUseSpeedMultiplier: 1
