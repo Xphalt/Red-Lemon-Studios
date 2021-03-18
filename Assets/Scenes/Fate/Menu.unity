@@ -10464,10 +10464,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2007850836}
         m_TargetAssemblyTypeName: Main_Menu, Assembly-CSharp
-        m_MethodName: SceneSelect
-        m_Mode: 3
+        m_MethodName: StartGame
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16027,15 +16027,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2007850836}
         m_TargetAssemblyTypeName: Main_Menu, Assembly-CSharp
-        m_MethodName: SceneSelect
-        m_Mode: 3
+        m_MethodName: StartGame
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1878981184
 MonoBehaviour:
@@ -16185,11 +16185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f7a14c1e5fccc4ebb42ea40d748b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName:
-  - Scenes/Daniel/Vertical_Slice
-  ButtonGOs:
-  - {fileID: 1878981181}
+  StartGO: {fileID: 1878981181}
   ExitGO: {fileID: 440399057}
+  FirstLevel: Scenes/Daniel/Vertical_Slice
 --- !u!224 &2007850837
 RectTransform:
   m_ObjectHideFlags: 0

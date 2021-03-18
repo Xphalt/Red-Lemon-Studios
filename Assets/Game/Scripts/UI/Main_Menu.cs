@@ -5,20 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
+    public GameObject StartGO, ExitGO;
+    public string FirstLevel;
 
-    public List<string> SceneName = new List<string>();
-    public List<GameObject> ButtonGOs = new List<GameObject>();
-    public GameObject ExitGO;
-
-    public void SceneSelect(int SceneID)
+    private void Awake()
     {
-        ButtonGOs[SceneID].SetActive(true);
-        SceneManager.LoadScene(SceneName[SceneID]);
+        SaveManager.LoadFromFile();
     }
 
-    public void Continue()
+    public void StartGame(bool newGame)
     {
-
+        if (newGame || !(SaveManager.HasString("LastOverallCheckpointID")))
+        {
+            SaveManager.ClearSaves();
+            SceneManager.LoadScene(FirstLevel);
+        }
+        else
+            SceneManager.LoadScene(SaveManager.GetInt("LastSavedScene"));
     }
 
     public void ExitScene()

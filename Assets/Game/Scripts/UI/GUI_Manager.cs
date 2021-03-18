@@ -130,8 +130,10 @@ public class GUI_Manager : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
         //maybe display a warning message about unsaved data being lose?
         SceneManager.LoadScene(homeMenu);
+
     }
 
     /*__________________________________________________________
