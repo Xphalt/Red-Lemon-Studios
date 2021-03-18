@@ -66,8 +66,7 @@ public class EnemyEarth : Enemy
     public override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        CharacterBase collisionCharacter;
-        if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
         {
             if (collisionCharacter.team != team) EndRoll();
         }
