@@ -22,9 +22,9 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    //Pause Panel variables
+    //Pause Menu and Toolbar Menu variables
     public string homeMenu;
-    public GameObject pausePanel;
+    public GameObject pausePanel, toolbarPanel;
 
     private void Awake()
     {
@@ -35,7 +35,8 @@ public class GUI_Manager : MonoBehaviour
     {
         HighlightSelectedAmmo();
         Pause();
-        ShowToolBar();
+        ShowPauseMenu();
+        ShowToolBarMenu();
     }
 
     /*__________________________________________________________
@@ -149,7 +150,19 @@ public class GUI_Manager : MonoBehaviour
     Tool bar view menu code
     ____________________________________________________________*/
 
-    private void ShowToolBar()
+    private void ShowToolBarMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            toolbarPanel.SetActive(true);
+            //pause game
+        }
+    }
+
+    /*__________________________________________________________
+    Pause menu code
+    ____________________________________________________________*/
+    private void ShowPauseMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
