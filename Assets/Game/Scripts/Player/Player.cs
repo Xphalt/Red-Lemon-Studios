@@ -53,7 +53,7 @@ public class Player : CharacterBase
             }
         }
 
-        userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
+        userInterface.HighlightSelectedAmmo();
     }
 
     public override void Update()
@@ -97,7 +97,7 @@ public class Player : CharacterBase
                 if (!switchingRelics)
                 {
                     elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-                    userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
+                    userInterface.HighlightSelectedAmmo();
                     userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
                 }
                 else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
@@ -109,15 +109,29 @@ public class Player : CharacterBase
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P)) TogglePause();
+        if (Input.GetKeyDown(KeyCode.P)) TogglePause(false);
+        if (Input.GetKeyDown(KeyCode.Q)) TogglePause(true);
     }
 
-    private void TogglePause()
+    public void TogglePause(bool toolMenu)
     {
-        paused = !paused;
+        bool checkUIOverlap = false;
 
-        Time.timeScale = (paused) ? 0 : 1;
-        rotationScript.SetCursorLock(!paused, paused);
+        if (toolMenu)
+        {
+            checkUIOverlap = userInterface.ShowToolBarMenu();
+        }
+        else
+            checkUIOverlap = userInterface.PausePlay();
+
+        //Prevents the player opening both panels at the same time.
+        if (checkUIOverlap)
+        {
+            paused = !paused;
+
+            Time.timeScale = (paused) ? 0 : 1;
+            rotationScript.SetCursorLock(!paused, paused);
+        }
     }
 
     public override void FixedUpdate()
@@ -286,7 +300,7 @@ public class Player : CharacterBase
             Ammo[ElementTypes.Earth] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Earth.ToString() + "Ammo");
             
             elementChanger.SetElement(SaveManager.GetElementType(loadID + "PlayerElement"));
-            userInterface.HighlightSelectedAmmo(elementChanger.m_CurElement);
+            userInterface.HighlightSelectedAmmo();
             userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
 
             relicIndex = Mathf.Clamp(SaveManager.GetInt(loadID + "PlayerRelicIndex"), 0, relicList.Count - 1);

@@ -31,14 +31,6 @@ public class GUI_Manager : MonoBehaviour
         pausePanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        HighlightSelectedAmmo();
-        Pause();
-        ShowPauseMenu();
-        ShowToolBarMenu();
-    }
-
     /*__________________________________________________________
     Health Bar code
     ____________________________________________________________*/
@@ -88,7 +80,7 @@ public class GUI_Manager : MonoBehaviour
     Ammo Selection panel code
     ____________________________________________________________*/
 
-    private void HighlightSelectedAmmo()
+    public void HighlightSelectedAmmo()
     {
         ResetElementalImages();
         switch (player.elementChanger.m_CurElement)
@@ -126,18 +118,14 @@ public class GUI_Manager : MonoBehaviour
     Pause menu code
     ____________________________________________________________*/
 
-    private void Pause()
+    public bool PausePlay()
     {
-        /* if input.key = esc
-         * pausePanel. set active = true
-         * pause game */
-
-    }
-
-    public void Play()
-    {
-        /* pausePanel. set active = false
-         * un-pause game */
+        if (!toolbarPanel.activeSelf)
+        {
+            pausePanel.SetActive(!pausePanel.activeSelf);
+            return true;
+        }
+        return false;
     }
 
     public void MainMenu()
@@ -150,25 +138,13 @@ public class GUI_Manager : MonoBehaviour
     Tool bar view menu code
     ____________________________________________________________*/
 
-    private void ShowToolBarMenu()
+    public bool ShowToolBarMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!pausePanel.activeSelf)
         {
-            toolbarPanel.SetActive(true);
-            //pause game
+            toolbarPanel.SetActive(!toolbarPanel.activeSelf);
+            return true;
         }
+        return false;
     }
-
-    /*__________________________________________________________
-    Pause menu code
-    ____________________________________________________________*/
-    private void ShowPauseMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pausePanel.SetActive(true);
-            //pause game
-        }
-    }
-
 }
