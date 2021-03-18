@@ -35,6 +35,7 @@ public class GUI_Manager : MonoBehaviour
     {
         HighlightSelectedAmmo();
         Pause();
+        ShowToolBar();
     }
 
     /*__________________________________________________________
@@ -142,6 +143,19 @@ public class GUI_Manager : MonoBehaviour
     {
         //maybe display a warning message about unsaved data being lose?
         SceneManager.LoadScene(homeMenu);
+    }
+
+    /*__________________________________________________________
+    Tool bar view menu code
+    ____________________________________________________________*/
+
+    private void ShowToolBar()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel.SetActive(true);
+            //pause game
+        }
     }
 
 }
