@@ -14,6 +14,7 @@ public class ArenaManager : MonoBehaviour
     #endregion
 
     #region UnityCallbacks
+    //enemies in arenas are now moved to their spawn positions________________________________________
     private void Start()
     {
         for (int i = 0; i < enemyPos.Count; i++)
@@ -27,9 +28,23 @@ public class ArenaManager : MonoBehaviour
 
     private void Update()
     {
-        if (!arenaSpawnTrigger.bCanSpawnEnemies)
+        //this code is an eyesore but it works for now_______________________________________________
+        if (!arenaSpawnTrigger.bCanSpawnEnemies && !arenaSpawnTrigger.bArenaComplete)
         {
-            
+            if (!arenaSpawnTrigger.enemies[0].activeSelf)
+            {
+                if (!arenaSpawnTrigger.enemies[1].activeSelf)
+                {
+                    if (!arenaSpawnTrigger.enemies[2].activeSelf)
+                    {
+                        if (!arenaSpawnTrigger.enemies[3].activeSelf)
+                        {
+                            arenaSpawnTrigger.bArenaComplete = true;
+                            Debug.Log("TEst");
+                        }
+                    }
+                }
+            }
         }
     }
     #endregion
