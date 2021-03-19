@@ -29,7 +29,8 @@ public class GUI_Manager : MonoBehaviour
     //Toolbar Menu and Toolbar Menu
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
     public Text RelicNameHolder, RelicInfoHolder;
-    //public List<Button> RelicButtons = new List<Button>();
+    public Image ImageHolder;
+    public List<Image> relicImage = new List<Image>();
 
     private void Start()
     {
@@ -155,25 +156,30 @@ public class GUI_Manager : MonoBehaviour
         return false;
     }
 
+    public void SetRelicInfo(int relicType)
+    {
+        RelicNameHolder.text = ((ElementTypes)relicType).ToString();
+        RelicInfoHolder.text = RelicDescription[relicType];
 
-    public void SetEarthInfo()
-    {
-        RelicNameHolder.text = "Earth";
-        RelicInfoHolder.text = RelicDescription[0];
+
+        switch (relicType)
+        {
+            case 0:
+                ImageHolder.sprite = relicImage[0].sprite;
+                break;     
+            case 1:        
+                ImageHolder.sprite = relicImage[1].sprite;
+                break;     
+            case 2:        
+                ImageHolder.sprite = relicImage[2].sprite;
+                break;     
+            case 3:        
+                ImageHolder.sprite = relicImage[3].sprite;
+                break;
+            default:
+                break;
+        }
+
     }
-    public void SetFireInfo()
-    {
-        RelicNameHolder.text = "Fire";
-        RelicInfoHolder.text = RelicDescription[1];
-    }
-    public void SetWaterInfo()
-    {
-        RelicNameHolder.text = "Water";
-        RelicInfoHolder.text = RelicDescription[2];
-    }
-    public void SetAirInfo()
-    {
-        RelicNameHolder.text = "Air";
-        RelicInfoHolder.text = RelicDescription[3];
-    }
+
 }

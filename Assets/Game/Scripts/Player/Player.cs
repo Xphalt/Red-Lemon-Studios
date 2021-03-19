@@ -118,9 +118,7 @@ public class Player : CharacterBase
         bool checkUIOverlap = false;
 
         if (toolMenu)
-        {
             checkUIOverlap = userInterface.ShowToolBarMenu();
-        }
         else
             checkUIOverlap = userInterface.PausePlay();
 
