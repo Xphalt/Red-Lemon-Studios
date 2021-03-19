@@ -22,11 +22,16 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    //Pause Menu and Toolbar Menu variables
+    //Pause Menu variables
     public string homeMenu;
     public GameObject pausePanel, toolbarPanel;
 
-    private void Awake()
+    //Toolbar Menu and Toolbar Menu
+    [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
+    public Text RelicNameHolder, RelicInfoHolder;
+    //public List<Button> RelicButtons = new List<Button>();
+
+    private void Start()
     {
         pausePanel.SetActive(false);
     }
@@ -67,13 +72,13 @@ public class GUI_Manager : MonoBehaviour
 
     public void SetMaxAmmo(float maxAmmo)
     {
-         ammoSlider.maxValue = maxAmmo;
-         ammoSlider.value = maxAmmo;
+        ammoSlider.maxValue = maxAmmo;
+        ammoSlider.value = maxAmmo;
     }
 
     public void UpdateAmmoCount(float curAmmoCount)
     {
-         ammoSlider.value = curAmmoCount;
+        ammoSlider.value = curAmmoCount;
     }
 
     /*__________________________________________________________
@@ -148,5 +153,27 @@ public class GUI_Manager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+
+    public void SetEarthInfo()
+    {
+        RelicNameHolder.text = "Earth";
+        RelicInfoHolder.text = RelicDescription[0];
+    }
+    public void SetFireInfo()
+    {
+        RelicNameHolder.text = "Fire";
+        RelicInfoHolder.text = RelicDescription[1];
+    }
+    public void SetWaterInfo()
+    {
+        RelicNameHolder.text = "Water";
+        RelicInfoHolder.text = RelicDescription[2];
+    }
+    public void SetAirInfo()
+    {
+        RelicNameHolder.text = "Air";
+        RelicInfoHolder.text = RelicDescription[3];
     }
 }

@@ -130,6 +130,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1794302709}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetEarthInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 638624106905636070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 893358766156092156, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -137,6 +165,50 @@ PrefabInstance:
     - target: {fileID: 893358766156092156, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536326571661136621, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 451.6316
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536326571661136621, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 180.7326
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536326571661136621, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.3997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536326571661136621, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -140.70004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1794302709}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetAirInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150190880586007343, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
@@ -194,6 +266,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelBasics
       objectReference: {fileID: 0}
+    - target: {fileID: 5573781693561702630, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1794302709}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetFireInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245435477327906445, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1794302709}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetWaterInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786394889625925105, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7842347551125480904, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -201,6 +333,29 @@ PrefabInstance:
     - target: {fileID: 7842347551125480904, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954393327919436902, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: RelicDescription.Array.data[0]
+      value: "Active effect: Launch jump item \u2013 raising pillar from below launches
+        player up in the air.\r\n\nPassive effects while equipped:\r\n\uF0A7\t+Give
+        damage reduction\r\n\uF0A7\t-Player has decreased movement speed\r\n\n\uF0A7(Extra
+        note: If the pillar hits an enemy, they\u2019ll be damaged and launched too.
+        Leaving them unable to attack or damage the player in the air.)\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954393327919436902, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: RelicDescription.Array.data[1]
+      value: "Active effect: Dashing item \u2013 player dashes forward\t\r\n\nPassive
+        effects while equipped:\r\n\uF0A7\t+Damage continually increases with enemy
+        hits, which builds heat. When heat reaches threshold, damage can no longer
+        increase.\r\n\uF0A7\t-If shot is missed, reset heat, and damage the player
+        slightly.\r\n\n\uF0A7(Extra note: Dashing into enemies damages and knocks
+        them away.)\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954393327919436902, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: RelicDescription.Array.data[2]
+      value: "Active effect: Healing item \u2013 player heals over time\t\r\n\nPassive
+        effects while equipped:\r\n\uF0A7\t+Increase move-speed\r\n\uF0A7\t-Player
+        receives more damage\r\n\n(Extra note: costs water ammo, slows player a little.)\r"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
@@ -445,3 +600,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1794302709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7954393327919436902, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+  m_PrefabInstance: {fileID: 125686953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b0ed45ae239214097fa5bfee6e138d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

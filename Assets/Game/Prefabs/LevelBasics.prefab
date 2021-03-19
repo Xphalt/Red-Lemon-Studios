@@ -400,13 +400,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToolBar_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3181401213593222380, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+--- !u!114 &5573781693561702630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5263604104102423808, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+  m_PrefabInstance: {fileID: 312464575356347878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2913973460855838986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3181401213593222380, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
   m_PrefabInstance: {fileID: 312464575356347878}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5990225130782051213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+  m_PrefabInstance: {fileID: 312464575356347878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1054228446316127967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,6 +490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8e36c53c4572841b47b444387d5bf3, type: 3}
+--- !u!4 &506329537638824532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 695673271457619083, guid: 4e8e36c53c4572841b47b444387d5bf3, type: 3}
+  m_PrefabInstance: {fileID: 1054228446316127967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &506329537638824535 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 695673271457619080, guid: 4e8e36c53c4572841b47b444387d5bf3, type: 3}
@@ -475,11 +506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcf0a4318f76a042bc5c8bffe6f5f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &506329537638824532 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 695673271457619083, guid: 4e8e36c53c4572841b47b444387d5bf3, type: 3}
-  m_PrefabInstance: {fileID: 1054228446316127967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2988791560955096481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -577,11 +603,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
---- !u!1 &5524924018667674298 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7338099962747303707, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
-  m_PrefabInstance: {fileID: 2988791560955096481}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5524924018667674289 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
@@ -601,6 +622,11 @@ GameObject:
 --- !u!4 &5524924018667674292 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7338099962747303701, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+  m_PrefabInstance: {fileID: 2988791560955096481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5524924018667674298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7338099962747303707, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
   m_PrefabInstance: {fileID: 2988791560955096481}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3104711081832152880
@@ -733,14 +759,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
---- !u!1 &1729546069 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3126296109035454999, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
-  m_PrefabInstance: {fileID: 3126296108581012802}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1729546071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3126296109035454997, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+  m_PrefabInstance: {fileID: 3126296108581012802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1729546069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3126296109035454999, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
   m_PrefabInstance: {fileID: 3126296108581012802}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3850521865209301308
@@ -1012,6 +1038,69 @@ PrefabInstance:
       propertyPath: toolbarPanel
       value: 
       objectReference: {fileID: 2913973460855838986}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicInfoHolder
+      value: 
+      objectReference: {fileID: 5990225130782051213}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicNameHolder
+      value: 
+      objectReference: {fileID: 5573781693561702630}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicName.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicName.Array.data[0]
+      value: Earth
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicName.Array.data[1]
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicName.Array.data[2]
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicName.Array.data[3]
+      value: Air
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicDescription.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicDescription.Array.data[0]
+      value: "Active effect: Launch jump item \u2013 raising pillar from below launches
+        player up in the air.\r\n\nPassive effects while equipped:\r\n\uF0A7\t+Give
+        damage reduction\r\n\uF0A7\t-Player has decreased movement speed\r\n\n\n\uF0A7(Extra
+        note: If the pillar hits an enemy, they\u2019ll be damaged and launched too.
+        Leaving them unable to attack or damage the player in the air.)\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicDescription.Array.data[1]
+      value: "Active effect: Dashing item \u2013 player dashes forward\t\r\n\nPassive
+        effects while equipped:\r\n\uF0A7\t+Damage continually increases with enemy
+        hits, which builds heat. When heat reaches threshold, damage can no longer
+        increase.\r\n\uF0A7\t-If shot is missed, reset heat, and damage the player
+        slightly.\r\n\n\uF0A7(Extra note: Dashing into enemies damages and knocks
+        them away.)\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicDescription.Array.data[2]
+      value: "Active effect: Healing item \u2013 player heals over time\t\r\n\nPassive
+        effects while equipped:\r\n\uF0A7\t+Increase move-speed\r\n\uF0A7\t-Player
+        receives more damage\r\n\n(Extra note: costs water ammo, slows player a little.)\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: RelicDescription.Array.data[3]
+      value: "Active effect: Pull item \u2013 pulls player to a point (akin to grapple
+        hook).\r\n\uF0A7\t\nPassive effects while equipped:\r\n\uF0A7\t+Allows player
+        to jump again in the air (double jump)\r\n\uF0A7\t-Take more knock-back\r\n\n(Extra
+        note: Colliding with enemies whilst the item is being used, makes the player
+        bounce up, stopping the item\u2019s pull.)\r"
+      objectReference: {fileID: 0}
     - target: {fileID: 2756816532866944667, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1100,6 +1189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4131798668767183178, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.199951
+      objectReference: {fileID: 0}
     - target: {fileID: 6883552223226430783, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1118,6 +1211,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+--- !u!224 &5464936609915677979 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2756816532866944667, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+  m_PrefabInstance: {fileID: 7896346042696229760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5464936609915677983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2756816532866944671, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+  m_PrefabInstance: {fileID: 7896346042696229760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7954393327919436902 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
@@ -1129,13 +1232,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b0ed45ae239214097fa5bfee6e138d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &5464936609915677979 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2756816532866944667, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
-  m_PrefabInstance: {fileID: 7896346042696229760}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5464936609915677983 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2756816532866944671, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
-  m_PrefabInstance: {fileID: 7896346042696229760}
-  m_PrefabAsset: {fileID: 0}
