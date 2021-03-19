@@ -27,13 +27,13 @@ public class CheckpointManager : MonoBehaviour
     {
         thisScene = SceneManager.GetActiveScene();
         if (ArenaName == "") ArenaName = thisScene.name;
-        
-        SaveManager.LoadFromFile();
 
-        checkpointAtStart = GetCheckpointAtStart();
+        if (!SaveManager.loaded) SaveManager.LoadFromFile();
         
         if (!newGame) newGame = !SaveManager.HasString("LastOverallCheckpointID");
         if (!resetArena) resetArena = !SaveManager.HasString(ArenaName + "LastCheckpointID");
+        
+        if (!newGame) checkpointAtStart = GetCheckpointAtStart();
 
         foreach (RelicBase arenarelic in arenaRelics) arenarelic.Awake();
 

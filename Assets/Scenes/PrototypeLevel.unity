@@ -1981,6 +1981,10 @@ PrefabInstance:
       propertyPath: arenaPickUps.Array.data[4]
       value: 
       objectReference: {fileID: 689202438}
+    - target: {fileID: 1461031180394068681, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.000244
+      objectReference: {fileID: 0}
     - target: {fileID: 2265825113294858872, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.3
@@ -2076,10 +2080,6 @@ PrefabInstance:
     - target: {fileID: 4769180668670683522, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_Name
       value: LevelBasics
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524924017126632859, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 5943
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674289, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: canvas

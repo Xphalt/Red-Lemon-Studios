@@ -31,6 +31,8 @@ public static class SaveManager
 
     private static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
 
+    public static bool loaded = false;
+
     public static void SaveToFile(string path="")
     {
         if (path == "") path = defaultSavePath;
@@ -99,7 +101,7 @@ public static class SaveManager
             }
 
             LoadDictsFromLists();
-
+            loaded = true;
             return true;
         }
 
@@ -323,14 +325,14 @@ public static class SaveManager
     public static void RemoveElementType(string key) { if (HasElementType(key)) elementDict.Remove(key); }
     #endregion
     #region CheckForData
-    public static bool HasInt(string key) { return saveData.intKeys.Contains(key); }
-    public static bool HasFloat(string key) { return saveData.floatKeys.Contains(key); }
-    public static bool HasBool(string key) { return saveData.boolKeys.Contains(key); }
-    public static bool HasString(string key) { return saveData.stringKeys.Contains(key); }
-    public static bool HasVector2(string key) { return saveData.vector2Keys.Contains(key); }
-    public static bool HasVector3(string key) { return saveData.vector3Keys.Contains(key); }
-    public static bool HasStringList(string key) { return saveData.stringListKeys.Contains(key); }
-    public static bool HasElementType(string key) { return saveData.elementKeys.Contains(key); }
+    public static bool HasInt(string key) { return intDict.ContainsKey(key); }
+    public static bool HasFloat(string key) { return floatDict.ContainsKey(key); }
+    public static bool HasBool(string key) { return boolDict.ContainsKey(key); }
+    public static bool HasString(string key) { return stringDict.ContainsKey(key); }
+    public static bool HasVector2(string key) { return vector2Dict.ContainsKey(key); }
+    public static bool HasVector3(string key) { return vector3Dict.ContainsKey(key); }
+    public static bool HasStringList(string key) { return stringListDict.ContainsKey(key); }
+    public static bool HasElementType(string key) { return elementDict.ContainsKey(key); }
     #endregion
 
     public static void SaveDictsToLists()
@@ -491,6 +493,30 @@ public static class SaveManager
         vector3Dict.Clear();
         stringListDict.Clear();
         elementDict.Clear();
+
+        saveData.intKeys.Clear();
+        saveData.intValues.Clear();
+
+        saveData.floatKeys.Clear();
+        saveData.floatValues.Clear();
+
+        saveData.boolKeys.Clear();
+        saveData.boolValues.Clear();
+
+        saveData.stringKeys.Clear();
+        saveData.stringValues.Clear();
+
+        saveData.vector2Keys.Clear();
+        saveData.vector2Values.Clear();
+
+        saveData.vector3Keys.Clear();
+        saveData.vector3Values.Clear();
+
+        saveData.stringListKeys.Clear();
+        saveData.stringListValues.Clear();
+
+        saveData.elementKeys.Clear();
+        saveData.elementValues.Clear();
     }
 }
 
