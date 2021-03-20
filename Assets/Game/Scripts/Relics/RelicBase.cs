@@ -116,11 +116,10 @@ public class RelicBase : MonoBehaviour
 
         if (collected)
         {
-            print("Collected");
             GameObject newUser = GameObject.Find(userName);
             newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
         }
 
-        else print("Not"); // gameObject.SetActive(spawned);
+        else gameObject.SetActive(spawned);
     }
 }
