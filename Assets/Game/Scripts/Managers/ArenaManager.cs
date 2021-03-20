@@ -36,6 +36,7 @@ public class ArenaManager : MonoBehaviour
         }
         relic.transform.position = relicSpawnPos.position;
         relicScript = relic.GetComponent<RelicBase>();
+        relicScript.inArena = true;
         relic.SetActive(false);
 
         bArenaComplete = false;

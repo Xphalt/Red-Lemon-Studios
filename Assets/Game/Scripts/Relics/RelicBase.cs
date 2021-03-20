@@ -35,7 +35,7 @@ public class RelicBase : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (user == null) gameObject.SetActive(inArena);
+        if (user == null) gameObject.SetActive(false);
     }
 
     public virtual void SetUser(GameObject newUser)
