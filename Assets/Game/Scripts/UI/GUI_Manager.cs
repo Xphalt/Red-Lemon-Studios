@@ -22,11 +22,17 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    //Pause Menu and Toolbar Menu variables
+    //Pause Menu variables
     public string homeMenu;
     public GameObject pausePanel, toolbarPanel;
 
-    private void Awake()
+    //Toolbar Menu and Toolbar Menu
+    [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
+    public Text RelicNameHolder, RelicInfoHolder;
+    public Image ImageHolder;
+    public List<Image> relicImage = new List<Image>();
+
+    private void Start()
     {
         pausePanel.SetActive(false);
     }
@@ -67,13 +73,13 @@ public class GUI_Manager : MonoBehaviour
 
     public void SetMaxAmmo(float maxAmmo)
     {
-         ammoSlider.maxValue = maxAmmo;
-         ammoSlider.value = maxAmmo;
+        ammoSlider.maxValue = maxAmmo;
+        ammoSlider.value = maxAmmo;
     }
 
     public void UpdateAmmoCount(float curAmmoCount)
     {
-         ammoSlider.value = curAmmoCount;
+        ammoSlider.value = curAmmoCount;
     }
 
     /*__________________________________________________________
@@ -149,4 +155,31 @@ public class GUI_Manager : MonoBehaviour
         }
         return false;
     }
+
+    public void SetRelicInfo(int relicType)
+    {
+        RelicNameHolder.text = ((ElementTypes)relicType).ToString();
+        RelicInfoHolder.text = RelicDescription[relicType];
+
+
+        switch (relicType)
+        {
+            case 0:
+                ImageHolder.sprite = relicImage[0].sprite;
+                break;     
+            case 1:        
+                ImageHolder.sprite = relicImage[1].sprite;
+                break;     
+            case 2:        
+                ImageHolder.sprite = relicImage[2].sprite;
+                break;     
+            case 3:        
+                ImageHolder.sprite = relicImage[3].sprite;
+                break;
+            default:
+                break;
+        }
+
+    }
+
 }
