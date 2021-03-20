@@ -4,33 +4,13 @@ using UnityEngine;
 
 public class ArenaSpawnTrigger : MonoBehaviour
 {
-    public List<GameObject> enemies = new List<GameObject>();
-    public bool bArenaComplete;
-    public bool bCanSpawnEnemies;
-
-    private void Start()
-    {
-        bArenaComplete = false;
-        bCanSpawnEnemies = true;
-
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].SetActive(false);
-        }
-    }
+    public ArenaManager arenaManager;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (bCanSpawnEnemies)
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].SetActive(true);
-                    bCanSpawnEnemies = false;
-                }
-            }
+            arenaManager.ActivateEnemies();
         }
     }
 }

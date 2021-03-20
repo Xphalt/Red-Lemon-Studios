@@ -38,8 +38,6 @@ public class Enemy : CharacterBase
     protected EnemyStates movementState;
     public bool sentryMode = false;
 
-    public bool spawned;
-
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
