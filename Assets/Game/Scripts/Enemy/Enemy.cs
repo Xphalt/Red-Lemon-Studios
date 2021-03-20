@@ -69,6 +69,8 @@ public class Enemy : CharacterBase
 
         if (sentryMode) movementState = EnemyStates.Idle;
         else characterRigid.velocity = transform.forward * chaseSpeed;
+
+        gameObject.SetActive(spawned && !killed);
     }
 
     public override void Update()
@@ -249,6 +251,6 @@ public class Enemy : CharacterBase
         killed = SaveManager.GetBool(loadID + "Killed");
         attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
 
-        gameObject.SetActive(!killed);
+        gameObject.SetActive(spawned && !killed);
     }
 }

@@ -286,8 +286,8 @@ public class Player : CharacterBase
             if (loadTransform != "")
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
-                transform.Rotate(SaveManager.GetVector3(loadTransform + "PlayerRot"), Space.Self);
-                firstPersonCamera.transform.Rotate(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"), Space.Self);
+                transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerRot"));
+                firstPersonCamera.transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"));
             }
 
             Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
