@@ -24,8 +24,10 @@ public class RelicEarth : RelicBase
         pillarTransform = pillar.GetComponent<Transform>();
     }
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+        
         userMomentumResidue = Mathf.Clamp(userMomentumResidue, 0, 1);
         hostileMomentumResidue = Mathf.Clamp(hostileMomentumResidue, 0, 1);
 

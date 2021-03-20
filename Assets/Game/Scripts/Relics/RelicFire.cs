@@ -24,8 +24,10 @@ public class RelicFire : RelicBase
 
     private Vector3 dashDist;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         relicType = ElementTypes.Fire;
     }
 

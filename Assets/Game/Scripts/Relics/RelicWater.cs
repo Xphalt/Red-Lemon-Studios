@@ -16,8 +16,10 @@ public class RelicWater : RelicBase
     public float inUseSpeedMultiplier;
     private float defaultSpeedMultiplier;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         relicType = ElementTypes.Water;
         defaultSpeedMultiplier = speedMultiplier;
     }

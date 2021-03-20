@@ -30,7 +30,7 @@ public class CheckpointManager : MonoBehaviour
         if (ArenaName == "") ArenaName = thisScene.name;
 
         if (!SaveManager.loaded) SaveManager.LoadFromFile();
-        
+
         newGame = !SaveManager.HasString("LastOverallCheckpointID") || newGame;
         resetArena = !SaveManager.HasString(ArenaName + "LastCheckpointID") || resetArena;
 
@@ -42,7 +42,10 @@ public class CheckpointManager : MonoBehaviour
         {
             FindArenaItems();
         }
+    }
 
+    private void Start()
+    {
         if (!newGame) Load(!resetArena);
         if (resetArena || newGame)
         {

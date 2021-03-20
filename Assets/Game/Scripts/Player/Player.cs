@@ -23,8 +23,6 @@ public class Player : CharacterBase
     public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
-    private bool saved = false;
-
     public override void Awake()
     {
         base.Awake();
@@ -39,9 +37,9 @@ public class Player : CharacterBase
         userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
         
-        if (!saved)
+        if (Ammo.Count < (int)ElementTypes.ElementTypesSize)
         {
-            for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
+            for (int ammo = Ammo.Count; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
             {
                 Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
             }
@@ -304,11 +302,8 @@ public class Player : CharacterBase
             relicIndex = Mathf.Clamp(SaveManager.GetInt(loadID + "PlayerRelicIndex"), 0, relicList.Count - 1);
             SetRelic(relicIndex);
 
-            saved = true;
             movementLocked = false;
         }
-
-        else saved = false;
 
         curHealth = maxHealth;
         userInterface.UpdateHealth(curHealth);

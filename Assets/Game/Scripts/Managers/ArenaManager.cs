@@ -29,7 +29,7 @@ public class ArenaManager : MonoBehaviour
 
     #region UnityCallbacks
     //enemies in arenas are now moved to their spawn positions________________________________________
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
