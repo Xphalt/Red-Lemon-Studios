@@ -12923,6 +12923,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8207596078077143641, guid: e2aabceac8141f04c8ff7ce5038c536a, type: 3}
   m_PrefabInstance: {fileID: 831911096}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &838375318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8978272892471092116, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+  m_PrefabInstance: {fileID: 1994182982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &839527182
 GameObject:
   m_ObjectHideFlags: 0
@@ -42339,8 +42344,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1226662204}
     - target: {fileID: 435191534387768162, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: newGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 435191534387768162, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: resetArena
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 435191534387768162, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: arenaEnemies.Array.data[0]
@@ -42366,6 +42375,10 @@ PrefabInstance:
       propertyPath: arenaPickUps.Array.data[1]
       value: 
       objectReference: {fileID: 6982324858161229595}
+    - target: {fileID: 853723616613765903, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 189.76
+      objectReference: {fileID: 0}
     - target: {fileID: 893358766156092156, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -42434,6 +42447,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelBasics
       objectReference: {fileID: 0}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: relic
+      value: 
+      objectReference: {fileID: 838375318}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: relicSpawnPos
+      value: 
+      objectReference: {fileID: 1685334379}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4747336620897222091}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 3477054513109624721}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4747336621527677136}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 3477054512513970660}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemySpawnPos.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemySpawnPos.Array.data[0]
+      value: 
+      objectReference: {fileID: 1685334379}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemySpawnPos.Array.data[1]
+      value: 
+      objectReference: {fileID: 1365156692}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemySpawnPos.Array.data[2]
+      value: 
+      objectReference: {fileID: 446722070}
+    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: enemySpawnPos.Array.data[3]
+      value: 
+      objectReference: {fileID: 1226662204}
     - target: {fileID: 5282648284177619730, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.size
       value: 4

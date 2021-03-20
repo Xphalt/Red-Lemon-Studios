@@ -85,7 +85,7 @@ public class ArenaManager : MonoBehaviour
 
     public void ActivateEnemies()
     {
-        if (bCanSpawnEnemies)
+        if (bCanSpawnEnemies && !bArenaComplete)
         {
             for (int i = 0; i < enemies.Count; i++)
             {
