@@ -42,10 +42,7 @@ public class CheckpointManager : MonoBehaviour
         {
             FindArenaItems();
         }
-    }
 
-    void Start()
-    {
         if (!newGame) Load(!resetArena);
         if (resetArena || newGame)
         {
@@ -74,6 +71,7 @@ public class CheckpointManager : MonoBehaviour
             for (int checkpointIndex = previousCheckpoints.Count - 1; checkpointIndex >= 0; checkpointIndex--)
             {
                 previousSceneCheckpoint = previousCheckpoints[checkpointIndex];
+                print(previousSceneCheckpoint);
                 if (!previousSceneCheckpoint.Contains(ArenaName)) return previousSceneCheckpoint;
                 else previousSceneCheckpoint = "";
             }
@@ -89,7 +87,7 @@ public class CheckpointManager : MonoBehaviour
         switch (checkpointsReached)
         {
             case 0:
-                newCheckpoint = arenaManager.bArenaComplete;
+                newCheckpoint = arenaManager.bEnemiesCleared;
                 break;
 
             case 1:
@@ -101,7 +99,6 @@ public class CheckpointManager : MonoBehaviour
         }
 
         if (newCheckpoint) Save();
-
     }
 
     public void Save(string checkpointOverride = "")
@@ -171,6 +168,7 @@ public class CheckpointManager : MonoBehaviour
 
         string playerLoadID = (loadArena) ? loadID : checkpointAtStart;
 
+        print(playerLoadID);
         if (playerLoadID != "")
         {
             for (int r = 0; r < arenaRelics.Count; r++)

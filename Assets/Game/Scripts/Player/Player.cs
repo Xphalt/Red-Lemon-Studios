@@ -9,9 +9,9 @@ public class Player : CharacterBase
     public GameObject canvas;
     public Vector3 crosshairPos;
     public Camera firstPersonCamera;
-    private GUI_Manager userInterface;
+    public GUI_Manager userInterface = null;
 
-    PlayerRotation rotationScript;
+    public PlayerRotation rotationScript = null;
 
     public float runSpeed;
     public float shootTargetDistance;
@@ -20,7 +20,7 @@ public class Player : CharacterBase
     private bool switchingRelics = false;
     private bool paused = false;
 
-    internal Elements elementChanger = null;
+    public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
     private bool saved = false;
@@ -28,23 +28,17 @@ public class Player : CharacterBase
     public override void Awake()
     {
         base.Awake();
-        elementChanger = weapon.GetComponent<Elements>();
-        rotationScript = GetComponent<PlayerRotation>();
+        if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
+        if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
 
-        userInterface = canvas.GetComponent<GUI_Manager>();
+        if (userInterface == null) userInterface = canvas.GetComponent<GUI_Manager>();
         userInterface.SetMaxHealth(maxHealth);
         userInterface.SetMaxAmmo(maxAmmo);
         //______________________________________________________________________________________
-    }
-
-    public override void Start()
-    {
-        base.Start();
-        team = Teams.Player;
-
+        
         if (!saved)
         {
             for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
@@ -52,6 +46,12 @@ public class Player : CharacterBase
                 Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
             }
         }
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        team = Teams.Player;
 
         userInterface.HighlightSelectedAmmo();
     }
@@ -267,8 +267,8 @@ public class Player : CharacterBase
     public void SaveStats(string saveID)
     {
         SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
-        SaveManager.UpdateSavedFloat(saveID + "PlayerYRot", transform.localRotation.eulerAngles.y);
-        SaveManager.UpdateSavedFloat(saveID + "PlayerCameraXRot", firstPersonCamera.transform.localRotation.eulerAngles.x);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerRot", transform.localRotation.eulerAngles);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerCameraRot", firstPersonCamera.transform.localRotation.eulerAngles);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
@@ -288,8 +288,8 @@ public class Player : CharacterBase
             if (loadTransform != "")
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
-                transform.Rotate(0, SaveManager.GetFloat(loadTransform + "PlayerYRot"), 0, Space.Self);
-                firstPersonCamera.transform.Rotate(SaveManager.GetFloat(loadTransform + "PlayerCameraXRot"), 0, 0, Space.Self);
+                transform.Rotate(SaveManager.GetVector3(loadTransform + "PlayerRot"), Space.Self);
+                firstPersonCamera.transform.Rotate(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"), Space.Self);
             }
 
             Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");

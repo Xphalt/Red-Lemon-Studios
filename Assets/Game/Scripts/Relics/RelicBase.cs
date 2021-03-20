@@ -14,6 +14,7 @@ public class RelicBase : MonoBehaviour
 
     internal bool inUse;
     internal bool collected = false;
+    internal bool spawned = false;
     public bool inArena;
 
     public int maxCombo = 1;
@@ -21,7 +22,7 @@ public class RelicBase : MonoBehaviour
     public float damagePercentRecievedOnMiss = 0;
     public bool missPenalty = false;
 
-    public bool doubleJumpEnabled = false;
+    public int maxJumps = 1;
     public float knockBackMultiplier = 1;
 
     public float damageRecievedMultiplier = 1;
@@ -35,7 +36,7 @@ public class RelicBase : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (user == null) gameObject.SetActive(false);
+        if (user == null) gameObject.SetActive(spawned && !collected);
     }
 
     public virtual void SetUser(GameObject newUser)
@@ -96,6 +97,7 @@ public class RelicBase : MonoBehaviour
     {
         saveID = saveID + relicType.ToString() + "Relic";
         SaveManager.UpdateSavedString(saveID + "User", userName);
+        SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
         SaveManager.UpdateSavedBool(saveID + "Collected", collected);
         SaveManager.UpdateSavedBool(saveID + "InUse", inUse);
         SaveManager.UpdateSavedBool(saveID + "ReadyToUse", readyToUse);
@@ -106,6 +108,7 @@ public class RelicBase : MonoBehaviour
     {
         loadID = loadID + relicType.ToString() + "Relic";
         userName = SaveManager.GetString(loadID + "User");
+        spawned = SaveManager.GetBool(loadID + "Spawned");
         collected = SaveManager.GetBool(loadID + "Collected");
         inUse = SaveManager.GetBool(loadID + "InUse");
         readyToUse = SaveManager.GetBool(loadID + "ReadyToUse");
@@ -113,9 +116,11 @@ public class RelicBase : MonoBehaviour
 
         if (collected)
         {
+            print("Collected");
             GameObject newUser = GameObject.Find(userName);
-            SetUser(newUser);
             newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
         }
+
+        else print("Not"); // gameObject.SetActive(spawned);
     }
 }

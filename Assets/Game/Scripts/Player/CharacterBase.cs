@@ -5,14 +5,14 @@ using static EnumHelper;
 
 public class CharacterBase : MonoBehaviour
 {
-    protected Rigidbody characterRigid;
+    public Rigidbody characterRigid = null;
 
     public Transform relicPlaceHolder;
     public GameObject weapon = null;
     
     public bool canFly = false;
 
-    public float jumpForce;
+    public float jumpSpeed;
     public float gravityMult = 1;
     public float floorDistance;
     public float airControl;
@@ -38,10 +38,10 @@ public class CharacterBase : MonoBehaviour
     internal Vector3 shiftVector;
 
     protected bool missPenalty = false;
-    protected bool doubleJumpEnabled = false;
-    protected bool hasJumpedTwice;
     protected bool isGrounded = false;
     protected bool jumping = false;
+    protected int maxJumps = 1;
+    protected int currentJumps = 0;
     protected int relicIndex = 0;
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -56,6 +56,7 @@ public class CharacterBase : MonoBehaviour
     public virtual void Awake()
     {
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
+        if (characterRigid != null) characterRigid = GetComponent<Rigidbody>();
 
         if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
         sfxScript = SFXManager.GetComponent<SFXScript>();
@@ -88,7 +89,7 @@ public class CharacterBase : MonoBehaviour
 
         if (jumping)
         {
-            characterRigid.AddForce(Vector3.up * (jumpForce + characterRigid.velocity.y * characterRigid.mass));
+            characterRigid.velocity = new Vector3(characterRigid.velocity.x, jumpSpeed, characterRigid.velocity.z);
             jumping = false;
         }
 
@@ -142,14 +143,15 @@ public class CharacterBase : MonoBehaviour
         //}
 
         isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
+        if (isGrounded && !jumping) currentJumps = 0;
     }
 
     protected void Jump()
     {
-        if ((isGrounded || doubleJumpEnabled && !hasJumpedTwice) && !jumping)
+        if (maxJumps > currentJumps && !jumping)
         {
             jumping = true;
-            hasJumpedTwice = !isGrounded;
+            currentJumps++;
         }
     }
 
@@ -293,7 +295,7 @@ public class CharacterBase : MonoBehaviour
         damagePercentRecievedOnMiss = currentRelic.damagePercentRecievedOnMiss;
         missPenalty = currentRelic.missPenalty;
 
-        doubleJumpEnabled = currentRelic.doubleJumpEnabled;
+        maxJumps = currentRelic.maxJumps;
         knockBackMultiplier = currentRelic.knockBackMultiplier;
 
         damageRecievedMultiplier = currentRelic.damageRecievedMultiplier;

@@ -129,7 +129,7 @@ MonoBehaviour:
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
-  jumpForce: 500
+  jumpSpeed: 10
   gravityMult: 1
   floorDistance: 1.01
   airControl: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   weakAgainstIncrease: 1.5
   attackInterval: 0
   sentryMode: 0
-  spawned: 0
   chaseSpeed: 10
   patrolSpeed: 2
   playerDetectionRadius: 50

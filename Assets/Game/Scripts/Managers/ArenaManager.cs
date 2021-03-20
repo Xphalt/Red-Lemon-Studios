@@ -1,54 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ArenaManager : MonoBehaviour
 {
     #region Variables
-    //reference to ArenaSpawnTrigger script___________________________________________________________Merged as this script was entirely dependant on that one
+    //reference to ArenaSpawnTrigger script___________________________________________________________
     
     public List<GameObject> enemies = new List<GameObject>();
     private List<Enemy> enemyScripts = new List<Enemy>();
 
-    //enemies in arenas are now linked to their spawn positions_______________________________________If it's a 1-1 relationship, you don't need the spawn pos
+    //enemies in arenas are now linked to their spawn positions_______________________________________
     public List<Transform> enemySpawnPos = new List<Transform>();
 
     public GameObject relic;
     private RelicBase relicScript;
     public Transform relicSpawnPos;
 
+    public string nextScene;
+
     public bool bCanSpawnEnemies = true;
 
-    internal bool bArenaComplete = false;
+    internal bool bEnemiesCleared = false;
     internal bool bRelicCollected = false;
 
     #endregion
 
     #region UnityCallbacks
-    //enemies in arenas are now moved to their spawn positions________________________________________Second for loop was unecessary
+    //enemies in arenas are now moved to their spawn positions________________________________________
     private void Start()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemyScripts.Add(enemies[i].GetComponent<Enemy>()); //Need reference to the 'killed' attribute
-            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i].position; //Don't need to reference the transform of a transform
+            enemyScripts.Add(enemies[i].GetComponent<Enemy>());
+            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i].position;
             enemies[i].SetActive(enemyScripts[i].spawned && !enemyScripts[i].killed);
         }
 
         relic.transform.position = relicSpawnPos.position;
         relicScript = relic.GetComponent<RelicBase>();
         relicScript.inArena = true;
-        relic.SetActive(false);
 
-        bArenaComplete = false;
-        bRelicCollected = false;
-        bCanSpawnEnemies = true;
+        if (nextScene == "") nextScene = SceneManager.GetSceneAt((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings).name;
     }
 
     private void Update()
     {
-        //this code is an eyesore but it works for now_______________________________________________Fixed it
-        if (!bArenaComplete)
+        if (!bEnemiesCleared)
         {
             bool enemiesRemaining = false;
 
@@ -63,12 +62,13 @@ public class ArenaManager : MonoBehaviour
 
             if (!enemiesRemaining)
             {
-                bArenaComplete = true;
+                bEnemiesCleared = true;
+                relicScript.spawned = true;
                 relic.SetActive(true);
             }
         }
 
-        else if (!bRelicCollected) bRelicCollected = relicScript.collected;
+        if (!bRelicCollected) bRelicCollected = relicScript.collected;
 
         //bool relicsRemaining = false; (In case of mulitple relics per arena)
 
@@ -85,7 +85,7 @@ public class ArenaManager : MonoBehaviour
 
     public void ActivateEnemies()
     {
-        if (bCanSpawnEnemies && !bArenaComplete)
+        if (bCanSpawnEnemies) // && !bArenaComplete could possibly fix a bug
         {
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -96,19 +96,27 @@ public class ArenaManager : MonoBehaviour
         }
     }
 
+    public void TransitionLevel()
+    {
+        if (bEnemiesCleared && bRelicCollected)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+    }
+
     #region Saving
     public void SaveArenaStatus(string saveID)
     {
         saveID = "SpawnTrigger" + saveID;
         SaveManager.UpdateSavedBool(saveID + "CanSpawn", bCanSpawnEnemies);
-        SaveManager.UpdateSavedBool(saveID + "Complete", bArenaComplete);
+        SaveManager.UpdateSavedBool(saveID + "Complete", bEnemiesCleared);
     }
 
     public void LoadArenaStatus(string loadID)
     {
         loadID = "SpawnTrigger" + loadID;
         bCanSpawnEnemies = SaveManager.GetBool(loadID + "CanSpawn");
-        bArenaComplete = SaveManager.GetBool(loadID + "Complete");
+        bEnemiesCleared = SaveManager.GetBool(loadID + "Complete");
     }
     #endregion
 }
