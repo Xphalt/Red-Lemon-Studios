@@ -38,6 +38,8 @@ public class Enemy : CharacterBase
     protected EnemyStates movementState;
     public bool sentryMode = false;
 
+    internal bool spawned = false;
+
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
@@ -232,6 +234,7 @@ public class Enemy : CharacterBase
 
         SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
         SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
         SaveManager.UpdateSavedBool(saveID + "Killed", killed);
         SaveManager.UpdateSavedFloat(saveID + "AttackTimer", attackTimer);
     }
@@ -242,6 +245,7 @@ public class Enemy : CharacterBase
 
         transform.position = SaveManager.GetVector3(loadID + "Pos");
         transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
+        spawned = SaveManager.GetBool(loadID + "Spawned");
         killed = SaveManager.GetBool(loadID + "Killed");
         attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
 

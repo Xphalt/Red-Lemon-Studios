@@ -30,10 +30,11 @@ public class ArenaManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].transform.position = enemySpawnPos[i].position; //Don't need to reference the transform of a transform
             enemyScripts.Add(enemies[i].GetComponent<Enemy>()); //Need reference to the 'killed' attribute
-            enemies[i].SetActive(false);
+            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i].position; //Don't need to reference the transform of a transform
+            enemies[i].SetActive(enemyScripts[i].spawned && !enemyScripts[i].killed);
         }
+
         relic.transform.position = relicSpawnPos.position;
         relicScript = relic.GetComponent<RelicBase>();
         relicScript.inArena = true;
@@ -89,6 +90,7 @@ public class ArenaManager : MonoBehaviour
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].SetActive(true);
+                enemyScripts[i].spawned = true;
                 bCanSpawnEnemies = false;
             }
         }
