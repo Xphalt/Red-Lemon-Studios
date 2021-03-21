@@ -18,8 +18,6 @@ using static EnumHelper;
 
 public class Elements : MonoBehaviour
 {
-    public GameObject canvas;
-
     public ElementTypes m_CurElement = (ElementTypes)0;
 
     public void ChangeElement(int cycleAmount = 1)

@@ -24,8 +24,7 @@ public class ElementShooting : MonoBehaviour
     private GameObject ChosenBullet;
     public GameObject GunPos;
 
-    public GameObject SFXManager = null;
-    private SFXScript sfxScript;
+    public SFXScript sfxScript = null;
 
     private CharacterBase wielderScript;
 
@@ -55,8 +54,7 @@ public class ElementShooting : MonoBehaviour
             shootSoundsDictionary.Add(soundTypes[index], soundNames[index]);
         }
 
-        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxScript = SFXManager.GetComponent<SFXScript>();
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
 
     //TODO cache the rigidbody reference to boost performance
@@ -69,8 +67,9 @@ public class ElementShooting : MonoBehaviour
 
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
         newBulletInfo.Initialise(damage, wielderScript);
+        newBulletInfo.sfxScript = sfxScript;
 
-        if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX(shootSoundsDictionary[shotType]);
+        if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX3D(shootSoundsDictionary[shotType], GunPos.transform.position);
 
         Destroy(newBullet, 2);
     }

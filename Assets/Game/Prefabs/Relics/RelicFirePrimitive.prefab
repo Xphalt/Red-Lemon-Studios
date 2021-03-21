@@ -114,11 +114,13 @@ MonoBehaviour:
   percentIncreasePerHit: 10
   damagePercentRecievedOnMiss: 25
   missPenalty: 1
-  doubleJumpEnabled: 0
+  maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1
   speedMultiplier: 1
   relicCooldownDuration: 3
+  sfxScript: {fileID: 0}
+  activateSound: FireRelicUse
   dashSpeed: 100
   dashDuration: 0.35
   postDashMomentum: 0.1

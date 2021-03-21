@@ -9,6 +9,9 @@ public class EnemyFire : Enemy
     public float explosionRadius;
     private bool canExplode = true;
 
+    public string explodeSound;
+    public string jumpSound;
+
     public override void Start()
     {
         base.Start();
@@ -23,8 +26,15 @@ public class EnemyFire : Enemy
 
         if (CanSeePlayer()) movementState = EnemyStates.Chasing;
         else if (!sentryMode) movementState = EnemyStates.Patrolling;
-        
-        if (!sentryMode) Jump();
+
+        if (!sentryMode)
+        {
+            bool newJump = !jumping;
+            Jump();
+
+            newJump = jumping && newJump;
+            if (newJump) sfxScript.PlaySFX3D(jumpSound, transform.position);
+        }
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -47,7 +57,11 @@ public class EnemyFire : Enemy
 
     public void Explode()
     {
-        if (canExplode && GetDistance() < explosionRadius) playerScript.TakeDamage(explosionDamage);
+        if (canExplode && GetDistance() < explosionRadius)
+        {
+            playerScript.TakeDamage(explosionDamage);
+            sfxScript.PlaySFX3D(explodeSound, transform.position);
+        }
         gameObject.SetActive(false);
     }
 

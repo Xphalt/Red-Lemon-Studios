@@ -55,6 +55,8 @@ public class RelicWater : RelicBase
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
 
+        sfxScript.PlaySFX3D(activateSound, user.transform.position);
+        
         return true;
     }
 

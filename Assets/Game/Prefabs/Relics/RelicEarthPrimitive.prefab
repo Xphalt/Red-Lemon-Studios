@@ -224,11 +224,13 @@ MonoBehaviour:
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
   missPenalty: 0
-  doubleJumpEnabled: 0
+  maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 0.8
   speedMultiplier: 0.8
   relicCooldownDuration: 4
+  sfxScript: {fileID: 0}
+  activateSound: EarthRelicUse
   pillar: {fileID: 1538245284360931053}
   maxPillarSize: 5
   pillarDamage: 50

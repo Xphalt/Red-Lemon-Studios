@@ -50,16 +50,14 @@ public class CharacterBase : MonoBehaviour
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
 
-    public GameObject SFXManager = null;
-    protected SFXScript sfxScript;
+    public SFXScript sfxScript;
 
     public virtual void Awake()
     {
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
         if (characterRigid != null) characterRigid = GetComponent<Rigidbody>();
 
-        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxScript = SFXManager.GetComponent<SFXScript>();
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
         characterRigid = GetComponent<Rigidbody>();
     }
 

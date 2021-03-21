@@ -126,16 +126,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5794ca241520b684dbdf841aec2af8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterRigid: {fileID: 0}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
-  jumpForce: 0
+  jumpSpeed: 0
   gravityMult: 1
   floorDistance: 1.01
   airControl: 0
   maxHealth: 100
   knockbackRecovery: 0
-  SFXManager: {fileID: 0}
+  sfxScript: {fileID: 0}
   target: {fileID: 0}
   elementType: 1
   ammoDrop: {fileID: 1418181493949439461}
@@ -144,13 +145,13 @@ MonoBehaviour:
   weakAgainstIncrease: 1.5
   attackInterval: 1
   sentryMode: 0
-  spawned: 0
   chaseSpeed: 15
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
   meleeDamage: 10
   meleeRange: 2
+  attackSound: WaterElementalAttack
 --- !u!1001 &6209591863251571164
 PrefabInstance:
   m_ObjectHideFlags: 0

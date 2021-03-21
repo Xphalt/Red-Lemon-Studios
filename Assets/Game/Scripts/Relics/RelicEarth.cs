@@ -79,6 +79,8 @@ public class RelicEarth : RelicBase
                 readyToUse = false;
                 inUse = true;
 
+                sfxScript.PlaySFX3D(activateSound, user.transform.position);
+                
                 return true;
             }
         }

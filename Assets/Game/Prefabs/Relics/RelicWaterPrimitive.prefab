@@ -114,11 +114,13 @@ MonoBehaviour:
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
   missPenalty: 0
-  doubleJumpEnabled: 0
+  maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1.25
   speedMultiplier: 1.25
   relicCooldownDuration: 4
+  sfxScript: {fileID: 0}
+  activateSound: WaterRelicUse
   healAmount: 10
   ammoCost: 10
   healDuration: 3

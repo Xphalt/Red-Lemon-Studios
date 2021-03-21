@@ -27,6 +27,10 @@ public class ElementHazardAilments : MonoBehaviour
 
     public bool dieOnHit = false;
 
+    public string hitSound;
+
+    internal SFXScript sfxScript = null;
+
     public void Initialise(float weaponDamage, CharacterBase newUser)
     {
         userScript = newUser;
@@ -42,6 +46,7 @@ public class ElementHazardAilments : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (sfxScript != null) sfxScript.PlaySFX3D(hitSound, transform.position);
         if (dieOnHit) Destroy(gameObject);
     }
 

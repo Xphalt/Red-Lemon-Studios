@@ -9,7 +9,8 @@ public class SFXScript : MonoBehaviour
     public List<AudioClip> AudioClipList = new List<AudioClip>();
 
     private Dictionary<string, AudioClip> SFXDict = new Dictionary<string, AudioClip>();
-    public AudioSource SFXPrefab;
+    public AudioSource SFXPrefab2D;
+    public AudioSource SFXPrefab3D;
 
     private AudioSource Music;
 
@@ -24,24 +25,24 @@ public class SFXScript : MonoBehaviour
         Music = GetComponent<AudioSource>();
     }
 
-    public void PlaySFX(string sfx, bool loop = false)
+    public void PlaySFX2D(string sfx, float volume = 1, bool loop = false)
     {
         if (SFXDict.ContainsKey(sfx))
         {
-            AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
-            newSFX.PlayOneShot(SFXDict[sfx]);
+            AudioSource newSFX = Instantiate(SFXPrefab2D).GetComponent<AudioSource>();
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
             newSFX.loop = loop;
             newSFX.tag = "SFX";
             if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
         }
     }
 
-    public void PlaySFX(string sfx, string instanceName, bool loop = false)
+    public void PlaySFX2D(string sfx, string instanceName, float volume = 1, bool loop = false)
     {
         if (SFXDict.ContainsKey(sfx))
         {
-            AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
-            newSFX.PlayOneShot(SFXDict[sfx]);
+            AudioSource newSFX = Instantiate(SFXPrefab2D).GetComponent<AudioSource>();
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
             newSFX.name = instanceName;
             newSFX.loop = loop;
             newSFX.tag = "SFX";
@@ -49,12 +50,52 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX(string sfx, float playTime, bool loop = false)
+    public void PlaySFX2D(string sfx, float playTime, float volume = 1, bool loop = false)
     {
         if (SFXDict.ContainsKey(sfx))
         {
-            AudioSource newSFX = Instantiate(SFXPrefab).GetComponent<AudioSource>();
-            newSFX.PlayOneShot(SFXDict[sfx]);
+            AudioSource newSFX = Instantiate(SFXPrefab2D).GetComponent<AudioSource>();
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
+            newSFX.loop = loop;
+            newSFX.tag = "SFX";
+            if (!loop) Destroy(newSFX.gameObject, playTime);
+        }
+    }
+
+    public void PlaySFX3D(string sfx, Vector3 position, float volume = 1, bool loop = false)
+    {
+        if (SFXDict.ContainsKey(sfx))
+        {
+            AudioSource newSFX = Instantiate(SFXPrefab3D).GetComponent<AudioSource>();
+            newSFX.transform.position = position;
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
+            newSFX.loop = loop;
+            newSFX.tag = "SFX";
+            if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
+        }
+    }
+
+    public void PlaySFX3D(string sfx, Vector3 position, string instanceName, float volume = 1, bool loop = false)
+    {
+        if (SFXDict.ContainsKey(sfx))
+        {
+            AudioSource newSFX = Instantiate(SFXPrefab3D).GetComponent<AudioSource>();
+            newSFX.transform.position = position;
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
+            newSFX.name = instanceName;
+            newSFX.loop = loop;
+            newSFX.tag = "SFX";
+            if (!loop) Destroy(newSFX.gameObject, SFXDict[sfx].length);
+        }
+    }
+
+    public void PlaySFX3D(string sfx, Vector3 position, float playTime, float volume = 1, bool loop = false)
+    {
+        if (SFXDict.ContainsKey(sfx))
+        {
+            AudioSource newSFX = Instantiate(SFXPrefab3D).GetComponent<AudioSource>();
+            newSFX.transform.position = position;
+            newSFX.PlayOneShot(SFXDict[sfx], volume);
             newSFX.loop = loop;
             newSFX.tag = "SFX";
             if (!loop) Destroy(newSFX.gameObject, playTime);

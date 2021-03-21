@@ -8,6 +8,8 @@ public class EnemyWater : Enemy
     public float meleeDamage;
     public float meleeRange;
 
+    public string attackSound;
+
     public override void Start()
     {
         base.Start();
@@ -47,6 +49,9 @@ public class EnemyWater : Enemy
         if (base.Attack())
         {
             playerScript.TakeDamage(meleeDamage);
+
+            sfxScript.PlaySFX3D(attackSound, transform.position);
+
             return true;
         }
         return false;
