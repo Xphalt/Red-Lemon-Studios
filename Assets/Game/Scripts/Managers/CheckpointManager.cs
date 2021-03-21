@@ -22,10 +22,12 @@ public class CheckpointManager : MonoBehaviour
     public List<RelicBase> arenaRelics;
     public List<PickUpBase> arenaPickUps;
     public Player arenaPlayer;
-    public ArenaManager arenaManager;
+    public ArenaManager arenaManager = null;
 
     private void Awake()
     {
+        if (arenaManager == null) arenaManager = GetComponent<ArenaManager>();
+
         thisScene = SceneManager.GetActiveScene();
         if (ArenaName == "") ArenaName = thisScene.name;
 
@@ -85,22 +87,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (arenaPlayer.killed) Load();
 
-        bool newCheckpoint = false;
-        switch (checkpointsReached)
-        {
-            case 0:
-                newCheckpoint = arenaManager.bEnemiesCleared;
-                break;
-
-            case 1:
-                newCheckpoint = arenaManager.bRelicCollected;
-                break;
-
-            default:
-                break;
-        }
-
-        if (newCheckpoint) Save();
+        else if (arenaManager.bCheckpointReady) Save();
     }
 
     public void Save(string checkpointOverride = "")

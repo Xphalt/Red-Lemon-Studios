@@ -6,13 +6,20 @@ using UnityEngine.SceneManagement;
 public class ArenaManager : MonoBehaviour
 {
     #region Variables
-    //reference to ArenaSpawnTrigger script___________________________________________________________
-    
+    public bool AutoFind = false;
+
     public List<GameObject> enemies = new List<GameObject>();
     private List<Enemy> enemyScripts = new List<Enemy>();
 
     //enemies in arenas are now linked to their spawn positions_______________________________________
+    [Tooltip("Number of enemies/number of spawn positions rounded up = number of waves")]
     public List<Transform> enemySpawnPos = new List<Transform>();
+
+    private int waveCounter = 0;
+    private int maxWaves;
+
+    public float waveDelay;
+    private float waveTimer = 0;
 
     public GameObject relic;
     private RelicBase relicScript;
@@ -20,10 +27,12 @@ public class ArenaManager : MonoBehaviour
 
     public string nextScene;
 
-    public bool bCanSpawnEnemies = true;
+    public bool bWavesStarted = false;
 
     internal bool bEnemiesCleared = false;
     internal bool bRelicCollected = false;
+
+    internal bool bCheckpointReady = false;
 
     #endregion
 
@@ -31,12 +40,22 @@ public class ArenaManager : MonoBehaviour
     //enemies in arenas are now moved to their spawn positions________________________________________
     private void Awake()
     {
+        if (AutoFind)
+        {
+            Scene thisScene = SceneManager.GetActiveScene();
+            enemies.Clear();
+            foreach (Enemy newEnemy in Resources.FindObjectsOfTypeAll<Enemy>())
+                if (newEnemy.gameObject.scene == thisScene) enemies.Add(newEnemy.gameObject);
+        }
+
         for (int i = 0; i < enemies.Count; i++)
         {
             enemyScripts.Add(enemies[i].GetComponent<Enemy>());
-            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i].position;
+            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i % enemySpawnPos.Count].position;
             enemies[i].SetActive(enemyScripts[i].spawned && !enemyScripts[i].killed);
         }
+
+        maxWaves = Mathf.CeilToInt(enemies.Count / enemySpawnPos.Count);
 
         relic.transform.position = relicSpawnPos.position;
         relicScript = relic.GetComponent<RelicBase>();
@@ -47,8 +66,16 @@ public class ArenaManager : MonoBehaviour
 
     private void Update()
     {
+        bCheckpointReady = false;
+
         if (!bEnemiesCleared)
         {
+            if (waveCounter < maxWaves && bWavesStarted)
+            {
+                waveTimer += Time.deltaTime;
+                if (waveTimer > waveDelay) SpawnNextWave();
+            }
+
             bool enemiesRemaining = false;
 
             foreach (Enemy enemy in enemyScripts)
@@ -65,10 +92,16 @@ public class ArenaManager : MonoBehaviour
                 bEnemiesCleared = true;
                 relicScript.spawned = true;
                 relic.SetActive(true);
+                bCheckpointReady = true;
             }
         }
 
-        if (!bRelicCollected) bRelicCollected = relicScript.collected;
+        else if (!bRelicCollected)
+        {
+            bRelicCollected = relicScript.collected;
+            bCheckpointReady = bRelicCollected;
+        }
+
 
         //bool relicsRemaining = false; (In case of mulitple relics per arena)
 
@@ -83,16 +116,19 @@ public class ArenaManager : MonoBehaviour
     }
     #endregion
 
-    public void ActivateEnemies()
+    public void SpawnNextWave()
     {
-        if (bCanSpawnEnemies) // && !bArenaComplete could possibly fix a bug
+        if (waveCounter < maxWaves) // && !bArenaComplete could possibly fix a bug
         {
-            for (int i = 0; i < enemies.Count; i++)
+            for (int e = waveCounter * enemySpawnPos.Count; e < (waveCounter + 1) * enemySpawnPos.Count; e++)
             {
-                enemies[i].SetActive(true);
-                enemyScripts[i].spawned = true;
-                bCanSpawnEnemies = false;
+                enemies[e].SetActive(true);
+                enemyScripts[e].spawned = true;
             }
+
+            bWavesStarted = true;
+            waveCounter++;
+            waveTimer = 0;
         }
     }
 
@@ -107,16 +143,18 @@ public class ArenaManager : MonoBehaviour
     #region Saving
     public void SaveArenaStatus(string saveID)
     {
-        saveID = "SpawnTrigger" + saveID;
-        SaveManager.UpdateSavedBool(saveID + "CanSpawn", bCanSpawnEnemies);
+        saveID = "ArenaManager" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "WavesStarted", bWavesStarted);
         SaveManager.UpdateSavedBool(saveID + "Complete", bEnemiesCleared);
+        SaveManager.UpdateSavedInt(saveID + "WaveCounter", waveCounter);
     }
 
     public void LoadArenaStatus(string loadID)
     {
-        loadID = "SpawnTrigger" + loadID;
-        bCanSpawnEnemies = SaveManager.GetBool(loadID + "CanSpawn");
+        loadID = "ArenaManager" + loadID;
+        bWavesStarted = SaveManager.GetBool(loadID + "WavesStarted");
         bEnemiesCleared = SaveManager.GetBool(loadID + "Complete");
+        waveCounter = SaveManager.GetInt(loadID + "WaveCounter");
     }
     #endregion
 }

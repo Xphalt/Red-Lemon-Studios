@@ -14,6 +14,7 @@ public class Player : CharacterBase
     public PlayerRotation rotationScript = null;
 
     public float runSpeed;
+    [Tooltip("How far away is the crosshair")]
     public float shootTargetDistance;
     public int maxAmmo;
 

@@ -149,12 +149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca73ec64bab2644eba48657a42bd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoFind: 0
   enemies: []
   enemySpawnPos: []
+  waveDelay: 10
   relic: {fileID: 0}
   relicSpawnPos: {fileID: 0}
   nextScene: 
-  bCanSpawnEnemies: 1
+  bWavesStarted: 0
 --- !u!1 &7426175933752922450
 GameObject:
   m_ObjectHideFlags: 0
