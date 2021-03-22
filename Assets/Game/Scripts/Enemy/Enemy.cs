@@ -1,7 +1,6 @@
 ﻿/// <summary>
 /// 
 /// Script made by Zack
-/// Comments made by Zack
 /// 
 /// Linden added enemy death
 /// when their health reaches 0
@@ -17,7 +16,6 @@ using static EnumHelper;
 
 public class Enemy : CharacterBase
 {
-    //holds the variables used across all enemies
     public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
 
     public GameObject target = null;
@@ -66,7 +64,6 @@ public class Enemy : CharacterBase
 
     public override void Start()
     {
-        //As the game sets up, these conditions are set
         base.Start();
         team = Teams.Enemy;
 
@@ -78,7 +75,6 @@ public class Enemy : CharacterBase
 
     public override void Update()
     {
-        //Runs every frame, currently used for status effect purposes
         base.Update();
 
         attackTimer += Time.deltaTime;
@@ -95,7 +91,6 @@ public class Enemy : CharacterBase
 
     public override void FixedUpdate()
     {
-        //holds movement code for enemies, takes from the code used for all moving entites
         base.FixedUpdate();
 
         bool directionSet = false;
@@ -167,7 +162,6 @@ public class Enemy : CharacterBase
 
     public bool CanSeePlayer()
     {
-        //Detects if player is within the enemy's line of sight
         RaycastHit castHit;
         if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit, playerDetectionRadius)) return false;
 
@@ -182,27 +176,19 @@ public class Enemy : CharacterBase
 
     public float GetDistance()
     {
-        //self explanatory
         return (target.transform.position - transform.position).magnitude;
     }
 
     public virtual bool Attack()
     {
-        //also self explanatory
         if (attackTimer < attackInterval || !CanSeePlayer()) return false;
 
         attackTimer = 0;
         return true;
     }
 
-    public virtual void Animate()
-    {
-        //currently used as a placeholder
-    }
-
     public override void OnCollisionEnter(Collision collision)
     {
-        //what happens when colliding with another collider
         base.OnCollisionEnter(collision);
 
         if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
@@ -216,7 +202,6 @@ public class Enemy : CharacterBase
 
     public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
     {
-        //calculates damage done by player
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
 
@@ -231,7 +216,6 @@ public class Enemy : CharacterBase
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 
     {
-        //starts a status effect, whatever its cause
         statusEffectActive = true;
         statusTimer = 0;
         statusDuration = effectStats.statusEffectDuration;
@@ -240,7 +224,6 @@ public class Enemy : CharacterBase
 
     public virtual void EndSatusEffect()
     {
-        //slight spellcheck, resets status effects
         statusEffectActive = false;
         statusTimer = 0;
         statusMagnitude = 0;
