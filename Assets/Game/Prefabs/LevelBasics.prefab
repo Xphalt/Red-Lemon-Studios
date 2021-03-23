@@ -1011,10 +1011,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3331455516436599721}
     m_Modifications:
+    - target: {fileID: 1948245423448516426, guid: 32a1f433a57c4b443ac2a9017bc5855e, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -559307097075499585, guid: 0d9134381102f0b428e5ed3f14a7845f, type: 3}
     - target: {fileID: 2966989379698145169, guid: 32a1f433a57c4b443ac2a9017bc5855e, type: 3}
       propertyPath: arenaManager
       value: 
       objectReference: {fileID: 4947084528858620763}
+    - target: {fileID: 5246828409431799022, guid: 32a1f433a57c4b443ac2a9017bc5855e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 500cd2060203f9b49ac8d9f0e91d755f, type: 2}
     - target: {fileID: 5786820468874997297, guid: 32a1f433a57c4b443ac2a9017bc5855e, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1537,7 +1545,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaSpawnTrigger
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8747251769711311992, guid: a82847c6d4b92664fb28dd5ad8882848, type: 3}
+    - {fileID: 8747251769711311999, guid: a82847c6d4b92664fb28dd5ad8882848, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a82847c6d4b92664fb28dd5ad8882848, type: 3}
 --- !u!4 &853723616613765903 stripped
 Transform:
