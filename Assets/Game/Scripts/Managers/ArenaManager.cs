@@ -51,11 +51,11 @@ public class ArenaManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             enemyScripts.Add(enemies[i].GetComponent<Enemy>());
-            if (!enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i % enemySpawnPos.Count].position;
+            if (enemySpawnPos.Count > 0 && !enemyScripts[i].spawned) enemies[i].transform.position = enemySpawnPos[i % enemySpawnPos.Count].position;
             enemies[i].SetActive(enemyScripts[i].spawned && !enemyScripts[i].killed);
         }
 
-        maxWaves = Mathf.CeilToInt(enemies.Count / enemySpawnPos.Count);
+        if (enemySpawnPos.Count > 0) maxWaves = Mathf.CeilToInt(enemies.Count / enemySpawnPos.Count);
 
         relic.transform.position = relicSpawnPos.position;
         relicScript = relic.GetComponent<RelicBase>();
