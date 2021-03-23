@@ -24,7 +24,7 @@ public class GUI_Manager : MonoBehaviour
 
     //Pause Menu variables
     public string homeMenu;
-    public GameObject pausePanel, toolbarPanel;
+    public GameObject pausePanel, toolbarPanel, controlsPanel;
 
     //Toolbar Menu and Toolbar Menu
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
@@ -129,6 +129,7 @@ public class GUI_Manager : MonoBehaviour
         if (!toolbarPanel.activeSelf)
         {
             pausePanel.SetActive(!pausePanel.activeSelf);
+            controlsPanel.SetActive(false);
             return true;
         }
         return false;
@@ -140,6 +141,11 @@ public class GUI_Manager : MonoBehaviour
         //maybe display a warning message about unsaved data being lose?
         SceneManager.LoadScene(homeMenu);
 
+    }
+
+    public void ControlsGuide()
+    {
+        controlsPanel.SetActive(true);
     }
 
     /*__________________________________________________________
