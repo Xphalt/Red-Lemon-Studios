@@ -5,12 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject StartGO, ExitGO, controlsPanel;
+    public GameObject StartGO, ExitGO, controlsPanel, creditsPanel;
     public string FirstLevel;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
+    }
+
+    private void Start()
+    {
+        controlsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
 
     public void StartGame(bool newGame)
@@ -37,6 +43,14 @@ public class Main_Menu : MonoBehaviour
             controlsPanel.SetActive(true);
         else
             controlsPanel.SetActive(false);
+    }
+
+    public void Credits(bool setActive)
+    {
+        if (setActive)
+            creditsPanel.SetActive(true);
+        else
+            creditsPanel.SetActive(false);
     }
 
 }
