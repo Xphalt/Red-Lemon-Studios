@@ -212,12 +212,12 @@ public class Enemy : CharacterBase
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
 
         base.TakeDamage(damage, damageType);
+    }
 
-        if (killed)
-        {
-            if (Random.value < dropChance) dropScript.Spawn();
-            gameObject.SetActive(false);
-        }
+    public override void Die()
+    {
+        if (Random.value < dropChance) dropScript.Spawn();
+        gameObject.SetActive(false);
     }
 
     public virtual void TriggerStatusEffect(ElementHazardAilments effectStats) 

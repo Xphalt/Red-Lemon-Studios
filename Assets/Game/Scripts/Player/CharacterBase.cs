@@ -198,9 +198,14 @@ public class CharacterBase : MonoBehaviour
         if (!immortal) curHealth -= value * damageRecievedMultiplier;     
         if (curHealth <= 0)
         {
-            curHealth = 0;
-            killed = true;
+            Die();
         }
+    }
+
+    public virtual void Die()
+    {
+        curHealth = 0;
+        killed = true;
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
