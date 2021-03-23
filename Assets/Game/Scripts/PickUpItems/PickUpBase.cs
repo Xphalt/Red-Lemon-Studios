@@ -33,6 +33,7 @@ public class PickUpBase : MonoBehaviour
     public void SavePickUp(string saveID)
     {
         saveID = "Pickup" + saveID;
+        SaveManager.UpdateSavedVector3(saveID + "Position", transform.position);
         SaveManager.UpdateSavedBool(saveID + "Collected", collected);
         SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
     }
@@ -40,6 +41,7 @@ public class PickUpBase : MonoBehaviour
     public void LoadPickUp(string loadID)
     {
         loadID = "Pickup" + loadID;
+        transform.position = SaveManager.GetVector3(loadID + "Position");
         collected = SaveManager.GetBool(loadID + "Collected");
         spawned = SaveManager.GetBool(loadID + "Spawned");
 

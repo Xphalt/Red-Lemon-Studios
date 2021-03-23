@@ -21,6 +21,7 @@ public class CheckpointManager : MonoBehaviour
     public List<Enemy> arenaEnemies;
     public List<RelicBase> arenaRelics;
     public List<PickUpBase> arenaPickUps;
+    public List<Interactable_Items> arenaInteractables;
     public Player arenaPlayer;
     public ArenaManager arenaManager = null;
 
@@ -60,11 +61,15 @@ public class CheckpointManager : MonoBehaviour
     {
         arenaEnemies.Clear();
         arenaPickUps.Clear();
+        arenaInteractables.Clear();
         foreach (Enemy newEnemy in Resources.FindObjectsOfTypeAll<Enemy>())
             if (newEnemy.gameObject.scene == thisScene) arenaEnemies.Add(newEnemy);
 
         foreach (PickUpBase newPickup in Resources.FindObjectsOfTypeAll<PickUpBase>())
             if (newPickup.gameObject.scene == thisScene) arenaPickUps.Add(newPickup);
+
+        foreach (Interactable_Items newInteractable in Resources.FindObjectsOfTypeAll<Interactable_Items>())
+            if (newInteractable.gameObject.scene == thisScene) arenaInteractables.Add(newInteractable);
     }
 
     private string GetCheckpointAtStart()
@@ -104,20 +109,13 @@ public class CheckpointManager : MonoBehaviour
         SaveManager.UpdateSavedString("LastOverallCheckpointID", saveID);
         SaveManager.UpdateSavedStringList("PreviousCheckpoints", previousCheckpoints);
 
-        for (int e = 0; e < arenaEnemies.Count; e++)
-        {
-            arenaEnemies[e].SaveEnemy(e.ToString() + saveID);
-        }
+        for (int e = 0; e < arenaEnemies.Count; e++) arenaEnemies[e].SaveEnemy(e.ToString() + saveID);
 
-        for (int p = 0; p < arenaPickUps.Count; p++)
-        {
-            arenaPickUps[p].SavePickUp(p.ToString() + saveID);
-        }
+        for (int i = 0; i < arenaInteractables.Count; i++) arenaInteractables[i].SaveInteractable(i.ToString() + saveID);
+        
+        for (int p = 0; p < arenaPickUps.Count; p++) arenaPickUps[p].SavePickUp(p.ToString() + saveID);
 
-        for (int r = 0; r < arenaRelics.Count; r++)
-        {
-            arenaRelics[r].SaveRelic(saveID);
-        }
+        for (int r = 0; r < arenaRelics.Count; r++) arenaRelics[r].SaveRelic(saveID);
 
         arenaPlayer.SaveStats(saveID);
 
@@ -141,15 +139,11 @@ public class CheckpointManager : MonoBehaviour
             arenaLoadID = (loadID.Contains(ArenaName)) ? loadID : SaveManager.GetString(ArenaName + "LastCheckpointID");
             checkpointsReached = SaveManager.GetInt(arenaLoadID + "CheckpointsReached");
 
-            for (int e = 0; e < arenaEnemies.Count; e++)
-            {
-                arenaEnemies[e].LoadEnemy(e.ToString() + arenaLoadID);
-            }
+            for (int e = 0; e < arenaEnemies.Count; e++) arenaEnemies[e].LoadEnemy(e.ToString() + arenaLoadID);
 
-            for (int p = 0; p < arenaPickUps.Count; p++)
-            {
-                arenaPickUps[p].LoadPickUp(p.ToString() + arenaLoadID);
-            }
+            for (int i = 0; i < arenaInteractables.Count; i++) arenaInteractables[i].LoadInteractable(i.ToString() + arenaLoadID);
+
+            for (int p = 0; p < arenaPickUps.Count; p++) arenaPickUps[p].LoadPickUp(p.ToString() + arenaLoadID);
 
             arenaManager.LoadArenaStatus(arenaLoadID);
         }

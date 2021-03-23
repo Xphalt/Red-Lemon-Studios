@@ -6,14 +6,9 @@ using static EnumHelper;
 public class EnemyAir : Enemy
 {
     public float weaponRange;
-    public int knockbackSpeed;
-    public float knockbackDuration;
-    public float postKnockbackMomentum; //Velocity retained by target after being knocked back (0-1)
 
     public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     private float minWeaponRange; //Point at which enemy runs away^
-
-    public float snipeDamage;
 
     private bool stunned;
 

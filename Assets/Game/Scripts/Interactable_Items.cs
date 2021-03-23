@@ -6,36 +6,56 @@ using UnityEngine;
 
 public class Interactable_Items : MonoBehaviour
 {
-    public float DropPercentage; //chance of dropping a pickup
+    private float DropPercentage; //chance of dropping a pickup
+
+    public int ammoDropPercent = 20;
+    public int healDropPercent = 20;
+
+    private bool destroyed = false;
+
+    public List<PickUpBase> ammoDrops;
+    public PickUpBase healthDrop;
 
     private void Start()
     {
-        DropPercentage = Random.Range(0, 100); 
+        DropPercentage = Random.Range(0, 100);
+        gameObject.SetActive(!destroyed);
     }
 
     public void OnCollisionEnter(Collision collision)
     { //check if a bullet has collided
         if (collision.gameObject.tag == "Bullet")
         {
-            Destroy(gameObject); //destroys the crate
+            destroyed = true;
+            gameObject.SetActive(false);
             Drop(DropPercentage);
         }
     }
 
     public void Drop(float value)
     {
-        Vector2 tempPos = gameObject.transform.position; //position at time of destruction
-        if (value > 60 && value <= 80)// drop ammo pickup
+        if (value <= ammoDropPercent)// drop ammo pickup
         {
-            GameObject[] boxes = GameObject.FindGameObjectsWithTag("PickUp");//grabs all ammo boxes
-            int ChosenType = Random.Range(0, 3);//picks one to drop
-            Instantiate(boxes[ChosenType], tempPos, Quaternion.identity);
+            int ChosenType = Random.Range(0, ammoDrops.Count);//picks one to drop
+            ammoDrops[ChosenType].Spawn();
         }
-        else if (value > 80) // drop health pickup
+        else if (value <= ammoDropPercent + healDropPercent) // drop health pickup
         {
-            Instantiate(GameObject.FindGameObjectWithTag("HealthUp"), tempPos, Quaternion.identity);
+            healthDrop.Spawn();
         }
-        
     }
 
+    public void SaveInteractable(string saveID)
+    {
+        saveID = "Interactable" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Destroyed", destroyed);
+    }
+
+    public void LoadInteractable(string loadID)
+    {
+        loadID = "Interactable" + loadID;
+        destroyed = SaveManager.GetBool(loadID + "Destroyed");
+
+        gameObject.SetActive(destroyed);
+    }
 }
