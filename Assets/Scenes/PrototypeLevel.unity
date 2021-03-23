@@ -3146,6 +3146,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3617868829912158951, guid: fbb5fb86ff701a84380053ca5d373315, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6025444317252461646, guid: fbb5fb86ff701a84380053ca5d373315, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3476,10 +3480,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074576360459371630, guid: d43a53bc23789e64f8b2e49a7a9a41ab, type: 3}
-      propertyPath: ammoDrop
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5074576360459371630, guid: d43a53bc23789e64f8b2e49a7a9a41ab, type: 3}
       propertyPath: characterRigid
       value: 
       objectReference: {fileID: 0}
@@ -3607,6 +3607,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 031a8219693410648b7227675e48958c, type: 3}
+--- !u!1 &6708554553444043175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6401159893810347764, guid: fbb5fb86ff701a84380053ca5d373315, type: 3}
+  m_PrefabInstance: {fileID: 417972544744093523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6708554553444043176 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3617868829912158951, guid: fbb5fb86ff701a84380053ca5d373315, type: 3}
+  m_PrefabInstance: {fileID: 417972544744093523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6708554553444043179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708554553444043175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95be44ce1d31cd84fb6dbd38f2fcaf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRigid: {fileID: 0}
+  relicPlaceHolder: {fileID: 0}
+  weapon: {fileID: 0}
+  canFly: 0
+  jumpSpeed: 12.04
+  gravityMult: 1
+  floorDistance: 1.31
+  airControl: 0
+  maxHealth: 100
+  knockbackRecovery: 0
+  sfxScript: {fileID: 0}
+  myAnim: {fileID: 6708554553444043176}
+  target: {fileID: 0}
+  elementType: 0
+  ammoDrop: {fileID: 522649053907359661, guid: ca97c59f49f872848b929e156bf39430, type: 3}
+  dropChance: 0
+  strongAgainstResist: 0.7
+  weakAgainstIncrease: 1.5
+  attackInterval: 0
+  sentryMode: 0
+  chaseSpeed: 5
+  patrolSpeed: 2
+  playerDetectionRadius: 50
+  wallDetectionRadius: 5
+  explosionDamage: 0
+  explosionRadius: 0
+  explodeSound: 
+  jumpSound: 
 --- !u!1001 &6883768328292904951
 PrefabInstance:
   m_ObjectHideFlags: 0

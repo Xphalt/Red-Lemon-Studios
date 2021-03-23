@@ -27,13 +27,51 @@ public class EnemyFire : Enemy
         if (CanSeePlayer()) movementState = EnemyStates.Chasing;
         else if (!sentryMode) movementState = EnemyStates.Patrolling;
 
-        if (!sentryMode)
+        if (!sentryMode && movementState == EnemyStates.Chasing)
         {
             bool newJump = !jumping;
             Jump();
 
             newJump = jumping && newJump;
             if (newJump) sfxScript.PlaySFX3D(jumpSound, transform.position);
+
+        }
+
+        Animate();
+    }
+
+    public override void Animate()
+    {
+        base.Animate();
+        Animator MyAnim = gameObject.GetComponent<Animator>();
+        if (movementState == EnemyStates.Chasing)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+            MyAnim.SetBool("JumpingDown", false);
+
+            if (characterRigid.velocity.y > 0)
+            {
+                MyAnim.SetBool("JumpingUp", true);
+                MyAnim.SetBool("Motion", false);
+            }
+            else if (characterRigid.velocity.y < 0)
+            {
+                MyAnim.SetBool("JumpingUp", false);
+                MyAnim.SetBool("JumpingDown", true);
+            }
+        }
+        else if (movementState == EnemyStates.Idle)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", false);
+            MyAnim.SetBool("JumpingDown", false);
+        }
+        else if (movementState == EnemyStates.Patrolling)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+            MyAnim.SetBool("JumpingDown", false);
         }
     }
 
@@ -68,12 +106,14 @@ public class EnemyFire : Enemy
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
+        myAnim.SetBool("Ignited", false);
         canExplode = false;
     }
 
     public override void EndSatusEffect()
     {
         base.EndSatusEffect();
+        myAnim.SetBool("Ignited", true);
         canExplode = true;
     }
 }
