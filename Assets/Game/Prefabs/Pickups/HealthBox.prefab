@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9077478207314496006}
   m_Layer: 12
   m_Name: HealthBox
-  m_TagString: PickUp
+  m_TagString: HealthUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251a7b5aadc32cc4f9a51d9278f0734c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDrop: 0
   spawned: 1
   RestoreValue: 50
 --- !u!54 &9077478207314496006
