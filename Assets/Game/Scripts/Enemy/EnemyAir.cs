@@ -50,7 +50,7 @@ public class EnemyAir : Enemy
                 movementState = EnemyStates.Idle;
                 transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
             }
-
+            Animate();
             if (inAttackRange)
             {
                 Attack();
@@ -91,5 +91,31 @@ public class EnemyAir : Enemy
         base.EndSatusEffect();
         stunned = false;
         DOTTimer = 0;
+    }
+
+    public override void Animate()
+    {
+        base.Animate();
+        Animator MyAnim = gameObject.GetComponent<Animator>();
+        if (movementState == EnemyStates.Idle)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Chasing)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", true);
+        }
+        else if (movementState == EnemyStates.Patrolling)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Fleeing)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", true);
+        }
     }
 }
