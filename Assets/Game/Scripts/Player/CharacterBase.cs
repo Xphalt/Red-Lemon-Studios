@@ -91,7 +91,7 @@ public class CharacterBase : MonoBehaviour
             jumping = false;
         }
 
-        if (!canFly) characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
+        if (!canFly && characterRigid.useGravity) characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
     }
 
     public virtual void OnCollisionEnter(Collision collision)
