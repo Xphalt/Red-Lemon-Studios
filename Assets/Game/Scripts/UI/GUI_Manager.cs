@@ -142,9 +142,12 @@ public class GUI_Manager : MonoBehaviour
         SceneManager.LoadScene(homeMenu);
     }
 
-    public void ControlsGuide()
+    public void ShowControls(bool isShown)
     {
-        controlsPanel.SetActive(true);
+        if (isShown)
+            controlsPanel.SetActive(true);
+        else
+            controlsPanel.SetActive(false);
     }
 
     /*__________________________________________________________
