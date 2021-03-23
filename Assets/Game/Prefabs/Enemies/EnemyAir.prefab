@@ -144,7 +144,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &1887174811526350812
 MonoBehaviour:
@@ -158,16 +158,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01567f7173ec0c4b8a638d61f416c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterRigid: {fileID: 0}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 4460503913441505782}
   canFly: 0
-  jumpForce: 0
+  jumpSpeed: 0
   gravityMult: 2
   floorDistance: 1.01
   airControl: 0
   maxHealth: 100
   knockbackRecovery: 0
-  SFXManager: {fileID: 0}
+  sfxScript: {fileID: 0}
   target: {fileID: 0}
   elementType: 2
   ammoDrop: {fileID: 8988498476532925396}
@@ -176,7 +177,6 @@ MonoBehaviour:
   weakAgainstIncrease: 1.5
   attackInterval: 2
   sentryMode: 0
-  spawned: 0
   chaseSpeed: 5
   patrolSpeed: 2
   playerDetectionRadius: 100
