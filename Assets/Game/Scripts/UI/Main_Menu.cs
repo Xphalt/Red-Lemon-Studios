@@ -5,17 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject StartGO, ExitGO;
+    public GameObject StartGO, ExitGO, controlsPanel;
     public string FirstLevel;
-    public Canvas worldCanvas, localCanvas;
-
-    private Camera mainCamera;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
-        mainCamera = FindObjectOfType<Camera>();
-        mainCamera = mainCamera.GetComponent<Camera>();
     }
 
     public void StartGame(bool newGame)
@@ -36,11 +31,13 @@ public class Main_Menu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Controls()
+    public void Controls(bool setActive)
     {
-        worldCanvas.enabled = false;
-        localCanvas.enabled = true;
-        mainCamera.transform.position = Vector3.zero;
+        if (setActive)
+            controlsPanel.SetActive(true);
+        else
+            controlsPanel.SetActive(false);
     }
+
 }
 
