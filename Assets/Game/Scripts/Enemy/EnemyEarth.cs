@@ -20,17 +20,19 @@ public class EnemyEarth : Enemy
         elementType = ElementTypes.Earth;
         weakAgainst = ElementTypes.Air;
         strongAgainst = ElementTypes.Water;
+        canFly = false;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (attackTimer > rollDuration && rolling)
+        if (attackTimer > rollDuration)
         {
-            EndRoll();
+            rolling = false;
+            impactDamage = 0;
         }
-
+        Animate();
         if (!rolling)
         {
             if (CanSeePlayer()) movementState = EnemyStates.Chasing;
@@ -61,6 +63,27 @@ public class EnemyEarth : Enemy
         EndShift();
 
         sfxScript.PlaySFX3D(chargeEndSound, transform.position);
+    }
+
+    public override void Animate()
+    {
+        base.Animate();
+        Animator MyAnim = gameObject.GetComponent<Animator>();
+        if (movementState == EnemyStates.Chasing)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", true);
+        }
+        else if (movementState == EnemyStates.Idle)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Patrolling)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+        }
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)

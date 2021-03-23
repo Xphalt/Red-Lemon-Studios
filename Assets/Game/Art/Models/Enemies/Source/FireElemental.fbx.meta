@@ -1,30 +1,33 @@
 fileFormatVersion: 2
-guid: c699a7a9976a89d47bd4fb99f039674b
+guid: 65f0560a0e7d04847a74ae695886b2b6
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 5978651762570310600
-    second: Armature|Fist
+      74: 4723146814002874508
+    second: Armature|Attack
+  - first:
+      74: -982115091633673366
+    second: Armature|Death
   - first:
       74: -8945691123924629249
     second: Armature|Idle
-  externalObjects:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GauntletBase
-    second: {fileID: 2100000, guid: e926ffe73b7263342ac63c080c4fd1b0, type: 2}
+      74: -6688971717060260294
+    second: Armature|JumpDown
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gem
-    second: {fileID: 2100000, guid: d7b643a1206dda147b98c7a730a43ff1, type: 2}
+      74: -7459061412826317550
+    second: Armature|JumpPrep
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gold
-    second: {fileID: 2100000, guid: 1d33d4659c823cf4c8f4cefd13e38842, type: 2}
+      74: 5277777409621656941
+    second: Armature|JumpUp
+  - first:
+      74: -4846281597985937304
+    second: Armature|MoveExhausted
+  - first:
+      74: 8535341216686289569
+    second: Armature|MoveIgnited
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

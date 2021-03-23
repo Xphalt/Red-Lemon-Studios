@@ -18,6 +18,7 @@ public class Enemy : CharacterBase
 {
     public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
 
+    public Animator myAnim;
     public GameObject target = null;
     public ElementTypes elementType;
     protected ElementTypes weakAgainst;
@@ -185,6 +186,11 @@ public class Enemy : CharacterBase
 
         attackTimer = 0;
         return true;
+    }
+
+    public virtual void Animate()
+    {
+        //currently used as a placeholder
     }
 
     public override void OnCollisionEnter(Collision collision)

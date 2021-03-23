@@ -1,21 +1,25 @@
 fileFormatVersion: 2
-guid: bf99e89d8444d244fad5fc77351efbdb
+guid: fa25084ba66b9af4585d26d52e06e347
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 4838144418298959550
-    second: Armature.001|0Idle
+      74: 2917318281195987965
+    second: Armature|Activate
   - first:
-      74: 5036245915125911459
-    second: Armature.001|Boulder
+      74: -8945691123924629249
+    second: Armature|Idle
+  externalObjects:
   - first:
-      74: -783536535281243057
-    second: Armature.001|Transformation
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower
+    second: {fileID: 2100000, guid: dec89a57c0a90b745bfe6103300b6f9d, type: 2}
   - first:
-      74: -6991723973015678290
-    second: Armature.001|Walking
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hand
+    second: {fileID: 2100000, guid: aeb8954eaa2015b41963153211a1eb5c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
