@@ -37,6 +37,7 @@ public class EnemyAir : Enemy
 
         if (!stunned)
         {
+
             if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
             else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
