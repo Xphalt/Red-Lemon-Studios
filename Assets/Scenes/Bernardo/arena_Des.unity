@@ -7498,6 +7498,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435191534387768162, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: ArenaName
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 435191534387768162, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: arenaEnemies.Array.data[0]
       value: 
       objectReference: {fileID: 4747336620897222089}
@@ -7703,19 +7707,19 @@ PrefabInstance:
       objectReference: {fileID: 3477054512513970659}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.35
+      value: -145.7
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.38
+      value: -10.8
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 92.24
+      value: 212.1
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalRotation.x
@@ -7723,7 +7727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalRotation.z
@@ -7731,7 +7735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6107562915893912266, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchoredPosition.x
