@@ -30,6 +30,7 @@ public class Player : CharacterBase
     public string jumpSound;
     public string landSound;
     public string damageSound;
+    public string deathSound;
 
     public override void Awake()
     {
@@ -212,6 +213,13 @@ public class Player : CharacterBase
         base.TakeDamage(damage);
         sfxScript.PlaySFX3D(damageSound, transform.position);
         userInterface.UpdateHealth(curHealth);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        sfxScript.PlaySFX2D(deathSound);
     }
 
     public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)

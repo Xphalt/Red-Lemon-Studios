@@ -8,6 +8,8 @@ public class LevelTransitionTrigger : MonoBehaviour
     public List<GameObject> images;
     private bool active = false;
 
+    public AudioSource audioSource;
+
     private void Update()
     {
         if (!active)
@@ -16,6 +18,7 @@ public class LevelTransitionTrigger : MonoBehaviour
             if (active)
             {
                 foreach (GameObject image in images) image.SetActive(true);
+                audioSource.Play();
             }
         }
     }
