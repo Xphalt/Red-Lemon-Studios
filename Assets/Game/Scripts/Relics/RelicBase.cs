@@ -42,7 +42,11 @@ public class RelicBase : MonoBehaviour
     public virtual void Start()
     {
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
-        if (user == null && inArena) gameObject.SetActive(spawned && !collected);
+        if (user == null)
+        {
+            if (inArena) gameObject.SetActive(spawned && !collected);
+            else gameObject.SetActive(false);
+        }
     }
 
     public virtual void SetUser(GameObject newUser)
