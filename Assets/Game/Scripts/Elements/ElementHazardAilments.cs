@@ -25,6 +25,18 @@ public class ElementHazardAilments : MonoBehaviour
     internal bool successfulHit = false;
     internal Teams team;
 
+    public bool dieOnHit = false;
+
+    public string hitSound;
+
+    internal SFXScript sfxScript = null;
+
+    public Color normalHitColour;
+    public Color strongHitColour;
+    public Color weakHitColour;
+
+    public bool changesColour = false;
+
     public void Initialise(float weaponDamage, CharacterBase newUser)
     {
         userScript = newUser;
@@ -36,6 +48,12 @@ public class ElementHazardAilments : MonoBehaviour
     {
         userScript.IncreaseCombo();
         successfulHit = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (sfxScript != null) sfxScript.PlaySFX3D(hitSound, transform.position);
+        if (dieOnHit) Destroy(gameObject);
     }
 
     private void OnDestroy()

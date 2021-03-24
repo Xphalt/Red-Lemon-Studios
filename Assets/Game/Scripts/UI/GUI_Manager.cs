@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static EnumHelper;
 
@@ -21,9 +22,19 @@ public class GUI_Manager : MonoBehaviour
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    private void Update()
+    //Pause Menu variables
+    public string homeMenu;
+    public GameObject pausePanel, toolbarPanel;
+
+    //Toolbar Menu and Toolbar Menu
+    [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
+    public Text RelicNameHolder, RelicInfoHolder;
+    public Image ImageHolder;
+    public List<Image> relicImage = new List<Image>();
+
+    private void Start()
     {
-        HighlightSelectedAmmo();
+        pausePanel.SetActive(false);
     }
 
     /*__________________________________________________________
@@ -62,20 +73,20 @@ public class GUI_Manager : MonoBehaviour
 
     public void SetMaxAmmo(float maxAmmo)
     {
-         ammoSlider.maxValue = maxAmmo;
-         ammoSlider.value = maxAmmo;
+        ammoSlider.maxValue = maxAmmo;
+        ammoSlider.value = maxAmmo;
     }
 
     public void UpdateAmmoCount(float curAmmoCount)
     {
-         ammoSlider.value = curAmmoCount;
+        ammoSlider.value = curAmmoCount;
     }
 
     /*__________________________________________________________
     Ammo Selection panel code
     ____________________________________________________________*/
 
-    private void HighlightSelectedAmmo()
+    public void HighlightSelectedAmmo()
     {
         ResetElementalImages();
         switch (player.elementChanger.m_CurElement)
@@ -108,4 +119,67 @@ public class GUI_Manager : MonoBehaviour
         fireImage.sprite = fireIcon;
         earthImage.sprite = earthIcon;
     }
+
+    /*__________________________________________________________
+    Pause menu code
+    ____________________________________________________________*/
+
+    public bool PausePlay()
+    {
+        if (!toolbarPanel.activeSelf)
+        {
+            pausePanel.SetActive(!pausePanel.activeSelf);
+            return true;
+        }
+        return false;
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        //maybe display a warning message about unsaved data being lose?
+        SceneManager.LoadScene(homeMenu);
+
+    }
+
+    /*__________________________________________________________
+    Tool bar view menu code
+    ____________________________________________________________*/
+
+    public bool ShowToolBarMenu()
+    {
+        if (!pausePanel.activeSelf)
+        {
+            toolbarPanel.SetActive(!toolbarPanel.activeSelf);
+            return true;
+        }
+        return false;
+    }
+
+    public void SetRelicInfo(int relicType)
+    {
+        RelicNameHolder.text = ((ElementTypes)relicType).ToString();
+        RelicInfoHolder.text = RelicDescription[relicType];
+
+
+        switch (relicType)
+        {
+            case 0:
+                ImageHolder.sprite = relicImage[0].sprite;
+                break;     
+            case 1:        
+                ImageHolder.sprite = relicImage[1].sprite;
+                break;     
+            case 2:        
+                ImageHolder.sprite = relicImage[2].sprite;
+                break;     
+            case 3:        
+                ImageHolder.sprite = relicImage[3].sprite;
+                break;
+            default:
+                break;
+        }
+
+    }
+
 }

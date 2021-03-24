@@ -18,8 +18,10 @@ public class RelicAir : RelicBase
     public int maxHits = 1;
     private int hits;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         grappleSwing = Mathf.Clamp(grappleSwing, 0, 1);
         hits = maxHits;
         relicType = ElementTypes.Air;
@@ -54,6 +56,8 @@ public class RelicAir : RelicBase
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
             characterScript.immortal = true;
+
+            sfxScript.PlaySFX3D(activateSound, user.transform.position);
 
             return true;
         }

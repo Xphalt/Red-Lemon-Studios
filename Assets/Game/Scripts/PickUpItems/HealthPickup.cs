@@ -11,16 +11,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour
+public class HealthPickup : PickUpBase
 {
     public float RestoreValue;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<Player>().AddHealth(RestoreValue);
-            gameObject.SetActive(false);
+            other.gameObject.GetComponent<Player>().AddHealth(RestoreValue);
+            Collect();
         }
     }
 }

@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
+  canFly: 0
   jumpForce: 800
   gravityMult: 2
   floorDistance: 1
@@ -208,7 +209,7 @@ MonoBehaviour:
   MaximumX: 90
   smooth: 0
   smoothTime: 5
-  lockCursor: 1
+  startLocked: 1
   firstPersonCamera: {fileID: 7338099964422291514}
 --- !u!1 &7338099964422291462
 GameObject:
@@ -275,7 +276,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

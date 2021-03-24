@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3096689947728228786}
   - component: {fileID: 5313912259567947170}
   m_Layer: 9
-  m_Name: RelicFire
+  m_Name: RelicFirePrimitive
   m_TagString: Relic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5587617274265408724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3269043, y: -576.26, z: -1320.9978}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,15 +109,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicType: 0
+  inArena: 0
   maxCombo: 10
   percentIncreasePerHit: 10
   damagePercentRecievedOnMiss: 25
   missPenalty: 1
-  doubleJumpEnabled: 0
+  maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1
   speedMultiplier: 1
   relicCooldownDuration: 3
+  sfxScript: {fileID: 0}
+  activateSound: FireRelicUse
   dashSpeed: 100
   dashDuration: 0.35
   postDashMomentum: 0.1

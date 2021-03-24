@@ -6,7 +6,7 @@ public class RelicEarth : RelicBase
 {
     public GameObject pillar;
     private Transform pillarTransform;
-    private EarthPillarScript pillarScript;
+    private EarthPillarScript pillarScript = null;
     public float maxPillarSize;
     public float pillarDamage;
     public float userMomentumResidue = 0.1f;
@@ -16,17 +16,24 @@ public class RelicEarth : RelicBase
     private float pillarTimer = 0;
     private float sizePerSecond;
 
-
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
+
+        pillarScript = pillar.GetComponent<EarthPillarScript>();
+        pillarTransform = pillar.GetComponent<Transform>();
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        
         userMomentumResidue = Mathf.Clamp(userMomentumResidue, 0, 1);
         hostileMomentumResidue = Mathf.Clamp(hostileMomentumResidue, 0, 1);
 
-        pillarTransform = pillar.GetComponent<Transform>();
         pillarTransform.localScale = new Vector3(pillarTransform.localScale.x, 0, pillarTransform.localScale.z);
 
         sizePerSecond = maxPillarSize / pillarLifeTime;
-        pillarScript = pillar.GetComponent<EarthPillarScript>();
 
         pillar.SetActive(false);
     }
@@ -49,7 +56,6 @@ public class RelicEarth : RelicBase
     public override void SetUser(GameObject newUser)
     {
         base.SetUser(newUser);
-
         pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript.team, userMomentumResidue, hostileMomentumResidue);
     }
 
@@ -73,6 +79,8 @@ public class RelicEarth : RelicBase
                 readyToUse = false;
                 inUse = true;
 
+                sfxScript.PlaySFX3D(activateSound, user.transform.position);
+                
                 return true;
             }
         }
