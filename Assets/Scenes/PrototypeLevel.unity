@@ -3379,6 +3379,18 @@ PrefabInstance:
       propertyPath: floorDistance
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1140679926596329740, guid: 30b53281b264ed84fb5a290c91e06a01, type: 3}
+      propertyPath: attackInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140679926596329740, guid: 30b53281b264ed84fb5a290c91e06a01, type: 3}
+      propertyPath: stationaryZone
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140679926596329740, guid: 30b53281b264ed84fb5a290c91e06a01, type: 3}
+      propertyPath: wallDetectionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1855838349543100420, guid: 30b53281b264ed84fb5a290c91e06a01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 12.906275
