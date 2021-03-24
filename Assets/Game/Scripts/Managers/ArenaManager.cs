@@ -15,7 +15,7 @@ public class ArenaManager : MonoBehaviour
     [Tooltip("Number of enemies/number of spawn positions rounded up = number of waves")]
     public List<Transform> enemySpawnPos = new List<Transform>();
 
-    private int waveCounter = 0;
+    internal int waveCounter = 0;
     private int maxWaves;
 
     public float waveDelay;
@@ -33,6 +33,10 @@ public class ArenaManager : MonoBehaviour
     internal bool bRelicCollected = false;
 
     internal bool bCheckpointReady = false;
+
+    public SFXScript sfxScript;
+    public string enemiesDeadSound;
+    public string enemySpawnSound;
 
     #endregion
 
@@ -66,6 +70,7 @@ public class ArenaManager : MonoBehaviour
         else bRelicCollected = true;
 
         if (nextScene == "") nextScene = SceneManager.GetSceneAt((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings).name;
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
 
     private void Update()
@@ -100,6 +105,8 @@ public class ArenaManager : MonoBehaviour
                     relic.SetActive(true);
                 }
                 bCheckpointReady = true;
+
+                sfxScript.PlaySFX2D(enemiesDeadSound);
             }
         }
 
@@ -132,6 +139,7 @@ public class ArenaManager : MonoBehaviour
                 if (e >= enemies.Count) break;
                 enemies[e].SetActive(true);
                 enemyScripts[e].spawned = true;
+                sfxScript.PlaySFX2D(enemySpawnSound);
             }
 
             bWavesStarted = true;

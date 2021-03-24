@@ -8,8 +8,13 @@ public class PickUpBase : MonoBehaviour
     public bool enemyDrop;
     public bool spawned;
 
+    public SFXScript sfxScript;
+
+    public string collectionSound;
+
     private void Start()
     {
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
         gameObject.SetActive(spawned);
     }
 
@@ -28,6 +33,8 @@ public class PickUpBase : MonoBehaviour
     {
         collected = true;
         gameObject.SetActive(false);
+
+        sfxScript.PlaySFX3D(collectionSound, transform.position);
     }
 
     public void SavePickUp(string saveID)

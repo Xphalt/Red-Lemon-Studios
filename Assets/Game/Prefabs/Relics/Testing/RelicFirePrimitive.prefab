@@ -120,7 +120,8 @@ MonoBehaviour:
   speedMultiplier: 1
   relicCooldownDuration: 3
   sfxScript: {fileID: 0}
-  activateSound: FireRelicUse
+  collectionSound: PickupRelic
+  activateSound: FireRelic
   dashSpeed: 100
   dashDuration: 0.35
   postDashMomentum: 0.1
