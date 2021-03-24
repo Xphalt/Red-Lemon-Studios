@@ -57,9 +57,13 @@ public class ArenaManager : MonoBehaviour
 
         if (enemySpawnPos.Count > 0) maxWaves = Mathf.CeilToInt((float)enemies.Count / enemySpawnPos.Count);
 
-        relic.transform.position = relicSpawnPos.position;
-        relicScript = relic.GetComponent<RelicBase>();
-        relicScript.inArena = true;
+        if (relic != null)
+        {
+            relic.transform.position = relicSpawnPos.position;
+            relicScript = relic.GetComponent<RelicBase>();
+            relicScript.inArena = true;
+        }
+        else bRelicCollected = true;
 
         if (nextScene == "") nextScene = SceneManager.GetSceneAt((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings).name;
     }
@@ -90,8 +94,11 @@ public class ArenaManager : MonoBehaviour
             if (!enemiesRemaining)
             {
                 bEnemiesCleared = true;
-                relicScript.spawned = true;
-                relic.SetActive(true);
+                if (relic != null)
+                {
+                    relicScript.spawned = true;
+                    relic.SetActive(true);
+                }
                 bCheckpointReady = true;
             }
         }
