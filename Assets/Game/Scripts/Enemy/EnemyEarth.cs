@@ -67,22 +67,24 @@ public class EnemyEarth : Enemy
 
     public override void Animate()
     {
-        base.Animate();
-        Animator MyAnim = gameObject.GetComponent<Animator>();
-        if (movementState == EnemyStates.Chasing)
+        if (myAnim != null)
         {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", true);
-        }
-        else if (movementState == EnemyStates.Idle)
-        {
-            MyAnim.SetBool("Motion", false);
-            MyAnim.SetBool("Attacking", false);
-        }
-        else if (movementState == EnemyStates.Patrolling)
-        {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", false);
+            base.Animate();
+            if (movementState == EnemyStates.Chasing)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", true);
+            }
+            else if (movementState == EnemyStates.Idle)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Patrolling)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+            }
         }
     }
 

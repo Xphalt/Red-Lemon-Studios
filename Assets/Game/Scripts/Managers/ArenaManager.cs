@@ -84,6 +84,7 @@ public class ArenaManager : MonoBehaviour
 
             foreach (Enemy enemy in enemyScripts)
             {
+                print(enemy.killed);
                 if (!enemy.killed)
                 {
                     enemiesRemaining = true;

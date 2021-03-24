@@ -43,35 +43,37 @@ public class EnemyFire : Enemy
     public override void Animate()
     {
         base.Animate();
-        Animator MyAnim = gameObject.GetComponent<Animator>();
-        if (movementState == EnemyStates.Chasing)
+        if (myAnim != null)
         {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", false);
-            MyAnim.SetBool("JumpingDown", false);
+            if (movementState == EnemyStates.Chasing)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+                myAnim.SetBool("JumpingDown", false);
 
-            if (characterRigid.velocity.y > 0)
-            {
-                MyAnim.SetBool("JumpingUp", true);
-                MyAnim.SetBool("Motion", false);
+                if (characterRigid.velocity.y > 0)
+                {
+                    myAnim.SetBool("JumpingUp", true);
+                    myAnim.SetBool("Motion", false);
+                }
+                else if (characterRigid.velocity.y < 0)
+                {
+                    myAnim.SetBool("JumpingUp", false);
+                    myAnim.SetBool("JumpingDown", true);
+                }
             }
-            else if (characterRigid.velocity.y < 0)
+            else if (movementState == EnemyStates.Idle)
             {
-                MyAnim.SetBool("JumpingUp", false);
-                MyAnim.SetBool("JumpingDown", true);
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+                myAnim.SetBool("JumpingDown", false);
             }
-        }
-        else if (movementState == EnemyStates.Idle)
-        {
-            MyAnim.SetBool("Motion", false);
-            MyAnim.SetBool("Attacking", false);
-            MyAnim.SetBool("JumpingDown", false);
-        }
-        else if (movementState == EnemyStates.Patrolling)
-        {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", false);
-            MyAnim.SetBool("JumpingDown", false);
+            else if (movementState == EnemyStates.Patrolling)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+                myAnim.SetBool("JumpingDown", false);
+            }
         }
     }
 

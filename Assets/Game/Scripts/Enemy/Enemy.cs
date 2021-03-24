@@ -19,7 +19,7 @@ public class Enemy : CharacterBase
 {
     public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
 
-    public Animator myAnim;
+    public Animator myAnim = null;
     public GameObject target = null;
     public ElementTypes elementType;
     protected ElementTypes weakAgainst;
@@ -70,6 +70,8 @@ public class Enemy : CharacterBase
         playerScript = target.GetComponent<Player>();
         dropScript = ammoDrop.GetComponent<PickUpBase>();
         dropChance = Mathf.Clamp(dropChance, 0, 1);
+
+        if (myAnim = null) myAnim = gameObject.GetComponent<Animator>();
 
         if (skins.Count == 0)
         {
@@ -287,6 +289,8 @@ public class Enemy : CharacterBase
 
     public override void Die()
     {
+        base.Die();
+
         if (Random.value < dropChance) dropScript.Spawn();
         gameObject.SetActive(false);
     }
