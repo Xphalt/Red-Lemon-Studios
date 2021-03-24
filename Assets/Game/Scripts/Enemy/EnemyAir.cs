@@ -91,27 +91,29 @@ public class EnemyAir : Enemy
 
     public override void Animate()
     {
-        base.Animate();
-        Animator MyAnim = gameObject.GetComponent<Animator>();
-        if (movementState == EnemyStates.Idle)
+        if (myAnim != null)
         {
-            MyAnim.SetBool("Motion", false);
-            MyAnim.SetBool("Attacking", false);
-        }
-        else if (movementState == EnemyStates.Chasing)
-        {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", true);
-        }
-        else if (movementState == EnemyStates.Patrolling)
-        {
-            MyAnim.SetBool("Motion", true);
-            MyAnim.SetBool("Attacking", false);
-        }
-        else if (movementState == EnemyStates.Fleeing)
-        {
-            MyAnim.SetBool("Motion", false);
-            MyAnim.SetBool("Attacking", true);
+            base.Animate();
+            if (movementState == EnemyStates.Idle)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Chasing)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", true);
+            }
+            else if (movementState == EnemyStates.Patrolling)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Fleeing)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", true);
+            }
         }
     }
 }

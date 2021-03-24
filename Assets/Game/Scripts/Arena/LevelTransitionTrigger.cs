@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelTransitionTrigger : MonoBehaviour
 {
     public ArenaManager arenaManager;
-
+    public List<GameObject> images;
     private bool active = false;
 
     private void Update()
@@ -15,7 +15,7 @@ public class LevelTransitionTrigger : MonoBehaviour
             active = arenaManager.bEnemiesCleared && arenaManager.bRelicCollected;
             if (active)
             {
-                // trigger visual change (colour/animation etc.)
+                foreach (GameObject image in images) image.SetActive(true);
             }
         }
     }
