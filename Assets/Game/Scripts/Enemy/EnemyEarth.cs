@@ -67,7 +67,7 @@ public class EnemyEarth : Enemy
 
     public override void Animate()
     {
-        if (myAnim != null)
+        if (myAnim)
         {
             base.Animate();
             if (movementState == EnemyStates.Chasing)
