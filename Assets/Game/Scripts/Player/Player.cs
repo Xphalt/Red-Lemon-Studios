@@ -117,7 +117,7 @@ public class Player : CharacterBase
                 }
                 else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
 
-                sfxScript.PlaySFX2D(ammoChangeSound, false, 0.3f);
+                sfxScript.PlaySFX2D(ammoChangeSound);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))

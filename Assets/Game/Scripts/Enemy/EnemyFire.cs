@@ -100,7 +100,7 @@ public class EnemyFire : Enemy
         if (canExplode && GetDistance() < explosionRadius)
         {
             playerScript.TakeDamage(explosionDamage);
-            sfxScript.PlaySFX3D(explodeSound, transform.position, false, 5);
+            sfxScript.PlaySFX3D(explodeSound, transform.position);
         }
         gameObject.SetActive(false);
     }
