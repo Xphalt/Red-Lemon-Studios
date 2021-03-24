@@ -108,14 +108,14 @@ public class EnemyFire : Enemy
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
-        myAnim.SetBool("Ignited", false);
+        if (myAnim != null) myAnim.SetBool("Ignited", false);
         canExplode = false;
     }
 
     public override void EndSatusEffect()
     {
         base.EndSatusEffect();
-        myAnim.SetBool("Ignited", true);
+        if (myAnim != null) myAnim.SetBool("Ignited", true);
         canExplode = true;
     }
 }

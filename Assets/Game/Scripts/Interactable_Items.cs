@@ -56,6 +56,6 @@ public class Interactable_Items : MonoBehaviour
         loadID = "Interactable" + loadID;
         destroyed = SaveManager.GetBool(loadID + "Destroyed");
 
-        gameObject.SetActive(destroyed);
+        gameObject.SetActive(!destroyed);
     }
 }

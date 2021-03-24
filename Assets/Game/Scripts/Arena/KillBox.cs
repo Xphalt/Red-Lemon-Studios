@@ -13,6 +13,7 @@ public class KillBox : MonoBehaviour
         {
             playerScript.TakeDamage(damage);
             playerScript.transform.position = respawnPos.position;
+            collision.attachedRigidbody.velocity = Vector3.zero;
         }
         else if (collision.TryGetComponent(out Enemy enemyScript)) enemyScript.Die();
     }
