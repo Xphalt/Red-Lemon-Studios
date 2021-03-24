@@ -31,6 +31,12 @@ public class ElementHazardAilments : MonoBehaviour
 
     internal SFXScript sfxScript = null;
 
+    public Color normalHitColour;
+    public Color strongHitColour;
+    public Color weakHitColour;
+
+    public bool changesColour = false;
+
     public void Initialise(float weaponDamage, CharacterBase newUser)
     {
         userScript = newUser;

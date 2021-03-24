@@ -815,7 +815,12 @@ MonoBehaviour:
   dropChance: 0.5
   strongAgainstResist: 0.7
   weakAgainstIncrease: 1.5
-  attackInterval: 0
+  defaultColourChangeDuration: 0.1
+  skins:
+  - {fileID: 3864337383671841871}
+  - {fileID: 765132566680288621}
+  - {fileID: 4638809498539717324}
+  attackInterval: 1
   sentryMode: 0
   chaseSpeed: 5
   patrolSpeed: 2

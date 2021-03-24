@@ -11,6 +11,7 @@
 /// 
 /// </summary>
 
+using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
@@ -32,6 +33,14 @@ public class Enemy : CharacterBase
 
     public float strongAgainstResist = 0.7f;
     public float weakAgainstIncrease = 1.5f;
+
+    public float defaultColourChangeDuration = 0.1f;
+    private float colourChangeDuration;
+    private float colourChangeTimer = 0;
+    private bool colourChanged = false;
+
+    public List<SkinnedMeshRenderer> skins;
+    private List<List<Color>> originalColours = new List<List<Color>>();
 
     public float attackInterval;
     protected float attackTimer = 0;
@@ -61,6 +70,20 @@ public class Enemy : CharacterBase
         playerScript = target.GetComponent<Player>();
         dropScript = ammoDrop.GetComponent<PickUpBase>();
         dropChance = Mathf.Clamp(dropChance, 0, 1);
+
+        if (skins.Count == 0)
+        {
+            foreach (SkinnedMeshRenderer newSkin in gameObject.transform.GetComponentsInChildren<SkinnedMeshRenderer>()) skins.Add(newSkin);
+        }
+
+        for (int s = 0; s < skins.Count; s++)
+        {
+            originalColours.Add(new List<Color>());
+            foreach (Material skinmat in skins[s].materials)
+            {
+                originalColours[s].Add(skinmat.color);
+            }
+        }
     }
 
     public override void Start()
@@ -86,6 +109,24 @@ public class Enemy : CharacterBase
             if (statusTimer > statusDuration)
             {
                 EndSatusEffect();
+            }
+        }
+
+        if (colourChanged)
+        {
+            colourChangeTimer += Time.deltaTime;
+            if (colourChangeTimer > colourChangeDuration)
+            {
+                for (int s = 0; s < skins.Count; s++)
+                {
+                    for (int m = 0; m < skins[s].materials.Length; m++)
+                    {
+                        skins[s].materials[m].color = originalColours[s][m];
+                    }
+                }
+
+                colourChanged = false;
+                colourChangeTimer = 0;
             }
         }
     }
@@ -163,8 +204,7 @@ public class Enemy : CharacterBase
 
     public bool CanSeePlayer()
     {
-        RaycastHit castHit;
-        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out castHit, playerDetectionRadius)) return false;
+        if (!Physics.Raycast(transform.position, (target.transform.position - transform.position), out RaycastHit castHit, playerDetectionRadius)) return false;
 
         if (castHit.transform.gameObject == target)
         {
@@ -199,6 +239,7 @@ public class Enemy : CharacterBase
 
         if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
+            ChangeColour(effectStats);
             if (effectStats.hasEffect && effectStats.damageType == weakAgainst && effectStats.team != team)
             {
                 TriggerStatusEffect(effectStats);
@@ -206,8 +247,38 @@ public class Enemy : CharacterBase
         }
     }
 
+    public void ChangeColour(ElementHazardAilments effectStats)
+    {
+        if (effectStats.changesColour)
+        {
+            Color newColour;
+            colourChanged = true;
+            colourChangeTimer = 0;
+
+            if (effectStats.damageType == weakAgainst)
+            {
+                newColour = effectStats.weakHitColour;
+                colourChangeDuration = (effectStats.hasEffect && effectStats.statusEffectDuration != 0) ? effectStats.statusEffectDuration : defaultColourChangeDuration;
+            }
+            else
+            {
+                colourChangeDuration = defaultColourChangeDuration;
+                newColour = (effectStats.damageType == strongAgainst) ? effectStats.strongHitColour : effectStats.normalHitColour;
+            }
+
+            foreach (SkinnedMeshRenderer skin in skins)
+            {
+                for (int m = 0; m < skin.materials.Length; m++)
+                {
+                    skin.materials[m].color = newColour;
+                }
+            }
+        }
+    }
+
     public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
     {
+
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
 
