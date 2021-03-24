@@ -26,7 +26,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!objectsPreviousParents.ContainsKey(collision.transform))
+        if (!objectsPreviousParents.ContainsKey(collision.transform) && collision.transform.CompareTag("Player"))
         {
             objectsPreviousParents.Add(collision.transform, collision.transform.parent);
             collision.transform.SetParent(transform);
@@ -35,7 +35,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (objectsPreviousParents.ContainsKey(collision.transform))
+        if (objectsPreviousParents.ContainsKey(collision.transform) && collision.transform.CompareTag("Player"))
         {
             collision.transform.SetParent(objectsPreviousParents[collision.transform]);
             objectsPreviousParents.Remove(collision.transform);

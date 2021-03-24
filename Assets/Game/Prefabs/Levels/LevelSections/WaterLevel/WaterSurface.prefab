@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8656244106451425289}
   - component: {fileID: 8656244106451425294}
   - component: {fileID: 8656244106451425293}
-  - component: {fileID: 1025133913593084790}
   - component: {fileID: 641709188297973387}
   m_Layer: 0
   m_Name: WaterSurface
@@ -129,18 +128,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1025133913593084790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656244106451425288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b136e09e065edb4f9bba9d10fc779ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &641709188297973387
 MonoBehaviour:
   m_ObjectHideFlags: 0
