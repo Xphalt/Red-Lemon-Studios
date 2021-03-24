@@ -63,26 +63,22 @@ public class RelicEarth : RelicBase
     {
         if (!base.Activate()) return false;
 
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(user.transform.position, -Vector3.up));
-        foreach (RaycastHit floorHit in floorHits)
+        if (Physics.Raycast(user.transform.position, Vector3.down, out RaycastHit hit))
         {
-            if (floorHit.transform.CompareTag("Floor"))
-            {
-                pillar.SetActive(true);
+            pillar.SetActive(true);
 
-                float startScale = 0;
+            float startScale = 0;
 
-                pillarScript.Activate(startScale, floorHit.point + Vector3.up * startScale);
-                characterScript.immortal = true;
+            pillarScript.Activate(startScale, hit.point + Vector3.up * startScale);
+            characterScript.immortal = true;
 
-                pillarTimer = 0;
-                readyToUse = false;
-                inUse = true;
+            pillarTimer = 0;
+            readyToUse = false;
+            inUse = true;
 
-                sfxScript.PlaySFX3D(activateSound, user.transform.position);
+            sfxScript.PlaySFX3D(activateSound, user.transform.position);
                 
-                return true;
-            }
+            return true;
         }
         return false;
     }
