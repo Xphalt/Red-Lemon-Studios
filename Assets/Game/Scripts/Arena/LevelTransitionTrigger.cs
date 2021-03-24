@@ -14,6 +14,7 @@ public class LevelTransitionTrigger : MonoBehaviour
     {
         if (!active)
         {
+            audioSource.Pause();
             active = arenaManager.bEnemiesCleared && arenaManager.bRelicCollected;
             if (active)
             {
