@@ -18,14 +18,16 @@ public class PlayerRotation : MonoBehaviour
     public Camera firstPersonCamera;
     private Transform cameraTransform;
     private Quaternion m_CharacterTargetRot;
+    private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
     private bool m_inputIsLocked = false;
 
     private void Start()
     {
         SetCursorLock(startLocked);
-
+        cameraTransform = firstPersonCamera.transform;
         m_CharacterTargetRot = transform.localRotation;
+        m_CameraTargetRot = cameraTransform.localRotation;
     }
 
 
@@ -37,20 +39,23 @@ public class PlayerRotation : MonoBehaviour
         float yRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : 0;
         float xRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : 0;
 
-        m_CharacterTargetRot *= Quaternion.Euler(-xRot, yRot, 0f);
-        m_CharacterTargetRot.eulerAngles = new Vector3(m_CharacterTargetRot.eulerAngles.x, m_CharacterTargetRot.eulerAngles.y, 0);
+        m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+        m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
         if (clampVerticalRotation)
-            m_CharacterTargetRot = ClampRotationAroundXAxis(m_CharacterTargetRot);
+            m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);
 
         if (smooth)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot,
                 smoothTime * Time.deltaTime);
+            cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, m_CameraTargetRot,
+                smoothTime * Time.deltaTime);
         }
         else
         {
             transform.localRotation = m_CharacterTargetRot;
+            cameraTransform.localRotation = m_CameraTargetRot;
             transform.rotation = m_CharacterTargetRot;
         }
     }
