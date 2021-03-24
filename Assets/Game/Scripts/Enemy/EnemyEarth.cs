@@ -10,9 +10,7 @@ public class EnemyEarth : Enemy
     public float rollDuration = 1;
     public float rollDamage = 25;
 
-    public string chargeSound;
-    public string chargeEndSound;
-
+    public string attackSound;
 
     public override void Start()
     {
@@ -50,7 +48,7 @@ public class EnemyEarth : Enemy
             impactDamage = rollDamage;
             Shift((target.transform.position - transform.position).normalized * rollSpeed, rollDuration, 0);
 
-            sfxScript.PlaySFX3D(chargeSound, transform.position);
+            sfxScript.PlaySFX3D(attackSound, transform.position);
         }
 
         return false;
@@ -61,8 +59,6 @@ public class EnemyEarth : Enemy
         rolling = false;
         impactDamage = 0;
         EndShift();
-
-        sfxScript.PlaySFX3D(chargeEndSound, transform.position);
     }
 
     public override void Animate()

@@ -24,11 +24,19 @@ public class Player : CharacterBase
     public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
+    public string ammoChangeSound;
+
+    public AudioSource audioSource;
+    public string jumpSound;
+    public string landSound;
+    public string damageSound;
+
     public override void Awake()
     {
         base.Awake();
         if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
         if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
@@ -57,8 +65,11 @@ public class Player : CharacterBase
 
     public override void Update()
     {
+        bool landed = !isGrounded;
         base.Update();
+        landed = landed && isGrounded;
 
+        if (landed) sfxScript.PlaySFX3D(landSound, transform.position);
         Inputs();
 
         //If relic is in use
@@ -78,7 +89,11 @@ public class Player : CharacterBase
         {
             if (Input.GetButtonDown("Jump"))
             {
+                bool newJump = !jumping;
                 Jump();
+
+                newJump = jumping && newJump;
+                if (newJump) sfxScript.PlaySFX3D(jumpSound, transform.position);
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -100,6 +115,8 @@ public class Player : CharacterBase
                     userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
                 }
                 else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+
+                sfxScript.PlaySFX2D(ammoChangeSound, false, 0.3f);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -114,7 +131,7 @@ public class Player : CharacterBase
 
     public void TogglePause(bool toolMenu)
     {
-        bool checkUIOverlap = false;
+        bool checkUIOverlap;
 
         if (toolMenu)
             checkUIOverlap = userInterface.ShowToolBarMenu();
@@ -139,6 +156,12 @@ public class Player : CharacterBase
         {
             Vector3 newVelocity = (Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward).normalized * (runSpeed * speedMultiplier);
 
+            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 || !isGrounded) audioSource.Pause();
+            else
+            {
+                audioSource.UnPause();
+                audioSource.pitch = UnityEngine.Random.Range(0.8f, 1f); // play slightly different sounding footsteps
+            }
             newVelocity.y = characterRigid.velocity.y;
             SetVelocity(newVelocity);
         }
@@ -149,7 +172,7 @@ public class Player : CharacterBase
     _________________________________________________________________________________________________________________*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Relic")) AddRelic(other.gameObject);
+        if (other.CompareTag("Relic")) AddRelic(other.gameObject, true);
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -187,7 +210,7 @@ public class Player : CharacterBase
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
-
+        sfxScript.PlaySFX3D(damageSound, transform.position);
         userInterface.UpdateHealth(curHealth);
     }
 
@@ -245,9 +268,9 @@ public class Player : CharacterBase
     /*_______________________________________________________________________________________________________________
     Relic override code
     _________________________________________________________________________________________________________________*/
-    public override void AddRelic(GameObject newRelic)
+    public override void AddRelic(GameObject newRelic, bool playSound=false)
     {
-        base.AddRelic(newRelic);
+        base.AddRelic(newRelic, playSound);
         //Resets the relic 
         userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
     }
@@ -309,6 +332,8 @@ public class Player : CharacterBase
         curHealth = maxHealth;
         userInterface.UpdateHealth(curHealth);
         killed = false;
+        characterRigid.velocity = Vector3.zero;
+        if (shifting) EndShift();
     }
     #endregion
 }

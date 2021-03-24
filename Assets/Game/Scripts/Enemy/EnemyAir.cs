@@ -65,9 +65,10 @@ public class EnemyAir : Enemy
 
     public override bool Attack()
     {
-        if (base.Attack())
+        if (base.Attack() && !stunned)
         {
             shooter.Shoot(elementType, target.transform.position);
+            sfxScript.PlaySFX3D(attackSound, transform.position);
             return true;
         }
         return false;

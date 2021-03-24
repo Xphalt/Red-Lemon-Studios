@@ -35,6 +35,8 @@ public class RelicBase : MonoBehaviour
     internal bool readyToUse = false;
 
     public SFXScript sfxScript = null;
+
+    public string collectionSound;
     public string activateSound;
 
     public virtual void Awake() {}
@@ -49,8 +51,9 @@ public class RelicBase : MonoBehaviour
         }
     }
 
-    public virtual void SetUser(GameObject newUser)
+    public virtual void SetUser(GameObject newUser, bool playSound=false)
     {
+        if (playSound) sfxScript.PlaySFX2D(collectionSound);
         collected = true;
         user = newUser;
         userName = newUser.name;

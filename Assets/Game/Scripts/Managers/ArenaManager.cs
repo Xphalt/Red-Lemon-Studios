@@ -15,7 +15,7 @@ public class ArenaManager : MonoBehaviour
     [Tooltip("Number of enemies/number of spawn positions rounded up = number of waves")]
     public List<Transform> enemySpawnPos = new List<Transform>();
 
-    private int waveCounter = 0;
+    internal int waveCounter = 0;
     private int maxWaves;
 
     public float waveDelay;

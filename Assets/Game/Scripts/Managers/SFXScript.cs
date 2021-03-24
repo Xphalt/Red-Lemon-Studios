@@ -25,7 +25,7 @@ public class SFXScript : MonoBehaviour
         Music = GetComponent<AudioSource>();
     }
 
-    public void PlaySFX2D(string sfx, float volume = 1, bool loop = false)
+    public void PlaySFX2D(string sfx, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {
@@ -37,7 +37,7 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX2D(string sfx, string instanceName, float volume = 1, bool loop = false)
+    public void PlaySFX2D(string sfx, string instanceName, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {
@@ -50,7 +50,7 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX2D(string sfx, float playTime, float volume = 1, bool loop = false)
+    public void PlaySFX2D(string sfx, float playTime, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {
@@ -62,7 +62,7 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(string sfx, Vector3 position, float volume = 1, bool loop = false)
+    public void PlaySFX3D(string sfx, Vector3 position, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {
@@ -75,7 +75,7 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(string sfx, Vector3 position, string instanceName, float volume = 1, bool loop = false)
+    public void PlaySFX3D(string sfx, Vector3 position, string instanceName, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {
@@ -89,7 +89,7 @@ public class SFXScript : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(string sfx, Vector3 position, float playTime, float volume = 1, bool loop = false)
+    public void PlaySFX3D(string sfx, Vector3 position, float playTime, bool loop = false, float volume = 1)
     {
         if (SFXDict.ContainsKey(sfx))
         {

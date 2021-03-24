@@ -224,12 +224,12 @@ public class CharacterBase : MonoBehaviour
 
     #region Relic
 
-    public virtual void AddRelic(GameObject newRelic)
+    public virtual void AddRelic(GameObject newRelic, bool playSound=false)
     {
         RelicBase relicScript = newRelic.GetComponent<RelicBase>();
 
+        relicScript.SetUser(gameObject, playSound);
         newRelic.transform.position = relicPlaceHolder.position;
-        relicScript.SetUser(gameObject);
 
         relicList.Add(relicScript);
 

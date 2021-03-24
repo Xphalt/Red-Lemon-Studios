@@ -56,8 +56,6 @@ public class Enemy : CharacterBase
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
 
-    public string ambientSound;
-
     protected float statusDuration;
     protected float statusTimer;
     protected bool statusEffectActive;
