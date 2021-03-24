@@ -29,9 +29,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4380585020505453013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.1, y: -5.9447565, z: 25.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 320613792715391453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,7 +112,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &4380585020505453015
 MonoBehaviour:
@@ -125,15 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e6327d2b9c9b84e8ae82e7ed66e160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterRigid: {fileID: 4380585020505453035}
   relicPlaceHolder: {fileID: 0}
-  jumpForce: 0
+  weapon: {fileID: 0}
+  canFly: 0
+  jumpSpeed: 0
   gravityMult: 1
   floorDistance: 1.01
   airControl: 0
-  weapon: {fileID: 0}
   maxHealth: 100
+  knockbackRecovery: 0
+  sfxScript: {fileID: 0}
   target: {fileID: 0}
   elementType: 3
+  ammoDrop: {fileID: 4671845019270866041}
+  dropChance: 0.5
   strongAgainstResist: 0.7
   weakAgainstIncrease: 1.5
   attackInterval: 2
@@ -142,8 +149,87 @@ MonoBehaviour:
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
-  canFly: 0
   rollSpeed: 20
   rollDuration: 1
   rollDamage: 25
-  knockbackRecovery: 0
+  chargeSound: EarthElementalCharge
+  chargeEndSound: EarthElementalChargeEnd
+--- !u!1001 &6079718927680988901
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4380585020505453012}
+    m_Modifications:
+    - target: {fileID: 1480059670758785692, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_Name
+      value: AmmoEarth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480059670758785692, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857296687207233589, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: spawned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857296687207233589, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+      propertyPath: enemyDrop
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+--- !u!1 &4671845019270866041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1480059670758785692, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+  m_PrefabInstance: {fileID: 6079718927680988901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &320613792715391453 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5777147094825477944, guid: d229355509b16444d81e541ffa03e3d7, type: 3}
+  m_PrefabInstance: {fileID: 6079718927680988901}
+  m_PrefabAsset: {fileID: 0}

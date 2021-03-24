@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityStandardAssets.Characters.FirstPerson;
 using static EnumHelper;
 using static SaveManager;
 
@@ -11,42 +9,50 @@ public class Player : CharacterBase
     public GameObject canvas;
     public Vector3 crosshairPos;
     public Camera firstPersonCamera;
-    private GUI_Manager userInterface;
+    public GUI_Manager userInterface = null;
+
+    public PlayerRotation rotationScript = null;
 
     public float runSpeed;
+    [Tooltip("How far away is the crosshair")]
     public float shootTargetDistance;
     public int maxAmmo;
 
     private bool switchingRelics = false;
+    private bool paused = false;
 
-    internal Elements elementChanger;
+    public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
-    private bool saved = false;
+    public override void Awake()
+    {
+        base.Awake();
+        if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
+        if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
+        /*______________________________________________________________________________________
+        User Interface  initialisation
+        ________________________________________________________________________________________*/
+
+        if (userInterface == null) userInterface = canvas.GetComponent<GUI_Manager>();
+        userInterface.SetMaxHealth(maxHealth);
+        userInterface.SetMaxAmmo(maxAmmo);
+        //______________________________________________________________________________________
+        
+        if (Ammo.Count < (int)ElementTypes.ElementTypesSize)
+        {
+            for (int ammo = Ammo.Count; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
+            {
+                Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
+            }
+        }
+    }
 
     public override void Start()
     {
         base.Start();
         team = Teams.Player;
-        elementChanger = weapon.GetComponent<Elements>();
-        LoadStats();
 
-        if (!saved)
-        {
-            for (int ammo = 0; ammo < (int)ElementTypes.ElementTypesSize; ammo++)
-            {
-                Ammo.Add((ElementTypes)0 + ammo, maxAmmo);
-            }
-        }
-
-        /*______________________________________________________________________________________
-            User Interface  initialisation
-            ________________________________________________________________________________________*/
-
-        userInterface = canvas.GetComponent<GUI_Manager>();
-        userInterface.SetMaxHealth(maxHealth);
-        userInterface.SetMaxAmmo(maxAmmo);
-        //______________________________________________________________________________________
+        userInterface.HighlightSelectedAmmo();
     }
 
     public override void Update()
@@ -68,34 +74,60 @@ public class Player : CharacterBase
 
     private void Inputs()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!paused)
         {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            UseRelic();
-        }
-
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            if (!switchingRelics)
+            if (Input.GetButtonDown("Jump"))
             {
-                elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
-                userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                Jump();
             }
-            else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                UseRelic();
+            }
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                if (!switchingRelics)
+                {
+                    elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                    userInterface.HighlightSelectedAmmo();
+                    userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
+                }
+                else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                switchingRelics = !switchingRelics;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.P)) TogglePause(false);
+        if (Input.GetKeyDown(KeyCode.Q)) TogglePause(true);
+    }
+
+    public void TogglePause(bool toolMenu)
+    {
+        bool checkUIOverlap = false;
+
+        if (toolMenu)
+            checkUIOverlap = userInterface.ShowToolBarMenu();
+        else
+            checkUIOverlap = userInterface.PausePlay();
+
+        //Prevents the player opening both panels at the same time.
+        if (checkUIOverlap)
         {
-            switchingRelics = !switchingRelics;
+            paused = !paused;
+
+            Time.timeScale = (paused) ? 0 : 1;
+            rotationScript.SetCursorLock(!paused, paused);
         }
     }
 
@@ -109,8 +141,6 @@ public class Player : CharacterBase
 
             newVelocity.y = characterRigid.velocity.y;
             SetVelocity(newVelocity);
-
-            characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
         }
     }
 
@@ -120,19 +150,19 @@ public class Player : CharacterBase
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Relic")) AddRelic(other.gameObject);
-        if (other.CompareTag("Checkpoint")) SaveStats();
     }
 
     public override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.CompareTag("Hazard"))
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments effectStats = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (effectStats.damageType == ElementTypes.Air)
-                Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+            if (effectStats.team != team)
+            {
+                if (effectStats.damageType == ElementTypes.Air)
+                    Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+            } 
         }
     }
 
@@ -140,14 +170,14 @@ public class Player : CharacterBase
     {
         if (AmmoCheck())
         {
-            shooter.Shoot(elementChanger.m_CurElement, (Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
+            shooter.Shoot(elementChanger.m_CurElement, (firstPersonCamera.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
             SubstractAmmo(1, elementChanger.m_CurElement);
         }
     }
 
     public override Ray GetForwardRay()
     {
-        return Camera.main.ViewportPointToRay(crosshairPos);
+        return firstPersonCamera.ViewportPointToRay(crosshairPos);
     }
 
     /*_______________________________________________________________________________________________________________
@@ -157,12 +187,6 @@ public class Player : CharacterBase
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
-
-        if (curHealth <= 0)
-        {
-            curHealth = 0;
-            Respawn();
-        }
 
         userInterface.UpdateHealth(curHealth);
     }
@@ -218,11 +242,6 @@ public class Player : CharacterBase
         return true;
     }
 
-    public void Respawn()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     /*_______________________________________________________________________________________________________________
     Relic override code
     _________________________________________________________________________________________________________________*/
@@ -237,44 +256,59 @@ public class Player : CharacterBase
     {
         base.ChangeRelic(cycleAmount);
         //Reset timer max in UI
-        userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
+        if (currentRelic) userInterface.RefillRelicTimer(currentRelic.relicCooldownDuration);
 
         //call function for new relic icon
     }
-    public void SaveStats()
+
+
+    #region Saving
+    public void SaveStats(string saveID)
     {
-        SaveManager.UpdateSavedVector3("PlayerPos", transform.position);
-        SaveManager.UpdateSavedFloat("PlayerYRot", transform.rotation.eulerAngles.y);
-        SaveManager.UpdateSavedFloat("PlayerCameraYRot", firstPersonCamera.transform.rotation.eulerAngles.y);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerRot", transform.localRotation.eulerAngles);
+        SaveManager.UpdateSavedVector3(saveID + "PlayerCameraRot", firstPersonCamera.transform.localRotation.eulerAngles);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
-            SaveManager.UpdateSavedInt(ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
+            SaveManager.UpdateSavedInt(saveID + "Player" + ammoPair.Key.ToString() + "Ammo", ammoPair.Value);
         }
 
-        SaveManager.UpdateSavedElementType("PlayerElement", elementChanger.m_CurElement);
+        SaveManager.UpdateSavedElementType(saveID + "PlayerElement", elementChanger.m_CurElement);
+        SaveManager.UpdateSavedInt(saveID + "PlayerRelicIndex", relicIndex);
 
         SaveManager.UpdateSavedBool("PlayerSaved", true);
     }
 
-    public void LoadStats()
+    public void LoadStats(string loadID, string loadTransform="")
     {
         if (SaveManager.HasBool("PlayerSaved"))
         {
-            transform.position = SaveManager.GetVector3("PlayerPos");
-            transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerYRot"), 0);
-            firstPersonCamera.transform.rotation = Quaternion.Euler(0, SaveManager.GetFloat("PlayerCameraYRot"), 0);
+            if (loadTransform != "")
+            {
+                transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
+                transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerRot"));
+                firstPersonCamera.transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"));
+            }
 
-            Ammo[ElementTypes.Fire] = SaveManager.GetInt(ElementTypes.Fire.ToString() + "Ammo");
-            Ammo[ElementTypes.Water] = SaveManager.GetInt(ElementTypes.Water.ToString() + "Ammo");
-            Ammo[ElementTypes.Air] = SaveManager.GetInt(ElementTypes.Air.ToString() + "Ammo");
-            Ammo[ElementTypes.Earth] = SaveManager.GetInt(ElementTypes.Earth.ToString() + "Ammo");
+            Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
+            Ammo[ElementTypes.Water] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Water.ToString() + "Ammo");
+            Ammo[ElementTypes.Air] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Air.ToString() + "Ammo");
+            Ammo[ElementTypes.Earth] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Earth.ToString() + "Ammo");
+            
+            elementChanger.SetElement(SaveManager.GetElementType(loadID + "PlayerElement"));
+            userInterface.HighlightSelectedAmmo();
+            userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
 
-            elementChanger.SetElement(SaveManager.GetElementType("PlayerElement"));
+            relicIndex = Mathf.Clamp(SaveManager.GetInt(loadID + "PlayerRelicIndex"), 0, relicList.Count - 1);
+            SetRelic(relicIndex);
 
-            saved = true;
+            movementLocked = false;
         }
 
-        else saved = false;
+        curHealth = maxHealth;
+        userInterface.UpdateHealth(curHealth);
+        killed = false;
     }
+    #endregion
 }

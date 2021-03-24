@@ -36,8 +36,7 @@ public class EarthPillarScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        CharacterBase collisionCharacter;
-        if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
         {
             if (collisionCharacter.team != team) collisionCharacter.TakeDamage(damage);
 

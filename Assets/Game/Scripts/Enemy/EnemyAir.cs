@@ -6,14 +6,9 @@ using static EnumHelper;
 public class EnemyAir : Enemy
 {
     public float weaponRange;
-    public int knockbackSpeed;
-    public float knockbackDuration;
-    public float postKnockbackMomentum; //Velocity retained by target after being knocked back (0-1)
 
     public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     private float minWeaponRange; //Point at which enemy runs away^
-
-    public float snipeDamage;
 
     private bool stunned;
 
@@ -37,6 +32,7 @@ public class EnemyAir : Enemy
 
         if (!stunned)
         {
+
             if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
             else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
@@ -50,7 +46,7 @@ public class EnemyAir : Enemy
                 movementState = EnemyStates.Idle;
                 transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
             }
-
+            Animate();
             if (inAttackRange)
             {
                 Attack();
@@ -72,16 +68,9 @@ public class EnemyAir : Enemy
 
     public override bool Attack()
     {
-        if (base.Attack())
+        if (base.Attack() && Physics.Raycast(transform.position, transform.forward))
         {
             shooter.Shoot(elementType, target.transform.position);
-
-            //playerScript.TakeDamage(snipeDamage);
-
-            //if (!playerScript.movementLocked)
-            //{
-            //    playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
-            //}
             return true;
         }
         return false;
@@ -98,5 +87,31 @@ public class EnemyAir : Enemy
         base.EndSatusEffect();
         stunned = false;
         DOTTimer = 0;
+    }
+
+    public override void Animate()
+    {
+        base.Animate();
+        Animator MyAnim = gameObject.GetComponent<Animator>();
+        if (movementState == EnemyStates.Idle)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Chasing)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", true);
+        }
+        else if (movementState == EnemyStates.Patrolling)
+        {
+            MyAnim.SetBool("Motion", true);
+            MyAnim.SetBool("Attacking", false);
+        }
+        else if (movementState == EnemyStates.Fleeing)
+        {
+            MyAnim.SetBool("Motion", false);
+            MyAnim.SetBool("Attacking", true);
+        }
     }
 }

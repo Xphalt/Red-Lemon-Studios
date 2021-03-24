@@ -16,9 +16,12 @@ public class RelicWater : RelicBase
     public float inUseSpeedMultiplier;
     private float defaultSpeedMultiplier;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         relicType = ElementTypes.Water;
+        defaultSpeedMultiplier = speedMultiplier;
     }
 
     public override void Update()
@@ -52,6 +55,8 @@ public class RelicWater : RelicBase
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
 
+        sfxScript.PlaySFX3D(activateSound, user.transform.position);
+        
         return true;
     }
 

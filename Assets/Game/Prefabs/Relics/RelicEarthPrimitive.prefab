@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1538245284360931049}
   - component: {fileID: 1538245284360931054}
   - component: {fileID: 1538245284360931055}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EarthPillar
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1538245285186874232}
   - component: {fileID: 1538245285186874229}
   m_Layer: 9
-  m_Name: RelicEarth
+  m_Name: RelicEarthPrimitive
   m_TagString: Relic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538245285186874238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4, y: -6.2, z: -42.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1538245284360931052}
@@ -219,15 +219,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicType: 0
+  inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
   damagePercentRecievedOnMiss: 0
   missPenalty: 0
-  doubleJumpEnabled: 0
+  maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 0.8
   speedMultiplier: 0.8
   relicCooldownDuration: 4
+  sfxScript: {fileID: 0}
+  activateSound: EarthRelicUse
   pillar: {fileID: 1538245284360931053}
   maxPillarSize: 5
   pillarDamage: 50
