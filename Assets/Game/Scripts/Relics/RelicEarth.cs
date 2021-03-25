@@ -27,9 +27,6 @@ public class RelicEarth : RelicBase
     public override void Start()
     {
         base.Start();
-        
-        userMomentumResidue = Mathf.Clamp(userMomentumResidue, 0, 1);
-        hostileMomentumResidue = Mathf.Clamp(hostileMomentumResidue, 0, 1);
 
         pillarTransform.localScale = new Vector3(pillarTransform.localScale.x, 0, pillarTransform.localScale.z);
 
