@@ -349,6 +349,7 @@ MonoBehaviour:
   sfxScript: {fileID: 1729546070}
   enemiesDeadSound: ArenaComplete
   enemySpawnSound: EnemySpawn
+  gameCompleteSound: GameComplete
 --- !u!1 &7426175933752922450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,15 +1305,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: SFXVolumes.Array.size
-      value: 32
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: SFXNameList.Array.size
-      value: 32
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: AudioClipList.Array.size
-      value: 32
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: SFXVolumes.Array.data[0]
@@ -1483,6 +1484,18 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXVolumes.Array.data[32]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXVolumes.Array.data[33]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXVolumes.Array.data[34]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: SFXNameList.Array.data[10]
       value: FireAttack
       objectReference: {fileID: 0}
@@ -1569,6 +1582,18 @@ PrefabInstance:
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: SFXNameList.Array.data[31]
       value: ChangeAmmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXNameList.Array.data[32]
+      value: DestroyTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXNameList.Array.data[33]
+      value: GameComplete
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: SFXNameList.Array.data[34]
+      value: EnemyHit
       objectReference: {fileID: 0}
     - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: AudioClipList.Array.data[0]
@@ -1698,6 +1723,18 @@ PrefabInstance:
       propertyPath: AudioClipList.Array.data[31]
       value: 
       objectReference: {fileID: 8300000, guid: 7eeacb0cf5c77814683fe59eeca04620, type: 3}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: AudioClipList.Array.data[32]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7dc3f960c8987084db8a32f4d1922eb1, type: 3}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: AudioClipList.Array.data[33]
+      value: 
+      objectReference: {fileID: 8300000, guid: 17b7871d842060a4cad994ebeebb677d, type: 3}
+    - target: {fileID: 3126296109035454996, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
+      propertyPath: AudioClipList.Array.data[34]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ae21e321bc933b4baaf85f6bcdb12fb, type: 3}
     - target: {fileID: 3126296109035454997, guid: c78a8fb108951a346bf4076e36af23ce, type: 3}
       propertyPath: m_RootOrder
       value: 3

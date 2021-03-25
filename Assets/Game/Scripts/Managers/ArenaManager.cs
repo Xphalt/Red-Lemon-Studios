@@ -38,6 +38,7 @@ public class ArenaManager : MonoBehaviour
     public SFXScript sfxScript;
     public string enemiesDeadSound;
     public string enemySpawnSound;
+    public string gameCompleteSound;
 
     #endregion
 
@@ -152,7 +153,11 @@ public class ArenaManager : MonoBehaviour
         if (bEnemiesCleared && bRelicCollected)
         {
             if (nextScene != "") SceneManager.LoadScene(nextScene);
-            else player.CompleteGame();
+            else
+            {
+                sfxScript.PlaySFX2D(gameCompleteSound);
+                player.CompleteGame();
+            }
         }
     }
 

@@ -1290,12 +1290,14 @@ MonoBehaviour:
   defaultColourChangeDuration: 0.1
   skins:
   - {fileID: 6370771755706772241}
+  meshes: []
   attackInterval: 0
   sentryMode: 0
   chaseSpeed: 5
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
+  hitSound: EnemyHit
   explosionDamage: 30
   explosionRadius: 20
   explodeSound: FireAttack

@@ -821,12 +821,14 @@ MonoBehaviour:
   - {fileID: 3864337383671841871}
   - {fileID: 765132566680288621}
   - {fileID: 4638809498539717324}
+  meshes: []
   attackInterval: 1
   sentryMode: 0
   chaseSpeed: 5
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 2
+  hitSound: EnemyHit
   weaponRange: 30
   stationaryZone: 0.1
   attackSound: AirAttack

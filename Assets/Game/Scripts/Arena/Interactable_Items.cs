@@ -16,8 +16,27 @@ public class Interactable_Items : MonoBehaviour
     public List<PickUpBase> ammoDrops;
     public PickUpBase healthDrop;
 
+    public SFXScript sfxScript;
+    public string destroySound;
+
     private void Start()
     {
+        if (ammoDrops.Count == 0 || ammoDrops[0] == null)
+        {
+            ammoDrops.Clear();
+            foreach (AmmoPickup ammo in GetComponentsInChildren<AmmoPickup>(true)) ammoDrops.Add(ammo.GetComponent<PickUpBase>());
+        }
+        if (healthDrop == null) healthDrop = GetComponentInChildren<HealthPickup>(true);
+
+        foreach (PickUpBase ammo in ammoDrops)
+        {
+            ammo.transform.localPosition = Vector3.zero;
+            ammo.transform.localScale = Vector3.one;
+            ammo.transform.localRotation = Quaternion.identity;
+        }
+        healthDrop.transform.localPosition = Vector3.zero;
+        healthDrop.transform.localScale = Vector3.one;
+        healthDrop.transform.localRotation = Quaternion.identity;
         DropPercentage = Random.Range(0, 100);
         gameObject.SetActive(!destroyed);
     }
@@ -29,6 +48,7 @@ public class Interactable_Items : MonoBehaviour
             destroyed = true;
             Drop(DropPercentage);
             gameObject.SetActive(false);
+            sfxScript.PlaySFX3D(destroySound, transform.position);
         }
     }
 

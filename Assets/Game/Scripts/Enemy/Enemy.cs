@@ -63,6 +63,8 @@ public class Enemy : CharacterBase
     protected bool statusEffectActive;
     protected float statusMagnitude;
 
+    public string hitSound;
+
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
@@ -78,7 +80,11 @@ public class Enemy : CharacterBase
 
         if (skins.Count == 0)
         {
-            foreach (SkinnedMeshRenderer newSkin in gameObject.transform.GetComponentsInChildren<SkinnedMeshRenderer>()) skins.Add(newSkin);
+            foreach (SkinnedMeshRenderer newSkin in GetComponentsInChildren<SkinnedMeshRenderer>()) skins.Add(newSkin);
+        }
+        if (skins.Count == 0)
+        {
+            foreach (MeshRenderer newMesh in GetComponentsInChildren<MeshRenderer>()) meshes.Add(newMesh);
         }
 
         for (int s = 0; s < skins.Count; s++)
@@ -293,6 +299,8 @@ public class Enemy : CharacterBase
 
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
+
+        sfxScript.PlaySFX3D(hitSound, transform.position);
 
         base.TakeDamage(damage, damageType);
     }

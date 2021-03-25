@@ -210,12 +210,14 @@ MonoBehaviour:
   - {fileID: 6723732432270602569}
   - {fileID: 6029868482030175863}
   - {fileID: 6137756412992378865}
+  meshes: []
   attackInterval: 2
   sentryMode: 0
   chaseSpeed: 3
   patrolSpeed: 2
   playerDetectionRadius: 50
   wallDetectionRadius: 5
+  hitSound: EnemyHit
   rollSpeed: 20
   rollDuration: 1
   rollDamage: 25
