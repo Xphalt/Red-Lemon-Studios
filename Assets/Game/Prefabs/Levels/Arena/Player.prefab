@@ -144,11 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50735f0c0b8198b408488d5e913d9ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRigid: {fileID: 0}
+  characterRigid: {fileID: 1784885376}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
-  jumpSpeed: 0
+  jumpSpeed: 15
   gravityMult: 2
   floorDistance: 1
   airControl: 0.025
@@ -159,7 +159,7 @@ MonoBehaviour:
   crosshairPos: {x: 0.5, y: 0.5, z: 0}
   firstPersonCamera: {fileID: 7338099964422291514}
   userInterface: {fileID: 0}
-  rotationScript: {fileID: 0}
+  rotationScript: {fileID: 1784885381}
   runSpeed: 10
   shootTargetDistance: 20
   maxAmmo: 100
@@ -169,6 +169,7 @@ MonoBehaviour:
   jumpSound: PlayerJump
   landSound: PlayerLand
   damageSound: PlayerHurt
+  deathSound: PlayerDeath
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0
