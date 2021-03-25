@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8933174198766699450}
   - component: {fileID: 7982080456857979723}
   - component: {fileID: 7554163699757160331}
+  - component: {fileID: -8795941856584735591}
   m_Layer: 12
   m_Name: AmmoAir
   m_TagString: PickUp
@@ -81,6 +82,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8795941856584735591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234860566754208359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateSpeed: {x: 0, y: 1, z: 0}
+  blowRadius: 0
+  blowRange: 50
+  blowSpeed: 0
 --- !u!1 &1368759205882973108
 GameObject:
   m_ObjectHideFlags: 0

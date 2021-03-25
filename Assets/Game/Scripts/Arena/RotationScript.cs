@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingFan : MonoBehaviour
+public class RotationScript : MonoBehaviour
 {
     public Vector3 RotateSpeed = Vector3.up;
     public float blowRadius = 5;

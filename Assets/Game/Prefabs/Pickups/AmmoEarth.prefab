@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 2582797250724291005}
   - component: {fileID: 8857296687207233589}
   - component: {fileID: -8801622434600544015}
+  - component: {fileID: 7012534296781293024}
   m_Layer: 12
   m_Name: AmmoEarth
   m_TagString: PickUp
@@ -162,6 +163,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7012534296781293024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480059670758785692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateSpeed: {x: 0, y: 1, z: 0}
+  blowRadius: 0
+  blowRange: 50
+  blowSpeed: 0
 --- !u!1 &4120978920772199664
 GameObject:
   m_ObjectHideFlags: 0

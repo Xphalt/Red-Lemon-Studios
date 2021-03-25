@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4405179316180290118}
   - component: {fileID: 592225013346735328}
   - component: {fileID: 9077478207314496006}
+  - component: {fileID: -2449552641213060249}
   m_Layer: 12
   m_Name: HealthBox
   m_TagString: HealthUp
@@ -161,3 +162,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2449552641213060249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371056515565579886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateSpeed: {x: 0, y: 1, z: 0}
+  blowRadius: 0
+  blowRange: 50
+  blowSpeed: 0
