@@ -236,7 +236,7 @@ public class Player : CharacterBase
     public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
     {
         if (cost == 0) base.AddHealth(value);
-        else if (Ammo[costType] >= cost)
+        else if (Ammo[costType] >= cost && curHealth < maxHealth)
         {
             base.AddHealth(value);
             SubstractAmmo(cost, costType);
@@ -308,8 +308,8 @@ public class Player : CharacterBase
     public void SaveStats(string saveID)
     {
         SaveManager.UpdateSavedVector3(saveID + "PlayerPos", transform.position);
-        SaveManager.UpdateSavedVector3(saveID + "PlayerRot", transform.localRotation.eulerAngles);
-        SaveManager.UpdateSavedVector3(saveID + "PlayerCameraRot", firstPersonCamera.transform.localRotation.eulerAngles);
+        SaveManager.UpdateSavedQuaternion(saveID + "PlayerRot", transform.localRotation);
+        SaveManager.UpdateSavedQuaternion(saveID + "PlayerCameraRot", firstPersonCamera.transform.localRotation);
 
         foreach (KeyValuePair<ElementTypes, int> ammoPair in Ammo)
         {
@@ -329,8 +329,8 @@ public class Player : CharacterBase
             if (loadTransform != "")
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
-                transform.localRotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerRot"));
-                firstPersonCamera.transform.localRotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"));
+                transform.localRotation = SaveManager.GetQuaternion(loadTransform + "PlayerRot");
+                firstPersonCamera.transform.localRotation = SaveManager.GetQuaternion(loadTransform + "PlayerCameraRot");
             }
 
             Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");

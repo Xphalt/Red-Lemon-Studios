@@ -10,6 +10,8 @@ public class RelicBase : MonoBehaviour
     internal string userName;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
+    public Animator myAnim;
+
     public ElementTypes relicType;
 
     internal bool inUse;
@@ -36,6 +38,8 @@ public class RelicBase : MonoBehaviour
 
     public SFXScript sfxScript = null;
 
+    public Quaternion collectedRotation;
+
     public string collectionSound;
     public string activateSound;
 
@@ -44,6 +48,7 @@ public class RelicBase : MonoBehaviour
     public virtual void Start()
     {
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
+        if (!myAnim) myAnim = GetComponent<Animator>();
         if (user == null)
         {
             if (inArena) gameObject.SetActive(spawned && !collected);
@@ -60,6 +65,12 @@ public class RelicBase : MonoBehaviour
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
+
+        if (TryGetComponent(out RotationScript relicRotate))
+        {
+            relicRotate.enabled = false;
+            transform.localRotation = collectedRotation;
+        }
     }
 
     public virtual void Update()

@@ -55,8 +55,11 @@ public class RelicWater : RelicBase
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
 
-        sfxScript.PlaySFX3D(activateSound, user.transform.position);
-        
+        sfxScript.PlaySFX2D(activateSound);
+
+        healTickTimer = healTickInterval;
+        if (myAnim) myAnim.SetTrigger("Activate");
+
         return true;
     }
 

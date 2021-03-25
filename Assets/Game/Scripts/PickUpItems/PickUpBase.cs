@@ -26,6 +26,7 @@ public class PickUpBase : MonoBehaviour
         {
             transform.SetParent(null);
             transform.localScale = Vector3.one;
+            transform.localRotation = Quaternion.identity;
         }
     }
 

@@ -256,10 +256,13 @@ public class Enemy : CharacterBase
 
         if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ChangeColour(effectStats);
-            if (effectStats.hasEffect && effectStats.damageType == weakAgainst && effectStats.team != team)
+            if (effectStats.team != team)
             {
-                TriggerStatusEffect(effectStats);
+                if (!colourChanged) ChangeColour(effectStats);
+                if (effectStats.hasEffect && effectStats.damageType == weakAgainst)
+                {
+                    TriggerStatusEffect(effectStats);
+                }
             }
         }
     }

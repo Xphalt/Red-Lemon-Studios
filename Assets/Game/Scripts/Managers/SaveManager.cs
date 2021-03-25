@@ -26,6 +26,7 @@ public static class SaveManager
     private static Dictionary<string, string> stringDict = new Dictionary<string, string>();
     private static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
     private static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
+    private static Dictionary<string, Quaternion> quaternionDict = new Dictionary<string, Quaternion>();
 
     private static Dictionary<string, List<string>> stringListDict = new Dictionary<string, List<string>>();
 
@@ -88,6 +89,11 @@ public static class SaveManager
             {
                 saveData.vector3Keys = new List<string>();
                 saveData.vector3Values = new List<myVector3>();
+            }
+            if (saveData.quaternionKeys == null)
+            {
+                saveData.quaternionKeys = new List<string>();
+                saveData.quaternionValues = new List<myQuaternion>();
             }
             if (saveData.elementKeys == null)
             {
@@ -197,6 +203,17 @@ public static class SaveManager
         return true;
     }
 
+    public static bool AddNewQuaternion(string key, Quaternion value)
+    {
+        if (quaternionDict.ContainsKey(key))
+        {
+            PrintOverrideWarning(key, "Quaternion");
+            return false;
+        }
+        else quaternionDict.Add(key, value);
+        return true;
+    }
+
     public static bool AddNewElementType(string key, ElementTypes value)
     {
         if (elementDict.ContainsKey(key))
@@ -237,6 +254,11 @@ public static class SaveManager
     public static void UpdateSavedVector3(string key, Vector3 value)
     {
         vector3Dict[key] = value;
+    }
+
+    public static void UpdateSavedQuaternion(string key, Quaternion value)
+    {
+        quaternionDict[key] = value;
     }
 
     public static void UpdateSavedStringList(string key, List<string> value)
@@ -298,6 +320,14 @@ public static class SaveManager
         return Vector3.zero;
     }
 
+    public static Quaternion GetQuaternion(string key)
+    {
+        if (quaternionDict.ContainsKey(key)) return quaternionDict[key];
+        else PrintMissingDataWarning(key, "Quaternion");
+
+        return Quaternion.identity;
+    }
+
     public static List<string> GetStringList(string key)
     {
         if (stringListDict.ContainsKey(key)) return stringListDict[key];
@@ -321,6 +351,7 @@ public static class SaveManager
     public static void RemoveString(string key) { if (HasString(key)) stringDict.Remove(key); }
     public static void RemoveVector2(string key) { if (HasVector2(key)) vector2Dict.Remove(key); }
     public static void RemoveVector3(string key) { if (HasVector3(key)) vector3Dict.Remove(key); }
+    public static void RemoveQuaternion(string key) { if (HasQuaternion(key)) quaternionDict.Remove(key); }
     public static void RemoveStringList(string key) { if (HasStringList(key)) stringListDict.Remove(key); }
     public static void RemoveElementType(string key) { if (HasElementType(key)) elementDict.Remove(key); }
     #endregion
@@ -331,6 +362,7 @@ public static class SaveManager
     public static bool HasString(string key) { return stringDict.ContainsKey(key); }
     public static bool HasVector2(string key) { return vector2Dict.ContainsKey(key); }
     public static bool HasVector3(string key) { return vector3Dict.ContainsKey(key); }
+    public static bool HasQuaternion(string key) { return quaternionDict.ContainsKey(key); }
     public static bool HasStringList(string key) { return stringListDict.ContainsKey(key); }
     public static bool HasElementType(string key) { return elementDict.ContainsKey(key); }
     #endregion
@@ -434,6 +466,22 @@ public static class SaveManager
         }
 
         dictIndex = 0;
+        foreach (KeyValuePair<string, Quaternion> pair in quaternionDict)
+        {
+            if (saveData.quaternionKeys.Contains(pair.Key))
+            {
+                saveData.quaternionKeys[dictIndex] = pair.Key;
+                saveData.quaternionValues[dictIndex] = new myQuaternion(pair.Value.x, pair.Value.y, pair.Value.z, pair.Value.w);
+            }
+            else
+            {
+                saveData.quaternionKeys.Add(pair.Key);
+                saveData.quaternionValues.Add(new myQuaternion(pair.Value.x, pair.Value.y, pair.Value.z, pair.Value.w));
+            }
+            dictIndex++;
+        }
+
+        dictIndex = 0;
         foreach (KeyValuePair<string, List<string>> pair in stringListDict)
         {
             if (saveData.stringListKeys.Contains(pair.Key))
@@ -477,7 +525,11 @@ public static class SaveManager
 
         for (int index = 0; index < saveData.vector3Keys.Count; index++)
             vector3Dict[saveData.vector3Keys[index]] = new Vector3(saveData.vector3Values[index].x, saveData.vector3Values[index].y, saveData.vector3Values[index].z);
-        
+       
+        for (int index = 0; index < saveData.quaternionKeys.Count; index++)
+            quaternionDict[saveData.quaternionKeys[index]] = new Quaternion(saveData.quaternionValues[index].x, saveData.quaternionValues[index].y, 
+                saveData.quaternionValues[index].z, saveData.quaternionValues[index].w);
+
         for (int index = 0; index < saveData.stringListKeys.Count; index++) stringListDict[saveData.stringListKeys[index]] = saveData.stringListValues[index];
 
         for (int index = 0; index < saveData.elementKeys.Count; index++) elementDict[saveData.elementKeys[index]] = saveData.elementValues[index];
@@ -541,6 +593,9 @@ public class Save
     public List<string> vector3Keys = new List<string>();
     public List<myVector3> vector3Values = new List<myVector3>();
 
+    public List<string> quaternionKeys = new List<string>();
+    public List<myQuaternion> quaternionValues = new List<myQuaternion>();
+
     public List<string> stringListKeys = new List<string>();
     public List<List<string>> stringListValues = new List<List<string>>();
 
@@ -573,5 +628,19 @@ public struct myVector3
         x = nx;
         y = ny;
         z = nz;
+    }
+}
+
+[Serializable]
+public struct myQuaternion
+{
+    public float x, y, z, w;
+
+    public myQuaternion(float nx, float ny, float nz, float nw)
+    {
+        x = nx;
+        y = ny;
+        z = nz;
+        w = nw;
     }
 }

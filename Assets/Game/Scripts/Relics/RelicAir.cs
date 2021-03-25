@@ -57,7 +57,9 @@ public class RelicAir : RelicBase
             characterScript.impactDamage = damage;
             characterScript.immortal = true;
 
-            sfxScript.PlaySFX3D(activateSound, user.transform.position);
+            if (myAnim) myAnim.SetTrigger("Activate");
+
+            sfxScript.PlaySFX2D(activateSound);
 
             return true;
         }

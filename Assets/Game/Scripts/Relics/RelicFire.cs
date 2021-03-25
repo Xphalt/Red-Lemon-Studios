@@ -61,7 +61,9 @@ public class RelicFire : RelicBase
         inUse = true;
         readyToUse = false;
 
-        sfxScript.PlaySFX3D(activateSound, user.transform.position);
+        sfxScript.PlaySFX2D(activateSound);
+
+        if (myAnim) myAnim.SetTrigger("Activate");
 
         return true;
     }
