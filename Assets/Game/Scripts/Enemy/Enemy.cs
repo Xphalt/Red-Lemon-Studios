@@ -40,7 +40,9 @@ public class Enemy : CharacterBase
     private bool colourChanged = false;
 
     public List<SkinnedMeshRenderer> skins;
-    protected List<List<Color>> originalColours = new List<List<Color>>();
+    public List<MeshRenderer> meshes;
+    protected List<List<Color>> originalSkinColours = new List<List<Color>>();
+    protected List<List<Color>> originalMeshColours = new List<List<Color>>();
 
     public float attackInterval;
     protected float attackTimer = 0;
@@ -81,11 +83,14 @@ public class Enemy : CharacterBase
 
         for (int s = 0; s < skins.Count; s++)
         {
-            originalColours.Add(new List<Color>());
-            foreach (Material skinmat in skins[s].materials)
-            {
-                originalColours[s].Add(skinmat.color);
-            }
+            originalSkinColours.Add(new List<Color>());
+            foreach (Material skinmat in skins[s].materials) originalSkinColours[s].Add(skinmat.color);
+        }
+
+        for (int mr = 0; mr < meshes.Count; mr++)
+        {
+            originalMeshColours.Add(new List<Color>());
+            foreach (Material meshmat in meshes[mr].materials) originalMeshColours[mr].Add(meshmat.color);
         }
     }
 
@@ -122,12 +127,12 @@ public class Enemy : CharacterBase
             {
                 for (int s = 0; s < skins.Count; s++)
                 {
-                    for (int m = 0; m < skins[s].materials.Length; m++)
-                    {
-                        skins[s].materials[m].color = originalColours[s][m];
-                    }
+                    for (int m = 0; m < skins[s].materials.Length; m++) skins[s].materials[m].color = originalSkinColours[s][m];
                 }
-
+                for (int mr = 0; mr < meshes.Count; mr++)
+                {
+                    for (int m = 0; m < meshes[mr].materials.Length; m++) meshes[mr].materials[m].color = originalMeshColours[mr][m];
+                }
                 colourChanged = false;
                 colourChangeTimer = 0;
             }
@@ -274,10 +279,11 @@ public class Enemy : CharacterBase
 
             foreach (SkinnedMeshRenderer skin in skins)
             {
-                for (int m = 0; m < skin.materials.Length; m++)
-                {
-                    skin.materials[m].color = newColour;
-                }
+                for (int m = 0; m < skin.materials.Length; m++) skin.materials[m].color = newColour;
+            }
+            foreach (MeshRenderer mesh in meshes)
+            {
+                for (int m = 0; m < mesh.materials.Length; m++) mesh.materials[m].color = newColour;
             }
         }
     }
