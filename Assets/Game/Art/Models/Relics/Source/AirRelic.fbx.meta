@@ -1,25 +1,43 @@
 fileFormatVersion: 2
-guid: c699a7a9976a89d47bd4fb99f039674b
+guid: dee05129707b09044921018ace6363b2
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 5978651762570310600
-    second: Armature|Fist
+      74: -4262942382880468435
+    second: Torus|HorizontalSpinning
   - first:
-      74: -8945691123924629249
-    second: Armature|Idle
+      74: -2384012552748974780
+    second: Torus|HorizontalUse
+  - first:
+      74: -4812847582347490882
+    second: Torus|VerticalSpinning
+  - first:
+      74: -4289507412380331539
+    second: Torus|VerticalUse
+  - first:
+      74: 3140293521367617829
+    second: Torus.001|HorizontalSpinning
+  - first:
+      74: 132313207294520391
+    second: Torus.001|HorizontalUse
+  - first:
+      74: -6769366659783745538
+    second: Torus.001|VerticalSpinning
+  - first:
+      74: 5711366008017219147
+    second: Torus.001|VerticalUse
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GauntletBase
-    second: {fileID: 2100000, guid: 4b37f634a406a5d42a13f42671203b21, type: 2}
+      name: Ring
+    second: {fileID: 2100000, guid: b1d476a1c7d92bf4889a1d66d8e7b4c2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Gold
-    second: {fileID: 2100000, guid: 3482c50f3d7499340803d13225a5f9b8, type: 2}
+      name: Sphere
+    second: {fileID: 2100000, guid: 15832240463b2454e95bc2fc7dd5f44c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
