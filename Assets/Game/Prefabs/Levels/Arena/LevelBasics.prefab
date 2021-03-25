@@ -698,6 +698,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7954393327919436902}
+    - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7954393327919436902}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowControls
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUI_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833840104301349065, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833840104301349065, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5524924018667674289}
+    - target: {fileID: 6833840104301349065, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833840104301349065, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833840104301349065, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7780071682561936046, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
