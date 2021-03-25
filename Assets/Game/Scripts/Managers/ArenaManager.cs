@@ -8,6 +8,8 @@ public class ArenaManager : MonoBehaviour
     #region Variables
     public bool AutoFind = false;
 
+    public Player player;
+
     public List<GameObject> enemies = new List<GameObject>();
     private List<Enemy> enemyScripts = new List<Enemy>();
 
@@ -23,7 +25,6 @@ public class ArenaManager : MonoBehaviour
 
     public GameObject relic;
     private RelicBase relicScript;
-    public Transform relicSpawnPos;
 
     public string nextScene;
 
@@ -63,13 +64,11 @@ public class ArenaManager : MonoBehaviour
 
         if (relic != null)
         {
-            relic.transform.position = relicSpawnPos.position;
             relicScript = relic.GetComponent<RelicBase>();
             relicScript.inArena = true;
         }
         else bRelicCollected = true;
 
-        if (nextScene == "") nextScene = SceneManager.GetSceneAt((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings).name;
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
 
@@ -152,7 +151,8 @@ public class ArenaManager : MonoBehaviour
     {
         if (bEnemiesCleared && bRelicCollected)
         {
-            SceneManager.LoadScene(nextScene);
+            if (nextScene != "") SceneManager.LoadScene(nextScene);
+            else player.CompleteGame();
         }
     }
 

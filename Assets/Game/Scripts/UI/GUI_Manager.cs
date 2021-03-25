@@ -24,7 +24,7 @@ public class GUI_Manager : MonoBehaviour
 
     //Pause Menu variables
     public string homeMenu;
-    public GameObject pausePanel, toolbarPanel, controlsPanel;
+    public GameObject pausePanel, toolbarPanel, controlsPanel, deathScreen, completeScreen;
 
     //Toolbar Menu and Toolbar Menu
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
@@ -126,7 +126,7 @@ public class GUI_Manager : MonoBehaviour
 
     public bool PausePlay()
     {
-        if (!toolbarPanel.activeSelf)
+        if (!toolbarPanel.activeSelf && !deathScreen.activeSelf && !completeScreen.activeSelf)
         {
             pausePanel.SetActive(!pausePanel.activeSelf);
             controlsPanel.SetActive(false);
@@ -153,7 +153,7 @@ public class GUI_Manager : MonoBehaviour
 
     public bool ShowToolBarMenu()
     {
-        if (!pausePanel.activeSelf)
+        if (!pausePanel.activeSelf && !deathScreen.activeSelf && !completeScreen.activeSelf)
         {
             toolbarPanel.SetActive(!toolbarPanel.activeSelf);
             return true;
@@ -166,5 +166,19 @@ public class GUI_Manager : MonoBehaviour
         RelicNameHolder.text = ((ElementTypes)relicType).ToString();
         RelicInfoHolder.text = RelicDescription[relicType];
         ImageHolder.sprite = relicImage[relicType].sprite;
+    }
+
+    public void ShowEndGame(bool dead)
+    {
+        Time.timeScale = 0;
+        if (dead) deathScreen.SetActive(true);
+        else completeScreen.SetActive(true);
+    }
+
+    public void LeaveEndGame()
+    {
+        Time.timeScale = 1;
+        deathScreen.SetActive(false);
+        completeScreen.SetActive(false);
     }
 }

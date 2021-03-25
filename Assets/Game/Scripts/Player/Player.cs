@@ -138,7 +138,6 @@ public class Player : CharacterBase
             checkUIOverlap = userInterface.ShowToolBarMenu();
         else
             checkUIOverlap = userInterface.PausePlay();
-
         //Prevents the player opening both panels at the same time.
         if (checkUIOverlap)
         {
@@ -153,7 +152,7 @@ public class Player : CharacterBase
     {
         base.FixedUpdate();
 
-        if (!movementLocked)
+        if (!movementLocked && !paused)
         {
             Vector3 newVelocity = (Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward).normalized * (runSpeed * speedMultiplier);
 
@@ -211,7 +210,7 @@ public class Player : CharacterBase
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
-        sfxScript.PlaySFX3D(damageSound, transform.position);
+        sfxScript.PlaySFX2D(damageSound);
         userInterface.UpdateHealth(curHealth);
     }
 
@@ -219,7 +218,19 @@ public class Player : CharacterBase
     {
         base.Die();
 
+        paused = true;
+        audioSource.Pause();
+        rotationScript.SetCursorLock(false, true);
         sfxScript.PlaySFX2D(deathSound);
+        userInterface.ShowEndGame(true);
+    }
+
+    public void CompleteGame()
+    {
+        paused = true;
+        audioSource.Pause();
+        rotationScript.SetCursorLock(false, true);
+        userInterface.ShowEndGame(false);
     }
 
     public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
@@ -318,8 +329,8 @@ public class Player : CharacterBase
             if (loadTransform != "")
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
-                transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerRot"));
-                firstPersonCamera.transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"));
+                transform.localRotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerRot"));
+                firstPersonCamera.transform.localRotation = Quaternion.Euler(SaveManager.GetVector3(loadTransform + "PlayerCameraRot"));
             }
 
             Ammo[ElementTypes.Fire] = SaveManager.GetInt(loadID + "Player" + ElementTypes.Fire.ToString() + "Ammo");
@@ -340,6 +351,8 @@ public class Player : CharacterBase
         curHealth = maxHealth;
         userInterface.UpdateHealth(curHealth);
         killed = false;
+        rotationScript.SetCursorLock(true);
+        paused = false;
         characterRigid.velocity = Vector3.zero;
         if (shifting) EndShift();
     }

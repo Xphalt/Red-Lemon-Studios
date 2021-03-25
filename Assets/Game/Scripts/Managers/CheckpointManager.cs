@@ -90,9 +90,7 @@ public class CheckpointManager : MonoBehaviour
 
     void Update()
     {
-        if (arenaPlayer.killed) Load();
-
-        else if (arenaManager.bCheckpointReady) Save();
+        if (arenaManager.bCheckpointReady) Save();
     }
 
     public void Save(string checkpointOverride = "")
@@ -125,6 +123,11 @@ public class CheckpointManager : MonoBehaviour
         SaveManager.UpdateSavedInt("LastSavedScene", thisScene.buildIndex);
 
         SaveManager.SaveToFile();
+    }
+
+    public void Restart()
+    {
+        Load(true);
     }
 
     public void Load(bool loadArena=true, string checkpointOverride="")
