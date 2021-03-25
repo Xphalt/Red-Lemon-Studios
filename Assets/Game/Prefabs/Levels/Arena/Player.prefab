@@ -46,11 +46,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c9df17072fa20a449bb09182eed6f33f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -144,22 +144,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50735f0c0b8198b408488d5e913d9ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterRigid: {fileID: 1784885376}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
-  jumpForce: 800
+  jumpSpeed: 15
   gravityMult: 2
   floorDistance: 1
   airControl: 0.025
   maxHealth: 100
   knockbackRecovery: 0
-  SFXManager: {fileID: 0}
+  sfxScript: {fileID: 0}
   canvas: {fileID: 0}
   crosshairPos: {x: 0.5, y: 0.5, z: 0}
   firstPersonCamera: {fileID: 7338099964422291514}
+  userInterface: {fileID: 0}
+  rotationScript: {fileID: 1784885381}
   runSpeed: 10
   shootTargetDistance: 20
   maxAmmo: 100
+  elementChanger: {fileID: 0}
+  ammoChangeSound: ChangeAmmo
+  audioSource: {fileID: 7338099962747303697}
+  jumpSound: PlayerJump
+  landSound: PlayerLand
+  damageSound: PlayerHurt
+  deathSound: PlayerDeath
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0

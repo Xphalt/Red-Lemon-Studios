@@ -24,11 +24,11 @@ public class Interactable_Items : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     { //check if a bullet has collided
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.CompareTag("Bullet"))
         {
             destroyed = true;
-            gameObject.SetActive(false);
             Drop(DropPercentage);
+            gameObject.SetActive(false);
         }
     }
 

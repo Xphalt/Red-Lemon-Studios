@@ -27,9 +27,6 @@ public class RelicEarth : RelicBase
     public override void Start()
     {
         base.Start();
-        
-        userMomentumResidue = Mathf.Clamp(userMomentumResidue, 0, 1);
-        hostileMomentumResidue = Mathf.Clamp(hostileMomentumResidue, 0, 1);
 
         pillarTransform.localScale = new Vector3(pillarTransform.localScale.x, 0, pillarTransform.localScale.z);
 
@@ -53,9 +50,9 @@ public class RelicEarth : RelicBase
         }
     }
 
-    public override void SetUser(GameObject newUser)
+    public override void SetUser(GameObject newUser, bool playSound=false)
     {
-        base.SetUser(newUser);
+        base.SetUser(newUser, playSound);
         pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript.team, userMomentumResidue, hostileMomentumResidue);
     }
 

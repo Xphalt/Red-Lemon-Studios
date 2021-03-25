@@ -9,10 +9,9 @@ public class ArenaSpawnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && active)
+        if (other.gameObject.CompareTag("Player") && arenaManager.waveCounter == 0)
         {
             arenaManager.SpawnNextWave();
-            active = false; //could SetActive(false) if we have no further use for it
         }
     }
 }

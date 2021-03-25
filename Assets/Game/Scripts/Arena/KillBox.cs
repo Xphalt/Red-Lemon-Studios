@@ -6,6 +6,7 @@ public class KillBox : MonoBehaviour
 {
     public Transform respawnPos;
     public int damage;
+    public bool playerOnly;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -15,6 +16,6 @@ public class KillBox : MonoBehaviour
             playerScript.transform.position = respawnPos.position;
             collision.attachedRigidbody.velocity = Vector3.zero;
         }
-        else if (collision.TryGetComponent(out Enemy enemyScript)) enemyScript.Die();
+        else if (!playerOnly && collision.TryGetComponent(out Enemy enemyScript)) enemyScript.Die();
     }
 }

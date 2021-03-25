@@ -12,6 +12,8 @@ public class EnemyAir : Enemy
 
     private bool stunned;
 
+    public string attackSound;
+
     public override void Start()
     {
         base.Start();
@@ -32,10 +34,9 @@ public class EnemyAir : Enemy
 
         if (!stunned)
         {
-
             if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
-            else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
+            else if ((targetDistance > weaponRange != targetDistance < minWeaponRange) && !runTooFar)
             {
                 if (inAttackRange) movementState = EnemyStates.Fleeing;
                 else movementState = EnemyStates.Chasing;
@@ -45,11 +46,6 @@ public class EnemyAir : Enemy
             {
                 movementState = EnemyStates.Idle;
                 transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            }
-            Animate();
-            if (inAttackRange)
-            {
-                Attack();
             }
         }
 
@@ -64,13 +60,15 @@ public class EnemyAir : Enemy
                 DOTTimer = 0;
             }
         }
+        Animate();
     }
 
     public override bool Attack()
     {
-        if (base.Attack() && Physics.Raycast(transform.position, transform.forward))
+        if (base.Attack() && !stunned)
         {
             shooter.Shoot(elementType, target.transform.position);
+            sfxScript.PlaySFX3D(attackSound, transform.position);
             return true;
         }
         return false;
@@ -91,28 +89,18 @@ public class EnemyAir : Enemy
 
     public override void Animate()
     {
-        if (myAnim != null)
+        if (myAnim)
         {
             base.Animate();
             if (movementState == EnemyStates.Idle)
             {
                 myAnim.SetBool("Motion", false);
-                myAnim.SetBool("Attacking", false);
-            }
-            else if (movementState == EnemyStates.Chasing)
-            {
-                myAnim.SetBool("Motion", true);
                 myAnim.SetBool("Attacking", true);
             }
-            else if (movementState == EnemyStates.Patrolling)
+            else
             {
                 myAnim.SetBool("Motion", true);
                 myAnim.SetBool("Attacking", false);
-            }
-            else if (movementState == EnemyStates.Fleeing)
-            {
-                myAnim.SetBool("Motion", false);
-                myAnim.SetBool("Attacking", true);
             }
         }
     }

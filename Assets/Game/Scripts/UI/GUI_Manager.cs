@@ -144,10 +144,7 @@ public class GUI_Manager : MonoBehaviour
 
     public void ShowControls(bool isShown)
     {
-        if (isShown)
-            controlsPanel.SetActive(true);
-        else
-            controlsPanel.SetActive(false);
+        controlsPanel.SetActive(isShown);
     }
 
     /*__________________________________________________________
@@ -168,26 +165,6 @@ public class GUI_Manager : MonoBehaviour
     {
         RelicNameHolder.text = ((ElementTypes)relicType).ToString();
         RelicInfoHolder.text = RelicDescription[relicType];
-
-
-        switch (relicType)
-        {
-            case 0:
-                ImageHolder.sprite = relicImage[0].sprite;
-                break;     
-            case 1:        
-                ImageHolder.sprite = relicImage[1].sprite;
-                break;     
-            case 2:        
-                ImageHolder.sprite = relicImage[2].sprite;
-                break;     
-            case 3:        
-                ImageHolder.sprite = relicImage[3].sprite;
-                break;
-            default:
-                break;
-        }
-
+        ImageHolder.sprite = relicImage[relicType].sprite;
     }
-
 }

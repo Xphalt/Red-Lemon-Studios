@@ -40,12 +40,13 @@ public class Enemy : CharacterBase
     private bool colourChanged = false;
 
     public List<SkinnedMeshRenderer> skins;
-    private List<List<Color>> originalColours = new List<List<Color>>();
+    protected List<List<Color>> originalColours = new List<List<Color>>();
 
     public float attackInterval;
     protected float attackTimer = 0;
 
     protected EnemyStates movementState;
+    protected bool runTooFar;
     public bool sentryMode = false;
 
     internal bool spawned = false;
@@ -71,7 +72,7 @@ public class Enemy : CharacterBase
         dropScript = ammoDrop.GetComponent<PickUpBase>();
         dropChance = Mathf.Clamp(dropChance, 0, 1);
 
-        if (myAnim = null) myAnim = gameObject.GetComponent<Animator>();
+        if (myAnim == null) myAnim = gameObject.GetComponent<Animator>();
 
         if (skins.Count == 0)
         {
@@ -141,19 +142,21 @@ public class Enemy : CharacterBase
         if (!movementLocked)
         {
             Vector3 newVelocity = characterRigid.velocity;
-
             switch (movementState)
             {
                 case EnemyStates.Chasing:
+                    runTooFar = false;
                     newVelocity = (target.transform.position - transform.position).normalized * chaseSpeed;
                     break;
 
                 case EnemyStates.Fleeing:
+                    runTooFar = false;
                     newVelocity = (transform.position - target.transform.position).normalized * chaseSpeed;
                     if (isGrounded && !canFly)
                     {
                         if (CheckObstruction(newVelocity))
                         {
+                            runTooFar = true;
                             newVelocity = Vector3.zero;
                             transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
                             directionSet = true;
@@ -162,6 +165,7 @@ public class Enemy : CharacterBase
                     break;
 
                 case EnemyStates.Patrolling:
+                    runTooFar = false;
                     Vector3 patrolDirection = characterRigid.velocity;
                     patrolDirection.y = 0;
 
@@ -195,7 +199,7 @@ public class Enemy : CharacterBase
         }
     }
 
-    private bool CheckObstruction(Vector3 patrolDirection)
+    public bool CheckObstruction(Vector3 patrolDirection)
     {
         bool obstruction = Physics.Raycast(transform.position, patrolDirection, wallDetectionRadius);
         if (!obstruction && isGrounded && !canFly)

@@ -43,7 +43,7 @@ public class EnemyFire : Enemy
     public override void Animate()
     {
         base.Animate();
-        if (myAnim != null)
+        if (myAnim)
         {
             if (movementState == EnemyStates.Chasing)
             {

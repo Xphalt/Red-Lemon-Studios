@@ -34,7 +34,6 @@ public class ElementShooting : MonoBehaviour
     public List<GameObject> BulletPrefabs = new List<GameObject>();
     private Dictionary<ElementTypes, GameObject> BulletColourDictionary = new Dictionary<ElementTypes, GameObject>();
 
-    public List<ElementTypes> soundTypes = new List<ElementTypes>();
     public List<string> soundNames = new List<string>();
     private Dictionary<ElementTypes, string> shootSoundsDictionary = new Dictionary<ElementTypes, string>();
 
@@ -49,9 +48,9 @@ public class ElementShooting : MonoBehaviour
             BulletColourDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
         }
 
-        for (int index = 0; index < soundTypes.Count; index++)
+        for (int index = 0; index < BulletTypes.Count; index++)
         {
-            shootSoundsDictionary.Add(soundTypes[index], soundNames[index]);
+            shootSoundsDictionary.Add(BulletTypes[index], soundNames[index]);
         }
 
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();

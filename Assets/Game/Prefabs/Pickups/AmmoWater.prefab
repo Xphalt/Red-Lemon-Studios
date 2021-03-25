@@ -109,7 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3315d3fc31e7cc746acc3d1c2728920b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDrop: 0
   spawned: 1
+  sfxScript: {fileID: 0}
+  collectionSound: PickupItem
   AmmoValue: 10
   Type: 1
 --- !u!54 &7164489116823485878
