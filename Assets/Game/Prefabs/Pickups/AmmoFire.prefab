@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6391174544658548311}
   - component: {fileID: 7805169112553994640}
   - component: {fileID: -2824558489372025516}
+  - component: {fileID: 2838066867719269194}
   m_Layer: 12
   m_Name: AmmoFire
   m_TagString: PickUp
@@ -98,6 +99,22 @@ MonoBehaviour:
   blowRadius: 0
   blowRange: 50
   blowSpeed: 0
+--- !u!114 &2838066867719269194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522649053907359661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: "\"----------------------------------------------\r\n\"Effect: Stuns
+    enemies.\r\n\"Super Effective against: Air Enemies.\r"
+  infoRight: ~Fire
 --- !u!1 &2047170845541681822
 GameObject:
   m_ObjectHideFlags: 0

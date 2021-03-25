@@ -968,6 +968,7 @@ GameObject:
   - component: {fileID: 6984414929879696743}
   - component: {fileID: 6984414929879696740}
   - component: {fileID: 3080684833312516578}
+  - component: {fileID: -2303786261822429039}
   m_Layer: 9
   m_Name: EarthRelic
   m_TagString: Relic
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   speedMultiplier: 0.8
   relicCooldownDuration: 4
   sfxScript: {fileID: 0}
+  collectedRotation: {x: 0, y: 0, z: 0, w: 0}
   collectionSound: PickupRelic
   activateSound: EarthRelic
   pillar: {fileID: 6984414929851687242}
@@ -1081,6 +1083,28 @@ MonoBehaviour:
   blowRadius: 0
   blowRange: 0
   blowSpeed: 0
+--- !u!114 &-2303786261822429039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800386003923182297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: '"----------------------------------------------
+
+    "Effect: Slows
+    down enemies.
+
+    "Super Effective against: Water Enemies.'
+  infoRight: '\Earth
+
+'
 --- !u!1 &6060000331552375622
 GameObject:
   m_ObjectHideFlags: 0

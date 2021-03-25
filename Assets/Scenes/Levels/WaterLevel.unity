@@ -1268,6 +1268,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -6.000366
       objectReference: {fileID: 0}
+    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: newGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: ArenaName
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1331,11 +1339,11 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: relic
       value: 
-      objectReference: {fileID: 1778291283}
+      objectReference: {fileID: 0}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: relicSpawnPos
       value: 
-      objectReference: {fileID: 1778291284}
+      objectReference: {fileID: 0}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2103.71
@@ -2077,16 +2085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b0ed45ae239214097fa5bfee6e138d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1778291283 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8978272892471092116, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-  m_PrefabInstance: {fileID: 1155473274}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1778291284 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8634221876403665198, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-  m_PrefabInstance: {fileID: 1155473274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1786185992
 Mesh:
   m_ObjectHideFlags: 0

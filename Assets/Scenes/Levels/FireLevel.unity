@@ -10783,16 +10783,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1635365717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7394085997366995940, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-  m_PrefabInstance: {fileID: 1994182982}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1635365718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7951085070090521357, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-  m_PrefabInstance: {fileID: 1994182982}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1669577789
 Mesh:
   m_ObjectHideFlags: 0
@@ -12439,7 +12429,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13855034
+  m_Name: pb_Mesh-563534
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14544,6 +14534,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 2.96
       objectReference: {fileID: 0}
+    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: newGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: ArenaName
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: arenaInteractables.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -14619,11 +14621,11 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: relic
       value: 
-      objectReference: {fileID: 1635365717}
+      objectReference: {fileID: 0}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: relicSpawnPos
       value: 
-      objectReference: {fileID: 1635365718}
+      objectReference: {fileID: 0}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.size
       value: 0

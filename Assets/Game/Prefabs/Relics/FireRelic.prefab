@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 8729788778047725343}
   - component: {fileID: 6988532098657201682}
   - component: {fileID: 7019535886230517121}
+  - component: {fileID: 5791084376048592285}
   m_Layer: 9
   m_Name: FireRelic
   m_TagString: Relic
@@ -571,6 +572,7 @@ MonoBehaviour:
   speedMultiplier: 1
   relicCooldownDuration: 3
   sfxScript: {fileID: 0}
+  collectedRotation: {x: 0, y: 0, z: 0, w: 0}
   collectionSound: PickupRelic
   activateSound: FireRelic
   dashSpeed: 100
@@ -607,6 +609,22 @@ MonoBehaviour:
   blowRadius: 0
   blowRange: 0
   blowSpeed: 0
+--- !u!114 &5791084376048592285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2734097542274692178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: "\"----------------------------------------------\r\n\"Effect: Stuns
+    enemies.\r\n\"Super Effective against: Air Enemies.\r"
+  infoRight: ~Fire
 --- !u!1 &3003607807951123548
 GameObject:
   m_ObjectHideFlags: 0
