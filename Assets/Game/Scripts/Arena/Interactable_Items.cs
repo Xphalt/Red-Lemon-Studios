@@ -28,15 +28,6 @@ public class Interactable_Items : MonoBehaviour
         }
         if (healthDrop == null) healthDrop = GetComponentInChildren<HealthPickup>(true);
 
-        foreach (PickUpBase ammo in ammoDrops)
-        {
-            ammo.transform.localPosition = Vector3.zero;
-            ammo.transform.localScale = Vector3.one;
-            ammo.transform.localRotation = Quaternion.identity;
-        }
-        healthDrop.transform.localPosition = Vector3.zero;
-        healthDrop.transform.localScale = Vector3.one;
-        healthDrop.transform.localRotation = Quaternion.identity;
         DropPercentage = Random.Range(0, 100);
         gameObject.SetActive(!destroyed);
     }
