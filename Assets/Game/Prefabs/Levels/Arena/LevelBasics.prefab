@@ -644,10 +644,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToolBar_Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 3181401213593222380, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3450215855726733001, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2130,9 +2126,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5524924018667674289}
     - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: airIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 4885bbb0bf622ff428a14e8fd63ab19b, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: fireIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: c6c5efddadf6afa49a79646899730943, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: homeMenu
       value: Scenes/Levels/MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: earthIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 08e05c76241b0a14ca8cf2b242c24cf7, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: waterIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 42ae503be912e244082d7c5aea41703a, type: 3}
     - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: pausePanel
       value: 
@@ -2178,6 +2190,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: relicSprite.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: RelicName.Array.data[0]
       value: Earth
       objectReference: {fileID: 0}
@@ -2209,6 +2225,22 @@ PrefabInstance:
       propertyPath: relicImage.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: relicSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: c6c5efddadf6afa49a79646899730943, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: relicSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 42ae503be912e244082d7c5aea41703a, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: relicSprite.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4885bbb0bf622ff428a14e8fd63ab19b, type: 3}
+    - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: relicSprite.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 08e05c76241b0a14ca8cf2b242c24cf7, type: 3}
     - target: {fileID: 285655825787680742, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: RelicDescription.Array.size
       value: 4
@@ -2336,6 +2368,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 4.2000732
       objectReference: {fileID: 0}
+    - target: {fileID: 6221116453966888831, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4885bbb0bf622ff428a14e8fd63ab19b, type: 3}
     - target: {fileID: 6883552223226430783, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

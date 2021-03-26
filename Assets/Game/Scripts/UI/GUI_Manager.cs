@@ -29,7 +29,7 @@ public class GUI_Manager : MonoBehaviour
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
     public Text RelicNameHolder, RelicInfoHolder;
     public Image ImageHolder;
-    public List<Image> relicImage = new List<Image>();
+    public List<Sprite> relicSprite = new List<Sprite>();
 
     private void Start()
     {
@@ -87,7 +87,6 @@ public class GUI_Manager : MonoBehaviour
 
     public void HighlightSelectedAmmo()
     {
-       // ResetElementalImages();
         switch (player.elementChanger.m_CurElement)
         {
             case ElementTypes.Air:
@@ -110,14 +109,6 @@ public class GUI_Manager : MonoBehaviour
                 break;
         }
     }
-
-    //private void ResetElementalImages()
-    //{
-    //    airImage.sprite = airIcon;
-    //    waterImage.sprite = waterIcon;
-    //    fireImage.sprite = fireIcon;
-    //    earthImage.sprite = earthIcon;
-    //}
 
     /*__________________________________________________________
     Pause menu code
@@ -164,7 +155,7 @@ public class GUI_Manager : MonoBehaviour
     {
         RelicNameHolder.text = ((ElementTypes)relicType).ToString();
         RelicInfoHolder.text = RelicDescription[relicType];
-        ImageHolder.sprite = relicImage[relicType].sprite;
+        ImageHolder.sprite = relicSprite[relicType];
     }
 
     public void ShowEndGame(bool dead)

@@ -2006,10 +2006,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2913973460855838986, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3063018366675082744, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_textAlignment
       value: 65535
@@ -2101,6 +2097,10 @@ PrefabInstance:
     - target: {fileID: 4769180668670683522, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_Name
       value: LevelBasics
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769180668670683522, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: relic
