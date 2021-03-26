@@ -166,11 +166,14 @@ public class CharacterBase : MonoBehaviour
 
     public void EndShift()
     {
-        movementLocked = false;
-        shifting = false;
-        shiftingTimer = 0;
+        if (shifting)
+        {
+            movementLocked = false;
+            shifting = false;
+            shiftingTimer = 0;
 
-        characterRigid.velocity *= postShiftMomentum;
+            characterRigid.velocity *= postShiftMomentum;
+        }
     }
 
     public float CalculateDamageMult()

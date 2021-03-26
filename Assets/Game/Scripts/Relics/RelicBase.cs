@@ -7,7 +7,7 @@ using static EnumHelper;
 public class RelicBase : MonoBehaviour
 {
     internal GameObject user = null;
-    internal string userName;
+    internal string userName = null;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
     public Animator myAnim;

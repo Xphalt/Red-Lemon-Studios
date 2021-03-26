@@ -27,10 +27,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5852110401229797322}
-  - {fileID: 5455344905473276173}
-  - {fileID: 8826670265354172425}
   - {fileID: 4687629445409603447}
+  - {fileID: 5852110401229797322}
+  - {fileID: 8826670265354172425}
+  - {fileID: 5455344905473276173}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5320357613222328419, guid: e00571c18d115b2498640583a7346b94, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5320357613222328419, guid: e00571c18d115b2498640583a7346b94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6486778449504721244, guid: df5368ac755824e4da777d6e9ea7a2b6, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6486778449504721244, guid: df5368ac755824e4da777d6e9ea7a2b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,9 +257,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireRelic
       objectReference: {fileID: 0}
+    - target: {fileID: 2734097542274692178, guid: 6f4213cf9aa6123438c31cb91d46253a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3367187934338707176, guid: 6f4213cf9aa6123438c31cb91d46253a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3367187934338707176, guid: 6f4213cf9aa6123438c31cb91d46253a, type: 3}
       propertyPath: m_LocalPosition.x
