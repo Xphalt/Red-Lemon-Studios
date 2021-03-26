@@ -59,9 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f4e2235da41f4bb73eedd9a69c33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPos: {fileID: 1603614797097648625}
+  respawnPos:
+  - {fileID: 1603614797097648625}
   damage: 10
   playerOnly: 0
+  AutoFind: 0
 --- !u!54 &-7498548134334605192
 Rigidbody:
   m_ObjectHideFlags: 0
