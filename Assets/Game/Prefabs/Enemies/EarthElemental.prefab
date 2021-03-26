@@ -180,7 +180,7 @@ MonoBehaviour:
   canFly: 0
   jumpSpeed: 0
   gravityMult: 1
-  floorDistance: 1.01
+  floorDistance: 2
   airControl: 0
   maxHealth: 100
   knockbackRecovery: 1
@@ -218,7 +218,7 @@ MonoBehaviour:
   playerDetectionRadius: 50
   wallDetectionRadius: 5
   hitSound: EnemyHit
-  rollSpeed: 20
+  rollSpeed: 10
   rollDuration: 1
   rollDamage: 25
   attackSound: EarthAttack

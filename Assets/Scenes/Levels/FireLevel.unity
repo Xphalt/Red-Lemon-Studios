@@ -14876,7 +14876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: newGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: autoFind
@@ -15010,6 +15010,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -87.97
       objectReference: {fileID: 0}
+    - target: {fileID: 4681593784555455908, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4769180668670683522, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_Name
       value: LevelBasics
@@ -15134,6 +15138,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 4.2000732
       objectReference: {fileID: 0}
+    - target: {fileID: 6483202905268888935, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: inArena
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7759739603350800999, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7842347551125480904, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -15153,6 +15165,14 @@ PrefabInstance:
     - target: {fileID: 8124744285331806304, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.z
       value: 212.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157067999603475616, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902265498002391770, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
@@ -16485,6 +16505,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 713728937}
+    - target: {fileID: 2026178389354876846, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPos
+      objectReference: {fileID: 0}
     - target: {fileID: 2026178389373513388, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -16533,6 +16557,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1170331266}
+    - target: {fileID: 2026178389731815563, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPos
+      objectReference: {fileID: 0}
     - target: {fileID: 2026178389767348684, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -16593,6 +16621,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1791744756}
+    - target: {fileID: 2026178390195857004, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPos
+      objectReference: {fileID: 0}
     - target: {fileID: 2026178390214225216, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -16769,6 +16801,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 639153021}
+    - target: {fileID: 2026178391013522392, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPos
+      objectReference: {fileID: 0}
     - target: {fileID: 2026178391050723297, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
       propertyPath: m_Mesh
       value: 
