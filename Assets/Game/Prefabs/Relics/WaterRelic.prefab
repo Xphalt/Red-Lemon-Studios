@@ -1537,7 +1537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8679130879087077655
 Transform:
   m_ObjectHideFlags: 0
@@ -1546,7 +1546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8302851145889199021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.07, y: -6.1, z: 19.374172}
+  m_LocalPosition: {x: 998.61, y: 49.31, z: 1001.78}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 343015596430997897}
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1.25
-  speedMultiplier: 1.25
+  speedMultiplier: 0
   relicCooldownDuration: 4
   collectedRotation: {x: 0, y: 0, z: 0, w: 1}
   rotationSpeed: 90
@@ -1633,7 +1633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
-  infoLeft: "Hello\"----------------------------------------------\r\n\"Effect: Heals
+  infoLeft: "\"----------------------------------------------\r\n\"Effect: Heals
     inflicted fire damage.\r\n\"Super Effective against: Fire Enemies.\r"
   infoRight: '@Water'
 --- !u!1 &8463852804539114508
