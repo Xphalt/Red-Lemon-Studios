@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: RPG
   m_EditorClassIdentifier: 
   slicedSprite: {fileID: 21300000, guid: 56e9b61d1bc557f48937e76684403739, type: 3}
-  color: {r: 0.3207547, g: 0.2738519, b: 0.2738519, a: 0.8666667}
+  color: {r: 0.3207547, g: 0.2738519, b: 0.2738519, a: 0.7529412}
   fontAsset: {fileID: 11400000, guid: 2ef190b77111ab84ba152f9da434fbae, type: 2}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   fontStyles:
   - tag: \
-    color: {r: 0.18279976, g: 0.5283019, b: 0.11712353, a: 0}
-    bold: 1
+    color: {r: 0.1724813, g: 0.6415094, b: 0.18295896, a: 0}
+    bold: 0
     italic: 0
     underline: 0
     strikethrough: 0
@@ -30,20 +30,14 @@ MonoBehaviour:
     underline: 0
     strikethrough: 0
   - tag: '@'
-    color: {r: 0.19326274, g: 0.93731904, b: 0.9528302, a: 0}
+    color: {r: 0.23113209, g: 0.82471025, b: 1, a: 0}
     bold: 1
     italic: 0
     underline: 0
     strikethrough: 0
   - tag: $
-    color: {r: 0.79883796, g: 0.39315593, b: 0.8773585, a: 0}
+    color: {r: 0.8063586, g: 0.45759168, b: 0.8584906, a: 0}
     bold: 1
     italic: 0
-    underline: 0
-    strikethrough: 0
-  - tag: '"'
-    color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
-    bold: 0
-    italic: 1
     underline: 0
     strikethrough: 0
