@@ -1849,6 +1849,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3331455516436599721}
     m_Modifications:
     - target: {fileID: 480205472946652733, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
+      propertyPath: inArena
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480205472946652733, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
       propertyPath: sfxScript
       value: 
       objectReference: {fileID: 1729546070}
@@ -1930,7 +1934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6520385203966045552, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6802883419382802009, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
       propertyPath: sfxScript

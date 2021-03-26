@@ -59,14 +59,13 @@ public class CharacterBase : MonoBehaviour
 
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
         characterRigid = GetComponent<Rigidbody>();
+        curHealth = maxHealth;
     }
 
     public virtual void Start()
     {
         characterRigid.useGravity = !canFly;
         airControl = Mathf.Clamp(airControl, 0, 1);
-
-        curHealth = maxHealth;
     }
     
     public virtual void Update()

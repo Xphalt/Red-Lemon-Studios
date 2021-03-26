@@ -330,6 +330,7 @@ public class Player : CharacterBase
             {
                 transform.position = SaveManager.GetVector3(loadTransform + "PlayerPos");
                 transform.localRotation = SaveManager.GetQuaternion(loadTransform + "PlayerRot");
+                transform.rotation = SaveManager.GetQuaternion(loadTransform + "PlayerRot");
                 firstPersonCamera.transform.localRotation = SaveManager.GetQuaternion(loadTransform + "PlayerCameraRot");
             }
 

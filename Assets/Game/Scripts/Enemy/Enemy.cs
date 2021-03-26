@@ -131,16 +131,7 @@ public class Enemy : CharacterBase
             colourChangeTimer += Time.deltaTime;
             if (colourChangeTimer > colourChangeDuration)
             {
-                for (int s = 0; s < skins.Count; s++)
-                {
-                    for (int m = 0; m < skins[s].materials.Length; m++) skins[s].materials[m].color = originalSkinColours[s][m];
-                }
-                for (int mr = 0; mr < meshes.Count; mr++)
-                {
-                    for (int m = 0; m < meshes[mr].materials.Length; m++) meshes[mr].materials[m].color = originalMeshColours[mr][m];
-                }
-                colourChanged = false;
-                colourChangeTimer = 0;
+                ResetColour();
             }
         }
     }
@@ -298,6 +289,20 @@ public class Enemy : CharacterBase
         }
     }
 
+    private void ResetColour()
+    {
+        for (int s = 0; s < skins.Count; s++)
+        {
+            for (int sm = 0; sm < skins[s].materials.Length; sm++) skins[s].materials[sm].color = originalSkinColours[s][sm];
+        }
+        for (int mr = 0; mr < meshes.Count; mr++)
+        {
+            for (int m = 0; m < meshes[mr].materials.Length; m++) meshes[mr].materials[m].color = originalMeshColours[mr][m];
+        }
+        colourChanged = false;
+        colourChangeTimer = 0;
+    }
+
     public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
     {
 
@@ -338,7 +343,9 @@ public class Enemy : CharacterBase
         saveID = "Enemy" + saveID;
 
         SaveManager.UpdateSavedVector3(saveID + "Pos", transform.position);
-        SaveManager.UpdateSavedVector3(saveID + "Rot", transform.rotation.eulerAngles);
+        SaveManager.UpdateSavedQuaternion(saveID + "Rot", transform.rotation);
+        if (spawned) SaveManager.UpdateSavedFloat(saveID + "Health", curHealth);
+        else SaveManager.UpdateSavedFloat(saveID + "Health", maxHealth);
         SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
         SaveManager.UpdateSavedBool(saveID + "Killed", killed);
         SaveManager.UpdateSavedFloat(saveID + "AttackTimer", attackTimer);
@@ -349,10 +356,14 @@ public class Enemy : CharacterBase
         loadID = "Enemy" + loadID;
 
         transform.position = SaveManager.GetVector3(loadID + "Pos");
-        transform.rotation = Quaternion.Euler(SaveManager.GetVector3(loadID + "Rot"));
+        transform.rotation = SaveManager.GetQuaternion(loadID + "Rot");
+        curHealth = SaveManager.GetFloat(loadID + "Health");
         spawned = SaveManager.GetBool(loadID + "Spawned");
         killed = SaveManager.GetBool(loadID + "Killed");
         attackTimer = SaveManager.GetFloat(loadID + "AttackTimer");
+
+        EndSatusEffect();
+        if (colourChanged) ResetColour();
 
         gameObject.SetActive(spawned && !killed);
     }
