@@ -345,10 +345,10 @@ MonoBehaviour:
   player: {fileID: 5524924018667674289}
   enemies: []
   enemySpawnPos: []
-  waveDelay: 10
-  relic: {fileID: 0}
+  waveDelay: 20
+  startRelic: {fileID: 0}
+  endRelic: {fileID: 0}
   nextScene: 
-  bWavesStarted: 0
   sfxScript: {fileID: 1729546070}
   enemiesDeadSound: ArenaComplete
   enemySpawnSound: EnemySpawn
@@ -1940,6 +1940,14 @@ PrefabInstance:
       propertyPath: sfxScript
       value: 
       objectReference: {fileID: 1729546070}
+    - target: {fileID: 8439010376669735287, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826670265354172425, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0792b89c48438de43b753f6a87f76d1e, type: 3}
 --- !u!114 &1738516368146467128 stripped
