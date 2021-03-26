@@ -4714,6 +4714,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &478198545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3910107836701259573, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+  m_PrefabInstance: {fileID: 1994182982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8474f03f4702434459027ce38e6e8996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &487595164
 Mesh:
   m_ObjectHideFlags: 0
@@ -15021,6 +15032,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -6.000244
       objectReference: {fileID: 0}
+    - target: {fileID: 2478213163738609481, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.7000732
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478213165775028388, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.7000732
+      objectReference: {fileID: 0}
     - target: {fileID: 2506396578636426251, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_Size.x
       value: 301.43
@@ -15068,7 +15087,7 @@ PrefabInstance:
     - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: arenaRelics.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 478198545}
     - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: arenaRelics.Array.data[1]
       value: 
