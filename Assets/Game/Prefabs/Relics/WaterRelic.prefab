@@ -1595,7 +1595,7 @@ MonoBehaviour:
   maxJumps: 1
   knockBackMultiplier: 1
   damageRecievedMultiplier: 1.25
-  speedMultiplier: 0
+  speedMultiplier: 1.25
   relicCooldownDuration: 4
   collectedRotation: {x: 0, y: 0, z: 0, w: 1}
   rotationSpeed: 90
@@ -1607,6 +1607,7 @@ MonoBehaviour:
   healDuration: 3
   healTickInterval: 0.5
   inUseSpeedMultiplier: 1
+  defaultSpeedMultiplier: 1.25
 --- !u!135 &8579838197928294505
 SphereCollider:
   m_ObjectHideFlags: 0

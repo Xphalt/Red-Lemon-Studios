@@ -14,14 +14,16 @@ public class RelicWater : RelicBase
     private float healTickTimer;
 
     public float inUseSpeedMultiplier;
-    private float defaultSpeedMultiplier;
+
+    [Tooltip("Should be the same as Speed Multiplier")]
+    public float defaultSpeedMultiplier;
 
     public override void Start()
     {
         base.Start();
 
         relicType = ElementTypes.Water;
-        defaultSpeedMultiplier = speedMultiplier;
+        speedMultiplier = defaultSpeedMultiplier;
     }
 
     public override void Update()

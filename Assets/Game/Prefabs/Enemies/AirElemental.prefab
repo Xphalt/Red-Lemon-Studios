@@ -826,11 +826,11 @@ MonoBehaviour:
   sentryMode: 0
   chaseSpeed: 5
   patrolSpeed: 2
-  playerDetectionRadius: 50
+  playerDetectionRadius: 100
   wallDetectionRadius: 2
   hitSound: EnemyHit
-  weaponRange: 30
-  stationaryZone: 0.2
+  weaponRange: 20
+  stationaryZone: 0.5
   attackSound: AirAttack
 --- !u!82 &6205449447219901066
 AudioSource:
