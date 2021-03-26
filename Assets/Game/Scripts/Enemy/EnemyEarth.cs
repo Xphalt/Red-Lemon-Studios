@@ -88,7 +88,7 @@ public class EnemyEarth : Enemy
     {
         base.TriggerStatusEffect(effectStats);
 
-        Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), 1, true);
+        Shift((transform.position - effectStats.gameObject.transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), 1, true);
     }
 
     public override void OnCollisionEnter(Collision collision)
