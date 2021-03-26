@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationScript : MonoBehaviour
+public class RotatingFan : MonoBehaviour
 {
-    public Vector3 RotateSpeed = Vector3.up;
+    public Vector3 RotateSpeed = Vector3.up * 360;
     public float blowRadius = 5;
     public float blowRange = 50;
     public float blowSpeed = 0;
 
     void Update()
     {
-        transform.Rotate(RotateSpeed);
+        transform.Rotate(RotateSpeed * Time.deltaTime);
 
         if (blowSpeed != 0)
         {

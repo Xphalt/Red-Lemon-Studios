@@ -804,7 +804,7 @@ MonoBehaviour:
   canFly: 0
   jumpSpeed: 0
   gravityMult: 1
-  floorDistance: 1.25
+  floorDistance: 5
   airControl: 0
   maxHealth: 100
   knockbackRecovery: 0
@@ -830,7 +830,7 @@ MonoBehaviour:
   wallDetectionRadius: 2
   hitSound: EnemyHit
   weaponRange: 30
-  stationaryZone: 0.1
+  stationaryZone: 1
   attackSound: AirAttack
 --- !u!82 &6205449447219901066
 AudioSource:

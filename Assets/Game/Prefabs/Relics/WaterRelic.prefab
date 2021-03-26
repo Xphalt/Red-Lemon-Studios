@@ -1530,7 +1530,6 @@ GameObject:
   - component: {fileID: 4383185084371700692}
   - component: {fileID: 7164348949525927082}
   - component: {fileID: 8579838197928294505}
-  - component: {fileID: 7724805655549495158}
   - component: {fileID: 1164238806272428470}
   m_Layer: 9
   m_Name: WaterRelic
@@ -1598,8 +1597,9 @@ MonoBehaviour:
   damageRecievedMultiplier: 1.25
   speedMultiplier: 1.25
   relicCooldownDuration: 4
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  rotationSpeed: 90
   sfxScript: {fileID: 0}
-  collectedRotation: {x: 0, y: 0, z: 0, w: 0}
   collectionSound: PickupRelic
   activateSound: WaterRelic
   healAmount: 10
@@ -1620,22 +1620,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7724805655549495158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8302851145889199021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 1, z: 0}
-  blowRadius: 0
-  blowRange: 0
-  blowSpeed: 0
 --- !u!114 &1164238806272428470
 MonoBehaviour:
   m_ObjectHideFlags: 0

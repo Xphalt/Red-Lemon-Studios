@@ -36,10 +36,11 @@ public class RelicBase : MonoBehaviour
 
     internal bool readyToUse = false;
 
-    public SFXScript sfxScript = null;
-
     public Quaternion collectedRotation;
+    public float rotationSpeed;
 
+    public SFXScript sfxScript = null;
+    
     public string collectionSound;
     public string activateSound;
 
@@ -65,16 +66,12 @@ public class RelicBase : MonoBehaviour
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
-
-        if (TryGetComponent(out RotationScript relicRotate))
-        {
-            relicRotate.enabled = false;
-            transform.localRotation = collectedRotation;
-        }
+        transform.localRotation = collectedRotation;
     }
 
     public virtual void Update()
     {
+        if (!collected) transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         Cooldown();
     }
 

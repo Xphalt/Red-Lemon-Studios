@@ -23,15 +23,19 @@ public class ArenaManager : MonoBehaviour
     public float waveDelay;
     private float waveTimer = 0;
 
-    public GameObject relic;
-    private RelicBase relicScript;
+    public GameObject startRelic;
+    private RelicBase startRelicScript;
+
+    public GameObject endRelic;
+    private RelicBase endRelicScript;
 
     public string nextScene;
 
-    public bool bWavesStarted = false;
+    internal bool bWavesStarted = false;
 
+    internal bool bStartRelicCollected = false;
     internal bool bEnemiesCleared = false;
-    internal bool bRelicCollected = false;
+    internal bool bEndRelicCollected = false;
 
     internal bool bCheckpointReady = false;
 
@@ -50,9 +54,20 @@ public class ArenaManager : MonoBehaviour
         {
             Scene thisScene = SceneManager.GetActiveScene();
             enemies.Clear();
+            enemySpawnPos.Clear();
             foreach (Enemy newEnemy in Resources.FindObjectsOfTypeAll<Enemy>())
                 if (newEnemy.gameObject.scene == thisScene) enemies.Add(newEnemy.gameObject);
+
+            foreach (GameObject newSpawn in GameObject.FindGameObjectsWithTag("SpawnPos")) enemySpawnPos.Add(newSpawn.transform);
         }
+
+        if (startRelic != null)
+        {
+            startRelicScript = startRelic.GetComponent<RelicBase>();
+            startRelicScript.inArena = true;
+            startRelicScript.spawned = true;
+        }
+        else bStartRelicCollected = true;
 
         for (int i = 0; i < enemies.Count; i++)
         {
@@ -63,12 +78,12 @@ public class ArenaManager : MonoBehaviour
 
         if (enemySpawnPos.Count > 0) maxWaves = Mathf.CeilToInt((float)enemies.Count / enemySpawnPos.Count);
 
-        if (relic != null)
+        if (endRelic != null)
         {
-            relicScript = relic.GetComponent<RelicBase>();
-            relicScript.inArena = true;
+            endRelicScript = endRelic.GetComponent<RelicBase>();
+            endRelicScript.inArena = true;
         }
-        else bRelicCollected = true;
+        else bEndRelicCollected = true;
 
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
@@ -77,7 +92,13 @@ public class ArenaManager : MonoBehaviour
     {
         bCheckpointReady = false;
 
-        if (!bEnemiesCleared)
+        if (!bStartRelicCollected)
+        {
+            bStartRelicCollected = startRelicScript.collected;
+            bCheckpointReady = bStartRelicCollected;
+        }
+
+        else if (!bEnemiesCleared)
         {
             if (waveCounter < maxWaves && bWavesStarted)
             {
@@ -99,10 +120,10 @@ public class ArenaManager : MonoBehaviour
             if (!enemiesRemaining)
             {
                 bEnemiesCleared = true;
-                if (relic != null)
+                if (endRelic != null)
                 {
-                    relicScript.spawned = true;
-                    relic.SetActive(true);
+                    endRelicScript.spawned = true;
+                    endRelic.SetActive(true);
                 }
                 bCheckpointReady = true;
 
@@ -110,10 +131,10 @@ public class ArenaManager : MonoBehaviour
             }
         }
 
-        else if (!bRelicCollected)
+        else if (!bEndRelicCollected)
         {
-            bRelicCollected = relicScript.collected;
-            bCheckpointReady = bRelicCollected;
+            bEndRelicCollected = endRelicScript.collected;
+            bCheckpointReady = bEndRelicCollected;
         }
 
 
@@ -132,7 +153,7 @@ public class ArenaManager : MonoBehaviour
 
     public void SpawnNextWave()
     {
-        if (waveCounter < maxWaves) // && !bArenaComplete could possibly fix a bug
+        if (waveCounter < maxWaves && bStartRelicCollected) // && !bArenaComplete could possibly fix a bug
         {
             for (int e = waveCounter * enemySpawnPos.Count; e < (waveCounter + 1) * enemySpawnPos.Count; e++)
             {
@@ -150,7 +171,7 @@ public class ArenaManager : MonoBehaviour
 
     public void TransitionLevel()
     {
-        if (bEnemiesCleared && bRelicCollected)
+        if (bEnemiesCleared && bEndRelicCollected)
         {
             if (nextScene != "") SceneManager.LoadScene(nextScene);
             else

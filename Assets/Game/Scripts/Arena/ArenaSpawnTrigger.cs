@@ -9,7 +9,7 @@ public class ArenaSpawnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && arenaManager.waveCounter == 0)
+        if (other.gameObject.CompareTag("Player") && !arenaManager.bWavesStarted)
         {
             arenaManager.SpawnNextWave();
         }

@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: 5858754362478887929}
   - component: {fileID: 6646196778962820599}
   - component: {fileID: 5753453549575931400}
-  - component: {fileID: -2852460127958717030}
   - component: {fileID: 420010516781823595}
   m_Layer: 9
   m_Name: AirRelic
@@ -256,8 +255,9 @@ MonoBehaviour:
   damageRecievedMultiplier: 1
   speedMultiplier: 1
   relicCooldownDuration: 5
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  rotationSpeed: 90
   sfxScript: {fileID: 0}
-  collectedRotation: {x: 0, y: 0, z: 0, w: 0}
   collectionSound: PickupRelic
   activateSound: AirRelic
   grappleRange: 100
@@ -266,22 +266,6 @@ MonoBehaviour:
   bounceForce: 500
   damage: 10
   maxHits: 1
---- !u!114 &-2852460127958717030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858754362478887910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 1, z: 0}
-  blowRadius: 0
-  blowRange: 0
-  blowSpeed: 0
 --- !u!114 &420010516781823595
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -205,7 +205,8 @@ public class Enemy : CharacterBase
 
         if (!directionSet)
         {
-            Vector3 lookDirection = characterRigid.velocity - Vector3.up * characterRigid.velocity.y; //Set Y component to 0
+            Vector3 lookDirection = characterRigid.velocity;
+            if (!canFly) lookDirection -= Vector3.up * lookDirection.y; //Set Y component to 0
             if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
         }
     }

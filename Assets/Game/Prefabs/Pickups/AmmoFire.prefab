@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3976858607617847291}
   - component: {fileID: 6391174544658548311}
   - component: {fileID: 7805169112553994640}
-  - component: {fileID: -2824558489372025516}
   - component: {fileID: 2838066867719269194}
   m_Layer: 12
   m_Name: AmmoFire
@@ -63,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDrop: 0
   spawned: 1
+  rotationSpeed: 90
   sfxScript: {fileID: 0}
   collectionSound: PickupItem
   AmmoValue: 10
@@ -83,22 +83,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!114 &-2824558489372025516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522649053907359661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 1, z: 0}
-  blowRadius: 0
-  blowRange: 50
-  blowSpeed: 0
 --- !u!114 &2838066867719269194
 MonoBehaviour:
   m_ObjectHideFlags: 0

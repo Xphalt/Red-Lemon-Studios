@@ -8,6 +8,8 @@ public class PickUpBase : MonoBehaviour
     public bool enemyDrop;
     public bool spawned;
 
+    public float rotationSpeed;
+
     public SFXScript sfxScript;
 
     public string collectionSound;
@@ -16,6 +18,11 @@ public class PickUpBase : MonoBehaviour
     {
         if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
         gameObject.SetActive(spawned);
+    }
+
+    private void Update()
+    {
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 
     public void Spawn()

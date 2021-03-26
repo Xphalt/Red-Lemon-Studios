@@ -92,7 +92,12 @@ public class EnemyAir : Enemy
         if (myAnim)
         {
             base.Animate();
-            if (movementState == EnemyStates.Idle)
+            if (stunned)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Idle)
             {
                 myAnim.SetBool("Motion", false);
                 myAnim.SetBool("Attacking", true);

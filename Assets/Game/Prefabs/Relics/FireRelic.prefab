@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 5543323854749884653}
   - component: {fileID: 8729788778047725343}
   - component: {fileID: 6988532098657201682}
-  - component: {fileID: 7019535886230517121}
   - component: {fileID: 5791084376048592285}
   m_Layer: 9
   m_Name: FireRelic
@@ -511,7 +510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3367187934338707176
 Transform:
   m_ObjectHideFlags: 0
@@ -571,8 +570,9 @@ MonoBehaviour:
   damageRecievedMultiplier: 1
   speedMultiplier: 1
   relicCooldownDuration: 3
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  rotationSpeed: 90
   sfxScript: {fileID: 0}
-  collectedRotation: {x: 0, y: 0, z: 0, w: 0}
   collectionSound: PickupRelic
   activateSound: FireRelic
   dashSpeed: 100
@@ -593,22 +593,6 @@ CapsuleCollider:
   m_Height: 0.79
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7019535886230517121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2734097542274692178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 1, z: 0}
-  blowRadius: 0
-  blowRange: 0
-  blowSpeed: 0
 --- !u!114 &5791084376048592285
 MonoBehaviour:
   m_ObjectHideFlags: 0

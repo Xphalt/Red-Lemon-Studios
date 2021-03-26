@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 3060005153427849995}
   - component: {fileID: 7410071128454729120}
   - component: {fileID: 7164489116823485878}
-  - component: {fileID: -8463284720102150836}
   - component: {fileID: -7476864371447506061}
   m_Layer: 12
   m_Name: AmmoWater
@@ -176,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDrop: 0
   spawned: 1
+  rotationSpeed: 90
   sfxScript: {fileID: 0}
   collectionSound: PickupItem
   AmmoValue: 10
@@ -196,22 +196,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!114 &-8463284720102150836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5008709120197889081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2b98c32ab4f6744bb98da91f4bc285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 1, z: 0}
-  blowRadius: 0
-  blowRange: 50
-  blowSpeed: 0
 --- !u!114 &-7476864371447506061
 MonoBehaviour:
   m_ObjectHideFlags: 0
