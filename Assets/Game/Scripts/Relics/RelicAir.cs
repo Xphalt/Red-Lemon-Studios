@@ -15,6 +15,8 @@ public class RelicAir : RelicBase
     public float bounceForce = 500;
     public float damage = 10;
 
+    private Vector3 startPos;
+
     public int maxHits = 1;
     private int hits;
 
@@ -31,9 +33,10 @@ public class RelicAir : RelicBase
     {
         base.Update();
 
-        if (inUse && grappleSwing < 1)
+        if (inUse)
         {
-            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+            if (grappleSwing < 1) characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+            if ((user.transform.position - startPos).magnitude > grappleRange) EndAbility();
         }
     }
 
@@ -56,6 +59,8 @@ public class RelicAir : RelicBase
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
             characterScript.immortal = true;
+
+            startPos = user.transform.position;
 
             if (myAnim) myAnim.SetTrigger("Activate");
 
