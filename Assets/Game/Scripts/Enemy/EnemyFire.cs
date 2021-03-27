@@ -102,6 +102,7 @@ public class EnemyFire : Enemy
             playerScript.TakeDamage(explosionDamage);
             sfxScript.PlaySFX3D(explodeSound, transform.position);
         }
+        killed = true;
         gameObject.SetActive(false);
     }
 

@@ -145,7 +145,7 @@ public class CharacterBase : MonoBehaviour
 
     protected void Jump()
     {
-        if (maxJumps > currentJumps && !jumping)
+        if (maxJumps > currentJumps && !jumping && !movementLocked)
         {
             jumping = true;
             currentJumps++;

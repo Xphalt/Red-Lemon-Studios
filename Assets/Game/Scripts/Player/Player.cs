@@ -184,7 +184,7 @@ public class Player : CharacterBase
             if (effectStats.team != team)
             {
                 if (effectStats.damageType == ElementTypes.Air)
-                    Shift((transform.position - effectStats.gameObject.transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+                    Shift((transform.position - effectStats.spawnPoint).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
             } 
         }
     }

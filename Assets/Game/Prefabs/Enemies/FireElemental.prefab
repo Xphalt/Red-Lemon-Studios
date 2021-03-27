@@ -1236,7 +1236,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!95 &6752336405545768896
 Animator:
@@ -1273,11 +1273,11 @@ MonoBehaviour:
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
-  jumpSpeed: 12.04
+  jumpSpeed: 12
   gravityMult: 1
   floorDistance: 1.31
   airControl: 0
-  maxHealth: 100
+  maxHealth: 50
   knockbackRecovery: 0
   sfxScript: {fileID: 0}
   myAnim: {fileID: 6752336405545768896}
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   attackInterval: 0
   sentryMode: 0
   chaseSpeed: 5
-  patrolSpeed: 2
+  patrolSpeed: 3
   playerDetectionRadius: 50
   wallDetectionRadius: 5
   hitSound: EnemyHit

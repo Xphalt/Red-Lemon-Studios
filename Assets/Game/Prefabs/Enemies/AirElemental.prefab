@@ -770,7 +770,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!136 &7503199250087295692
 CapsuleCollider:
@@ -806,7 +806,7 @@ MonoBehaviour:
   gravityMult: 1
   floorDistance: 3
   airControl: 0
-  maxHealth: 100
+  maxHealth: 50
   knockbackRecovery: 0
   sfxScript: {fileID: 0}
   myAnim: {fileID: 4372032724729686918}
@@ -824,13 +824,13 @@ MonoBehaviour:
   meshes: []
   attackInterval: 1
   sentryMode: 0
-  chaseSpeed: 5
-  patrolSpeed: 2
+  chaseSpeed: 6
+  patrolSpeed: 3
   playerDetectionRadius: 100
   wallDetectionRadius: 2
   hitSound: EnemyHit
-  weaponRange: 20
-  stationaryZone: 0.5
+  weaponRange: 30
+  stationaryZone: 0.25
   attackSound: AirAttack
 --- !u!82 &6205449447219901066
 AudioSource:

@@ -24,6 +24,7 @@ public class ElementHazardAilments : MonoBehaviour
     internal CharacterBase userScript;
     internal bool successfulHit = false;
     internal Teams team;
+    internal Vector3 spawnPoint;
 
     public bool dieOnHit = false;
 
@@ -37,8 +38,10 @@ public class ElementHazardAilments : MonoBehaviour
 
     public bool changesColour = false;
 
-    public void Initialise(float weaponDamage, CharacterBase newUser)
+    public void Initialise(float weaponDamage, CharacterBase newUser, Vector3 spawn=new Vector3())
     {
+        spawnPoint = (spawn == new Vector3()) ? transform.position : spawn;
+
         userScript = newUser;
         damage = Mathf.RoundToInt(weaponDamage * userScript.CalculateDamageMult());
         team = userScript.team;
