@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3335768294076967421}
   - component: {fileID: 3335768294076967298}
-  - component: {fileID: 3335768294076967299}
   m_Layer: 0
   m_Name: AirTerrain
   m_TagString: Untagged
@@ -65,14 +64,3 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
---- !u!154 &3335768294076967299
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335768294076967296}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: afcf823bf4fc56743800d98ac7516905, type: 2}
-  m_EnableTreeColliders: 1
