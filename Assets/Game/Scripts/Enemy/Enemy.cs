@@ -244,8 +244,6 @@ public class Enemy : CharacterBase
 
     public override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
-
         if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
             if (effectStats.team != team)
@@ -257,6 +255,8 @@ public class Enemy : CharacterBase
                 }
             }
         }
+        
+        base.OnCollisionEnter(collision);
     }
 
     public void ChangeColour(ElementHazardAilments effectStats)

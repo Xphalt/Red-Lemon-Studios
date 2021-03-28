@@ -141,6 +141,6 @@ public class RelicBase : MonoBehaviour
             newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
         }
 
-        else gameObject.SetActive(spawned);
+        else gameObject.SetActive(spawned && inArena);
     }
 }
