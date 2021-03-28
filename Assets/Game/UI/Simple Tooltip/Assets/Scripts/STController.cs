@@ -137,4 +137,9 @@ public class STController : MonoBehaviour
         showNow = false;
         rect.anchoredPosition = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
     }
+
+    private void OnDisable()
+    {
+        HideTooltip();
+    }
 }
