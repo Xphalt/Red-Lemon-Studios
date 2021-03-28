@@ -569,7 +569,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5382917, y: 0.23184907}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.2000732, y: 4.200012}
+  m_AnchoredPosition: {x: 4.2001343, y: 4.200012}
   m_SizeDelta: {x: 13.152466, y: 15.184387}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5696674432195823168
@@ -761,24 +761,14 @@ MonoBehaviour:
   deathScreen: {fileID: 449084780163539161}
   completeScreen: {fileID: 2950300588788354305}
   RelicDescription:
-  - "Active effect: Dashing item \u2013 player dashes forward\t\r\n\nPassive effects
-    while equipped:\r\n\uF0A7\t+Damage continually increases with enemy hits, which
-    builds heat. When heat reaches threshold, damage can no longer increase.\r\n\uF0A7\t-If
-    shot is missed, reset heat, and damage the player slightly.\r\n\n\uF0A7(Extra
-    note: Dashing into enemies damages and knocks them away.)\r\n"
-  - "Active effect: Healing item \u2013 player heals over time\t\r\n\nPassive effects
-    while equipped:\r\n\uF0A7\t+Increase move-speed\r\n\uF0A7\t-Player receives more
-    damage\r\n\n(Extra note: costs water ammo, slows player a little.)\r"
-  - "Active effect: Pull item \u2013 pulls player to a point (akin to grapple hook).\r\n\nPassive
-    effects while equipped:\r\n\uF0A7\t+Allows player to jump again in the air (double
-    jump)\r\n\uF0A7\t-Take more knock-back\r\n\n\uF0A7(Extra note: Colliding with
-    enemies whilst the item is being used, makes the player bounce up, stopping the
-    item\u2019s pull.)\r\n"
-  - "Active effect: Launch jump item \u2013 raising pillar from below launches player
-    up in the air.\r\n\r\nPassive effects while equipped:\r\n\uF0A7\t+Give damage
-    reduction\r\n\uF0A7\t-Player has decreased movement speed\r\n\r\n\r\n\uF0A7(Extra
-    note: If the pillar hits an enemy, they\u2019ll be damaged and launched too.
-    Leaving them unable to attack or damage the player in the air.)\r\n"
+  - "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases 10% per
+    hit\n\n\uF0A7-Reset combo and take 10% damage on miss"
+  - "ACTIVE EFFECT: \nHeal over time\t\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+25% move speed
+    increase when not in use\n\n\uF0A7-25% extra damage recieved "
+  - "ACTIVE EFFECT: \nGrapple towards target\n\nPASSIVE EFFECTS:\r\n\uF0A7+Double
+    jump\n\n\uF0A7-Twice as vulnerable to knockback"
+  - "ACTIVE EFFECT: \nRaise pillar to launch yourself up and enemies away\n\nPASSIVE
+    EFFECTS:\r\n\uF0A7+20% less damage recieved\n\n\uF0A7-20% move speed reduction"
   RelicNameHolder: {fileID: 5487588858774612583}
   RelicInfoHolder: {fileID: 5934713042130774284}
   ImageHolder: {fileID: 7446460850101496277}
@@ -2339,6 +2329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToolBar_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3181401213593222380, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3450215855726733001, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2355,6 +2349,27 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Text
+      value: "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases
+        10% per hit\n\n\uF0A7-Reset combo and take 10% damage on miss"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6366233087453225983, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_Name
       value: Earth Button
@@ -2649,6 +2664,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 6626804225147571663, guid: 5eee867b3f321694da43416a15231624, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.6998596
+      objectReference: {fileID: 0}
     - target: {fileID: 6626804225283714426, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_Name
       value: Over
@@ -2736,6 +2755,10 @@ PrefabInstance:
     - target: {fileID: 6626804225283714427, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626804226324118050, guid: 5eee867b3f321694da43416a15231624, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.6998596
       objectReference: {fileID: 0}
     - target: {fileID: 6626804226324118051, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
