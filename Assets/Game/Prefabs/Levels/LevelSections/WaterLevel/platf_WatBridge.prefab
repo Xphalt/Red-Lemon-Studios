@@ -591,7 +591,6 @@ GameObject:
   - component: {fileID: 3991741110274008435}
   - component: {fileID: 3991741110274008434}
   - component: {fileID: 3991741110274008433}
-  - component: {fileID: 3991741110274008432}
   m_Layer: 0
   m_Name: Bridge piece 4
   m_TagString: Floor
@@ -662,19 +661,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110274008432
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110274008439}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110357189974
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +672,6 @@ GameObject:
   - component: {fileID: 3991741110357189970}
   - component: {fileID: 3991741110357189969}
   - component: {fileID: 3991741110357189968}
-  - component: {fileID: 3991741110357189975}
   m_Layer: 0
   m_Name: Bridge piece 3
   m_TagString: Floor
@@ -757,19 +742,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110357189975
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110357189974}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110457525476
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +753,6 @@ GameObject:
   - component: {fileID: 3991741110457525472}
   - component: {fileID: 3991741110457525479}
   - component: {fileID: 3991741110457525478}
-  - component: {fileID: 3991741110457525477}
   m_Layer: 0
   m_Name: Bridge piece 5
   m_TagString: Floor
@@ -852,19 +823,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110457525477
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110457525476}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110465475577
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +834,6 @@ GameObject:
   - component: {fileID: 3991741110465475573}
   - component: {fileID: 3991741110465475572}
   - component: {fileID: 3991741110465475579}
-  - component: {fileID: 3991741110465475578}
   m_Layer: 0
   m_Name: Bridge piece 2
   m_TagString: Floor
@@ -947,19 +904,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110465475578
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110465475577}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110503605947
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +915,6 @@ GameObject:
   - component: {fileID: 3991741110503605943}
   - component: {fileID: 3991741110503605942}
   - component: {fileID: 3991741110503605941}
-  - component: {fileID: 3991741110503605940}
   m_Layer: 0
   m_Name: Bridge piece 10
   m_TagString: Floor
@@ -1042,19 +985,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110503605940
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110503605947}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110514593519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +996,6 @@ GameObject:
   - component: {fileID: 3991741110514593515}
   - component: {fileID: 3991741110514593514}
   - component: {fileID: 3991741110514593513}
-  - component: {fileID: 3991741110514593512}
   m_Layer: 0
   m_Name: Bridge piece 11
   m_TagString: Floor
@@ -1137,19 +1066,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110514593512
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110514593519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110541167316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1077,6 @@ GameObject:
   - component: {fileID: 3991741110541167312}
   - component: {fileID: 3991741110541167319}
   - component: {fileID: 3991741110541167318}
-  - component: {fileID: 3991741110541167317}
   m_Layer: 0
   m_Name: Bridge piece 13
   m_TagString: Floor
@@ -1232,19 +1147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110541167317
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110541167316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110560422533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1158,6 @@ GameObject:
   - component: {fileID: 3991741110560422529}
   - component: {fileID: 3991741110560422528}
   - component: {fileID: 3991741110560422535}
-  - component: {fileID: 3991741110560422534}
   m_Layer: 0
   m_Name: Bridge piece 16
   m_TagString: Floor
@@ -1273,7 +1174,7 @@ Transform:
   m_GameObject: {fileID: 3991741110560422533}
   m_LocalRotation: {x: -0, y: -0, z: -0.043619312, w: 0.99904823}
   m_LocalPosition: {x: 5.534727, y: -0.7249544, z: 0}
-  m_LocalScale: {x: 1.0050899, y: 0.98503506, z: 1}
+  m_LocalScale: {x: 1.0050899, y: 0.9850351, z: 1}
   m_Children: []
   m_Father: {fileID: 3991741110944920886}
   m_RootOrder: 14
@@ -1327,19 +1228,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110560422534
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110560422533}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110571404457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1239,6 @@ GameObject:
   - component: {fileID: 3991741110571404453}
   - component: {fileID: 3991741110571404452}
   - component: {fileID: 3991741110571404459}
-  - component: {fileID: 3991741110571404458}
   m_Layer: 0
   m_Name: Bridge piece 25
   m_TagString: Floor
@@ -1422,19 +1309,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110571404458
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110571404457}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110669639442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1320,6 @@ GameObject:
   - component: {fileID: 3991741110669639662}
   - component: {fileID: 3991741110669639661}
   - component: {fileID: 3991741110669639660}
-  - component: {fileID: 3991741110669639443}
   m_Layer: 0
   m_Name: Bridge piece 8
   m_TagString: Floor
@@ -1463,7 +1336,7 @@ Transform:
   m_GameObject: {fileID: 3991741110669639442}
   m_LocalRotation: {x: -0, y: -0, z: 0.026176933, w: 0.9996574}
   m_LocalPosition: {x: -3.6618066, y: -0.80158573, z: 0}
-  m_LocalScale: {x: 1.0018294, y: 0.99455166, z: 1}
+  m_LocalScale: {x: 1.0018294, y: 0.99455154, z: 1}
   m_Children: []
   m_Father: {fileID: 3991741110944920886}
   m_RootOrder: 6
@@ -1517,19 +1390,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110669639443
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110669639442}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110709857192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1401,6 @@ GameObject:
   - component: {fileID: 3991741110709857188}
   - component: {fileID: 3991741110709857195}
   - component: {fileID: 3991741110709857194}
-  - component: {fileID: 3991741110709857193}
   m_Layer: 0
   m_Name: Bridge piece 23
   m_TagString: Floor
@@ -1612,19 +1471,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110709857193
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110709857192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110823108959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1482,6 @@ GameObject:
   - component: {fileID: 3991741110823108955}
   - component: {fileID: 3991741110823108954}
   - component: {fileID: 3991741110823108953}
-  - component: {fileID: 3991741110823108952}
   m_Layer: 0
   m_Name: Bridge piece 9
   m_TagString: Floor
@@ -1707,19 +1552,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110823108952
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110823108959}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110889344960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1563,6 @@ GameObject:
   - component: {fileID: 3991741110889344988}
   - component: {fileID: 3991741110889344963}
   - component: {fileID: 3991741110889344962}
-  - component: {fileID: 3991741110889344961}
   m_Layer: 0
   m_Name: Bridge piece 15
   m_TagString: Floor
@@ -1802,19 +1633,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110889344961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110889344960}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110944920890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,7 +1644,6 @@ GameObject:
   - component: {fileID: 3991741110944920886}
   - component: {fileID: 3991741110944920885}
   - component: {fileID: 3991741110944920884}
-  - component: {fileID: 3991741110944920891}
   m_Layer: 0
   m_Name: platf_WatBridge
   m_TagString: Floor
@@ -1870,6 +1687,7 @@ Transform:
   - {fileID: 3991741111994815449}
   - {fileID: 2326865396463919707}
   - {fileID: 808318902832866363}
+  - {fileID: 8171876631524411479}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.5}
@@ -1922,19 +1740,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110944920891
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110944920890}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110979489980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,7 +1751,6 @@ GameObject:
   - component: {fileID: 3991741110979489976}
   - component: {fileID: 3991741110979489983}
   - component: {fileID: 3991741110979489982}
-  - component: {fileID: 3991741110979489981}
   m_Layer: 0
   m_Name: Bridge piece 27
   m_TagString: Floor
@@ -2017,19 +1821,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110979489981
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110979489980}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741110990106522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,7 +1832,6 @@ GameObject:
   - component: {fileID: 3991741110990106518}
   - component: {fileID: 3991741110990106517}
   - component: {fileID: 3991741110990106516}
-  - component: {fileID: 3991741110990106523}
   m_Layer: 0
   m_Name: Bridge piece 14
   m_TagString: Floor
@@ -2058,7 +1848,7 @@ Transform:
   m_GameObject: {fileID: 3991741110990106522}
   m_LocalRotation: {x: -0, y: -0, z: -0.026177015, w: 0.99965733}
   m_LocalPosition: {x: 3.3148322, y: -0.11388167, z: 0}
-  m_LocalScale: {x: 1.0018294, y: 0.99455166, z: 1}
+  m_LocalScale: {x: 1.0018294, y: 0.99455154, z: 1}
   m_Children: []
   m_Father: {fileID: 3991741110944920886}
   m_RootOrder: 12
@@ -2112,19 +1902,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741110990106523
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741110990106522}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741111444640019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,7 +1913,6 @@ GameObject:
   - component: {fileID: 3991741111444640239}
   - component: {fileID: 3991741111444640238}
   - component: {fileID: 3991741111444640237}
-  - component: {fileID: 3991741111444640236}
   m_Layer: 0
   m_Name: Bridge piece 12
   m_TagString: Floor
@@ -2207,19 +1983,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741111444640236
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741111444640019}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741111482513244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,7 +1994,6 @@ GameObject:
   - component: {fileID: 3991741111482513240}
   - component: {fileID: 3991741111482513247}
   - component: {fileID: 3991741111482513246}
-  - component: {fileID: 3991741111482513245}
   m_Layer: 0
   m_Name: Bridge piece 26
   m_TagString: Floor
@@ -2302,19 +2064,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741111482513245
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741111482513244}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741111536389628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,7 +2075,6 @@ GameObject:
   - component: {fileID: 3991741111536389624}
   - component: {fileID: 3991741111536389631}
   - component: {fileID: 3991741111536389630}
-  - component: {fileID: 3991741111536389629}
   m_Layer: 0
   m_Name: Bridge piece 29
   m_TagString: Floor
@@ -2397,19 +2145,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741111536389629
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741111536389628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741111615149822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2156,6 @@ GameObject:
   - component: {fileID: 3991741111615149818}
   - component: {fileID: 3991741111615149817}
   - component: {fileID: 3991741111615149816}
-  - component: {fileID: 3991741111615149823}
   m_Layer: 0
   m_Name: Bridge piece 24
   m_TagString: Floor
@@ -2492,19 +2226,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741111615149823
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741111615149822}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741111994815453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,7 +2237,6 @@ GameObject:
   - component: {fileID: 3991741111994815449}
   - component: {fileID: 3991741111994815448}
   - component: {fileID: 3991741111994815455}
-  - component: {fileID: 3991741111994815454}
   m_Layer: 0
   m_Name: Bridge piece 30
   m_TagString: Floor
@@ -2587,19 +2307,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741111994815454
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741111994815453}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741112009024124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2318,6 @@ GameObject:
   - component: {fileID: 3991741112009024120}
   - component: {fileID: 3991741112009024127}
   - component: {fileID: 3991741112009024126}
-  - component: {fileID: 3991741112009024125}
   m_Layer: 0
   m_Name: Bridge piece 28
   m_TagString: Floor
@@ -2682,19 +2388,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741112009024125
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741112009024124}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741112091042671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,7 +2399,6 @@ GameObject:
   - component: {fileID: 3991741112091042667}
   - component: {fileID: 3991741112091042666}
   - component: {fileID: 3991741112091042665}
-  - component: {fileID: 3991741112091042664}
   m_Layer: 0
   m_Name: Bridge piece 6
   m_TagString: Floor
@@ -2723,7 +2415,7 @@ Transform:
   m_GameObject: {fileID: 3991741112091042671}
   m_LocalRotation: {x: -0, y: -0, z: 0.04361941, w: 0.99904823}
   m_LocalPosition: {x: -6.330297, y: -0.75234467, z: 0}
-  m_LocalScale: {x: 1.0050898, y: 0.985035, z: 1}
+  m_LocalScale: {x: 1.0050898, y: 0.98503506, z: 1}
   m_Children: []
   m_Father: {fileID: 3991741110944920886}
   m_RootOrder: 4
@@ -2777,19 +2469,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741112091042664
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741112091042671}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3991741112193150191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,7 +2480,6 @@ GameObject:
   - component: {fileID: 3991741112193150187}
   - component: {fileID: 3991741112193150186}
   - component: {fileID: 3991741112193150185}
-  - component: {fileID: 3991741112193150184}
   m_Layer: 0
   m_Name: Bridge piece 7
   m_TagString: Floor
@@ -2872,19 +2550,50 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3991741112193150184
+--- !u!1 &6437412096077365695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8171876631524411479}
+  - component: {fileID: 7571426301323296157}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8171876631524411479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437412096077365695}
+  m_LocalRotation: {x: 0.0000000023283062, y: -0, z: -0.015168764, w: 0.99988496}
+  m_LocalPosition: {x: -0.050397232, y: -1.0274081, z: 0.00005116997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3991741110944920886}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.738}
+--- !u!65 &7571426301323296157
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991741112193150191}
+  m_GameObject: {fileID: 6437412096077365695}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 19.529844, y: 1, z: 1}
+  m_Center: {x: 2.791504, y: -0.96, z: 0}
 --- !u!1 &8387789234789416783
 GameObject:
   m_ObjectHideFlags: 0
