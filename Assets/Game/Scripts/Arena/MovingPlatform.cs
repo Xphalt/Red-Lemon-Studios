@@ -21,4 +21,9 @@ public class MovingPlatform : MonoBehaviour
         transform.Translate(moveVelocity * Time.deltaTime); //Apologise for the translating but in this case is' easier to not have a rigidbody
         if ((transform.position - startPos).magnitude > maxMovement.magnitude) moveVelocity *= -1;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        moveVelocity *= -1;
+    }
 }
