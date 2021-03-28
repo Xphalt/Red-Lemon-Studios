@@ -128,7 +128,7 @@ public class Player : CharacterBase
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P)) TogglePause(false);
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
         if (Input.GetKeyDown(KeyCode.Q)) TogglePause(true);
     }
 

@@ -75,11 +75,7 @@ public class PlayerRotation : MonoBehaviour
     {
         if (!m_inputIsLocked)
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                SetCursorLock(false);
-            }
-            else if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 SetCursorLock(true);
             }

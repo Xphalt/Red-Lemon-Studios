@@ -33,11 +33,7 @@ public class Main_Menu : MonoBehaviour
     public void ExitScene()
     {
         ExitGO.SetActive(true);
-# if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
         Application.Quit();
-#endif
     }
 
     public void Controls(bool setActive)
