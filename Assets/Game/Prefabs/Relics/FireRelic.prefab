@@ -510,7 +510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3367187934338707176
 Transform:
   m_ObjectHideFlags: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 5543323854749884653}
   relicType: 0
-  inArena: 1
+  inArena: 0
   maxCombo: 10
   percentIncreasePerHit: 10
   damagePercentRecievedOnMiss: 10

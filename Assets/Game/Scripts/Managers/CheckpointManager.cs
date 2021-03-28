@@ -13,6 +13,8 @@ public class CheckpointManager : MonoBehaviour
     private List<string> previousCheckpoints = new List<string>();
     private string checkpointAtStart;
 
+    public Transform revisitSpawnPoint;
+
     public bool newGame = false; //If true, clears all saved values
     public bool resetArena = false; //If true, clears all checkpoints saved in current arena
 
@@ -161,6 +163,7 @@ public class CheckpointManager : MonoBehaviour
                 if (loadArena || !arenaRelics[r].inArena) arenaRelics[r].LoadRelic(playerLoadID);
             }
             arenaPlayer.LoadStats(playerLoadID, arenaLoadID);
+            if (arenaLoadID.Contains("End")) arenaPlayer.transform.position = revisitSpawnPoint.position;
         }
 
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bullet);
