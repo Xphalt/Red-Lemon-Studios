@@ -12,6 +12,7 @@ public class GUI_Manager : MonoBehaviour
     //Slider Bar variables
     public Slider healthSlider, relicSlider, ammoSlider;
     public Image healthBarFill, relicBarFill, ammoBarFill, relicBarBorder, ammoBarBorder;
+    public Text ammoText, relicText;
 
     //Elemental Group variables
     public Image equipedAmmoIcon;
@@ -90,11 +91,15 @@ public class GUI_Manager : MonoBehaviour
         {
             ammoBarBorder.color = scrollNormal;
             relicBarBorder.color = scrollSelected;
+            ammoText.enabled = false;
+            relicText.enabled = true;
         }
         else
         {
             ammoBarBorder.color = scrollSelected;
             relicBarBorder.color = scrollNormal;
+            ammoText.enabled = true;
+            relicText.enabled = false;
         }
     }
 
