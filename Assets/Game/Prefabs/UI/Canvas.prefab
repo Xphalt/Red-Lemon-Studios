@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d25dee5601348904bb7f31f595df9a5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4885bbb0bf622ff428a14e8fd63ab19b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2077,10 +2077,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2756816532866944667}
     m_Modifications:
+    - target: {fileID: 716517959102719597, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Name
+      value: Water Button
+      objectReference: {fileID: 0}
     - target: {fileID: 903747834168125696, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 908035920577059827, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2172,15 +2176,27 @@ PrefabInstance:
     - target: {fileID: 3450215855726733001, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 3779932485402057809, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Name
+      value: Air Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488127107421903731, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Name
+      value: Fire Button
       objectReference: {fileID: 0}
     - target: {fileID: 5979133898804863851, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 6366233087453225983, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Name
+      value: Earth Button
       objectReference: {fileID: 0}
     - target: {fileID: 6518967959878094871, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
 --- !u!1 &2958121106303531915 stripped
@@ -2244,7 +2260,7 @@ PrefabInstance:
     - target: {fileID: 2972112932793934637, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 2972112932793934637, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowControls
@@ -2355,7 +2371,7 @@ PrefabInstance:
     - target: {fileID: 3719609444171457057, guid: 296d19ce760b7ad44847add1839bc9d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 3719609445286214150, guid: 296d19ce760b7ad44847add1839bc9d0, type: 3}
       propertyPath: m_Name
       value: Won
@@ -2466,7 +2482,7 @@ PrefabInstance:
     - target: {fileID: 6626804225147571660, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 6626804225283714426, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_Name
       value: Over
@@ -2558,7 +2574,7 @@ PrefabInstance:
     - target: {fileID: 6626804226324118051, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 6626804226324118051, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2697,7 +2713,7 @@ PrefabInstance:
     - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MainMenu
@@ -2717,7 +2733,7 @@ PrefabInstance:
     - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 4726285493873402228, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowControls
