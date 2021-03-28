@@ -62,6 +62,7 @@ public class Player : CharacterBase
         team = Teams.Player;
 
         userInterface.HighlightSelectedAmmo();
+        userInterface.ToggleSliderSelection(switchingRelics);
     }
 
     public override void Update()
@@ -123,6 +124,7 @@ public class Player : CharacterBase
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 switchingRelics = !switchingRelics;
+                userInterface.ToggleSliderSelection(switchingRelics);
             }
         }
 

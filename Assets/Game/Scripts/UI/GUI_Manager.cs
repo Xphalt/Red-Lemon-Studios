@@ -11,7 +11,7 @@ public class GUI_Manager : MonoBehaviour
 
     //Slider Bar variables
     public Slider healthSlider, relicSlider, ammoSlider;
-    public Image healthBarFill, relicBarFill, ammoBarFill;
+    public Image healthBarFill, relicBarFill, ammoBarFill, relicBarBorder, ammoBarBorder;
 
     //Elemental Group variables
     public Image equipedAmmoIcon;
@@ -20,6 +20,9 @@ public class GUI_Manager : MonoBehaviour
     public Color lightBlue = new Color(0.09f, 0.2f, 0.9f, 1);
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
+
+    public Color scrollSelected = new Color();
+    public Color scrollNormal = new Color();
 
     //Pause Menu variables
     public string homeMenu;
@@ -79,6 +82,20 @@ public class GUI_Manager : MonoBehaviour
     public void UpdateAmmoCount(float curAmmoCount)
     {
         ammoSlider.value = curAmmoCount;
+    }
+
+    public void ToggleSliderSelection(bool toRelic)
+    {
+        if (toRelic)
+        {
+            ammoBarBorder.color = scrollNormal;
+            relicBarBorder.color = scrollSelected;
+        }
+        else
+        {
+            ammoBarBorder.color = scrollSelected;
+            relicBarBorder.color = scrollNormal;
+        }
     }
 
     /*__________________________________________________________
