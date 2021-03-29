@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject StartGO, ExitGO, controlsPanel, creditsPanel;
+    public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
     private void Awake()
@@ -32,24 +32,21 @@ public class Main_Menu : MonoBehaviour
 
     public void ExitScene()
     {
-        ExitGO.SetActive(true);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void Controls(bool setActive)
     {
-        if (setActive)
-            controlsPanel.SetActive(true);
-        else
-            controlsPanel.SetActive(false);
+        controlsPanel.SetActive(setActive);
     }
 
     public void Credits(bool setActive)
     {
-        if (setActive)
-            creditsPanel.SetActive(true);
-        else
-            creditsPanel.SetActive(false);
+        creditsPanel.SetActive(setActive);
     }
 
 }
