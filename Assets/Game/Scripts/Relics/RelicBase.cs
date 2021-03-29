@@ -101,11 +101,15 @@ public class RelicBase : MonoBehaviour
 
     public void ReEquip()
     {
-        cooldownTimer += Time.time - lastEquippedTime;
-        if (cooldownTimer > relicCooldownDuration)
+        if (!readyToUse)
         {
-            readyToUse = true;
-            cooldownTimer = 0;
+            cooldownTimer += Time.time - lastEquippedTime;
+
+            if (cooldownTimer > relicCooldownDuration)
+            {
+                readyToUse = true;
+                cooldownTimer = 0;
+            }
         }
     }
 

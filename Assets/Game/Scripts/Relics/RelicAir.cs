@@ -31,8 +31,6 @@ public class RelicAir : RelicBase
 
     private void FixedUpdate()
     {
-        base.Update();
-
         if (inUse)
         {
             if (grappleSwing < 1) characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
