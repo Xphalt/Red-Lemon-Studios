@@ -22,11 +22,6 @@ public class RelicEarth : RelicBase
 
         pillarScript = pillar.GetComponent<EarthPillarScript>();
         pillarTransform = pillar.GetComponent<Transform>();
-    }
-
-    public override void Start()
-    {
-        base.Start();
 
         pillarTransform.localScale = new Vector3(pillarTransform.localScale.x, 0, pillarTransform.localScale.z);
 
@@ -34,7 +29,6 @@ public class RelicEarth : RelicBase
 
         pillar.SetActive(false);
     }
-
 
     public override void Update()
     {
