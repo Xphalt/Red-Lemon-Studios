@@ -7757,11 +7757,11 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemySpawnPos.Array.data[4]
       value: 
-      objectReference: {fileID: 1883570888749512288}
+      objectReference: {fileID: 8818018968352423566}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemySpawnPos.Array.data[5]
       value: 
-      objectReference: {fileID: 1883570888749512288}
+      objectReference: {fileID: 8818018968352423565}
     - target: {fileID: 5524924018667674292, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.x
       value: -145.7
@@ -8775,5 +8775,15 @@ GameObject:
 --- !u!1 &8818018968352423564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8078015613355603448, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+  m_PrefabInstance: {fileID: 8818018968352423553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8818018968352423565 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6104555252072916820, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
+  m_PrefabInstance: {fileID: 8818018968352423553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8818018968352423566 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8778108044217221969, guid: d3325e440e818fd45a892ccf895815ac, type: 3}
   m_PrefabInstance: {fileID: 8818018968352423553}
   m_PrefabAsset: {fileID: 0}
