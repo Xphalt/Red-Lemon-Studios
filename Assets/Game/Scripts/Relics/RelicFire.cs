@@ -24,8 +24,10 @@ public class RelicFire : RelicBase
 
     private Vector3 dashDist;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         relicType = ElementTypes.Fire;
     }
 
@@ -58,6 +60,10 @@ public class RelicFire : RelicBase
 
         inUse = true;
         readyToUse = false;
+
+        sfxScript.PlaySFX2D(activateSound);
+
+        if (myAnim) myAnim.SetTrigger("Activate");
 
         return true;
     }

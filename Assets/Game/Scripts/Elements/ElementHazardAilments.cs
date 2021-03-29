@@ -24,9 +24,24 @@ public class ElementHazardAilments : MonoBehaviour
     internal CharacterBase userScript;
     internal bool successfulHit = false;
     internal Teams team;
+    internal Vector3 spawnPoint;
 
-    public void Initialise(float weaponDamage, CharacterBase newUser)
+    public bool dieOnHit = false;
+
+    public string hitSound;
+
+    internal SFXScript sfxScript = null;
+
+    public Color normalHitColour;
+    public Color strongHitColour;
+    public Color weakHitColour;
+
+    public bool changesColour = false;
+
+    public void Initialise(float weaponDamage, CharacterBase newUser, Vector3 spawn=new Vector3())
     {
+        spawnPoint = (spawn == new Vector3()) ? transform.position : spawn;
+
         userScript = newUser;
         damage = Mathf.RoundToInt(weaponDamage * userScript.CalculateDamageMult());
         team = userScript.team;
@@ -36,6 +51,12 @@ public class ElementHazardAilments : MonoBehaviour
     {
         userScript.IncreaseCombo();
         successfulHit = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (sfxScript != null) sfxScript.PlaySFX3D(hitSound, transform.position);
+        if (dieOnHit) Destroy(gameObject);
     }
 
     private void OnDestroy()

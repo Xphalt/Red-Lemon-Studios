@@ -6,16 +6,13 @@ using static EnumHelper;
 public class EnemyAir : Enemy
 {
     public float weaponRange;
-    public int knockbackSpeed;
-    public float knockbackDuration;
-    public float postKnockbackMomentum; //Velocity retained by target after being knocked back (0-1)
 
     public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     private float minWeaponRange; //Point at which enemy runs away^
 
-    public float snipeDamage;
-
     private bool stunned;
+
+    public string attackSound;
 
     public override void Start()
     {
@@ -39,7 +36,7 @@ public class EnemyAir : Enemy
         {
             if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
-            else if (targetDistance > weaponRange != targetDistance < minWeaponRange)
+            else if ((targetDistance > weaponRange != targetDistance < minWeaponRange) && !runTooFar)
             {
                 if (inAttackRange) movementState = EnemyStates.Fleeing;
                 else movementState = EnemyStates.Chasing;
@@ -49,11 +46,6 @@ public class EnemyAir : Enemy
             {
                 movementState = EnemyStates.Idle;
                 transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            }
-
-            if (inAttackRange)
-            {
-                Attack();
             }
         }
 
@@ -68,20 +60,15 @@ public class EnemyAir : Enemy
                 DOTTimer = 0;
             }
         }
+        Animate();
     }
 
     public override bool Attack()
     {
-        if (base.Attack())
+        if (base.Attack() && !stunned)
         {
             shooter.Shoot(elementType, target.transform.position);
-
-            //playerScript.TakeDamage(snipeDamage);
-
-            //if (!playerScript.movementLocked)
-            //{
-            //    playerScript.Shift(((target.transform.position - transform.position).normalized * knockbackSpeed), knockbackDuration, postKnockbackMomentum, 1, true);
-            //}
+            sfxScript.PlaySFX3D(attackSound, transform.position);
             return true;
         }
         return false;
@@ -98,5 +85,28 @@ public class EnemyAir : Enemy
         base.EndSatusEffect();
         stunned = false;
         DOTTimer = 0;
+    }
+
+    public override void Animate()
+    {
+        if (myAnim)
+        {
+            base.Animate();
+            if (stunned)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Idle)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", true);
+            }
+            else
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+            }
+        }
     }
 }

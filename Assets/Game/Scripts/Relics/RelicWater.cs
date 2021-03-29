@@ -14,11 +14,16 @@ public class RelicWater : RelicBase
     private float healTickTimer;
 
     public float inUseSpeedMultiplier;
-    private float defaultSpeedMultiplier;
 
-    void Start()
+    [Tooltip("Should be the same as Speed Multiplier")]
+    public float defaultSpeedMultiplier;
+
+    public override void Start()
     {
+        base.Start();
+
         relicType = ElementTypes.Water;
+        speedMultiplier = defaultSpeedMultiplier;
     }
 
     public override void Update()
@@ -51,6 +56,11 @@ public class RelicWater : RelicBase
 
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
+
+        sfxScript.PlaySFX2D(activateSound);
+
+        healTickTimer = healTickInterval;
+        if (myAnim) myAnim.SetTrigger("Activate");
 
         return true;
     }

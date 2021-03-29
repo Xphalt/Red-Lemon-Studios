@@ -24,8 +24,7 @@ public class ElementShooting : MonoBehaviour
     private GameObject ChosenBullet;
     public GameObject GunPos;
 
-    public GameObject SFXManager = null;
-    private SFXScript sfxScript;
+    public SFXScript sfxScript = null;
 
     private CharacterBase wielderScript;
 
@@ -35,11 +34,10 @@ public class ElementShooting : MonoBehaviour
     public List<GameObject> BulletPrefabs = new List<GameObject>();
     private Dictionary<ElementTypes, GameObject> BulletColourDictionary = new Dictionary<ElementTypes, GameObject>();
 
-    public List<ElementTypes> soundTypes = new List<ElementTypes>();
     public List<string> soundNames = new List<string>();
     private Dictionary<ElementTypes, string> shootSoundsDictionary = new Dictionary<ElementTypes, string>();
 
-    public float ShootForce;
+    public float ShootSpeed;
 
     private void Start()
     {
@@ -50,27 +48,27 @@ public class ElementShooting : MonoBehaviour
             BulletColourDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
         }
 
-        for (int index = 0; index < soundTypes.Count; index++)
+        for (int index = 0; index < BulletTypes.Count; index++)
         {
-            shootSoundsDictionary.Add(soundTypes[index], soundNames[index]);
+            shootSoundsDictionary.Add(BulletTypes[index], soundNames[index]);
         }
 
-        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxScript = SFXManager.GetComponent<SFXScript>();
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
 
     //TODO cache the rigidbody reference to boost performance
     public void Shoot(ElementTypes shotType, Vector3 target)
-    {
+    {      
         CheckElement(shotType);
         GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-        newBullet.GetComponent<Rigidbody>().AddForce((target - GunPos.transform.position).normalized * ShootForce);
+        newBullet.GetComponent<Rigidbody>().velocity = (target - GunPos.transform.position).normalized * ShootSpeed;
         newBullet.transform.SetParent(null);
 
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
         newBulletInfo.Initialise(damage, wielderScript);
+        newBulletInfo.sfxScript = sfxScript;
 
-        if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX(shootSoundsDictionary[shotType]);
+        if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX3D(shootSoundsDictionary[shotType], GunPos.transform.position);
 
         Destroy(newBullet, 2);
     }

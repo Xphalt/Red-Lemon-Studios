@@ -7,19 +7,24 @@ using static EnumHelper;
 public class RelicBase : MonoBehaviour
 {
     internal GameObject user = null;
+    internal string userName = null;
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
+    public Animator myAnim;
+
     public ElementTypes relicType;
 
     internal bool inUse;
     internal bool collected = false;
+    internal bool spawned = false;
+    public bool inArena;
 
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
     public float damagePercentRecievedOnMiss = 0;
     public bool missPenalty = false;
 
-    public bool doubleJumpEnabled = false;
+    public int maxJumps = 1;
     public float knockBackMultiplier = 1;
 
     public float damageRecievedMultiplier = 1;
@@ -31,17 +36,42 @@ public class RelicBase : MonoBehaviour
 
     internal bool readyToUse = false;
 
-    public virtual void SetUser(GameObject newUser)
+    public Quaternion collectedRotation;
+    public float rotationSpeed;
+
+    public SFXScript sfxScript = null;
+    
+    public string collectionSound;
+    public string activateSound;
+
+    public virtual void Awake() {}
+
+    public virtual void Start()
     {
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
+        if (!myAnim) myAnim = GetComponent<Animator>();
+        if (user == null)
+        {
+            if (inArena) gameObject.SetActive(spawned && !collected);
+            else gameObject.SetActive(false);
+        }
+    }
+
+    public virtual void SetUser(GameObject newUser, bool playSound=false)
+    {
+        if (playSound) sfxScript.PlaySFX2D(collectionSound);
         collected = true;
         user = newUser;
+        userName = newUser.name;
         characterScript = user.GetComponent<CharacterBase>();
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
+        transform.localRotation = collectedRotation;
     }
 
     public virtual void Update()
     {
+        if (!collected) transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         Cooldown();
     }
 
@@ -71,11 +101,15 @@ public class RelicBase : MonoBehaviour
 
     public void ReEquip()
     {
-        cooldownTimer += Time.time - lastEquippedTime;
-        if (cooldownTimer > relicCooldownDuration)
+        if (!readyToUse)
         {
-            readyToUse = true;
-            cooldownTimer = 0;
+            cooldownTimer += Time.time - lastEquippedTime;
+
+            if (cooldownTimer > relicCooldownDuration)
+            {
+                readyToUse = true;
+                cooldownTimer = 0;
+            }
         }
     }
 
@@ -84,23 +118,33 @@ public class RelicBase : MonoBehaviour
         lastEquippedTime = Time.time;
     }
 
-    public void SaveRelic(int id)
+    public void SaveRelic(string saveID)
     {
-        string identifier = "Relic" + id.ToString();
-        SaveManager.UpdateSavedBool(identifier + "Collected", collected);
-        SaveManager.UpdateSavedBool(identifier + "InUse", inUse);
-        SaveManager.UpdateSavedBool(identifier + "ReadyToUse", readyToUse);
-        SaveManager.UpdateSavedFloat(identifier + "CooldownTimer", cooldownTimer);
-        SaveManager.UpdateSavedVector3(identifier + "Position", transform.position);
+        saveID = saveID + relicType.ToString() + "Relic";
+        SaveManager.UpdateSavedString(saveID + "User", userName);
+        SaveManager.UpdateSavedBool(saveID + "Spawned", spawned);
+        SaveManager.UpdateSavedBool(saveID + "Collected", collected);
+        SaveManager.UpdateSavedBool(saveID + "InUse", inUse);
+        SaveManager.UpdateSavedBool(saveID + "ReadyToUse", readyToUse);
+        SaveManager.UpdateSavedFloat(saveID + "CooldownTimer", cooldownTimer);
     }
 
-    public void LoadRelic(int id)
+    public void LoadRelic(string loadID)
     {
-        string identifier = "Relic" + id.ToString();
-        collected = SaveManager.GetBool(identifier + "Collected");
-        inUse = SaveManager.GetBool(identifier + "InUse");
-        readyToUse = SaveManager.GetBool(identifier + "ReadyToUse");
-        cooldownTimer = SaveManager.GetFloat(identifier + "CooldownTimer");
-        transform.position = SaveManager.GetVector3(identifier + "Position");
+        loadID = loadID + relicType.ToString() + "Relic";
+        userName = SaveManager.GetString(loadID + "User");
+        spawned = SaveManager.GetBool(loadID + "Spawned");
+        collected = SaveManager.GetBool(loadID + "Collected");
+        inUse = SaveManager.GetBool(loadID + "InUse");
+        readyToUse = SaveManager.GetBool(loadID + "ReadyToUse");
+        cooldownTimer = SaveManager.GetFloat(loadID + "CooldownTimer");
+
+        if (collected)
+        {
+            GameObject newUser = GameObject.Find(userName);
+            newUser.GetComponent<CharacterBase>().AddRelic(gameObject);
+        }
+
+        else gameObject.SetActive(spawned && inArena);
     }
 }

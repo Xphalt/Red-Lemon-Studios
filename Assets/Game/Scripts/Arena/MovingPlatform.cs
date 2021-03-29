@@ -6,18 +6,24 @@ public class MovingPlatform : MonoBehaviour
 {
     public Vector3 maxMovement;
     public float moveSpeed;
-    private Rigidbody platformRigid;
     private Vector3 startPos;
+
+    private Vector3 moveVelocity;
 
     void Start()
     {
-        platformRigid = GetComponent<Rigidbody>();
-        platformRigid.velocity = maxMovement.normalized * moveSpeed;
+        moveVelocity = maxMovement.normalized * moveSpeed;
         startPos = transform.position;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        if ((transform.position - startPos).magnitude > maxMovement.magnitude) platformRigid.velocity *= -1;
+        transform.Translate(moveVelocity * Time.deltaTime); //Apologise for the translating but in this case is' easier to not have a rigidbody
+        if ((transform.position - startPos).magnitude > maxMovement.magnitude) moveVelocity *= -1;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        moveVelocity *= -1;
     }
 }

@@ -5,12 +5,14 @@ using static EnumHelper;
 
 public class CharacterBase : MonoBehaviour
 {
-    protected Rigidbody characterRigid;
+    public Rigidbody characterRigid = null;
 
     public Transform relicPlaceHolder;
     public GameObject weapon = null;
+    
+    public bool canFly = false;
 
-    public float jumpForce;
+    public float jumpSpeed;
     public float gravityMult = 1;
     public float floorDistance;
     public float airControl;
@@ -20,6 +22,7 @@ public class CharacterBase : MonoBehaviour
     internal bool movementLocked = false;
     internal bool shifting; 
     internal bool immortal = false;
+    internal bool killed = false;
     internal float shiftDuration;
     internal float shiftingTimer;
     internal float shiftTransition;
@@ -35,10 +38,10 @@ public class CharacterBase : MonoBehaviour
     internal Vector3 shiftVector;
 
     protected bool missPenalty = false;
-    protected bool doubleJumpEnabled = false;
-    protected bool hasJumpedTwice;
     protected bool isGrounded = false;
     protected bool jumping = false;
+    protected int maxJumps = 1;
+    protected int currentJumps = 0;
     protected int relicIndex = 0;
     protected int maxCombo = 1;
     protected float percentIncreasePerHit = 0;
@@ -47,19 +50,22 @@ public class CharacterBase : MonoBehaviour
     protected float damageRecievedMultiplier = 1;
     protected float speedMultiplier = 1;
 
-    public GameObject SFXManager = null;
-    protected SFXScript sfxSctipt;
+    public SFXScript sfxScript;
+
+    public virtual void Awake()
+    {
+        if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
+        if (characterRigid != null) characterRigid = GetComponent<Rigidbody>();
+
+        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
+        characterRigid = GetComponent<Rigidbody>();
+        curHealth = maxHealth;
+    }
 
     public virtual void Start()
     {
-        characterRigid = GetComponent<Rigidbody>();
+        characterRigid.useGravity = !canFly;
         airControl = Mathf.Clamp(airControl, 0, 1);
-        if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
-
-        if (SFXManager == null) SFXManager = GameObject.FindGameObjectWithTag("SFXManager");
-        sfxSctipt = SFXManager.GetComponent<SFXScript>();
-
-        curHealth = maxHealth;
     }
     
     public virtual void Update()
@@ -80,21 +86,21 @@ public class CharacterBase : MonoBehaviour
 
         if (jumping)
         {
-            characterRigid.AddForce(Vector3.up * (jumpForce + characterRigid.velocity.y * characterRigid.mass));
+            characterRigid.velocity = new Vector3(characterRigid.velocity.x, jumpSpeed, characterRigid.velocity.z);
             jumping = false;
         }
+
+        if (!canFly && characterRigid.useGravity) characterRigid.AddForce(Physics.gravity * (gravityMult - 1), ForceMode.Acceleration);
     }
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Hazard"))
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments effectStats))
         {
-            ElementHazardAilments hazardInfo = collision.gameObject.GetComponent<ElementHazardAilments>();
-
-            if (hazardInfo.team != team)
+            if (effectStats.team != team)
             {
-                TakeDamage(hazardInfo.damage);
-                hazardInfo.RegisterHit();
+                TakeDamage(effectStats.damage);
+                effectStats.RegisterHit();
             }
         }
 
@@ -103,8 +109,7 @@ public class CharacterBase : MonoBehaviour
             if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse) currentRelic.EndAbility();
         }
 
-        CharacterBase collisionCharacter;
-        if (collision.gameObject.TryGetComponent<CharacterBase>(out collisionCharacter))
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
         {
             if (collisionCharacter.team != team) collisionCharacter.TakeDamage(impactDamage);
         }
@@ -122,25 +127,28 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
-        isGrounded = false;
-        foreach (RaycastHit floorHit in floorHits)
-        {
-            if (floorHit.transform.CompareTag("Floor"))
-            {
-                isGrounded = true;
-                hasJumpedTwice = false;
-                break;
-            }
-        }
+        //RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
+        //isGrounded = false;
+        //foreach (RaycastHit floorHit in floorHits)
+        //{
+        //    if (floorHit.transform.CompareTag("Floor"))
+        //    {
+        //        isGrounded = true;
+        //        hasJumpedTwice = false;
+        //        break;
+        //    }
+        //}
+
+        isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
+        if (isGrounded && !jumping) currentJumps = 0;
     }
 
     protected void Jump()
     {
-        if ((isGrounded || doubleJumpEnabled && !hasJumpedTwice) && !jumping)
+        if (maxJumps > currentJumps && !jumping && !movementLocked)
         {
             jumping = true;
-            hasJumpedTwice = !isGrounded;
+            currentJumps++;
         }
     }
 
@@ -158,11 +166,14 @@ public class CharacterBase : MonoBehaviour
 
     public void EndShift()
     {
-        movementLocked = false;
-        shifting = false;
-        shiftingTimer = 0;
+        if (shifting)
+        {
+            movementLocked = false;
+            shifting = false;
+            shiftingTimer = 0;
 
-        characterRigid.velocity *= postShiftMomentum;
+            characterRigid.velocity *= postShiftMomentum;
+        }
     }
 
     public float CalculateDamageMult()
@@ -186,7 +197,17 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-        if (!immortal) curHealth -= value * damageRecievedMultiplier;        
+        if (!immortal) curHealth -= value * damageRecievedMultiplier;     
+        if (curHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        curHealth = 0;
+        killed = true;
     }
 
     public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
@@ -205,12 +226,12 @@ public class CharacterBase : MonoBehaviour
 
     #region Relic
 
-    public virtual void AddRelic(GameObject newRelic)
+    public virtual void AddRelic(GameObject newRelic, bool playSound=false)
     {
         RelicBase relicScript = newRelic.GetComponent<RelicBase>();
 
+        relicScript.SetUser(gameObject, playSound);
         newRelic.transform.position = relicPlaceHolder.position;
-        relicScript.SetUser(gameObject);
 
         relicList.Add(relicScript);
 
@@ -243,15 +264,18 @@ public class CharacterBase : MonoBehaviour
 
     public void SetRelic(int index)
     {
-        currentRelic.EndAbility();
-        currentRelic.Unequip();
-        currentRelic.gameObject.SetActive(false);
+        if (relicList.Count > 0)
+        {
+            currentRelic.EndAbility();
+            currentRelic.Unequip();
+            currentRelic.gameObject.SetActive(false);
 
-        relicIndex = index;
-        currentRelic = relicList[relicIndex];
-        currentRelic.ReEquip();
-        currentRelic.gameObject.SetActive(true); 
-        ActivatePassives();
+            relicIndex = index;
+            currentRelic = relicList[relicIndex];
+            currentRelic.ReEquip();
+            currentRelic.gameObject.SetActive(true);
+            ActivatePassives();
+        }
     }
 
     public void UseRelic()
@@ -276,7 +300,7 @@ public class CharacterBase : MonoBehaviour
         damagePercentRecievedOnMiss = currentRelic.damagePercentRecievedOnMiss;
         missPenalty = currentRelic.missPenalty;
 
-        doubleJumpEnabled = currentRelic.doubleJumpEnabled;
+        maxJumps = currentRelic.maxJumps;
         knockBackMultiplier = currentRelic.knockBackMultiplier;
 
         damageRecievedMultiplier = currentRelic.damageRecievedMultiplier;

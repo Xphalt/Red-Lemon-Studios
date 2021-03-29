@@ -44,7 +44,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wielder: {fileID: 0}
   GunPos: {fileID: 0}
-  SFXManager: {fileID: 0}
+  sfxScript: {fileID: 0}
   damage: 10
   BulletTypes: 00000000010000000300000002000000
   BulletPrefabs:
@@ -52,13 +52,12 @@ MonoBehaviour:
   - {fileID: 7015762197351387664, guid: d3a967e726a36df49b2ddd0ef894631f, type: 3}
   - {fileID: 7015762197351387664, guid: e9112738285993a4f95eb4130e5363f0, type: 3}
   - {fileID: 7015762197351387664, guid: 2f7537e9df26cfc47929cb62f93fea5c, type: 3}
-  soundTypes: 00000000010000000200000003000000
   soundNames:
-  - FireAmmoShoot
-  - WaterAmmoShoot
-  - AirAmmoShoot
-  - EarthAmmoShoot
-  ShootForce: 1500
+  - FireShot
+  - WaterShot
+  - EarthShot
+  - AirShot
+  ShootSpeed: 0
 --- !u!114 &5879440347458978357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,13 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c49dc17f0e2d14db503395ad5157e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  WandTypes: 00000000010000000200000003000000
-  WandMaterials:
-  - {fileID: 2100000, guid: 0fe1b84c9c02fcb4a927a73e174011c3, type: 2}
-  - {fileID: 2100000, guid: 77abd6c595f8efe429098f8d7a65f9d4, type: 2}
-  - {fileID: 2100000, guid: 34bbb029e4e22af4daba30de61f21659, type: 2}
-  - {fileID: 2100000, guid: 5497abaf9787e564cadde791c2db82ee, type: 2}
   m_CurElement: 0
 --- !u!1 &7556397501567951789
 GameObject:

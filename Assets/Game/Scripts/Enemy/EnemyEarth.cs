@@ -10,6 +10,7 @@ public class EnemyEarth : Enemy
     public float rollDuration = 1;
     public float rollDamage = 25;
 
+    public string attackSound;
 
     public override void Start()
     {
@@ -17,6 +18,7 @@ public class EnemyEarth : Enemy
         elementType = ElementTypes.Earth;
         weakAgainst = ElementTypes.Air;
         strongAgainst = ElementTypes.Water;
+        canFly = false;
     }
 
     public override void Update()
@@ -28,7 +30,7 @@ public class EnemyEarth : Enemy
             rolling = false;
             impactDamage = 0;
         }
-
+        Animate();
         if (!rolling)
         {
             if (CanSeePlayer()) movementState = EnemyStates.Chasing;
@@ -45,15 +47,73 @@ public class EnemyEarth : Enemy
             rolling = true;
             impactDamage = rollDamage;
             Shift((target.transform.position - transform.position).normalized * rollSpeed, rollDuration, 0);
+
+            sfxScript.PlaySFX3D(attackSound, transform.position);
         }
 
         return false;
     }
 
+    private void EndRoll()
+    {
+        rolling = false;
+        impactDamage = 0;
+        EndShift();
+    }
+
+    public override void Animate()
+    {
+        if (myAnim)
+        {
+            base.Animate();
+            if (movementState == EnemyStates.Chasing)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", true);
+            }
+            else if (movementState == EnemyStates.Idle)
+            {
+                myAnim.SetBool("Motion", false);
+                myAnim.SetBool("Attacking", false);
+            }
+            else if (movementState == EnemyStates.Patrolling)
+            {
+                myAnim.SetBool("Motion", true);
+                myAnim.SetBool("Attacking", false);
+            }
+        }
+    }
+
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)
     {
         base.TriggerStatusEffect(effectStats);
+        Shift((transform.position - effectStats.spawnPoint).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1 - knockbackRecovery), 1, true);
+    }
 
-        Shift((effectStats.gameObject.transform.position - transform.position).normalized * effectStats.statusMagnitude, effectStats.statusEffectDuration, (1-knockbackRecovery), 1, true);
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
+        {
+            if (collisionCharacter.team != team) EndRoll();
+        }
+    }
+
+    public override void SaveEnemy(string saveID)
+    {
+        base.SaveEnemy(saveID);
+
+        saveID = "Enemy" + saveID;
+        SaveManager.UpdateSavedBool(saveID + "Rolling", rolling);
+
+        if (!rolling && shifting) EndShift();
+    }
+
+    public override void LoadEnemy(string loadID)
+    {
+        base.LoadEnemy(loadID);
+
+        loadID = "Enemy" + loadID;
+        rolling = SaveManager.GetBool(loadID + "Rolling");
     }
 }

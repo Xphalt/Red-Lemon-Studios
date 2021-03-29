@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static EnumHelper;
 
@@ -10,20 +11,33 @@ public class GUI_Manager : MonoBehaviour
 
     //Slider Bar variables
     public Slider healthSlider, relicSlider, ammoSlider;
-    public Image healthBarFill, relicBarFill, ammoBarFill;
+    public Image healthBarFill, relicBarFill, ammoBarFill, relicBarBorder, ammoBarBorder;
+    public Text ammoText, relicText;
 
     //Elemental Group variables
-    public Image airImage, waterImage, fireImage, earthImage;
+    public Image equipedAmmoIcon;
     public Sprite airIcon, waterIcon, fireIcon, earthIcon;
-    public Sprite selectedAirIcon, selectedWaterIcon, selectedEarthIcon, selectedFireIcon;
     public Color lightPink = new Color(0.9f, 0.5f, 0.5f, 1);
     public Color lightBlue = new Color(0.09f, 0.2f, 0.9f, 1);
     public Color lightRed = new Color(1, 0.2f, 0.3f, 1);
     public Color lightGreen = new Color(0.2f, 0.7f, 0.2f, 1);
 
-    private void Update()
+    public Color scrollSelected = new Color();
+    public Color scrollNormal = new Color();
+
+    //Pause Menu variables
+    public string homeMenu;
+    public GameObject pausePanel, toolbarPanel, controlsPanel, deathScreen, completeScreen;
+
+    //Toolbar Menu and Toolbar Menu
+    [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
+    public Text RelicNameHolder, RelicInfoHolder;
+    public Image ImageHolder;
+    public List<Sprite> relicSprite = new List<Sprite>();
+
+    private void Start()
     {
-        HighlightSelectedAmmo();
+        pausePanel.SetActive(false);
     }
 
     /*__________________________________________________________
@@ -62,38 +76,55 @@ public class GUI_Manager : MonoBehaviour
 
     public void SetMaxAmmo(float maxAmmo)
     {
-         ammoSlider.maxValue = maxAmmo;
-         ammoSlider.value = maxAmmo;
+        ammoSlider.maxValue = maxAmmo;
+        ammoSlider.value = maxAmmo;
     }
 
     public void UpdateAmmoCount(float curAmmoCount)
     {
-         ammoSlider.value = curAmmoCount;
+        ammoSlider.value = curAmmoCount;
+    }
+
+    public void ToggleSliderSelection(bool toRelic)
+    {
+        if (toRelic)
+        {
+            ammoBarBorder.color = scrollNormal;
+            relicBarBorder.color = scrollSelected;
+            ammoText.enabled = false;
+            relicText.enabled = true;
+        }
+        else
+        {
+            ammoBarBorder.color = scrollSelected;
+            relicBarBorder.color = scrollNormal;
+            ammoText.enabled = true;
+            relicText.enabled = false;
+        }
     }
 
     /*__________________________________________________________
     Ammo Selection panel code
     ____________________________________________________________*/
 
-    private void HighlightSelectedAmmo()
+    public void HighlightSelectedAmmo()
     {
-        ResetElementalImages();
         switch (player.elementChanger.m_CurElement)
         {
             case ElementTypes.Air:
-                airImage.sprite = selectedAirIcon;
+                equipedAmmoIcon.sprite = airIcon;
                 ammoBarFill.color = lightPink;
                 break;
             case ElementTypes.Water:
-                waterImage.sprite = selectedWaterIcon;
+                equipedAmmoIcon.sprite = waterIcon;
                 ammoBarFill.color = lightBlue;
                 break;
             case ElementTypes.Fire:
-                fireImage.sprite = selectedFireIcon;
+                equipedAmmoIcon.sprite = fireIcon;
                 ammoBarFill.color = lightRed;
                 break;
             case ElementTypes.Earth:
-                earthImage.sprite = selectedEarthIcon;
+                equipedAmmoIcon.sprite = earthIcon;
                 ammoBarFill.color = lightGreen;
                 break;
             default:
@@ -101,11 +132,65 @@ public class GUI_Manager : MonoBehaviour
         }
     }
 
-    private void ResetElementalImages()
+    /*__________________________________________________________
+    Pause menu code
+    ____________________________________________________________*/
+
+    public bool PausePlay()
     {
-        airImage.sprite = airIcon;
-        waterImage.sprite = waterIcon;
-        fireImage.sprite = fireIcon;
-        earthImage.sprite = earthIcon;
+        if (!toolbarPanel.activeSelf && !deathScreen.activeSelf && !completeScreen.activeSelf)
+        {
+            pausePanel.SetActive(!pausePanel.activeSelf);
+            controlsPanel.SetActive(false);
+            return true;
+        }
+        return false;
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        //maybe display a warning message about unsaved data being lose?
+        SceneManager.LoadScene(homeMenu);
+    }
+
+    public void ShowControls(bool isShown)
+    {
+        controlsPanel.SetActive(isShown);
+    }
+
+    /*__________________________________________________________
+    Tool bar view menu code
+    ____________________________________________________________*/
+
+    public bool ShowToolBarMenu()
+    {
+        if (!pausePanel.activeSelf && !deathScreen.activeSelf && !completeScreen.activeSelf)
+        {
+            toolbarPanel.SetActive(!toolbarPanel.activeSelf);
+            return true;
+        }
+        return false;
+    }
+
+    public void SetRelicInfo(int relicType)
+    {
+        RelicNameHolder.text = ((ElementTypes)relicType).ToString();
+        RelicInfoHolder.text = RelicDescription[relicType];
+        ImageHolder.sprite = relicSprite[relicType];
+    }
+
+    public void ShowEndGame(bool dead)
+    {
+        Time.timeScale = 0;
+        if (dead) deathScreen.SetActive(true);
+        else completeScreen.SetActive(true);
+    }
+
+    public void LeaveEndGame()
+    {
+        Time.timeScale = 1;
+        deathScreen.SetActive(false);
+        completeScreen.SetActive(false);
     }
 }

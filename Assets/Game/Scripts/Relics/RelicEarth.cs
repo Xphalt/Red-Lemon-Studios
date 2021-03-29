@@ -6,7 +6,7 @@ public class RelicEarth : RelicBase
 {
     public GameObject pillar;
     private Transform pillarTransform;
-    private EarthPillarScript pillarScript;
+    private EarthPillarScript pillarScript = null;
     public float maxPillarSize;
     public float pillarDamage;
     public float userMomentumResidue = 0.1f;
@@ -16,21 +16,19 @@ public class RelicEarth : RelicBase
     private float pillarTimer = 0;
     private float sizePerSecond;
 
-
-    void Start()
+    public override void Awake()
     {
-        userMomentumResidue = Mathf.Clamp(userMomentumResidue, 0, 1);
-        hostileMomentumResidue = Mathf.Clamp(hostileMomentumResidue, 0, 1);
+        base.Awake();
 
+        pillarScript = pillar.GetComponent<EarthPillarScript>();
         pillarTransform = pillar.GetComponent<Transform>();
+
         pillarTransform.localScale = new Vector3(pillarTransform.localScale.x, 0, pillarTransform.localScale.z);
 
         sizePerSecond = maxPillarSize / pillarLifeTime;
-        pillarScript = pillar.GetComponent<EarthPillarScript>();
 
         pillar.SetActive(false);
     }
-
 
     public override void Update()
     {
@@ -46,10 +44,9 @@ public class RelicEarth : RelicBase
         }
     }
 
-    public override void SetUser(GameObject newUser)
+    public override void SetUser(GameObject newUser, bool playSound=false)
     {
-        base.SetUser(newUser);
-
+        base.SetUser(newUser, playSound);
         pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript.team, userMomentumResidue, hostileMomentumResidue);
     }
 
@@ -57,24 +54,23 @@ public class RelicEarth : RelicBase
     {
         if (!base.Activate()) return false;
 
-        RaycastHit[] floorHits = Physics.RaycastAll(new Ray(user.transform.position, -Vector3.up));
-        foreach (RaycastHit floorHit in floorHits)
+        if (Physics.Raycast(user.transform.position, Vector3.down, out RaycastHit hit))
         {
-            if (floorHit.transform.CompareTag("Floor"))
-            {
-                pillar.SetActive(true);
+            pillar.SetActive(true);
 
-                float startScale = 0;
+            // use start scale if pillar is to appear at players feet regardless of vertical position
 
-                pillarScript.Activate(startScale, floorHit.point + Vector3.up * startScale);
-                characterScript.immortal = true;
+            pillarScript.Activate(0, hit.point);
+            characterScript.immortal = true;
 
-                pillarTimer = 0;
-                readyToUse = false;
-                inUse = true;
+            pillarTimer = 0;
+            readyToUse = false;
+            inUse = true;
 
-                return true;
-            }
+            sfxScript.PlaySFX2D(activateSound);
+            if (myAnim) myAnim.SetTrigger("Activate");
+                
+            return true;
         }
         return false;
     }
