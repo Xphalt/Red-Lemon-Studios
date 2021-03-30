@@ -141,6 +141,7 @@ public class CharacterBase : MonoBehaviour
 
         isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
         if (isGrounded && !jumping) currentJumps = 0;
+        else currentJumps = Mathf.Max(currentJumps, 1);
     }
 
     protected void Jump()
