@@ -38,6 +38,7 @@ public class Player : CharacterBase
         if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
         if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
+
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
@@ -61,6 +62,7 @@ public class Player : CharacterBase
         base.Start();
         team = Teams.Player;
 
+        if (audioListener) audioListener.enabled = SaveManager.GetBool("Muted");
         userInterface.HighlightSelectedAmmo();
         userInterface.ToggleSliderSelection(switchingRelics);
     }
@@ -154,6 +156,7 @@ public class Player : CharacterBase
     public void ToggleMute()
     {
         if (audioListener) audioListener.enabled = !audioListener.enabled;
+        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
     }
 
     public override void FixedUpdate()
