@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
+    public AudioListener audioListener;
     public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
@@ -17,6 +18,11 @@ public class Main_Menu : MonoBehaviour
     {
         controlsPanel.SetActive(false);
         creditsPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M)) audioListener.enabled = !audioListener.enabled;
     }
 
     public void StartGame(bool newGame)

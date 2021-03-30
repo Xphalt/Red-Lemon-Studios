@@ -24,9 +24,9 @@ public class Player : CharacterBase
     public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
-    public string ammoChangeSound;
-
+    public AudioListener audioListener;
     public AudioSource audioSource;
+    public string ammoChangeSound;
     public string jumpSound;
     public string landSound;
     public string damageSound;
@@ -130,6 +130,7 @@ public class Player : CharacterBase
 
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
         if (Input.GetKeyDown(KeyCode.Q)) TogglePause(true);
+        if (Input.GetKeyDown(KeyCode.M)) ToggleMute();
     }
 
     public void TogglePause(bool toolMenu)
@@ -148,6 +149,11 @@ public class Player : CharacterBase
             Time.timeScale = (paused) ? 0 : 1;
             rotationScript.SetCursorLock(!paused, paused);
         }
+    }
+
+    public void ToggleMute()
+    {
+        if (audioListener) audioListener.enabled = !audioListener.enabled;
     }
 
     public override void FixedUpdate()

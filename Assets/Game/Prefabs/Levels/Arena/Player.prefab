@@ -164,8 +164,9 @@ MonoBehaviour:
   shootTargetDistance: 20
   maxAmmo: 100
   elementChanger: {fileID: 0}
-  ammoChangeSound: ChangeAmmo
+  audioListener: {fileID: 7338099964422291513}
   audioSource: {fileID: 7338099962747303697}
+  ammoChangeSound: ChangeAmmo
   jumpSound: PlayerJump
   landSound: PlayerLand
   damageSound: PlayerHurt
