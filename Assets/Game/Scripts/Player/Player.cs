@@ -123,7 +123,7 @@ public class Player : CharacterBase
                 sfxScript.PlaySFX2D(ammoChangeSound);
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Mouse2))
             {
                 switchingRelics = !switchingRelics;
                 userInterface.ToggleSliderSelection(switchingRelics);
