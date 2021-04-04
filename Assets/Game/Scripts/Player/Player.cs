@@ -33,6 +33,7 @@ public class Player : CharacterBase
     public string landSound;
     public string damageSound;
     public string deathSound;
+    public string enemyHitSound;
 
     public override void Awake()
     {
@@ -84,6 +85,11 @@ public class Player : CharacterBase
             if (!currentRelic.readyToUse)
                 userInterface.UpdateRelicTimer(currentRelic.cooldownTimer);
         }
+
+        bool enemyScanned = false;
+        if (Physics.Raycast(GetForwardRay(), out RaycastHit enemyScan, shootTargetDistance)) enemyScanned = enemyScan.transform.CompareTag("Enemy");
+
+        userInterface.HighlightCrosshair(enemyScanned);
     }
     /*_______________________________________________________________________________________________________________
     Player movement code
@@ -224,6 +230,13 @@ public class Player : CharacterBase
         }
     }
 
+    public override void IncreaseCombo()
+    {
+        base.IncreaseCombo();
+        userInterface.ShowHit();
+        sfxScript.PlaySFX2D(enemyHitSound);
+    }
+
     public override Ray GetForwardRay()
     {
         return firstPersonCamera.ViewportPointToRay(crosshairPos);
@@ -237,7 +250,7 @@ public class Player : CharacterBase
     {
         base.TakeDamage(damage);
         sfxScript.PlaySFX2D(damageSound);
-        userInterface.UpdateHealth(curHealth);
+        userInterface.UpdateHealth(curHealth, true);
     }
 
     public override void Die()

@@ -182,7 +182,7 @@ public class CharacterBase : MonoBehaviour
         return 1 + Mathf.Min(hitCombo, maxCombo) * percentIncreasePerHit / 100;
     }
 
-    public void IncreaseCombo()
+    public virtual void IncreaseCombo()
     {
         if (hitCombo < maxCombo) hitCombo++;
     }

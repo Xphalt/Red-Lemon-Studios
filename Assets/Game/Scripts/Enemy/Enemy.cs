@@ -63,8 +63,6 @@ public class Enemy : CharacterBase
     protected bool statusEffectActive;
     protected float statusMagnitude;
 
-    public string hitSound;
-
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 
@@ -308,8 +306,6 @@ public class Enemy : CharacterBase
 
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
-
-        sfxScript.PlaySFX3D(hitSound, transform.position);
 
         base.TakeDamage(damage, damageType);
     }
