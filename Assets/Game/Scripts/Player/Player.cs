@@ -18,15 +18,17 @@ public class Player : CharacterBase
     public float shootTargetDistance;
     public int maxAmmo;
 
+    private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
+
     private bool switchingRelics = false;
     private bool paused = false;
 
     public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
-    public string ammoChangeSound;
-
+    public AudioListener audioListener;
     public AudioSource audioSource;
+    public string ammoChangeSound;
     public string jumpSound;
     public string landSound;
     public string damageSound;
@@ -38,6 +40,7 @@ public class Player : CharacterBase
         if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
         if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
+
         /*______________________________________________________________________________________
         User Interface  initialisation
         ________________________________________________________________________________________*/
@@ -61,6 +64,7 @@ public class Player : CharacterBase
         base.Start();
         team = Teams.Player;
 
+        if (audioListener) audioListener.enabled = SaveManager.GetBool("Muted");
         userInterface.HighlightSelectedAmmo();
         userInterface.ToggleSliderSelection(switchingRelics);
     }
@@ -98,38 +102,52 @@ public class Player : CharacterBase
                 if (newJump) sfxScript.PlaySFX3D(jumpSound, transform.position);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+
+            if (Input.GetAxisRaw("Triggers") > 0)
             {
-                Shoot();
+                if (!axisActive.ContainsKey("RightTrigger")) Shoot();
+                else if (!axisActive["RightTrigger"]) Shoot();
+                axisActive["RightTrigger"] = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
+            else
+            {
+                axisActive["RightTrigger"] = false;
+                if (Input.GetButtonDown("Fire1")) Shoot();
+            }
+
+            if (Input.GetButtonDown("Fire2"))
             {
                 UseRelic();
             }
 
-            if (Input.mouseScrollDelta.y != 0)
+            if (Input.mouseScrollDelta.y != 0 || Input.GetButtonDown("ScrollUp") || Input.GetButtonDown("ScrollDown"))
             {
+                int scrollAmount;
+                if (Input.mouseScrollDelta.y != 0) scrollAmount = Mathf.FloorToInt(Input.mouseScrollDelta.y);
+                else scrollAmount = Input.GetButtonDown("ScrollUp") ? 1 : -1;
+
                 if (!switchingRelics)
                 {
-                    elementChanger.ChangeElement(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                    elementChanger.ChangeElement(scrollAmount);
                     userInterface.HighlightSelectedAmmo();
                     userInterface.UpdateAmmoCount(Ammo[elementChanger.m_CurElement]);
                 }
-                else ChangeRelic(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+                else ChangeRelic(scrollAmount);
 
                 sfxScript.PlaySFX2D(ammoChangeSound);
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetButtonDown("Toggle"))
             {
                 switchingRelics = !switchingRelics;
                 userInterface.ToggleSliderSelection(switchingRelics);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
-        if (Input.GetKeyDown(KeyCode.Q)) TogglePause(true);
+        if (Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
+        if (Input.GetButtonDown("Select")) TogglePause(true);
+        if (Input.GetKeyDown(KeyCode.M)) ToggleMute();
     }
 
     public void TogglePause(bool toolMenu)
@@ -148,6 +166,12 @@ public class Player : CharacterBase
             Time.timeScale = (paused) ? 0 : 1;
             rotationScript.SetCursorLock(!paused, paused);
         }
+    }
+
+    public void ToggleMute()
+    {
+        if (audioListener) audioListener.enabled = !audioListener.enabled;
+        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
     }
 
     public override void FixedUpdate()

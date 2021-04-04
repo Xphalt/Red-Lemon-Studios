@@ -1064,7 +1064,7 @@ MonoBehaviour:
   pillar: {fileID: 6984414929851687242}
   maxPillarSize: 5
   pillarDamage: 50
-  userMomentumResidue: 0.5
+  userMomentumResidue: 1
   hostileMomentumResidue: 1
   pillarLifeTime: 0.5
 --- !u!114 &-2303786261822429039
@@ -1192,8 +1192,8 @@ GameObject:
   - component: {fileID: 6984414929851687243}
   - component: {fileID: 6984414929851687239}
   - component: {fileID: 6984414929851687238}
-  - component: {fileID: 6984414929851687241}
   - component: {fileID: 6984414929851687240}
+  - component: {fileID: 8801782217247198929}
   m_Layer: 9
   m_Name: EarthPillar
   m_TagString: Floor
@@ -1264,20 +1264,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6984414929851687241
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6984414929851687242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &6984414929851687240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,6 +1276,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668d03e15b9d000428c08a9ec5f35c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8801782217247198929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984414929851687242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7172939119399561102
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,9 +18,9 @@ public class RotatingFan : MonoBehaviour
             foreach (RaycastHit hit in Physics.CapsuleCastAll(transform.position, transform.position + Vector3.up * blowRange,
                 Mathf.Min(blowRadius, blowRange), Vector3.up, blowRange))
             {
-                if (hit.transform.CompareTag("Player"))
+                if (hit.transform.TryGetComponent(out Player player))
                 {
-                    hit.transform.GetComponent<Rigidbody>().velocity += Vector3.up * blowSpeed * Time.deltaTime;
+                    if (!player.movementLocked) player.GetComponent<Rigidbody>().velocity += Vector3.up * blowSpeed * Time.deltaTime;
                     break;
                 }
             }

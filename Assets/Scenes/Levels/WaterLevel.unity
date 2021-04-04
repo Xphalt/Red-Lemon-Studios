@@ -1323,16 +1323,8 @@ PrefabInstance:
       value: 348.71744
       objectReference: {fileID: 0}
     - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: newGame
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: ArenaName
       value: Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: resetArena
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
@@ -1437,19 +1429,19 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 874270773}
+      objectReference: {fileID: 1995096561}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[2]
       value: 
-      objectReference: {fileID: 1995096561}
+      objectReference: {fileID: 972272608}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[3]
       value: 
-      objectReference: {fileID: 1316811014}
+      objectReference: {fileID: 874270773}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[4]
       value: 
-      objectReference: {fileID: 972272608}
+      objectReference: {fileID: 1316811014}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[5]
       value: 
@@ -1457,27 +1449,27 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[6]
       value: 
-      objectReference: {fileID: 1417957345}
+      objectReference: {fileID: 1935899099}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[7]
       value: 
-      objectReference: {fileID: 1935899099}
+      objectReference: {fileID: 903929180}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[8]
       value: 
-      objectReference: {fileID: 414479722}
+      objectReference: {fileID: 345803743}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[9]
       value: 
-      objectReference: {fileID: 903929180}
+      objectReference: {fileID: 1417957345}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[10]
       value: 
-      objectReference: {fileID: 1962443029}
+      objectReference: {fileID: 414479722}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[11]
       value: 
-      objectReference: {fileID: 345803743}
+      objectReference: {fileID: 1962443029}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[12]
       value: 
@@ -1485,19 +1477,19 @@ PrefabInstance:
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[13]
       value: 
-      objectReference: {fileID: 68072258}
+      objectReference: {fileID: 2053194217}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[14]
       value: 
-      objectReference: {fileID: 2053194217}
+      objectReference: {fileID: 746084648}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[15]
       value: 
-      objectReference: {fileID: 751898915}
+      objectReference: {fileID: 68072258}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[16]
       value: 
-      objectReference: {fileID: 746084648}
+      objectReference: {fileID: 751898915}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: enemies.Array.data[17]
       value: 
@@ -1662,7 +1654,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.7998047
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6483202905238241610, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
 --- !u!1 &1155473275 stripped
 GameObject:

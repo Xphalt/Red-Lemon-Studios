@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject StartGO, ExitGO, controlsPanel, creditsPanel;
+    public AudioListener audioListener;
+    public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
+        if (audioListener && SaveManager.HasBool("Muted")) audioListener.enabled = SaveManager.GetBool("Muted");
     }
 
     private void Start()
@@ -19,11 +21,21 @@ public class Main_Menu : MonoBehaviour
         creditsPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            audioListener.enabled = !audioListener.enabled;
+            SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
+        }
+    }
+
     public void StartGame(bool newGame)
     {
         if (newGame || !(SaveManager.HasString("LastOverallCheckpointID")))
         {
             SaveManager.ClearSaves();
+            SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
             SceneManager.LoadScene(FirstLevel);
         }
         else
@@ -32,25 +44,26 @@ public class Main_Menu : MonoBehaviour
 
     public void ExitScene()
     {
-        ExitGO.SetActive(true);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void Controls(bool setActive)
     {
-        if (setActive)
-            controlsPanel.SetActive(true);
-        else
-            controlsPanel.SetActive(false);
+        controlsPanel.SetActive(setActive);
     }
 
     public void Credits(bool setActive)
     {
-        if (setActive)
-            creditsPanel.SetActive(true);
-        else
-            creditsPanel.SetActive(false);
+        creditsPanel.SetActive(setActive);
     }
 
+    private void OnDestroy()
+    {
+        SaveManager.SaveToFile();
+    }
 }
 
