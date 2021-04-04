@@ -24,10 +24,13 @@ public class Main_Menu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
-        {
-            audioListener.enabled = !audioListener.enabled;
-            SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
-        }
+            Mute();
+    }
+
+    public void Mute()
+    {
+        audioListener.enabled = !audioListener.enabled;
+        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
     }
 
     public void StartGame(bool newGame)
