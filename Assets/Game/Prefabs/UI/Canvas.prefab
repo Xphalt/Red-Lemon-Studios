@@ -2434,6 +2434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controls_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 86759186374018817, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2972112932793934637, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -2666,7 +2670,7 @@ PrefabInstance:
       objectReference: {fileID: 285655825787680742}
     - target: {fileID: 6626804225147571663, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6998596
+      value: 1.6998291
       objectReference: {fileID: 0}
     - target: {fileID: 6626804225283714426, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_Name
@@ -2758,7 +2762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6626804226324118050, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6998596
+      value: 1.6998291
       objectReference: {fileID: 0}
     - target: {fileID: 6626804226324118051, guid: 5eee867b3f321694da43416a15231624, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2833,11 +2837,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 36.56311
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 25.786621
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2869,11 +2873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -12.893005
       objectReference: {fileID: 0}
     - target: {fileID: 2120378128295527901, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2898,6 +2902,10 @@ PrefabInstance:
     - target: {fileID: 2929660995562056506, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_Name
       value: Pause_Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929660995562056506, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4440483179001119114, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
