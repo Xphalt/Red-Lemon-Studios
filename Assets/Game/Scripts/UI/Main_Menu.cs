@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
+    public AudioListener audioListener;
     public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
     private void Awake()
     {
         SaveManager.LoadFromFile();
+        if (audioListener && SaveManager.HasBool("Muted")) audioListener.enabled = SaveManager.GetBool("Muted");
     }
 
     private void Start()
@@ -19,11 +21,24 @@ public class Main_Menu : MonoBehaviour
         creditsPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+            Mute();
+    }
+
+    public void Mute()
+    {
+        audioListener.enabled = !audioListener.enabled;
+        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
+    }
+
     public void StartGame(bool newGame)
     {
         if (newGame || !(SaveManager.HasString("LastOverallCheckpointID")))
         {
             SaveManager.ClearSaves();
+            SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
             SceneManager.LoadScene(FirstLevel);
         }
         else
@@ -49,5 +64,9 @@ public class Main_Menu : MonoBehaviour
         creditsPanel.SetActive(setActive);
     }
 
+    private void OnDestroy()
+    {
+        SaveManager.SaveToFile();
+    }
 }
 

@@ -34,8 +34,9 @@ public class Interactable_Items : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     { //check if a bullet has collided
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments hitter))
         {
+            hitter.RegisterHit();
             destroyed = true;
             Drop(DropPercentage);
             gameObject.SetActive(false);

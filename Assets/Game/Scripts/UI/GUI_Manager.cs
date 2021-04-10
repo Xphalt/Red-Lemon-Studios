@@ -35,9 +35,52 @@ public class GUI_Manager : MonoBehaviour
     public Image ImageHolder;
     public List<Sprite> relicSprite = new List<Sprite>();
 
+    public float healthBarFlashDuration;
+    public Color healthBarFlashColour;
+    private Color healthBarColour;
+    private float healthBarFlashTimer = 0;
+    private bool healthBarFlashed = false;
+
+    public List<Image> crosshair;
+    public float crossHighlightOpacity;
+    public float crossDefaultOpacity;
+    public GameObject secondCrosshair;
+    public float secondCrosshairDuration;
+    private float secondCrosshairTimer = 0;
+
+    private void Awake()
+    {
+        healthBarColour = healthBarFill.color;
+        secondCrosshair.SetActive(false);
+    }
+
     private void Start()
     {
         pausePanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (healthBarFlashed)
+        {
+            healthBarFlashTimer += Time.deltaTime;
+            if (healthBarFlashTimer > healthBarFlashDuration)
+            {
+                healthBarFill.color = healthBarColour;
+                healthBarFlashed = false;
+                healthBarFlashTimer = 0;
+            }
+        }
+
+        if (secondCrosshair.activeSelf)
+        {
+            secondCrosshairTimer += Time.deltaTime;
+            if (secondCrosshairTimer > secondCrosshairDuration)
+            {
+                secondCrosshair.SetActive(false);
+                secondCrosshairTimer = 0;
+            }
+        }
     }
 
     /*__________________________________________________________
@@ -50,9 +93,20 @@ public class GUI_Manager : MonoBehaviour
         healthSlider.value = maxHealth;
     }
 
-    public void UpdateHealth(float curHealth)
+    public void UpdateHealth(float curHealth, bool damaged=false)
     {
         healthSlider.value = curHealth;
+        if (damaged)
+        {
+            healthBarFill.color = healthBarFlashColour;
+            healthBarFlashed = true;
+        }
+    }
+
+    public void ShowHit()
+    {
+        secondCrosshair.SetActive(true);
+        secondCrosshairTimer = 0;
     }
 
     /*__________________________________________________________
@@ -114,22 +168,32 @@ public class GUI_Manager : MonoBehaviour
             case ElementTypes.Air:
                 equipedAmmoIcon.sprite = airIcon;
                 ammoBarFill.color = lightPink;
+                foreach (Image cross in crosshair) cross.color = lightPink;
                 break;
             case ElementTypes.Water:
                 equipedAmmoIcon.sprite = waterIcon;
                 ammoBarFill.color = lightBlue;
+                foreach (Image cross in crosshair) cross.color = lightBlue;
                 break;
             case ElementTypes.Fire:
                 equipedAmmoIcon.sprite = fireIcon;
                 ammoBarFill.color = lightRed;
+                foreach (Image cross in crosshair) cross.color = lightRed;
                 break;
             case ElementTypes.Earth:
                 equipedAmmoIcon.sprite = earthIcon;
                 ammoBarFill.color = lightGreen;
+                foreach (Image cross in crosshair) cross.color = lightGreen;
                 break;
             default:
                 break;
         }
+    }
+
+    public void HighlightCrosshair(bool highlight=false)
+    {
+        foreach (Image cross in crosshair) 
+            cross.color = new Color(cross.color.r, cross.color.g, cross.color.b, (highlight) ? crossHighlightOpacity : crossDefaultOpacity);
     }
 
     /*__________________________________________________________

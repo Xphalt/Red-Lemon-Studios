@@ -141,6 +141,7 @@ public class CharacterBase : MonoBehaviour
 
         isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
         if (isGrounded && !jumping) currentJumps = 0;
+        else currentJumps = Mathf.Max(currentJumps, 1);
     }
 
     protected void Jump()
@@ -181,7 +182,7 @@ public class CharacterBase : MonoBehaviour
         return 1 + Mathf.Min(hitCombo, maxCombo) * percentIncreasePerHit / 100;
     }
 
-    public void IncreaseCombo()
+    public virtual void IncreaseCombo()
     {
         if (hitCombo < maxCombo) hitCombo++;
     }
