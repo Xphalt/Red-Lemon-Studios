@@ -828,7 +828,6 @@ MonoBehaviour:
   patrolSpeed: 3
   playerDetectionRadius: 100
   wallDetectionRadius: 2
-  hitSound: EnemyHit
   weaponRange: 30
   stationaryZone: 0.25
   attackSound: AirAttack
@@ -841,7 +840,7 @@ AudioSource:
   m_GameObject: {fileID: 6529171544479913101}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7453376544570869007, guid: c7dfcfe22a31e9d4fa24619fb4d6e1ae, type: 2}
   m_audioClip: {fileID: 8300000, guid: e4d6c9e137502db40835ae8438b1ec6b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

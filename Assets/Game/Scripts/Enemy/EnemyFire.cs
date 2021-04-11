@@ -12,6 +12,16 @@ public class EnemyFire : Enemy
     public string explodeSound;
     public string jumpSound;
 
+    public GameObject explosion;
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        if (explosion == null) explosion = GetComponentInChildren<FireExplosion>().gameObject;
+        explosion.SetActive(false);
+    }
+
     public override void Start()
     {
         base.Start();
@@ -103,6 +113,10 @@ public class EnemyFire : Enemy
             sfxScript.PlaySFX3D(explodeSound, transform.position);
         }
         killed = true;
+
+        explosion.SetActive(true);
+        explosion.transform.SetParent(null);
+        explosion.GetComponent<FireExplosion>().parent = gameObject.transform;
         gameObject.SetActive(false);
     }
 
