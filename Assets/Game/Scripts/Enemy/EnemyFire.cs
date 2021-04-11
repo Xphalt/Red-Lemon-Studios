@@ -111,13 +111,13 @@ public class EnemyFire : Enemy
         {
             playerScript.TakeDamage(explosionDamage);
             sfxScript.PlaySFX3D(explodeSound, transform.position);
+
+            explosion.SetActive(true);
+            explosion.transform.SetParent(null);
+            explosion.GetComponent<FireExplosion>().parent = gameObject.transform;
+            gameObject.SetActive(false);
         }
         killed = true;
-
-        explosion.SetActive(true);
-        explosion.transform.SetParent(null);
-        explosion.GetComponent<FireExplosion>().parent = gameObject.transform;
-        gameObject.SetActive(false);
     }
 
     public override void TriggerStatusEffect(ElementHazardAilments effectStats)

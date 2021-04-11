@@ -52,10 +52,21 @@ public class GUI_Manager : MonoBehaviour
     public float secondCrosshairDuration;
     private float secondCrosshairTimer = 0;
 
+    public Image relicPopUp;
+    public List<Text> popUpText;
+    public float popUpDuration;
+    private Color popUpColour;
+    private Color popUpTextColor;
+    private float popUpTimer = 0;
+    private bool popUpActive = false;
+
     private void Awake()
     {
         healthBarColour = healthBarFill.color;
         secondCrosshair.SetActive(false);
+
+        popUpColour = relicPopUp.color;
+        popUpTextColor = popUpText[0].color;
     }
 
     private void Start()
@@ -83,6 +94,20 @@ public class GUI_Manager : MonoBehaviour
             {
                 secondCrosshair.SetActive(false);
                 secondCrosshairTimer = 0;
+            }
+        }
+
+        if (popUpActive)
+        {
+            popUpTimer += Time.deltaTime;
+
+            relicPopUp.color = Color.Lerp(popUpColour, Color.clear, popUpTimer / popUpDuration);
+            foreach (Text text in popUpText) text.color = Color.Lerp(popUpTextColor, Color.clear, popUpTimer / popUpDuration);
+
+            if (popUpTimer > popUpDuration)
+            {
+                popUpActive = false;
+                relicPopUp.gameObject.SetActive(false);
             }
         }
     }
@@ -126,6 +151,14 @@ public class GUI_Manager : MonoBehaviour
     public void UpdateRelicTimer(float cooldownValue)
     {
         relicSlider.value = cooldownValue;
+    }
+
+    public void ShowRelicPopUp(string relicType)
+    {
+        relicPopUp.gameObject.SetActive(true);
+        popUpText[0].text = relicType + " Collected";
+        popUpActive = true;
+        popUpTimer = 0;
     }
 
     /*__________________________________________________________

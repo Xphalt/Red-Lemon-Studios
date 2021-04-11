@@ -205,7 +205,11 @@ public class Player : CharacterBase
     _________________________________________________________________________________________________________________*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Relic")) AddRelic(other.gameObject, true);
+        if (other.TryGetComponent(out RelicBase newRelic))
+        {
+            AddRelic(other.gameObject, true);
+            userInterface.ShowRelicPopUp(newRelic.relicType.ToString());
+        }
     }
 
     public override void OnCollisionEnter(Collision collision)
