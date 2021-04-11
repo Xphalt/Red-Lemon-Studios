@@ -48,6 +48,7 @@ public class RelicAir : RelicBase
             RaycastHit target = grappleHits[0];
 
             grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
+            if (characterScript.isGrounded && grappleDir.y < 0) return false;
 
             characterRigid.useGravity = false;
             characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);

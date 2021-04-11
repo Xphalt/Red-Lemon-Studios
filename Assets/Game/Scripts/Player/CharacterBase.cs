@@ -19,6 +19,7 @@ public class CharacterBase : MonoBehaviour
     public float maxHealth = 100.0f;
     public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
+    internal bool isGrounded = false;
     internal bool movementLocked = false;
     internal bool shifting; 
     internal bool immortal = false;
@@ -38,7 +39,6 @@ public class CharacterBase : MonoBehaviour
     internal Vector3 shiftVector;
 
     protected bool missPenalty = false;
-    protected bool isGrounded = false;
     protected bool jumping = false;
     protected int maxJumps = 1;
     protected int currentJumps = 0;
