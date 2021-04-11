@@ -9,7 +9,7 @@ public class Main_Menu : MonoBehaviour
     public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
-    public Animator transition;
+    public Transition transition;
     public float transitionDelay;
 
     private void Awake()
@@ -42,17 +42,10 @@ public class Main_Menu : MonoBehaviour
         {
             SaveManager.ClearSaves();
             SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
-            StartCoroutine(LoadLevel(FirstLevel));
+            StartCoroutine(transition.LoadLevel(FirstLevel));
         }
         else
-            StartCoroutine(LoadLevel(SaveManager.GetString("LastSavedScene")));
-    }
-
-    public IEnumerator LoadLevel(string level)
-    {
-        transition.SetTrigger("exitScene");
-        yield return new WaitForSeconds(transitionDelay);
-        SceneManager.LoadScene(level);
+            StartCoroutine(transition.LoadLevel(SaveManager.GetString("LastSavedScene")));
     }
 
     public void ExitScene()

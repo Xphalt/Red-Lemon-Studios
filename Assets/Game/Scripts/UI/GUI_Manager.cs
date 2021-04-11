@@ -28,7 +28,7 @@ public class GUI_Manager : MonoBehaviour
     //Pause Menu variables
     public string homeMenu;
     public GameObject pausePanel, toolbarPanel, controlsPanel, deathScreen, completeScreen, ammoButtonHighlight, relicButtonHighlight;
-
+    public Transition transition;
 
     //Toolbar Menu and Toolbar Menu
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
@@ -162,6 +162,9 @@ public class GUI_Manager : MonoBehaviour
         popUpText[0].text = relicType + " Collected";
         popUpActive = true;
         popUpTimer = 0;
+
+        relicPopUp.color = popUpColour;
+        foreach (Text text in popUpText) text.color = popUpTextColor;
     }
 
     /*__________________________________________________________
@@ -253,9 +256,7 @@ public class GUI_Manager : MonoBehaviour
 
     public void MainMenu()
     {
-        Time.timeScale = 1;
-        //maybe display a warning message about unsaved data being lose?
-        SceneManager.LoadScene(homeMenu);
+        StartCoroutine(transition.LoadLevel(homeMenu));
     }
 
     public void ShowControls(bool isShown)

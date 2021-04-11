@@ -44,6 +44,8 @@ public class ArenaManager : MonoBehaviour
     public string enemySpawnSound;
     public string gameCompleteSound;
 
+    public Transition transition;
+
     #endregion
 
     #region UnityCallbacks
@@ -173,7 +175,7 @@ public class ArenaManager : MonoBehaviour
     {
         if (bEnemiesCleared && bEndRelicCollected)
         {
-            if (nextScene != "") SceneManager.LoadScene(nextScene);
+            if (nextScene != "") StartCoroutine(transition.LoadLevel(nextScene));
             else
             {
                 sfxScript.PlaySFX2D(gameCompleteSound);

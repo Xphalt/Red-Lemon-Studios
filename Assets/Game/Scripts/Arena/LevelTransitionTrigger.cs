@@ -6,7 +6,6 @@ public class LevelTransitionTrigger : MonoBehaviour
 {
     public ArenaManager arenaManager;
     public CheckpointManager checkpointManager = null;
-    public Transition transition;
     public List<GameObject> images;
     private bool active = false;
 
@@ -31,7 +30,7 @@ public class LevelTransitionTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             if (checkpointManager != null) checkpointManager.Save(checkpointManager.ArenaName + "End");
-            StartCoroutine(transition.LoadLevel());
+            arenaManager.TransitionLevel();
         }
     }
 }

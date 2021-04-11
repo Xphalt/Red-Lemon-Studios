@@ -9,19 +9,18 @@ public class Transition : MonoBehaviour
     public float delay;
     public float inputLockDelay;
     public Player player;
-    public ArenaManager arenaManager;
 
     private void Awake()
     {
         StartCoroutine(StartLevel());
     }
 
-    public IEnumerator LoadLevel()
+    public IEnumerator LoadLevel(string level)
     {
         ToggleInput(true);
         transition.SetTrigger("exitScene");
         yield return new WaitForSecondsRealtime(delay);
-        arenaManager.TransitionLevel();
+        SceneManager.LoadScene(level);
     }
 
     IEnumerator StartLevel()
@@ -34,5 +33,6 @@ public class Transition : MonoBehaviour
     public void ToggleInput(bool lockInput)
     {
         if (player != null) player.ToggleInput(true, lockInput);
+        else Time.timeScale = (lockInput) ? 0 : 1;
     }
 }

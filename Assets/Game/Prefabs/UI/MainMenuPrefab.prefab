@@ -25972,8 +25972,8 @@ MonoBehaviour:
   controlsPanel: {fileID: 3444018634886961423}
   creditsPanel: {fileID: 3444018635545951067}
   FirstLevel: Scenes/Levels/FireLevel
-  transition: {fileID: 8121604250993097330}
-  transitionDelay: 2
+  transition: {fileID: 2583603546456222219}
+  transitionDelay: 1
 --- !u!1 &3444018636708688439
 GameObject:
   m_ObjectHideFlags: 0
@@ -32231,11 +32231,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59570ed225034174091d07fb815f032b, type: 3}
---- !u!95 &8121604250993097330 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 237540569628140003, guid: 59570ed225034174091d07fb815f032b, type: 3}
+--- !u!114 &2583603546456222219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5774908118675059098, guid: 59570ed225034174091d07fb815f032b, type: 3}
   m_PrefabInstance: {fileID: 8358212426165066641}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8413533596845f40b7e4282e13f303a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3528124401180298741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4830180530163963492, guid: 59570ed225034174091d07fb815f032b, type: 3}
