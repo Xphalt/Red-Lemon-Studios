@@ -101,8 +101,11 @@ public class GUI_Manager : MonoBehaviour
         {
             popUpTimer += Time.deltaTime;
 
-            relicPopUp.color = Color.Lerp(popUpColour, Color.clear, popUpTimer / popUpDuration);
-            foreach (Text text in popUpText) text.color = Color.Lerp(popUpTextColor, Color.clear, popUpTimer / popUpDuration);
+            if (popUpTimer > popUpDuration / 2)
+            {
+                relicPopUp.color = Color.Lerp(popUpColour, Color.clear, (popUpTimer - popUpDuration / 2) * 2);
+                foreach (Text text in popUpText) text.color = Color.Lerp(popUpTextColor, Color.clear, (popUpTimer - popUpDuration / 2) * 2);
+            }
 
             if (popUpTimer > popUpDuration)
             {
