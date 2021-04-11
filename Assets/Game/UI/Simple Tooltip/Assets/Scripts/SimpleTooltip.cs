@@ -134,6 +134,6 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnDisable()
     {
-        tooltipController.HideTooltip();
+        HideTooltip();
     }
 }
