@@ -9,6 +9,9 @@ public class Main_Menu : MonoBehaviour
     public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
+    public Animator transition;
+    public float transitionDelay;
+
     private void Awake()
     {
         SaveManager.LoadFromFile();
@@ -39,10 +42,17 @@ public class Main_Menu : MonoBehaviour
         {
             SaveManager.ClearSaves();
             SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
-            SceneManager.LoadScene(FirstLevel);
+            StartCoroutine(LoadLevel(FirstLevel));
         }
         else
-            SceneManager.LoadScene(SaveManager.GetInt("LastSavedScene"));
+            StartCoroutine(LoadLevel(SaveManager.GetString("LastSavedScene")));
+    }
+
+    public IEnumerator LoadLevel(string level)
+    {
+        transition.SetTrigger("exitScene");
+        yield return new WaitForSeconds(transitionDelay);
+        SceneManager.LoadScene(level);
     }
 
     public void ExitScene()
