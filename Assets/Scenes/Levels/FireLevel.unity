@@ -7386,10 +7386,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1729546070, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: SFXVolumes.Array.data[10]
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1994182984, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: arenaSpawnTrigger
       value: 
@@ -7554,10 +7550,6 @@ PrefabInstance:
       propertyPath: ArenaName
       value: Fire
       objectReference: {fileID: 0}
-    - target: {fileID: 3086964879591648997, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: resetArena
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3331455516436599721, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7662,10 +7654,6 @@ PrefabInstance:
       propertyPath: relic
       value: 
       objectReference: {fileID: 246312079}
-    - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: AutoFind
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4947084528858620763, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: endRelic
       value: 
@@ -7822,19 +7810,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 4.2000732
       objectReference: {fileID: 0}
-    - target: {fileID: 6418219318967339154, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: infoLeft
-      value: '"----------------------------------------------
-
-        "Effect: Create
-        pillar to launch from.
-
-        "Press Q for more information.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6418219318967339154, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: simpleTooltipStyle
-      value: 
-      objectReference: {fileID: 11400000, guid: a104288cd74ebc84d80f27ae9b51d26c, type: 2}
     - target: {fileID: 6483202905268888935, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: inArena
       value: 1
@@ -7849,10 +7824,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7842347551125480904, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8045011856406757710, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
-      propertyPath: inArena
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8124744285331806304, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
