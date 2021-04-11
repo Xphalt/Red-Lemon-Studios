@@ -7,17 +7,27 @@ public class Transition : MonoBehaviour
 {
     public Animator transition;
     public float delay;
+    public float inputLockDelay;
+    public Player player;
+    public ArenaManager arenaManager;
 
-    public void LoadNextLevel()
+    private void Awake()
     {
-        //This loads the next scene by calling the next index of the build scenes
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(StartLevel());
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    public IEnumerator LoadLevel()
     {
+        player.ToggleInput(true);
         transition.SetTrigger("exitScene");
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(levelIndex);
+        yield return new WaitForSecondsRealtime(delay);
+        arenaManager.TransitionLevel();
+    }
+
+    IEnumerator StartLevel()
+    {
+        player.ToggleInput(true);
+        yield return new WaitForSecondsRealtime(inputLockDelay);
+        player.ToggleInput(false);
     }
 }

@@ -165,14 +165,17 @@ public class Player : CharacterBase
                 (currentRelic != null) ? currentRelic.relicType : ElementTypes.ElementTypesSize);
         else
             checkUIOverlap = userInterface.PausePlay();
-        //Prevents the player opening both panels at the same time.
-        if (checkUIOverlap)
-        {
-            paused = !paused;
 
-            Time.timeScale = (paused) ? 0 : 1;
-            rotationScript.SetCursorLock(!paused, paused);
-        }
+        //Prevents the player opening both panels at the same time.
+        if (checkUIOverlap) ToggleInput();
+    }
+
+    public void ToggleInput(bool forcePause=false)
+    {
+        paused = !paused || forcePause;
+
+        Time.timeScale = (paused) ? 0 : 1;
+        rotationScript.SetCursorLock(!paused, paused);
     }
 
     public void ToggleMute()

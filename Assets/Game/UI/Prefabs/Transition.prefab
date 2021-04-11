@@ -91,7 +91,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2c2e521e7d7904d439368a1b184c8a5d, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -123,7 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 237540569628140003}
-  delay: 0.5
+  delay: 1.5
+  inputLockDelay: 0.5
+  player: {fileID: 0}
+  arenaManager: {fileID: 0}
 --- !u!1 &8252158024723149178
 GameObject:
   m_ObjectHideFlags: 0

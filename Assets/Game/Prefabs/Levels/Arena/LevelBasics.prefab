@@ -1358,15 +1358,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3086964879591648997}
     - target: {fileID: 824670097328235198, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
-      propertyPath: delay
-      value: 0.5
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 5524924018667674289}
+    - target: {fileID: 824670097328235198, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: arenaManager
+      value: 
+      objectReference: {fileID: 4947084528858620763}
     - target: {fileID: 1755690108644345152, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1755690108644345152, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087015353841632080, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2452563536175001868, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
