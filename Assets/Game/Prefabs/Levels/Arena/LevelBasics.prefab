@@ -144,7 +144,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Relic Information
+  m_Text: 'Tool Information
 
 '
 --- !u!1 &4769180668670683522
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Click the buttons to find out more.
+  m_Text: Click the icons to find out more.
 --- !u!1001 &2198466363723774399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1468,7 +1468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2958121106303531915, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131798668767183178, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.2000732
       objectReference: {fileID: 0}
     - target: {fileID: 5607380537281203171, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_FontData.m_MaxSize
@@ -1532,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7684221974233466290, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8638580073068328012, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1549,10 +1553,6 @@ PrefabInstance:
     - target: {fileID: 8638580073068328012, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8952956088724332019, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -3.3001099
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}

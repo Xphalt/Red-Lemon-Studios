@@ -27,13 +27,17 @@ public class GUI_Manager : MonoBehaviour
 
     //Pause Menu variables
     public string homeMenu;
-    public GameObject pausePanel, toolbarPanel, controlsPanel, deathScreen, completeScreen;
+    public GameObject pausePanel, toolbarPanel, controlsPanel, deathScreen, completeScreen, ammoButtonHighlight, relicButtonHighlight;
+
 
     //Toolbar Menu and Toolbar Menu
     [TextArea(1, 40)] public List<string> RelicDescription = new List<string>();
-    public Text RelicNameHolder, RelicInfoHolder;
+    [TextArea(1, 40)] public List<string> AmmoDescription = new List<string>();
+    public Text ToolNameHolder, ToolInfoHolder;
     public Image ImageHolder;
     public List<Sprite> relicSprite = new List<Sprite>();
+    private int toolNumber = 0;
+    private bool relicInfoType = true;
 
     public float healthBarFlashDuration;
     public Color healthBarFlashColour;
@@ -227,21 +231,38 @@ public class GUI_Manager : MonoBehaviour
     Tool bar view menu code
     ____________________________________________________________*/
 
-    public bool ShowToolBarMenu()
+    public bool ShowToolBarMenu(ElementTypes currentAmmo, ElementTypes currentRelic=ElementTypes.ElementTypesSize)
     {
         if (!pausePanel.activeSelf && !deathScreen.activeSelf && !completeScreen.activeSelf)
         {
             toolbarPanel.SetActive(!toolbarPanel.activeSelf);
+
+            if (toolbarPanel.activeSelf)
+            {
+                SetInfoType(relicInfoType);
+                if (relicInfoType && currentRelic != ElementTypes.ElementTypesSize) SetToolInfo((int)currentRelic);
+                else SetToolInfo((int)currentAmmo);
+            }
             return true;
         }
         return false;
     }
 
-    public void SetRelicInfo(int relicType)
+    public void SetToolInfo(int toolType=-1)
     {
-        RelicNameHolder.text = ((ElementTypes)relicType).ToString();
-        RelicInfoHolder.text = RelicDescription[relicType];
-        ImageHolder.sprite = relicSprite[relicType];
+        if (toolType == -1) toolType = toolNumber;
+        else toolNumber = toolType;
+        ToolNameHolder.text = ((ElementTypes)toolType).ToString();
+        ToolInfoHolder.text = (relicInfoType) ? RelicDescription[toolType] : AmmoDescription[toolType];
+        ImageHolder.sprite = relicSprite[toolType];
+    }
+
+    public void SetInfoType(bool toRelic)
+    {
+        relicInfoType = toRelic;
+        ammoButtonHighlight.SetActive(!toRelic);
+        relicButtonHighlight.SetActive(toRelic);
+        SetToolInfo();
     }
 
     public void ShowEndGame(bool dead)

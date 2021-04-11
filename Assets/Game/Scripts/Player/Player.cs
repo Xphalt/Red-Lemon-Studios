@@ -161,7 +161,8 @@ public class Player : CharacterBase
         bool checkUIOverlap;
 
         if (toolMenu)
-            checkUIOverlap = userInterface.ShowToolBarMenu();
+            checkUIOverlap = userInterface.ShowToolBarMenu(elementChanger.m_CurElement, 
+                (currentRelic != null) ? currentRelic.relicType : ElementTypes.ElementTypesSize);
         else
             checkUIOverlap = userInterface.PausePlay();
         //Prevents the player opening both panels at the same time.
