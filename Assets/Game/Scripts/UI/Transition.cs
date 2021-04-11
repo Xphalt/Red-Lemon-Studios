@@ -18,7 +18,7 @@ public class Transition : MonoBehaviour
 
     public IEnumerator LoadLevel()
     {
-        player.ToggleInput(true);
+        player.ToggleInput(true, true);
         transition.SetTrigger("exitScene");
         yield return new WaitForSecondsRealtime(delay);
         arenaManager.TransitionLevel();
@@ -26,8 +26,8 @@ public class Transition : MonoBehaviour
 
     IEnumerator StartLevel()
     {
-        player.ToggleInput(true);
+        player.ToggleInput(true, true);
         yield return new WaitForSecondsRealtime(inputLockDelay);
-        player.ToggleInput(false);
+        player.ToggleInput(true, false);
     }
 }

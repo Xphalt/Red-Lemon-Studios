@@ -170,10 +170,11 @@ public class Player : CharacterBase
         if (checkUIOverlap) ToggleInput();
     }
 
-    public void ToggleInput(bool forcePause=false)
+    public void ToggleInput(bool forcePause=false, bool newPause=false)
     {
-        paused = !paused || forcePause;
-
+        if (forcePause) paused = newPause;
+        else paused = !paused;
+        print(paused);
         Time.timeScale = (paused) ? 0 : 1;
         rotationScript.SetCursorLock(!paused, paused);
     }
