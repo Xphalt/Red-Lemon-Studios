@@ -174,7 +174,6 @@ public class Player : CharacterBase
     {
         if (forcePause) paused = newPause;
         else paused = !paused;
-        print(paused);
         Time.timeScale = (paused) ? 0 : 1;
         rotationScript.SetCursorLock(!paused, paused);
     }
