@@ -11,6 +11,7 @@ public class CharacterBase : MonoBehaviour
     public GameObject weapon = null;
     
     public bool canFly = false;
+    public List<string> dontJumpFrom = new List<string>();
 
     public float jumpSpeed;
     public float gravityMult = 1;
@@ -139,7 +140,9 @@ public class CharacterBase : MonoBehaviour
         //    }
         //}
 
-        isGrounded = Physics.Raycast(new Ray(transform.position, Vector3.down), floorDistance);
+        if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, floorDistance)) isGrounded = !dontJumpFrom.Contains(hit.transform.tag);
+        else isGrounded = false;
+
         if (isGrounded && !jumping) currentJumps = 0;
         else currentJumps = Mathf.Max(currentJumps, 1);
     }
