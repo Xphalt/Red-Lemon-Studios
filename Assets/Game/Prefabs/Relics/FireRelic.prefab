@@ -578,7 +578,7 @@ MonoBehaviour:
   dashSpeed: 100
   dashDuration: 0.35
   postDashMomentum: 0.1
-  damage: 25
+  damage: 15
 --- !u!136 &6988532098657201682
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -608,8 +608,8 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: a104288cd74ebc84d80f27ae9b51d26c, type: 2}
   infoLeft: '"----------------------------------------------
 
-    "Effect: Dash
-    in direction of movement.
+    "Effect: Dash in
+    direction of movement.
 
     "Press Q for more information.'
   infoRight: ~Fire

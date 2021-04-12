@@ -107,16 +107,16 @@ public class EnemyFire : Enemy
 
     public void Explode()
     {
-        if (canExplode && GetDistance() < explosionRadius)
+        if (canExplode)
         {
-            playerScript.TakeDamage(explosionDamage);
-            sfxScript.PlaySFX3D(explodeSound, transform.position);
+            if (GetDistance() < explosionRadius) playerScript.TakeDamage(explosionDamage);
 
+            sfxScript.PlaySFX3D(explodeSound, transform.position);
             explosion.SetActive(true);
             explosion.transform.SetParent(null);
             explosion.GetComponent<FireExplosion>().parent = gameObject.transform;
-            gameObject.SetActive(false);
         }
+        gameObject.SetActive(false);
         killed = true;
     }
 

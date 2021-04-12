@@ -159,7 +159,7 @@ public class GUI_Manager : MonoBehaviour
     public void ShowRelicPopUp(string relicType)
     {
         relicPopUp.gameObject.SetActive(true);
-        popUpText[0].text = relicType + " Collected";
+        popUpText[0].text = relicType + " Relic Collected";
         popUpActive = true;
         popUpTimer = 0;
 
