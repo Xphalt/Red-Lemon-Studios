@@ -208,6 +208,16 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    public virtual void Immortalise()
+    {
+        immortal = true;
+    }
+
+    public virtual void Mortalise()
+    {
+        immortal = false;
+    }
+
     public virtual void Die()
     {
         curHealth = 0;

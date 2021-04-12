@@ -45,6 +45,8 @@ public class GUI_Manager : MonoBehaviour
     private float healthBarFlashTimer = 0;
     private bool healthBarFlashed = false;
 
+    public Color invulnerableColour;
+
     public List<Image> crosshair;
     public float crossHighlightOpacity;
     public float crossDefaultOpacity;
@@ -108,12 +110,12 @@ public class GUI_Manager : MonoBehaviour
             {
                 relicPopUp.color = Color.Lerp(popUpColour, Color.clear, (popUpTimer - popUpDuration / 2) * 2);
                 foreach (Text text in popUpText) text.color = Color.Lerp(popUpTextColor, Color.clear, (popUpTimer - popUpDuration / 2) * 2);
-            }
 
-            if (popUpTimer > popUpDuration)
-            {
-                popUpActive = false;
-                relicPopUp.gameObject.SetActive(false);
+                if (popUpTimer > popUpDuration)
+                {
+                    popUpActive = false;
+                    relicPopUp.gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -136,6 +138,16 @@ public class GUI_Manager : MonoBehaviour
             healthBarFill.color = healthBarFlashColour;
             healthBarFlashed = true;
         }
+    }
+
+    public void SetInvulnerable()
+    {
+        healthBarFill.color = invulnerableColour;
+    }
+
+    public void EndInvulnerable()
+    {
+        healthBarFill.color = healthBarColour;
     }
 
     public void ShowHit()

@@ -61,7 +61,7 @@ public class RelicEarth : RelicBase
             // use start scale if pillar is to appear at players feet regardless of vertical position
 
             pillarScript.Activate(0, hit.point);
-            characterScript.immortal = true;
+            characterScript.Immortalise();
 
             pillarTimer = 0;
             readyToUse = false;
@@ -81,7 +81,7 @@ public class RelicEarth : RelicBase
 
         pillar.SetActive(false);
 
-        characterScript.immortal = false;
+        characterScript.Mortalise();
         characterScript.EndShift();
     }
 }

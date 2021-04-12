@@ -257,8 +257,24 @@ public class Player : CharacterBase
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         base.TakeDamage(damage);
-        sfxScript.PlaySFX2D(damageSound);
-        userInterface.UpdateHealth(curHealth, true);
+
+        if (!immortal)
+        {
+            sfxScript.PlaySFX2D(damageSound);
+            userInterface.UpdateHealth(curHealth, true);
+        }
+    }
+
+    public override void Immortalise()
+    {
+        base.Immortalise();
+        userInterface.SetInvulnerable();
+    }
+
+    public override void Mortalise()
+    {
+        base.Mortalise();
+        userInterface.EndInvulnerable();
     }
 
     public override void Die()

@@ -56,7 +56,7 @@ public class RelicFire : RelicBase
 
         characterScript.Shift(dashDist, dashDuration, postDashMomentum);
         characterScript.impactDamage = damage;
-        characterScript.immortal = true;
+        characterScript.Immortalise();
 
         inUse = true;
         readyToUse = false;
@@ -73,6 +73,6 @@ public class RelicFire : RelicBase
         base.EndAbility();
         dashTimer = 0;
         characterScript.impactDamage = 0;
-        characterScript.immortal = false;
+        characterScript.Mortalise();
     }
 }

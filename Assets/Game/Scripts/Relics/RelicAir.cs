@@ -56,7 +56,7 @@ public class RelicAir : RelicBase
             readyToUse = false;
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
-            characterScript.immortal = true;
+            characterScript.Immortalise();
 
             startPos = user.transform.position;
 
@@ -84,7 +84,7 @@ public class RelicAir : RelicBase
                 hits = maxHits;
                 characterScript.movementLocked = false;
                 characterScript.impactDamage = 0;
-                characterScript.immortal = false;
+                characterScript.Mortalise();
                 base.EndAbility();
             }
         }
