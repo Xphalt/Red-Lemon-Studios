@@ -9,6 +9,7 @@ public class ArenaManager : MonoBehaviour
     public bool AutoFind = false;
 
     public Player player;
+    public GUI_Manager userInterface;
 
     public List<GameObject> enemies = new List<GameObject>();
     private List<Enemy> enemyScripts = new List<Enemy>();
@@ -100,26 +101,30 @@ public class ArenaManager : MonoBehaviour
             bCheckpointReady = bStartRelicCollected;
         }
 
-        else if (!bEnemiesCleared)
+        else if (!bEnemiesCleared && bWavesStarted)
         {
-            if (waveCounter < maxWaves && bWavesStarted)
+            if (waveCounter < maxWaves)
             {
                 waveTimer += Time.deltaTime;
+                userInterface.UpdateWaveTimer(Mathf.CeilToInt(waveDelay - waveTimer));
                 if (waveTimer > waveDelay) SpawnNextWave();
             }
 
-            bool enemiesRemaining = false;
+            int enemiesSpawned = 0;
+            int enemiesRemaining = 0;
+            bool enemiesCleared = true;
 
             foreach (Enemy enemy in enemyScripts)
             {
-                if (!enemy.killed)
+                if (!enemy.killed) enemiesCleared = false;
+                if (enemy.spawned)
                 {
-                    enemiesRemaining = true;
-                    break;
+                    enemiesSpawned++;
+                    if (!enemy.killed) enemiesRemaining++;
                 }
             }
 
-            if (!enemiesRemaining)
+            if (enemiesCleared)
             {
                 bEnemiesCleared = true;
                 if (endRelic != null)
@@ -130,7 +135,11 @@ public class ArenaManager : MonoBehaviour
                 bCheckpointReady = true;
 
                 sfxScript.PlaySFX2D(enemiesDeadSound);
+
+                userInterface.ClearEnemyCounter();
             }
+
+            else userInterface.UpdateEnemyCounter(enemiesRemaining, enemiesSpawned);
         }
 
         else if (!bEndRelicCollected)
@@ -165,9 +174,15 @@ public class ArenaManager : MonoBehaviour
                 sfxScript.PlaySFX2D(enemySpawnSound);
             }
 
-            bWavesStarted = true;
+            if (!bWavesStarted)
+            {
+                userInterface.ActivateEnemyCounter();
+                bWavesStarted = true;
+            }
             waveCounter++;
             waveTimer = 0;
+
+            userInterface.UpdateWaveCounter(waveCounter, maxWaves);
         }
     }
 
