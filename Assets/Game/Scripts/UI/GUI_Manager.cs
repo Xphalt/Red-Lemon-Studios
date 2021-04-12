@@ -180,6 +180,7 @@ public class GUI_Manager : MonoBehaviour
     {
         if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
         waveCounter.text = "Wave: " + waveNumber.ToString() + "/" + maxWaves.ToString();
+        waveTimer.text = "Next Wave In: -";
         //if (waveNumber == maxWaves) waveTimer.gameObject.SetActive(false);
     }
 
