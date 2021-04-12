@@ -60,6 +60,9 @@ public class GUI_Manager : MonoBehaviour
     private float popUpTimer = 0;
     private bool popUpActive = false;
 
+    public Text waveCounter, enemyCounter, waveTimer;
+    public Image enemyPanel;
+
     private void Awake()
     {
         healthBarColour = healthBarFill.color;
@@ -165,6 +168,44 @@ public class GUI_Manager : MonoBehaviour
 
         relicPopUp.color = popUpColour;
         foreach (Text text in popUpText) text.color = popUpTextColor;
+    }
+
+    public void UpdateEnemyCounter(int enemiesAlive, int enemiesSpawned)
+    {
+        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        enemyCounter.text = "Enemies Remaining: " + enemiesAlive.ToString() + "/" + enemiesSpawned.ToString();
+    }
+
+    public void UpdateWaveCounter(int waveNumber, int maxWaves)
+    {
+        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        waveCounter.text = "Wave: " + waveNumber.ToString() + "/" + maxWaves.ToString();
+        //if (waveNumber == maxWaves) waveTimer.gameObject.SetActive(false);
+    }
+
+    public void UpdateWaveTimer(int timer)
+    {
+        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        waveTimer.text = "Next Wave In: " + timer.ToString();
+    }
+
+    public void ActivateEnemyCounter()
+    {
+        if (!enemyPanel.gameObject.activeSelf)
+        {
+            enemyPanel.gameObject.SetActive(true);
+            enemyCounter.gameObject.SetActive(true);
+            waveCounter.gameObject.SetActive(true);
+            waveTimer.gameObject.SetActive(true);
+        }
+    }
+
+    public void ClearEnemyCounter()
+    {
+        enemyPanel.gameObject.SetActive(false);
+        enemyCounter.gameObject.SetActive(false);
+        waveCounter.gameObject.SetActive(false);
+        waveTimer.gameObject.SetActive(false);
     }
 
     /*__________________________________________________________
