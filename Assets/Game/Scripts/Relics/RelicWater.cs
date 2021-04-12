@@ -51,17 +51,12 @@ public class RelicWater : RelicBase
     {
         if (!base.Activate()) return false;
 
-        inUse = true;
-        readyToUse = false;
-
-        characterScript.Immortalise();
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
-
-        sfxScript.PlaySFX2D(activateSound);
-
+        
         healTickTimer = healTickInterval;
-        if (myAnim) myAnim.SetTrigger("Activate");
+
+        SetActive();
 
         return true;
     }

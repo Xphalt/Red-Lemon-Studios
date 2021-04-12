@@ -52,17 +52,12 @@ public class RelicAir : RelicBase
             characterRigid.useGravity = false;
             characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
 
-            inUse = true;
-            readyToUse = false;
+            SetActive();
+
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
-            characterScript.Immortalise();
 
             startPos = user.transform.position;
-
-            if (myAnim) myAnim.SetTrigger("Activate");
-
-            sfxScript.PlaySFX2D(activateSound);
 
             return true;
         }

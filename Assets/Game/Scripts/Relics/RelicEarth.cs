@@ -61,14 +61,9 @@ public class RelicEarth : RelicBase
             // use start scale if pillar is to appear at players feet regardless of vertical position
 
             pillarScript.Activate(0, hit.point);
-            characterScript.Immortalise();
-
             pillarTimer = 0;
-            readyToUse = false;
-            inUse = true;
 
-            sfxScript.PlaySFX2D(activateSound);
-            if (myAnim) myAnim.SetTrigger("Activate");
+            SetActive();
                 
             return true;
         }

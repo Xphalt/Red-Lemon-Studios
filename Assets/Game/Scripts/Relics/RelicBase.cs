@@ -86,6 +86,17 @@ public class RelicBase : MonoBehaviour
         return readyToUse && !inUse; 
     }
 
+    public void SetActive()
+    {
+        inUse = true;
+        readyToUse = false;
+        if (myAnim) myAnim.SetTrigger("Activate");
+        sfxScript.PlaySFX2D(activateSound);
+        characterScript.Immortalise();
+
+        cooldownTimer = 0;
+    }
+
     virtual public void EndAbility()
     {
         inUse = false;

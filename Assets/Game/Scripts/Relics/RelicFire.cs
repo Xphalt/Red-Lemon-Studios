@@ -56,14 +56,8 @@ public class RelicFire : RelicBase
 
         characterScript.Shift(dashDist, dashDuration, postDashMomentum);
         characterScript.impactDamage = damage;
-        characterScript.Immortalise();
 
-        inUse = true;
-        readyToUse = false;
-
-        sfxScript.PlaySFX2D(activateSound);
-
-        if (myAnim) myAnim.SetTrigger("Activate");
+        SetActive();
 
         return true;
     }

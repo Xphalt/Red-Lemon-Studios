@@ -148,9 +148,10 @@ MonoBehaviour:
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
   canFly: 0
+  dontJumpFrom: []
   jumpSpeed: 15
   gravityMult: 2
-  floorDistance: 1
+  floorDistance: 1.1
   airControl: 0.025
   maxHealth: 150
   knockbackRecovery: 0
