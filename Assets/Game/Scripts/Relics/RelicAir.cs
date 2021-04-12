@@ -12,7 +12,7 @@ public class RelicAir : RelicBase
     private Vector3 grappleDir;
     public float grappleSpeed = 5;
     public float grappleSwing = 1;
-    public float bounceForce = 500;
+    public float bounceSpeed = 10;
     public float damage = 10;
 
     private Vector3 startPos;
@@ -34,7 +34,7 @@ public class RelicAir : RelicBase
         if (inUse)
         {
             if (grappleSwing < 1) characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
-            if ((user.transform.position - startPos).magnitude > grappleRange || (characterScript.isGrounded && grappleDir.y < 0)) EndAbility();
+            if ((user.transform.position - startPos).magnitude > grappleRange) EndAbility();
         }
     }
 
@@ -48,6 +48,8 @@ public class RelicAir : RelicBase
             RaycastHit target = grappleHits[0];
 
             grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
+
+            if (characterScript.isGrounded && grappleDir.y < 0) return false;
 
             characterRigid.useGravity = false;
             characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
@@ -74,12 +76,10 @@ public class RelicAir : RelicBase
             {
                 characterRigid.useGravity = true;
 
-                characterRigid.AddForce(Vector3.up * bounceForce);
-
+                characterRigid.velocity = new Vector3(characterRigid.velocity.x, bounceSpeed, characterRigid.velocity.z);
                 hits = maxHits;
                 characterScript.movementLocked = false;
                 characterScript.impactDamage = 0;
-                characterScript.Mortalise();
                 base.EndAbility();
             }
         }

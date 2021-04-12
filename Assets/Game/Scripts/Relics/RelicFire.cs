@@ -67,6 +67,5 @@ public class RelicFire : RelicBase
         base.EndAbility();
         dashTimer = 0;
         characterScript.impactDamage = 0;
-        characterScript.Mortalise();
     }
 }

@@ -68,7 +68,6 @@ public class RelicWater : RelicBase
         healStartTimer = 0;
         healTickTimer = 0;
 
-        characterScript.Mortalise();
         speedMultiplier = defaultSpeedMultiplier;
         characterScript.ActivatePassives();
     }

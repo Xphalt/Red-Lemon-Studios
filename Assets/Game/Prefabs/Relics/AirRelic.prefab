@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 5858754362478887910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.0225563, y: -2.38, z: -20.788593}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 3045606476142979153}
   - {fileID: 1562111226477061362}
@@ -265,7 +265,7 @@ MonoBehaviour:
   grappleRange: 100
   grappleSpeed: 5
   grappleSwing: 1
-  bounceForce: 500
+  bounceSpeed: 10
   damage: 10
   maxHits: 1
 --- !u!114 &420010516781823595

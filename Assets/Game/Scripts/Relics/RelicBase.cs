@@ -100,6 +100,7 @@ public class RelicBase : MonoBehaviour
     virtual public void EndAbility()
     {
         inUse = false;
+        characterScript.Mortalise();
     }
 
     public void Cooldown()

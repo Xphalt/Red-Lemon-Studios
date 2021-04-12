@@ -76,7 +76,6 @@ public class RelicEarth : RelicBase
 
         pillar.SetActive(false);
 
-        characterScript.Mortalise();
         characterScript.EndShift();
     }
 }
