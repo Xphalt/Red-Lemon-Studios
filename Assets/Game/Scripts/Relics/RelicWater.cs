@@ -54,6 +54,7 @@ public class RelicWater : RelicBase
         inUse = true;
         readyToUse = false;
 
+        characterScript.immortal = true;
         speedMultiplier = inUseSpeedMultiplier;
         characterScript.ActivatePassives();
 
@@ -72,6 +73,7 @@ public class RelicWater : RelicBase
         healStartTimer = 0;
         healTickTimer = 0;
 
+        characterScript.immortal = false;
         speedMultiplier = defaultSpeedMultiplier;
         characterScript.ActivatePassives();
     }
