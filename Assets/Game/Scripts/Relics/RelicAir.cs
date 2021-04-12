@@ -34,7 +34,7 @@ public class RelicAir : RelicBase
         if (inUse)
         {
             if (grappleSwing < 1) characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
-            if ((user.transform.position - startPos).magnitude > grappleRange) EndAbility();
+            if ((user.transform.position - startPos).magnitude > grappleRange || (characterScript.isGrounded && grappleDir.y < 0)) EndAbility();
         }
     }
 
@@ -48,7 +48,6 @@ public class RelicAir : RelicBase
             RaycastHit target = grappleHits[0];
 
             grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
-            if (characterScript.isGrounded && grappleDir.y < 0) return false;
 
             characterRigid.useGravity = false;
             characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
