@@ -17,10 +17,9 @@ public class HealthPickup : PickUpBase
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.TryGetComponent(out Player player))
         {
-            other.gameObject.GetComponent<Player>().AddHealth(RestoreValue);
-            Collect();
+            if (player.AddHealth(RestoreValue)) Collect();
         }
     }
 }

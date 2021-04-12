@@ -19,10 +19,9 @@ public class AmmoPickup : PickUpBase
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.TryGetComponent(out Player player))
         {
-            other.gameObject.GetComponent<Player>().AddAmmo(AmmoValue, Type);
-            Collect();
+            if (player.AddAmmo(AmmoValue, Type)) Collect();
         }
     }
 }

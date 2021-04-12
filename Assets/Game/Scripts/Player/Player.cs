@@ -280,16 +280,17 @@ public class Player : CharacterBase
         userInterface.ShowEndGame(false);
     }
 
-    public override void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
+    public override bool AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
     {
-        if (cost == 0) base.AddHealth(value);
-        else if (Ammo[costType] >= cost && curHealth < maxHealth)
+        if ((costType == ElementTypes.ElementTypesSize) ? true : Ammo[costType] >= cost)
         {
-            base.AddHealth(value);
-            SubstractAmmo(cost, costType);
+            if (!base.AddHealth(value)) return false;
+            if (costType != ElementTypes.ElementTypesSize) SubstractAmmo(cost, costType);
+            userInterface.UpdateHealth(curHealth);
+            return true;
         }
-
-        userInterface.UpdateHealth(curHealth);
+        
+        return false;
     }
 
     /*_______________________________________________________________________________________________________________
@@ -307,8 +308,9 @@ public class Player : CharacterBase
         if (elementChanger.m_CurElement == type) userInterface.UpdateAmmoCount(Ammo[type]);
     }
 
-    public void AddAmmo(int value, ElementTypes type)
+    public bool AddAmmo(int value, ElementTypes type)
     {
+        if (Ammo[type] >= maxAmmo) return false;
         Ammo[type] += value;
 
         if (Ammo[type] > maxAmmo)
@@ -317,6 +319,8 @@ public class Player : CharacterBase
         }
 
         if (elementChanger.m_CurElement == type) userInterface.UpdateAmmoCount(Ammo[type]);
+
+        return true;
     }
 
     public bool AmmoCheck(int requiredAmount = 1)

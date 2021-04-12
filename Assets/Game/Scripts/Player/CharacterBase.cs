@@ -211,13 +211,17 @@ public class CharacterBase : MonoBehaviour
         killed = true;
     }
 
-    public virtual void AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
+    public virtual bool AddHealth(float value, int cost=0, ElementTypes costType=ElementTypes.ElementTypesSize)
     {
+        if (curHealth >= maxHealth) return false;
+
         curHealth += value;
         if (curHealth > maxHealth)
         {
             curHealth = maxHealth;
         }
+
+        return true;
     }
 
     public virtual bool IsPlayer() 
