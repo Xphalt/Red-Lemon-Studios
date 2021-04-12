@@ -67,10 +67,12 @@ public class RelicBase : MonoBehaviour
         characterRigid = user.GetComponent<Rigidbody>();
         readyToUse = true;
         transform.localRotation = collectedRotation;
-        gameObject.GetComponent<ParticleSystem>().Clear();
-        var em = gameObject.GetComponent<ParticleSystem>().emission;
+
+        ParticleSystem particles = gameObject.GetComponent<ParticleSystem>();
+        particles.Clear();
+        ParticleSystem.EmissionModule em = particles.emission;
         em.enabled = false;
-        gameObject.GetComponent<ParticleSystem>().Stop();
+        particles.Stop();
     }
 
     public virtual void Update()
