@@ -77,6 +77,7 @@ public class GUI_Manager : MonoBehaviour
     private void Start()
     {
         pausePanel.SetActive(false);
+        transition.gameObject.SetActive(true);
     }
 
     private void Update()
