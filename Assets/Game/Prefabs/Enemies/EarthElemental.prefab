@@ -139,8 +139,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 7.176758
-  m_Height: 19.646553
+  m_Radius: 10
+  m_Height: 20
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &715742278670370775
@@ -216,8 +216,8 @@ MonoBehaviour:
   sentryMode: 0
   chaseSpeed: 3
   patrolSpeed: 2
-  playerDetectionRadius: 50
-  wallDetectionRadius: 5
+  playerDetectionRadius: 100
+  wallDetectionRadius: 2
   rollSpeed: 15
   rollDuration: 1
   rollDamage: 15

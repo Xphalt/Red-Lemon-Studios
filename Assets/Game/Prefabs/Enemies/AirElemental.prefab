@@ -802,6 +802,7 @@ MonoBehaviour:
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 4507703052418591449}
   canFly: 0
+  dontJumpFrom: []
   jumpSpeed: 0
   gravityMult: 1
   floorDistance: 3
@@ -828,7 +829,6 @@ MonoBehaviour:
   patrolSpeed: 3
   playerDetectionRadius: 100
   wallDetectionRadius: 2
-  weaponRange: 30
   stationaryZone: 0.25
   attackSound: AirAttack
 --- !u!82 &6205449447219901066
@@ -1306,6 +1306,10 @@ PrefabInstance:
       value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: range
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: GunPos
       value: 
       objectReference: {fileID: 1206424234409392939}
@@ -1316,10 +1320,6 @@ PrefabInstance:
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: ShootForce
       value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
-      propertyPath: ShootSpeed
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: soundNames.Array.size

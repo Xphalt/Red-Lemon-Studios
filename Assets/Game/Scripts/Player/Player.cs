@@ -15,7 +15,7 @@ public class Player : CharacterBase
 
     public float runSpeed;
 
-    private float shootTargetDistance;
+    public float shootTargetDistance = 0;
     public int maxAmmo;
 
     private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
@@ -42,7 +42,7 @@ public class Player : CharacterBase
         if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
 
-        shootTargetDistance = shooter.range;
+        if (shootTargetDistance == 0) shootTargetDistance = shooter.range;
 
         /*______________________________________________________________________________________
         User Interface  initialisation

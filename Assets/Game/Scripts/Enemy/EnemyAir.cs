@@ -5,8 +5,6 @@ using static EnumHelper;
 
 public class EnemyAir : Enemy
 {
-    public float weaponRange;
-
     public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     private float minWeaponRange; //Point at which enemy runs away^
 
@@ -22,7 +20,7 @@ public class EnemyAir : Enemy
         weakAgainst = ElementTypes.Fire;
         strongAgainst = ElementTypes.Earth;
 
-        minWeaponRange = weaponRange * (1 - stationaryZone);
+        minWeaponRange = shooter.range * (1 - stationaryZone);
     }
 
     public override void Update()
@@ -30,13 +28,13 @@ public class EnemyAir : Enemy
         base.Update();
 
         float targetDistance = GetDistance();
-        bool inAttackRange = targetDistance < weaponRange;
+        bool inAttackRange = targetDistance < shooter.range;
 
         if (!stunned)
         {
             if (!CanSeePlayer() && !sentryMode) movementState = EnemyStates.Patrolling;
             //!= is equivalent of XOR
-            else if ((targetDistance > weaponRange != targetDistance < minWeaponRange) && !runTooFar)
+            else if ((targetDistance > shooter.range != targetDistance < minWeaponRange) && !runTooFar)
             {
                 if (inAttackRange) movementState = EnemyStates.Fleeing;
                 else movementState = EnemyStates.Chasing;
