@@ -14,8 +14,8 @@ public class Player : CharacterBase
     public PlayerRotation rotationScript = null;
 
     public float runSpeed;
-    [Tooltip("How far away is the crosshair")]
-    public float shootTargetDistance;
+
+    private float shootTargetDistance;
     public int maxAmmo;
 
     private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
@@ -41,6 +41,8 @@ public class Player : CharacterBase
         if (elementChanger == null) elementChanger = weapon.GetComponent<Elements>();
         if (rotationScript == null) rotationScript = GetComponent<PlayerRotation>();
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
+
+        shootTargetDistance = shooter.range;
 
         /*______________________________________________________________________________________
         User Interface  initialisation

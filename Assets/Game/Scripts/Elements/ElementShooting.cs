@@ -38,6 +38,7 @@ public class ElementShooting : MonoBehaviour
     private Dictionary<ElementTypes, string> shootSoundsDictionary = new Dictionary<ElementTypes, string>();
 
     public float ShootSpeed;
+    public float range;
 
     private void Start()
     {
@@ -70,7 +71,7 @@ public class ElementShooting : MonoBehaviour
 
         if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX3D(shootSoundsDictionary[shotType], GunPos.transform.position);
 
-        Destroy(newBullet, 2);
+        Destroy(newBullet, range/ShootSpeed);
     }
 
     //Assigns the correct prefab to the selected elemental ammo
