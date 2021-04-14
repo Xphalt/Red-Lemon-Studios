@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static EnumHelper;
@@ -72,6 +73,10 @@ public class CheckpointManager : MonoBehaviour
 
         foreach (Interactable_Items newInteractable in Resources.FindObjectsOfTypeAll<Interactable_Items>())
             if (newInteractable.gameObject.scene == thisScene) arenaInteractables.Add(newInteractable);
+
+        arenaEnemies = arenaEnemies.OrderBy(enemy => enemy.name).ToList();
+        arenaPickUps = arenaPickUps.OrderBy(pickup => pickup.name).ToList();
+        arenaInteractables = arenaInteractables.OrderBy(interactable => interactable.name).ToList();
     }
 
     private string GetCheckpointAtStart()
