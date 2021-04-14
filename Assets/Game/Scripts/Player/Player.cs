@@ -243,8 +243,15 @@ public class Player : CharacterBase
     public override void IncreaseCombo()
     {
         base.IncreaseCombo();
-        userInterface.ShowHit();
+        userInterface.ShowHit(hitCombo);
         sfxScript.PlaySFX2D(enemyHitSound);
+    }
+
+    public override void MissShot(float bulletDamage)
+    {
+        base.MissShot(bulletDamage);
+
+        userInterface.EndCombo();
     }
 
     public override Ray GetForwardRay()

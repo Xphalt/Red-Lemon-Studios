@@ -12,7 +12,14 @@ public class GUI_Manager : MonoBehaviour
     //Slider Bar variables
     public Slider healthSlider, relicSlider, ammoSlider;
     public Image healthBarFill, relicBarFill, ammoBarFill, relicBarBorder, ammoBarBorder;
-    public Text ammoText, relicText;
+    public Text ammoText, relicText, comboText;
+
+    public GameObject comboPanel;
+    public Color comboMinCol, comboMaxCol;
+    public int comboMinSize = 0;
+    public int comboSizeIncrease = 1;
+    public int maxCombo;
+    private int comboMaxSize;
 
     //Elemental Group variables
     public Image equipedAmmoIcon;
@@ -72,6 +79,10 @@ public class GUI_Manager : MonoBehaviour
 
         popUpColour = relicPopUp.color;
         popUpTextColor = popUpText[0].color;
+
+        if (comboMinSize == 0) comboMinSize = comboText.fontSize;
+        comboMaxSize = comboMinSize + comboSizeIncrease * maxCombo;
+        EndCombo();
     }
 
     private void Start()
@@ -151,10 +162,23 @@ public class GUI_Manager : MonoBehaviour
         healthBarFill.color = healthBarColour;
     }
 
-    public void ShowHit()
+    public void ShowHit(int combo)
     {
         secondCrosshair.SetActive(true);
         secondCrosshairTimer = 0;
+
+        if (combo > 0)
+        {
+            if (!comboPanel.activeSelf) comboPanel.SetActive(true);
+            comboText.text = "x " + combo.ToString();
+            comboText.color = Color.Lerp(comboMinCol, comboMaxCol, (float) combo / maxCombo);
+            comboText.fontSize = Mathf.Min(comboMinSize + combo * comboSizeIncrease, comboMaxSize);
+        }
+    }
+
+    public void EndCombo()
+    {
+        comboPanel.SetActive(false);
     }
 
     /*__________________________________________________________

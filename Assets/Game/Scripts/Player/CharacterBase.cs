@@ -187,16 +187,13 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void IncreaseCombo()
     {
-        if (hitCombo < maxCombo) hitCombo++;
+        hitCombo++;
     }
 
-    public void MissShot(float bulletDamage)
+    public virtual void MissShot(float bulletDamage)
     {
-        if (missPenalty)
-        {
-            TakeDamage(bulletDamage * (damagePercentRecievedOnMiss / 100));
-            hitCombo = 0;
-        }
+        if (missPenalty) TakeDamage(bulletDamage * (damagePercentRecievedOnMiss / 100));
+        hitCombo = 0;
     }
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
