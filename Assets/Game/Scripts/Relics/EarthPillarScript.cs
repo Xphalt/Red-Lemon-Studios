@@ -38,7 +38,7 @@ public class EarthPillarScript : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
         {
-            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(damage);
+            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(damage, ElementTypes.Earth);
 
             float momentumResidue = (collisionCharacter.team == team) ? userMomentumResidue : hostileMomentumResidue;
             collisionCharacter.Shift(Vector3.up * sizePerSecond * 2, lifeTime, momentumResidue);

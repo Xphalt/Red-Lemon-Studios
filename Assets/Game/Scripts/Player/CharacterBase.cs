@@ -110,9 +110,9 @@ public class CharacterBase : MonoBehaviour
             if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse) currentRelic.EndAbility();
         }
 
-        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter))
+        if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter) && impactDamage != 0)
         {
-            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(impactDamage);
+            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(impactDamage, currentRelic.relicType);
         }
     }
 
