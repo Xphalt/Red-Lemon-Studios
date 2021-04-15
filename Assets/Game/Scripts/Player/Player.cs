@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using static EnumHelper;
 using static SaveManager;
 
@@ -26,6 +27,7 @@ public class Player : CharacterBase
     public Elements elementChanger = null;
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
+    public AudioMixerSnapshot unpausedSound, pausedSound;
     public AudioListener audioListener;
     public AudioSource audioSource;
     public string ammoChangeSound;
@@ -178,6 +180,9 @@ public class Player : CharacterBase
         else paused = !paused;
         Time.timeScale = (paused) ? 0 : 1;
         rotationScript.SetCursorLock(!paused, paused);
+
+        if (paused) pausedSound.TransitionTo(0);
+        else unpausedSound.TransitionTo(0);
     }
 
     public void ToggleMute()
