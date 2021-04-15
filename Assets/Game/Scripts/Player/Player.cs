@@ -28,7 +28,6 @@ public class Player : CharacterBase
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
     public AudioMixerSnapshot unpausedSound, pausedSound;
-    public AudioListener audioListener;
     public AudioSource audioSource;
     public string ammoChangeSound;
     public string jumpSound;
@@ -69,7 +68,7 @@ public class Player : CharacterBase
         base.Start();
         team = Teams.Player;
 
-        if (audioListener) audioListener.enabled = SaveManager.GetBool("Muted");
+        AudioListener.volume = SaveManager.GetBool("Muted") ? 0 : 1;
         userInterface.HighlightSelectedAmmo();
         userInterface.ToggleSliderSelection(switchingRelics);
     }
@@ -195,8 +194,8 @@ public class Player : CharacterBase
 
     public void ToggleMute()
     {
-        if (audioListener) audioListener.enabled = !audioListener.enabled;
-        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
+        AudioListener.volume = (AudioListener.volume == 1) ? 0 : 1;
+        SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
     }
 
     public override void FixedUpdate()

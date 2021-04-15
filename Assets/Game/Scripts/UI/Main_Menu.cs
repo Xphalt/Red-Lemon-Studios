@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public AudioListener audioListener;
     public GameObject controlsPanel, creditsPanel;
     public string FirstLevel;
 
@@ -15,7 +14,7 @@ public class Main_Menu : MonoBehaviour
     private void Awake()
     {
         SaveManager.LoadFromFile();
-        if (audioListener && SaveManager.HasBool("Muted")) audioListener.enabled = SaveManager.GetBool("Muted");
+        if (SaveManager.HasBool("Muted")) AudioListener.volume = SaveManager.GetBool("Muted") ? 0 : 1;
     }
 
     private void Start()
@@ -32,8 +31,8 @@ public class Main_Menu : MonoBehaviour
 
     public void Mute()
     {
-        audioListener.enabled = !audioListener.enabled;
-        SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
+        AudioListener.volume = (AudioListener.volume == 1) ? 0 : 1;
+        SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
     }
 
     public void StartGame(bool newGame)
@@ -41,7 +40,7 @@ public class Main_Menu : MonoBehaviour
         if (newGame || !(SaveManager.HasString("LastOverallCheckpointID")))
         {
             SaveManager.ClearSaves();
-            SaveManager.UpdateSavedBool("Muted", audioListener.enabled);
+            SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
             StartCoroutine(transition.LoadLevel(FirstLevel));
         }
         else
