@@ -58,7 +58,7 @@ public class CharacterBase : MonoBehaviour
         if (weapon != null) shooter = weapon.GetComponent<ElementShooting>();
         if (characterRigid != null) characterRigid = GetComponent<Rigidbody>();
 
-        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
         characterRigid = GetComponent<Rigidbody>();
         curHealth = maxHealth;
     }
@@ -100,7 +100,7 @@ public class CharacterBase : MonoBehaviour
         {
             if (effectStats.team != team)
             {
-                TakeDamage(effectStats.damage);
+                TakeDamage(effectStats.damage, effectStats.damageType);
                 effectStats.RegisterHit();
             }
         }

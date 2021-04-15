@@ -44,12 +44,14 @@ public class RelicBase : MonoBehaviour
     public string collectionSound;
     public string activateSound;
 
-    public virtual void Awake() {}
+    public virtual void Awake() 
+    {
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
+        if (!myAnim) myAnim = GetComponent<Animator>();
+    }
 
     public virtual void Start()
     {
-        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
-        if (!myAnim) myAnim = GetComponent<Animator>();
         if (user == null)
         {
             if (inArena) gameObject.SetActive(spawned && !collected);

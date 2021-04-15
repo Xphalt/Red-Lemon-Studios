@@ -301,7 +301,7 @@ public class Enemy : CharacterBase
         colourChangeTimer = 0;
     }
 
-    public override void TakeDamage(float damage, ElementTypes damageType = ElementTypes.ElementTypesSize)
+    public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
 
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;

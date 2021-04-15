@@ -181,8 +181,16 @@ public class Player : CharacterBase
         Time.timeScale = (paused) ? 0 : 1;
         rotationScript.SetCursorLock(!paused, paused);
 
-        if (paused) pausedSound.TransitionTo(0);
-        else unpausedSound.TransitionTo(0);
+        if (paused)
+        {
+            pausedSound.TransitionTo(0);
+            sfxScript.PauseSFX();
+        }
+        else
+        {
+            unpausedSound.TransitionTo(0);
+            sfxScript.UnPauseSFX();
+        }
     }
 
     public void ToggleMute()

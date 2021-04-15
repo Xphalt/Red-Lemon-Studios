@@ -40,10 +40,10 @@ public class ElementShooting : MonoBehaviour
     public float ShootSpeed;
     public float range;
 
-    private void Start()
+    private void Awake()
     {
         wielderScript = wielder.GetComponent<CharacterBase>();
-
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
         for (int index = 0; index < BulletTypes.Count; index++)
         {
             BulletColourDictionary.Add(BulletTypes[index], BulletPrefabs[index]);
@@ -53,11 +53,8 @@ public class ElementShooting : MonoBehaviour
         {
             shootSoundsDictionary.Add(BulletTypes[index], soundNames[index]);
         }
-
-        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
     }
 
-    //TODO cache the rigidbody reference to boost performance
     public void Shoot(ElementTypes shotType, Vector3 target)
     {      
         CheckElement(shotType);

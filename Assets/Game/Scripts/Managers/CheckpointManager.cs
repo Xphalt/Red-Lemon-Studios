@@ -27,10 +27,12 @@ public class CheckpointManager : MonoBehaviour
     public List<Interactable_Items> arenaInteractables;
     public Player arenaPlayer;
     public ArenaManager arenaManager = null;
+    public SFXScript sfxScript = null;
 
     private void Awake()
     {
         if (arenaManager == null) arenaManager = GetComponent<ArenaManager>();
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
 
         thisScene = SceneManager.GetActiveScene();
         if (ArenaName == "") ArenaName = thisScene.name;
@@ -172,7 +174,7 @@ public class CheckpointManager : MonoBehaviour
         }
 
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bullet);
-        foreach (GameObject sfx in GameObject.FindGameObjectsWithTag("SFX")) Destroy(sfx);
+        sfxScript.StopSFX();
     }
 
     private void OnDestroy()

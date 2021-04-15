@@ -88,7 +88,7 @@ public class ArenaManager : MonoBehaviour
         }
         else bEndRelicCollected = true;
 
-        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
     }
 
     private void Update()

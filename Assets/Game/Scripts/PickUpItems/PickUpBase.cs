@@ -14,9 +14,13 @@ public class PickUpBase : MonoBehaviour
 
     public string collectionSound;
 
+    private void Awake()
+    {
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
+    }
+
     private void Start()
     {
-        if (sfxScript == null) sfxScript = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXScript>();
         gameObject.SetActive(spawned);
     }
 

@@ -19,6 +19,11 @@ public class Interactable_Items : MonoBehaviour
     public SFXScript sfxScript;
     public string destroySound;
 
+    private void Awake()
+    {
+        if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
+    }
+
     private void Start()
     {
         if (ammoDrops.Count == 0 || ammoDrops[0] == null)

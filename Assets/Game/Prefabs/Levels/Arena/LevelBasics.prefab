@@ -133,6 +133,7 @@ MonoBehaviour:
   arenaInteractables: []
   arenaPlayer: {fileID: 5524924018667674289}
   arenaManager: {fileID: 4947084528858620763}
+  sfxScript: {fileID: 1729546070}
 --- !u!114 &4947084528858620763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +179,10 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
+      propertyPath: sfxScript
+      value: 
+      objectReference: {fileID: 1729546070}
     - target: {fileID: 7338099962747303696, guid: b09967aba82277f4cb4dcb52d8018b68, type: 3}
       propertyPath: SFXManager
       value: 
@@ -1219,6 +1224,10 @@ PrefabInstance:
     - target: {fileID: 7497770797588044166, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633807410502228322, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -38.81421
       objectReference: {fileID: 0}
     - target: {fileID: 8563501291158682825, guid: 0f80000e8831ee8419d72bd5e7cd140e, type: 3}
       propertyPath: m_AnchorMax.x
