@@ -303,7 +303,6 @@ public class Enemy : CharacterBase
 
     public override void TakeDamage(float damage, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
-
         if (damageType == weakAgainst) damage *= weakAgainstIncrease;
         else if (damageType == strongAgainst) damage *= strongAgainstResist;
 
