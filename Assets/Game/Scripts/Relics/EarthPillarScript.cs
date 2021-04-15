@@ -12,14 +12,17 @@ public class EarthPillarScript : MonoBehaviour
     private float hostileMomentumResidue;
     internal Teams team;
 
+    public CharacterBase userScript = null;
+
     private List<CharacterBase> beenHit = new List<CharacterBase>();
 
-    public void Initialise(float pillarDamage, float growthRate, float pillarLifeTime, Teams userTeam, float userMomentum, float hostileMomentum)
+    public void Initialise(float pillarDamage, float growthRate, float pillarLifeTime, CharacterBase user, float userMomentum, float hostileMomentum)
     {
         damage = pillarDamage;
         sizePerSecond = growthRate;
         lifeTime = pillarLifeTime;
-        team = userTeam;
+        if (!userScript) userScript = user;
+        team = userScript.team;
         userMomentumResidue = userMomentum;
         hostileMomentumResidue = hostileMomentum;
     }
@@ -44,6 +47,7 @@ public class EarthPillarScript : MonoBehaviour
             if (collisionCharacter.team != team && !beenHit.Contains(collisionCharacter))
             {
                 collisionCharacter.TakeDamage(damage, ElementTypes.Earth);
+                userScript.IncreaseCombo();
                 beenHit.Add(collisionCharacter);
             }
 

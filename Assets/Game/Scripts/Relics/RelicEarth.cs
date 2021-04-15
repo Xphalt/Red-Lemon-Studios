@@ -47,7 +47,7 @@ public class RelicEarth : RelicBase
     public override void SetUser(GameObject newUser, bool playSound=false)
     {
         base.SetUser(newUser, playSound);
-        pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript.team, userMomentumResidue, hostileMomentumResidue);
+        pillarScript.Initialise(pillarDamage, sizePerSecond, pillarLifeTime, characterScript, userMomentumResidue, hostileMomentumResidue);
     }
 
     public override bool Activate()

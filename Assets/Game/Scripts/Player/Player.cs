@@ -247,7 +247,7 @@ public class Player : CharacterBase
     {
         if (AmmoCheck())
         {
-            shooter.Shoot(elementChanger.m_CurElement, (firstPersonCamera.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * shootTargetDistance)));
+            shooter.Shoot(elementChanger.m_CurElement, (firstPersonCamera.ViewportToWorldPoint(crosshairPos + Vector3.forward * shootTargetDistance)));
             SubstractAmmo(1, elementChanger.m_CurElement);
         }
     }

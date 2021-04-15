@@ -112,7 +112,11 @@ public class CharacterBase : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter) && impactDamage != 0)
         {
-            if (collisionCharacter.team != team) collisionCharacter.TakeDamage(impactDamage, (currentRelic != null) ? currentRelic.relicType : ElementTypes.ElementTypesSize);
+            if (collisionCharacter.team != team)
+            {
+                collisionCharacter.TakeDamage(impactDamage, (currentRelic != null) ? currentRelic.relicType : ElementTypes.ElementTypesSize);
+                IncreaseCombo();
+            }
         }
     }
 

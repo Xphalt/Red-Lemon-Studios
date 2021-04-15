@@ -56,12 +56,11 @@ public class ElementShooting : MonoBehaviour
     }
 
     public void Shoot(ElementTypes shotType, Vector3 target)
-    {      
+    {
         CheckElement(shotType);
         GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
         newBullet.GetComponent<Rigidbody>().velocity = (target - GunPos.transform.position).normalized * ShootSpeed;
         newBullet.transform.SetParent(null);
-
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
         newBulletInfo.Initialise(damage, wielderScript);
         newBulletInfo.sfxScript = sfxScript;
