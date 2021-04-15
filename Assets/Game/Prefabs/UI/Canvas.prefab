@@ -468,7 +468,7 @@ MonoBehaviour:
   transition: {fileID: 824670097328235198}
   RelicDescription:
   - "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases 10% per
-    hit\n\n\uF0A7-Reset combo and take 10% damage on miss"
+    hit (caps at double damage)\n\n\uF0A7-Reset combo and take 10% damage on miss"
   - "ACTIVE EFFECT: \nHeal over time at the cost of water ammo\n\nPASSIVE EFFECTS:\r\n\uF0A7+25%
     move speed when not in use\n\n\uF0A7-25% extra damage recieved "
   - "ACTIVE EFFECT: \nGrapple towards target (Cannot grapple through floor)\n\nPASSIVE
@@ -1126,7 +1126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16460928, y: 0.33069313}
   m_AnchorMax: {x: 0.8338235, y: 0.72184014}
-  m_AnchoredPosition: {x: 1, y: 4.92}
+  m_AnchoredPosition: {x: 1, y: 4.9200134}
   m_SizeDelta: {x: 13.099976, y: -11.730204}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7907871495215423674
@@ -2159,6 +2159,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 6302672113415482987, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_Text
+      value: "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases
+        10% per hit (caps at double damage)\n\n\uF0A7-Reset combo and take 10% damage
+        on miss"
+      objectReference: {fileID: 0}
     - target: {fileID: 6518967959878094871, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
