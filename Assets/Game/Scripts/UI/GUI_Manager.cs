@@ -16,9 +16,7 @@ public class GUI_Manager : MonoBehaviour
 
     public GameObject comboPanel;
     public Color comboMinCol, comboMaxCol;
-    public int comboMinSize = 0;
-    public int comboSizeIncrease = 1;
-    public int maxCombo;
+    public int comboMinSize = 0, comboSizeIncrease = 1, maxCombo, minCombo;
     private int comboMaxSize;
 
     //Elemental Group variables
@@ -55,8 +53,7 @@ public class GUI_Manager : MonoBehaviour
     public Color invulnerableColour;
 
     public List<Image> crosshair;
-    public float crossHighlightOpacity;
-    public float crossDefaultOpacity;
+    public float crossHighlightOpacity, crossDefaultOpacity;
     public GameObject secondCrosshair;
     public float secondCrosshairDuration;
     private float secondCrosshairTimer = 0;
@@ -167,7 +164,7 @@ public class GUI_Manager : MonoBehaviour
         secondCrosshair.SetActive(true);
         secondCrosshairTimer = 0;
 
-        if (combo > 0)
+        if (combo >= minCombo)
         {
             if (!comboPanel.activeSelf) comboPanel.SetActive(true);
             comboText.text = "x " + combo.ToString();

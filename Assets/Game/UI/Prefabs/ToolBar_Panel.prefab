@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 706957148371051552}
   m_Layer: 5
-  m_Name: diamond (5)
+  m_Name: Water Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 1.3997, y: -140.70004}
+  m_AnchoredPosition: {x: -0.000055194, y: -104}
   m_SizeDelta: {x: 451.6316, y: 180.7326}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4126288957385322388
@@ -376,7 +376,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1e594dbf305a7f44a9e81f80a97641bb, type: 3}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -458,19 +458,16 @@ MonoBehaviour:
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 1
-    m_AlignByGeometry: 0
+    m_Alignment: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Active effect: Dashing item \u2013 player dashes forward\t\r\n\nPassive
-    effects while equipped:\r\n\uF0A7\t+Damage continually increases with enemy hits,
-    which builds heat. When heat reaches threshold, damage can no longer increase.\r\n\uF0A7\t-If
-    shot is missed, reset heat, and damage the player slightly.\r\n\n\uF0A7(Extra
-    note: Dashing into enemies damages and knocks them away.)\r\n"
+  m_Text: "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases
+    10% per hit\n\n\uF0A7-Reset combo and take 10% damage on miss"
 --- !u!1 &2535175432557654321
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +724,8 @@ RectTransform:
   m_Children:
   - {fileID: 4505299052889486038}
   - {fileID: 8724751029211716244}
+  - {fileID: 1597862260955860725}
+  - {fileID: 3079160167019651631}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -894,7 +893,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GUI_Manager, Assembly-CSharp
-        m_MethodName: SetRelicInfo
+        m_MethodName: SetToolInfo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -914,7 +913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4017375747819768}
   m_Layer: 5
-  m_Name: diamond (6)
+  m_Name: Air Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,10 +1048,10 @@ RectTransform:
   m_Father: {fileID: 4505299052889486038}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.3999939, y: 279.3}
-  m_SizeDelta: {x: 451.63684, y: 180.73492}
+  m_AnchorMin: {x: 0.074305, y: 0.73476195}
+  m_AnchorMax: {x: 0.92721987, y: 0.94100004}
+  m_AnchoredPosition: {x: 0.8999939, y: -4.200012}
+  m_SizeDelta: {x: 4.636841, y: 7.7349243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1750836784447739679
 CanvasRenderer:
@@ -1102,7 +1101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8354847066887707325}
   m_Layer: 5
-  m_Name: diamond (4)
+  m_Name: Fire Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,10 +1161,10 @@ RectTransform:
   m_Father: {fileID: 4505299052889486038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.3999939, y: -106.20001}
-  m_SizeDelta: {x: 451.63684, y: 511.29126}
+  m_AnchorMin: {x: 0.074305, y: 0.06457143}
+  m_AnchorMax: {x: 0.92721987, y: 0.67876196}
+  m_AnchoredPosition: {x: 0.8999939, y: 1.7999878}
+  m_SizeDelta: {x: 4.636841, y: -4.70874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504667900679052604
 CanvasRenderer:
@@ -1359,6 +1358,87 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5188733813317946244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597862260955860725}
+  - component: {fileID: 7508389298137091360}
+  - component: {fileID: 7307994283688881450}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1597862260955860725
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5188733813317946244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 908035920577059827}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -374.82, y: -175}
+  m_SizeDelta: {x: 716.20557, y: 167.15515}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7508389298137091360
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5188733813317946244}
+  m_CullTransparentMesh: 0
+--- !u!114 &7307994283688881450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5188733813317946244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.078431375, g: 0.03529412, b: 0.03529412, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 33d7fab38fd7e1c49b6dd1108a92dd68, type: 3}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Element Information
+
+'
 --- !u!1 &5447829015753830918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0265625, y: 0.0795774}
   m_AnchorMax: {x: 0.5936668, y: 0.94900006}
-  m_AnchoredPosition: {x: -3.3000488, y: 1.7999268}
+  m_AnchoredPosition: {x: -3.2998047, y: 1.7999268}
   m_SizeDelta: {x: 2.4344482, y: -0.53881836}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6302793370899043592
@@ -1560,7 +1640,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GUI_Manager, Assembly-CSharp
-        m_MethodName: SetRelicInfo
+        m_MethodName: SetToolInfo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1805,7 +1885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6391656776699472049}
   m_Layer: 5
-  m_Name: diamond (3)
+  m_Name: Earth Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2029,7 +2109,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GUI_Manager, Assembly-CSharp
-        m_MethodName: SetRelicInfo
+        m_MethodName: SetToolInfo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2371,7 +2451,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GUI_Manager, Assembly-CSharp
-        m_MethodName: SetRelicInfo
+        m_MethodName: SetToolInfo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2456,6 +2536,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8178919689212066528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3079160167019651631}
+  - component: {fileID: 7072890723758521341}
+  - component: {fileID: 4935363791348109762}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3079160167019651631
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178919689212066528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.57484, y: 0.6544735, z: 1}
+  m_Children: []
+  m_Father: {fileID: 908035920577059827}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -367.37, y: -238}
+  m_SizeDelta: {x: 701.2977, y: 111.56138}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7072890723758521341
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178919689212066528}
+  m_CullTransparentMesh: 0
+--- !u!114 &4935363791348109762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178919689212066528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.078431375, g: 0.03529412, b: 0.03529412, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 33d7fab38fd7e1c49b6dd1108a92dd68, type: 3}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Click the icons to find out more.
 --- !u!1 &8536745988185254088
 GameObject:
   m_ObjectHideFlags: 0
