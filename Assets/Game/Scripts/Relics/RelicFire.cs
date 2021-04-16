@@ -47,7 +47,7 @@ public class RelicFire : RelicBase
     {
         if (!base.Activate()) return false;
 
-        Vector3 nonVerticalDirection = characterRigid.velocity;
+        Vector3 nonVerticalDirection = characterScript.targetDirection;
         nonVerticalDirection.y = 0;
 
         if (nonVerticalDirection == Vector3.zero) nonVerticalDirection = user.transform.forward;

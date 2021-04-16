@@ -50,7 +50,6 @@ public class ArenaManager : MonoBehaviour
     #endregion
 
     #region UnityCallbacks
-    //enemies in arenas are now moved to their spawn positions________________________________________
     private void Awake()
     {
         if (AutoFind)
@@ -147,24 +146,12 @@ public class ArenaManager : MonoBehaviour
             bEndRelicCollected = endRelicScript.collected;
             bCheckpointReady = bEndRelicCollected;
         }
-
-
-        //bool relicsRemaining = false; (In case of mulitple relics per arena)
-
-        //foreach (RelicBase relic in relics)
-        //{
-        //    if (relic.inArena && !relic.collected)
-        //    {
-        //        relicsRemaining = true;
-        //        break;
-        //    }
-        //}
     }
     #endregion
 
     public void SpawnNextWave()
     {
-        if (waveCounter < maxWaves && bStartRelicCollected) // && !bArenaComplete could possibly fix a bug
+        if (waveCounter < maxWaves && bStartRelicCollected)
         {
             for (int e = waveCounter * enemySpawnPos.Count; e < (waveCounter + 1) * enemySpawnPos.Count; e++)
             {

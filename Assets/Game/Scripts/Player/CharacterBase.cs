@@ -38,6 +38,7 @@ public class CharacterBase : MonoBehaviour
     internal List<RelicBase> relicList = new List<RelicBase>();
     internal RelicBase currentRelic = null;
     internal Vector3 shiftVector;
+    internal Vector3 targetDirection;
 
     protected bool missPenalty = false;
     protected bool jumping = false;
@@ -122,6 +123,7 @@ public class CharacterBase : MonoBehaviour
 
     public void SetVelocity(Vector3 newVelocity)
     {
+        targetDirection = newVelocity;
         if (!isGrounded)
         {
             newVelocity = Vector3.Lerp(characterRigid.velocity, newVelocity, airControl);
@@ -132,18 +134,6 @@ public class CharacterBase : MonoBehaviour
 
     protected void CheckGround()
     {
-        //RaycastHit[] floorHits = Physics.RaycastAll(new Ray(transform.position, Vector3.down), floorDistance);
-        //isGrounded = false;
-        //foreach (RaycastHit floorHit in floorHits)
-        //{
-        //    if (floorHit.transform.CompareTag("Floor"))
-        //    {
-        //        isGrounded = true;
-        //        hasJumpedTwice = false;
-        //        break;
-        //    }
-        //}
-
         if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, floorDistance)) isGrounded = !dontJumpFrom.Contains(hit.transform.tag);
         else isGrounded = false;
 
