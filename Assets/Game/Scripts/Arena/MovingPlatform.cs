@@ -18,7 +18,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(moveVelocity * Time.deltaTime); //Apologise for the translating but in this case is' easier to not have a rigidbody
+        transform.Translate(moveVelocity * Time.deltaTime); //Rigidbody is kinematic
         if ((transform.position - startPos).magnitude > maxMovement.magnitude) moveVelocity *= -1;
     }
 

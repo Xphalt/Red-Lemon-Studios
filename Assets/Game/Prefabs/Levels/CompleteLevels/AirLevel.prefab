@@ -86868,12 +86868,20 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886117876031500031, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3060726053828571330, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4bc804acf7b99ac4a84c44e38a6abe9f, type: 2}
     - target: {fileID: 3259877722277080636, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402515745362331550, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+      propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3450495027676124103, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
@@ -86968,6 +86976,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5878989108847839883, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7706177775187666018, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -86980,16 +86992,19 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 8136737794422561192, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8137102777937405763, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4bc804acf7b99ac4a84c44e38a6abe9f, type: 2}
-    m_RemovedComponents:
-    - {fileID: 886117876031500031, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
-    - {fileID: 3402515745362331550, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
-    - {fileID: 5878989108847839883, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
-    - {fileID: 8136737794422561192, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
-    - {fileID: 9017215419192964227, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+    - target: {fileID: 9017215419192964227, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2d73bbca473cdb4eaf04a301e9c7bd6, type: 3}
 --- !u!1 &8760889391115411226 stripped
 GameObject:

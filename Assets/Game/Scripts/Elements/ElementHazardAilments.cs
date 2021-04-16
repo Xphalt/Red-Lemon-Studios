@@ -15,6 +15,8 @@ using static EnumHelper;
 
 public class ElementHazardAilments : MonoBehaviour
 {
+    private Rigidbody myRigid;
+
     public bool hasEffect;
     public int damage;
     public ElementTypes damageType;
@@ -38,10 +40,15 @@ public class ElementHazardAilments : MonoBehaviour
 
     public bool changesColour = false;
 
-    public void Initialise(float weaponDamage, CharacterBase newUser, Vector3 spawn=new Vector3())
+    private void Awake()
+    {
+        myRigid = GetComponent<Rigidbody>();
+    }
+
+    public void Initialise(float weaponDamage, CharacterBase newUser, Vector3 moveVel=new Vector3(), Vector3 spawn=new Vector3())
     {
         spawnPoint = (spawn == new Vector3()) ? transform.position : spawn;
-
+        if (moveVel != new Vector3()) myRigid.velocity = moveVel;
         userScript = newUser;
         damage = Mathf.RoundToInt(weaponDamage * userScript.CalculateDamageMult());
         team = userScript.team;

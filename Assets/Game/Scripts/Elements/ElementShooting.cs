@@ -59,10 +59,9 @@ public class ElementShooting : MonoBehaviour
     {
         CheckElement(shotType);
         GameObject newBullet = Instantiate(ChosenBullet, GunPos.transform);
-        newBullet.GetComponent<Rigidbody>().velocity = (target - GunPos.transform.position).normalized * ShootSpeed;
         newBullet.transform.SetParent(null);
         ElementHazardAilments newBulletInfo = newBullet.GetComponent<ElementHazardAilments>();
-        newBulletInfo.Initialise(damage, wielderScript);
+        newBulletInfo.Initialise(damage, wielderScript, (target - GunPos.transform.position).normalized * ShootSpeed);
         newBulletInfo.sfxScript = sfxScript;
 
         if (shootSoundsDictionary.ContainsKey(shotType)) sfxScript.PlaySFX3D(shootSoundsDictionary[shotType], GunPos.transform.position);
