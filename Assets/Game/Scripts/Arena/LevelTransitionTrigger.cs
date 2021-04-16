@@ -15,7 +15,7 @@ public class LevelTransitionTrigger : MonoBehaviour
     {
         if (!active)
         {
-            audioSource.Pause();
+            if (audioSource.isPlaying) audioSource.Stop();
             active = arenaManager.bEnemiesCleared && arenaManager.bEndRelicCollected;
             if (active)
             {
@@ -27,7 +27,7 @@ public class LevelTransitionTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && active)
         {
             if (checkpointManager != null) checkpointManager.Save(checkpointManager.ArenaName + "End");
             arenaManager.TransitionLevel();

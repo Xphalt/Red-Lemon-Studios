@@ -43,6 +43,7 @@ public class CheckpointManager : MonoBehaviour
         resetArena = !SaveManager.HasString(ArenaName + "LastCheckpointID") || resetArena;
 
         if (!newGame) checkpointAtStart = GetCheckpointAtStart();
+        else if (SaveManager.HasBool("PlayerSaved")) SaveManager.ClearSaves();
 
         foreach (RelicBase arenarelic in arenaRelics) arenarelic.Awake();
 
@@ -167,7 +168,8 @@ public class CheckpointManager : MonoBehaviour
         {
             for (int r = 0; r < arenaRelics.Count; r++)
             {
-                if (loadArena || !arenaRelics[r].inArena) arenaRelics[r].LoadRelic(playerLoadID);
+                if (!arenaRelics[r].inArena) arenaRelics[r].LoadRelic(playerLoadID);
+                else if (loadArena) arenaRelics[r].LoadRelic(arenaLoadID);
             }
             arenaPlayer.LoadStats(playerLoadID, arenaLoadID);
             if (arenaLoadID.Contains("End")) arenaPlayer.transform.position = revisitSpawnPoint.position;

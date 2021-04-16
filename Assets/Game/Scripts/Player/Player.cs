@@ -444,6 +444,12 @@ public class Player : CharacterBase
         paused = false;
         characterRigid.velocity = Vector3.zero;
         if (shifting) EndShift();
+
+        if (hitCombo != 0)
+        {
+            hitCombo = 0;
+            userInterface.EndCombo();
+        }
     }
     #endregion
 }
