@@ -38,19 +38,35 @@ public class Interactable_Items : MonoBehaviour
     }
 
     public void OnCollisionEnter(Collision collision)
-    { //check if a bullet has collided
-        if (collision.gameObject.TryGetComponent(out ElementHazardAilments hitter))
+    {
+        if (collision.gameObject.TryGetComponent(out ElementHazardAilments bulletHit))
         {
-            hitter.RegisterHit();
-            destroyed = true;
+            bulletHit.RegisterHit();
             Drop(DropPercentage);
-            gameObject.SetActive(false);
-            sfxScript.PlaySFX3D(destroySound, transform.position);
+        }
+        else if (collision.gameObject.TryGetComponent(out CharacterBase characterHit))
+        {
+            if (characterHit.impactDamage > 0)
+            {
+                characterHit.IncreaseCombo();
+                Drop(DropPercentage);
+            }
+        }
+
+        else if (collision.gameObject.TryGetComponent(out EarthPillarScript pillar))
+        {
+            pillar.userScript.IncreaseCombo();
+            Drop(DropPercentage);
         }
     }
 
-    public void Drop(float value)
+    public void Drop(float value=-1)
     {
+        if (destroyed) return;
+        if (value == -1) value = DropPercentage;
+        destroyed = true;
+        gameObject.SetActive(false);
+        sfxScript.PlaySFX3D(destroySound, transform.position); 
         if (value <= ammoDropPercent)// drop ammo pickup
         {
             int ChosenType = Random.Range(0, ammoDrops.Count);//picks one to drop

@@ -146,12 +146,14 @@ public class GUI_Manager : MonoBehaviour
         {
             healthBarFill.color = healthBarFlashColour;
             healthBarFlashed = true;
+            healthBarFlashTimer = 0;
         }
     }
 
     public void SetInvulnerable()
     {
         healthBarFill.color = invulnerableColour;
+        healthBarFlashed = false;
     }
 
     public void EndInvulnerable()

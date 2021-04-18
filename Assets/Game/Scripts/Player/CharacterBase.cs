@@ -108,7 +108,16 @@ public class CharacterBase : MonoBehaviour
 
         if (currentRelic != null)
         {
-            if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse) currentRelic.EndAbility();
+            if (currentRelic.relicType == ElementTypes.Air && currentRelic.inUse)
+            {
+                if (collision.gameObject.TryGetComponent(out Interactable_Items interactable))
+                {
+                    IncreaseCombo();
+                    interactable.Drop();
+                }
+                currentRelic.EndAbility();
+            }
+
         }
 
         if (collision.gameObject.TryGetComponent(out CharacterBase collisionCharacter) && impactDamage != 0)
