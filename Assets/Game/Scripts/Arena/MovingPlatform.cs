@@ -21,9 +21,4 @@ public class MovingPlatform : MonoBehaviour
         transform.Translate(moveVelocity * Time.deltaTime); //Rigidbody is kinematic
         if ((transform.position - startPos).magnitude > maxMovement.magnitude) moveVelocity *= -1;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        moveVelocity *= -1;
-    }
 }
