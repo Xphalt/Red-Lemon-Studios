@@ -201,6 +201,13 @@ public class ArenaManager : MonoBehaviour
         bWavesStarted = SaveManager.GetBool(loadID + "WavesStarted");
         bEnemiesCleared = SaveManager.GetBool(loadID + "Complete");
         waveCounter = SaveManager.GetInt(loadID + "WaveCounter");
+
+        if (bWavesStarted && !bEnemiesCleared)
+        {
+            userInterface.ActivateEnemyCounter();
+            userInterface.UpdateWaveCounter(waveCounter, maxWaves);
+        }
+        else userInterface.ClearEnemyCounter();
     }
     #endregion
 }

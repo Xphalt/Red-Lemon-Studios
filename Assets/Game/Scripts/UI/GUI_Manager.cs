@@ -67,7 +67,7 @@ public class GUI_Manager : MonoBehaviour
     private bool popUpActive = false;
 
     public Text waveCounter, enemyCounter, waveTimer;
-    public Image enemyPanel;
+    public GameObject enemyPanel;
 
     private void Awake()
     {
@@ -206,13 +206,13 @@ public class GUI_Manager : MonoBehaviour
 
     public void UpdateEnemyCounter(int enemiesAlive, int enemiesSpawned)
     {
-        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        if (!enemyPanel.activeSelf) ActivateEnemyCounter();
         enemyCounter.text = "Enemies Remaining: " + enemiesAlive.ToString() + "/" + enemiesSpawned.ToString();
     }
 
     public void UpdateWaveCounter(int waveNumber, int maxWaves)
     {
-        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        if (!enemyPanel.activeSelf) ActivateEnemyCounter();
         waveCounter.text = "Wave: " + waveNumber.ToString() + "/" + maxWaves.ToString();
         if (waveNumber == maxWaves) waveTimer.text = "Next Wave In: -";
         //if (waveNumber == maxWaves) waveTimer.gameObject.SetActive(false);
@@ -220,27 +220,18 @@ public class GUI_Manager : MonoBehaviour
 
     public void UpdateWaveTimer(int timer)
     {
-        if (!enemyPanel.gameObject.activeSelf) ActivateEnemyCounter();
+        if (!enemyPanel.activeSelf) ActivateEnemyCounter();
         waveTimer.text = "Next Wave In: " + timer.ToString();
     }
 
     public void ActivateEnemyCounter()
     {
-        if (!enemyPanel.gameObject.activeSelf)
-        {
-            enemyPanel.gameObject.SetActive(true);
-            enemyCounter.gameObject.SetActive(true);
-            waveCounter.gameObject.SetActive(true);
-            waveTimer.gameObject.SetActive(true);
-        }
+        if (!enemyPanel.activeSelf) enemyPanel.SetActive(true);
     }
 
     public void ClearEnemyCounter()
     {
-        enemyPanel.gameObject.SetActive(false);
-        enemyCounter.gameObject.SetActive(false);
-        waveCounter.gameObject.SetActive(false);
-        waveTimer.gameObject.SetActive(false);
+        if (enemyPanel.activeSelf) enemyPanel.SetActive(false);
     }
 
     /*__________________________________________________________
@@ -381,6 +372,8 @@ public class GUI_Manager : MonoBehaviour
     public void ShowEndGame(bool dead)
     {
         Time.timeScale = 0;
+        EndCombo();
+        ClearEnemyCounter();
         if (dead) deathScreen.SetActive(true);
         else completeScreen.SetActive(true);
     }
