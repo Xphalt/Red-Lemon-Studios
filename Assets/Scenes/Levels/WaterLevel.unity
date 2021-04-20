@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.990566, g: 0.5093005, b: 0.6767538, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.001
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2690,7 +2690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7612769703244133290, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7654144366241327857, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_RootOrder
@@ -2746,7 +2746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8115206596254978305, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8251332882212513483, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2786,7 +2786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685026910875104947, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8783789070077895090, guid: 6ad0dddb20ba3eb4fa563bfbf6b7f13e, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2937,6 +2937,10 @@ PrefabInstance:
     - target: {fileID: 1933135638589326323, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011119240171515828, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.4001465
       objectReference: {fileID: 0}
     - target: {fileID: 2199558184786247714, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_IsActive
@@ -3189,6 +3193,10 @@ PrefabInstance:
     - target: {fileID: 5002006168902337348, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.9799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002006168902337348, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.2619934
       objectReference: {fileID: 0}
     - target: {fileID: 5454857585660960542, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_LocalPosition.x
