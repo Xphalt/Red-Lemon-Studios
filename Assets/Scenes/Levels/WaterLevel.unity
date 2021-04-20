@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 1, g: 0.4745098, b: 0.39215687, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.001
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2532,11 +2532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759153336566813697, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6995239
+      value: 1.6994629
       objectReference: {fileID: 0}
     - target: {fileID: 7759153338284483564, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6995239
+      value: 1.6994629
       objectReference: {fileID: 0}
     - target: {fileID: 7842347551125480904, guid: e05b0bcd7e252c24990dfb5369a46047, type: 3}
       propertyPath: m_RootOrder
@@ -3431,6 +3431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6079442043466456267, guid: ab79fed049eee8746bc9664c00593b4f, type: 3}
+      propertyPath: m_MaterialTemplate
+      value: 
+      objectReference: {fileID: 2100000, guid: a5f2339f242f6cc41a982ec55ea3c201, type: 2}
     - target: {fileID: 8656244106451425288, guid: ab79fed049eee8746bc9664c00593b4f, type: 3}
       propertyPath: m_Name
       value: WaterSurface
@@ -8163,7 +8167,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.3764706, g: 0.3529412, b: 0.30980393, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
