@@ -1,13 +1,4 @@
-﻿/// <summary>
-/// Script made by Matt
-/// 
-/// This allows for health to be
-/// picked up from the ground
-/// to heal the player
-/// 
-/// </summary>
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

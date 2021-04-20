@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LevelTransitionTrigger : MonoBehaviour
 {
+    private bool active = false;
+
     public ArenaManager arenaManager;
     public CheckpointManager checkpointManager = null;
     public List<GameObject> images;
-    private bool active = false;
-
     public AudioSource audioSource;
 
     private void Update()

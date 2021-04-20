@@ -5,11 +5,10 @@ using static EnumHelper;
 
 public class EnemyAir : Enemy
 {
-    public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     private float minWeaponRange; //Point at which enemy runs away^
-
     private bool stunned;
 
+    public float stationaryZone = 0.05f; //Percentage of weapon range which enemy stays in before running away from target
     public string attackSound;
 
     public override void Start()

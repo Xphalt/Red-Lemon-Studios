@@ -1,22 +1,17 @@
-﻿//Script created by Zack
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactable_Items : MonoBehaviour
 {
     private float DropPercentage; //chance of dropping a pickup
-
-    public int ammoDropPercent = 20;
-    public int healDropPercent = 20;
-
     private bool destroyed = false;
 
+    public SFXScript sfxScript;
     public List<PickUpBase> ammoDrops;
     public PickUpBase healthDrop;
-
-    public SFXScript sfxScript;
+    public byte ammoDropPercent = 20;
+    public byte healDropPercent = 20;
     public string destroySound;
 
     private void Awake()
@@ -75,7 +70,7 @@ public class Interactable_Items : MonoBehaviour
         else if (value <= ammoDropPercent + healDropPercent) // drop health pickup
         {
             healthDrop.Spawn();
-        }
+        }   
     }
 
     public void SaveInteractable(string saveID)

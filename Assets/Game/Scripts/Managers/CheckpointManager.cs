@@ -8,19 +8,12 @@ using static SaveManager;
 public class CheckpointManager : MonoBehaviour
 {
     Scene thisScene;
-    public string ArenaName;
-    private int checkpointsReached = 0;
 
     private List<string> previousCheckpoints = new List<string>();
+    private int checkpointsReached = 0;
     private string checkpointAtStart;
 
     public Transform revisitSpawnPoint;
-
-    public bool newGame = false; //If true, clears all saved values
-    public bool resetArena = false; //If true, clears all checkpoints saved in current arena
-
-    public bool autoFind = true;
-
     public List<Enemy> arenaEnemies;
     public List<RelicBase> arenaRelics;
     public List<PickUpBase> arenaPickUps;
@@ -28,6 +21,10 @@ public class CheckpointManager : MonoBehaviour
     public Player arenaPlayer;
     public ArenaManager arenaManager = null;
     public SFXScript sfxScript = null;
+    public bool newGame = false; //If true, clears all saved values
+    public bool resetArena = false; //If true, clears all checkpoints saved in current arena
+    public bool autoFind = true;
+    public string ArenaName;
 
     private void Awake()
     {

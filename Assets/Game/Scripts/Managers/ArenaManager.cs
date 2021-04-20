@@ -6,47 +6,34 @@ using UnityEngine.SceneManagement;
 public class ArenaManager : MonoBehaviour
 {
     #region Variables
-    public bool AutoFind = false;
+    private List<Enemy> enemyScripts = new List<Enemy>();
+    private RelicBase startRelicScript;
+    private RelicBase endRelicScript;
+    private int maxWaves;
+    private float waveTimer = 0;
 
     public Player player;
     public GUI_Manager userInterface;
-
     public List<GameObject> enemies = new List<GameObject>();
-    private List<Enemy> enemyScripts = new List<Enemy>();
-
-    //enemies in arenas are now linked to their spawn positions_______________________________________
     [Tooltip("Number of enemies/number of spawn positions rounded up = number of waves")]
     public List<Transform> enemySpawnPos = new List<Transform>();
-
-    internal int waveCounter = 0;
-    private int maxWaves;
-
-    public float waveDelay;
-    private float waveTimer = 0;
-
     public GameObject startRelic;
-    private RelicBase startRelicScript;
-
     public GameObject endRelic;
-    private RelicBase endRelicScript;
-
-    public string nextScene;
-
-    internal bool bWavesStarted = false;
-
-    internal bool bStartRelicCollected = false;
-    internal bool bEnemiesCleared = false;
-    internal bool bEndRelicCollected = false;
-
-    internal bool bCheckpointReady = false;
-
+    public Transition transition;
     public SFXScript sfxScript;
     public string enemiesDeadSound;
     public string enemySpawnSound;
     public string gameCompleteSound;
+    public bool AutoFind = false;
+    public float waveDelay;
+    public string nextScene;
 
-    public Transition transition;
-
+    internal int waveCounter = 0;
+    internal bool bWavesStarted = false;
+    internal bool bStartRelicCollected = false;
+    internal bool bEnemiesCleared = false;
+    internal bool bEndRelicCollected = false;
+    internal bool bCheckpointReady = false;
     #endregion
 
     #region UnityCallbacks

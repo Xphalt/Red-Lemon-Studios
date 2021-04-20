@@ -5,16 +5,14 @@ using static EnumHelper;
 
 public class RelicWater : RelicBase
 {
-    public float healAmount;
-    public int ammoCost;
-
-    public float healDuration;
-    public float healTickInterval;
     private float healStartTimer;
     private float healTickTimer;
 
+    public float healAmount;
+    public int ammoCost;
+    public float healDuration;
+    public float healTickInterval;
     public float inUseSpeedMultiplier;
-
     [Tooltip("Should be the same as Speed Multiplier")]
     public float defaultSpeedMultiplier;
 

@@ -1,16 +1,4 @@
-﻿/// <summary>
-/// 
-/// Script made by Daniel and Matt
-/// 
-/// Linden and Daniel refactored this
-/// script to allow for it's complete
-/// independance form other scripts
-/// making it very easy to add in new
-/// elements
-/// 
-/// </summary>
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
