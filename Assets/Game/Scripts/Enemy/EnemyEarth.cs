@@ -6,10 +6,10 @@ using static EnumHelper;
 public class EnemyEarth : Enemy
 {
     private bool rolling = false;
+
     public float rollSpeed = 15;
     public float rollDuration = 1;
     public float rollDamage = 25;
-
     public string attackSound;
 
     public override void Start()

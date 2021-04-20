@@ -6,41 +6,34 @@ using static EnumHelper;
 
 public class RelicBase : MonoBehaviour
 {
-    internal GameObject user = null;
-    internal string userName = null;
+    private float lastEquippedTime;
+
     protected CharacterBase characterScript;
     protected Rigidbody characterRigid;
-    public Animator myAnim;
 
-    public ElementTypes relicType;
-
+    internal GameObject user = null;
+    internal string userName = null;
     internal bool inUse;
     internal bool collected = false;
     internal bool spawned = false;
-    public bool inArena;
+    internal float cooldownTimer = 0;
+    internal bool readyToUse = false;
 
+    public Animator myAnim;
+    public ElementTypes relicType;
+    public Quaternion collectedRotation;
+    public SFXScript sfxScript = null;
+    public bool inArena;
     public int maxCombo = 1;
     public float percentIncreasePerHit = 0;
     public float damagePercentRecievedOnMiss = 0;
     public bool missPenalty = false;
-
     public int maxJumps = 1;
     public float knockBackMultiplier = 1;
-
     public float damageRecievedMultiplier = 1;
     public float speedMultiplier = 1;
-
-    internal float cooldownTimer = 0;
     public float relicCooldownDuration;
-    private float lastEquippedTime;
-
-    internal bool readyToUse = false;
-
-    public Quaternion collectedRotation;
     public float rotationSpeed;
-
-    public SFXScript sfxScript = null;
-    
     public string collectionSound;
     public string activateSound;
 

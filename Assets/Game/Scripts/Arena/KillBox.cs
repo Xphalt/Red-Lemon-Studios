@@ -7,7 +7,6 @@ public class KillBox : MonoBehaviour
     public List<Transform> respawnPos;
     public int damage;
     public bool playerOnly;
-
     public bool AutoFind;
 
     private void Awake()

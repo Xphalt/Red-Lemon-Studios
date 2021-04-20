@@ -7,7 +7,6 @@ public class EnemyWater : Enemy
 {
     public float meleeDamage;
     public float meleeRange;
-
     public string attackSound;
 
     public override void Start()

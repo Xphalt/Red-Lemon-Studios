@@ -7,19 +7,10 @@ using System.IO;
 using System.Linq;
 using static EnumHelper;
 
-//Zack Pilgrim + Daniel Bibby
-//
-//Intention is to have all variables stored and referenced through dicts. Dicts must be converted to pairs of lists to be serialised.
-//Vector2/3 are non-serialisable, hence the custom structs.
-//Current variable data types are only a baseline. More can be added, possibly including storing entire lists.
-
 public static class SaveManager
 {
-    public static string fileType = ".LEMON";
     private static string defaultSavePath = Application.persistentDataPath + "/GameSave" + fileType;
-
     private static Save saveData = new Save();
-
     private static Dictionary<string, int> intDict = new Dictionary<string, int>();
     private static Dictionary<string, float> floatDict = new Dictionary<string, float>();
     private static Dictionary<string, bool> boolDict = new Dictionary<string, bool>();
@@ -27,11 +18,10 @@ public static class SaveManager
     private static Dictionary<string, Vector2> vector2Dict = new Dictionary<string, Vector2>();
     private static Dictionary<string, Vector3> vector3Dict = new Dictionary<string, Vector3>();
     private static Dictionary<string, Quaternion> quaternionDict = new Dictionary<string, Quaternion>();
-
     private static Dictionary<string, List<string>> stringListDict = new Dictionary<string, List<string>>();
-
     private static Dictionary<string, ElementTypes> elementDict = new Dictionary<string, ElementTypes>();
 
+    public static string fileType = ".LEMON";
     public static bool loaded = false;
 
     public static void SaveToFile(string path="")

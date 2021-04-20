@@ -1,68 +1,46 @@
-﻿/// <summary>
-/// 
-/// Script made by Zack
-/// 
-/// Linden added enemy death
-/// when their health reaches 0
-/// 
-/// Daniel added enemies being
-/// effected by ailments from
-/// elemental ammo
-/// 
-/// </summary>
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
 public class Enemy : CharacterBase
 {
-    public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
-
-    public Animator myAnim = null;
-    public GameObject target = null;
-    public ElementTypes elementType;
-    protected ElementTypes weakAgainst;
-    protected ElementTypes strongAgainst;
-
-    public GameObject ammoDrop;
     private PickUpBase dropScript;
-    public float dropChance;
-
-    protected Player playerScript;
-
-    public float strongAgainstResist = 0.7f;
-    public float weakAgainstIncrease = 1.5f;
-
-    public float defaultColourChangeDuration = 0.1f;
     private float colourChangeDuration;
     private float colourChangeTimer = 0;
     private bool colourChanged = false;
 
+    public Animator myAnim = null;
+    public GameObject target = null;
+    public GameObject ammoDrop;
+    public ElementTypes elementType;
+    public enum EnemyStates { Idle, Chasing, Patrolling, Fleeing, EnemyStatesSize };
     public List<SkinnedMeshRenderer> skins;
     public List<MeshRenderer> meshes;
-    protected List<List<Color>> originalSkinColours = new List<List<Color>>();
-    protected List<List<Color>> originalMeshColours = new List<List<Color>>();
-
-    public float attackInterval;
-    protected float attackTimer = 0;
-
-    protected EnemyStates movementState;
-    protected bool runTooFar;
     public bool sentryMode = false;
-
-    internal bool spawned = false;
-
+    public float attackInterval;
     public float chaseSpeed = 5;
     public float patrolSpeed = 2;
     public float playerDetectionRadius = 50;
     public float wallDetectionRadius = 5;
+    public float dropChance;
+    public float strongAgainstResist = 0.7f;
+    public float weakAgainstIncrease = 1.5f;
+    public float defaultColourChangeDuration = 0.1f;
 
+    internal bool spawned = false;
+
+    protected Player playerScript;
+    protected ElementTypes weakAgainst;
+    protected ElementTypes strongAgainst;
+    protected EnemyStates movementState;
+    protected List<List<Color>> originalSkinColours = new List<List<Color>>();
+    protected List<List<Color>> originalMeshColours = new List<List<Color>>();
+    protected bool runTooFar;
+    protected float attackTimer = 0;
     protected float statusDuration;
     protected float statusTimer;
     protected bool statusEffectActive;
     protected float statusMagnitude;
-
     protected float DOTTimer;
     protected float DOTInterval = 1; //Placeholder. Not sure how it will be implemented long-term 
 

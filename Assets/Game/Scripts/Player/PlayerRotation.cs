@@ -6,6 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerRotation : MonoBehaviour
 {
+    private Transform cameraTransform;
+    private Quaternion m_CharacterTargetRot;
+    private Quaternion m_CameraTargetRot;
+    private bool m_cursorIsLocked = true;
+    private bool m_inputIsLocked = false;
+
+    public Camera firstPersonCamera;
     public float XSensitivity = 2f;
     public float YSensitivity = 2f;
     public bool clampVerticalRotation = true;
@@ -14,13 +21,6 @@ public class PlayerRotation : MonoBehaviour
     public bool smooth;
     public float smoothTime = 5f;
     public bool startLocked = true;
-
-    public Camera firstPersonCamera;
-    private Transform cameraTransform;
-    private Quaternion m_CharacterTargetRot;
-    private Quaternion m_CameraTargetRot;
-    private bool m_cursorIsLocked = true;
-    private bool m_inputIsLocked = false;
 
     private void Start()
     {

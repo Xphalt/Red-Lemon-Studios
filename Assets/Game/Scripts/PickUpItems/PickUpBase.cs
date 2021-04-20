@@ -5,13 +5,11 @@ using UnityEngine;
 public class PickUpBase : MonoBehaviour
 {
     protected bool collected = false;
+ 
+    public SFXScript sfxScript;
+    public float rotationSpeed;
     public bool enemyDrop;
     public bool spawned;
-
-    public float rotationSpeed;
-
-    public SFXScript sfxScript;
-
     public string collectionSound;
 
     private void Awake()

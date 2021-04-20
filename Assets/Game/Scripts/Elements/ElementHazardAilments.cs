@@ -1,14 +1,4 @@
-﻿/// <summary>
-/// 
-/// Script made by Daniel
-/// 
-/// This adds the ailment
-/// effects for the elemental
-/// ammo
-/// 
-/// </summary>
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
@@ -17,28 +7,23 @@ public class ElementHazardAilments : MonoBehaviour
 {
     private Rigidbody myRigid;
 
-    public bool hasEffect;
-    public int damage;
-    public ElementTypes damageType;
-    public float statusEffectDuration;
-    public float statusMagnitude;
-
     internal CharacterBase userScript;
-    internal bool successfulHit = false;
-    internal Teams team;
     internal Vector3 spawnPoint;
-
-    public bool dieOnHit = false;
-
-    public string hitSound;
-
     internal SFXScript sfxScript = null;
+    internal Teams team;
+    internal bool successfulHit = false;
 
     public Color normalHitColour;
     public Color strongHitColour;
     public Color weakHitColour;
-
+    public ElementTypes damageType;
     public bool changesColour = false;
+    public bool dieOnHit = false;
+    public string hitSound;
+    public float statusEffectDuration;
+    public float statusMagnitude;
+    public bool hasEffect;
+    public int damage;
 
     private void Awake()
     {

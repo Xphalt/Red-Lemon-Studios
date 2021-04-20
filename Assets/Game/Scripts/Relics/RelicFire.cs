@@ -1,28 +1,17 @@
-﻿/// <summary>
-/// 
-/// Script made by Linden and Daniel
-/// 
-/// By inheriting from the relic base
-/// script, relics are able to be created
-/// very easily and quickly
-/// 
-/// </summary>
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
 public class RelicFire : RelicBase
 {
+    private Vector3 dashDist;
+    private float dashTimer;
+
     public float dashSpeed;
     public float dashDuration;
     public float postDashMomentum; //Veclocity retained by user after dash (0-1)
-    private float dashTimer;
-
     public float damage;
-
-    private Vector3 dashDist;
 
     public override void Start()
     {

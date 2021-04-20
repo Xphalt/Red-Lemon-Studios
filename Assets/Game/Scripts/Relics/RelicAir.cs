@@ -1,24 +1,20 @@
-﻿// Made by Daniel
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnumHelper;
 
 public class RelicAir : RelicBase
-{
-    public float grappleRange = 100;
+{    
     private Vector3 grappleDir;
+    private Vector3 startPos;
+    private int hits;
+
+    public float grappleRange = 100;
     public float grappleSpeed = 5;
     public float grappleSwing = 1;
     public float bounceSpeed = 10;
     public float damage = 10;
-
-    private Vector3 startPos;
-
     public int maxHits = 1;
-    private int hits;
 
     public override void Start()
     {
