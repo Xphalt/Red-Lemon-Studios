@@ -5,19 +5,16 @@ using UnityEngine.Audio;
 
 public class SFXScript : MonoBehaviour
 {
-    public List<string> SFXNameList = new List<string>();
-    public List<AudioClip> AudioClipList = new List<AudioClip>();
-    public List<float> SFXVolumes = new List<float>();
-
+    private AudioSource Music;
     private Dictionary<string, AudioClip> SFXDict = new Dictionary<string, AudioClip>();
     private Dictionary<string, float> volumeDict = new Dictionary<string, float>();
-
-    public bool AutoFind = false;
-    public List<AudioSource> sfx2D, sfx3D;
-
     private int index2D = 0, index3D = 0;
 
-    private AudioSource Music;
+    public List<AudioClip> AudioClipList = new List<AudioClip>();
+    public List<string> SFXNameList = new List<string>();
+    public List<float> SFXVolumes = new List<float>();
+    public List<AudioSource> sfx2D, sfx3D;
+    public bool AutoFind = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -54,7 +51,7 @@ public class SFXScript : MonoBehaviour
     void Incrememnt3D()
     {
         ++index3D;
-        index3D %= sfx3D.Count;
+        index3D %= sfx3D.Count; 
     }
 
     public void PlaySFX2D(string sfx, bool loop = false, float volume = 0)

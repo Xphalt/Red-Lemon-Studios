@@ -5,14 +5,13 @@ using static EnumHelper;
 
 public class EnemyFire : Enemy
 {
-    public float explosionDamage;
-    public float explosionRadius;
     private bool canExplode = true;
 
+    public GameObject explosion;
+    public float explosionDamage;
+    public float explosionRadius;
     public string explodeSound;
     public string jumpSound;
-
-    public GameObject explosion;
 
     public override void Awake()
     {

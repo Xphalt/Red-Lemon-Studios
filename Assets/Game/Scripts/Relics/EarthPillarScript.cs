@@ -5,16 +5,16 @@ using static EnumHelper;
 
 public class EarthPillarScript : MonoBehaviour
 {
+    private List<CharacterBase> beenHit = new List<CharacterBase>();
     private float damage;
     private float sizePerSecond;
     private float lifeTime;
     private float userMomentumResidue;
     private float hostileMomentumResidue;
+
     internal Teams team;
 
     public CharacterBase userScript = null;
-
-    private List<CharacterBase> beenHit = new List<CharacterBase>();
 
     public void Initialise(float pillarDamage, float growthRate, float pillarLifeTime, CharacterBase user, float userMomentum, float hostileMomentum)
     {

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class RelicEarth : RelicBase
 {
-    public GameObject pillar;
     private Transform pillarTransform;
     private EarthPillarScript pillarScript = null;
+    private float pillarTimer = 0;
+    private float sizePerSecond;
+
+    public GameObject pillar;
     public float maxPillarSize;
     public float pillarDamage;
     public float userMomentumResidue = 0.1f;
     public float hostileMomentumResidue = 1;
-
     public float pillarLifeTime;
-    private float pillarTimer = 0;
-    private float sizePerSecond;
 
     public override void Awake()
     {

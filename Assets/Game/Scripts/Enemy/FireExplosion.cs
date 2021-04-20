@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireExplosion : MonoBehaviour
-{
-    public float startRadius;
-    public float endRadius;
-    public float explosionDuration;
-
-    public Color startColour;
-    public Color endColour;
-
-    public MeshRenderer myMesh;
-
+{    
     private float explosionTimer;
     private float growthRate;
     private float currentRadius;
     private float colourRate;
     private float colourPhase;
+    public float startRadius;
+    public float endRadius;
+    public float explosionDuration;
 
     internal Transform parent;
+
+    public Color startColour;
+    public Color endColour;
+    public MeshRenderer myMesh;
 
     private void Awake()
     {

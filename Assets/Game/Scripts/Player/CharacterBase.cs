@@ -5,21 +5,12 @@ using static EnumHelper;
 
 public class CharacterBase : MonoBehaviour
 {
-    public Rigidbody characterRigid = null;
-
-    public Transform relicPlaceHolder;
-    public GameObject weapon = null;
-    
-    public bool canFly = false;
-    public List<string> dontJumpFrom = new List<string>();
-
-    public float jumpSpeed;
-    public float gravityMult = 1;
-    public float floorDistance;
-    public float airControl;
-    public float maxHealth = 100.0f;
-    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
-
+    internal Teams team;
+    internal ElementShooting shooter;
+    internal List<RelicBase> relicList = new List<RelicBase>();
+    internal RelicBase currentRelic = null;
+    internal Vector3 shiftVector;
+    internal Vector3 targetDirection;
     internal bool isGrounded = false;
     internal bool movementLocked = false;
     internal bool shifting; 
@@ -32,13 +23,6 @@ public class CharacterBase : MonoBehaviour
     internal float curHealth; 
     internal float impactDamage = 0;
     internal int hitCombo = 0;
-
-    internal Teams team;
-    internal ElementShooting shooter;
-    internal List<RelicBase> relicList = new List<RelicBase>();
-    internal RelicBase currentRelic = null;
-    internal Vector3 shiftVector;
-    internal Vector3 targetDirection;
 
     protected bool missPenalty = false;
     protected bool jumping = false;
@@ -53,6 +37,17 @@ public class CharacterBase : MonoBehaviour
     protected float speedMultiplier = 1;
 
     public SFXScript sfxScript;
+    public Rigidbody characterRigid = null;
+    public Transform relicPlaceHolder;
+    public GameObject weapon = null;
+    public List<string> dontJumpFrom = new List<string>();
+    public bool canFly = false;
+    public float jumpSpeed;
+    public float gravityMult = 1;
+    public float floorDistance;
+    public float airControl;
+    public float maxHealth = 100.0f;
+    public float knockbackRecovery; //How quickly AI returns to normal velocity after being knocked back (0-1)
 
     public virtual void Awake()
     {

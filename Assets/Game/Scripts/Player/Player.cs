@@ -7,26 +7,18 @@ using static SaveManager;
 
 public class Player : CharacterBase
 {
+    private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
+    private bool switchingRelics = false;
+    private bool paused = false;
+
+    internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
+
     public GameObject canvas;
     public Vector3 crosshairPos;
     public Camera firstPersonCamera;
     public GUI_Manager userInterface = null;
-
     public PlayerRotation rotationScript = null;
-
-    public float runSpeed;
-
-    public float shootTargetDistance = 0;
-    public int maxAmmo;
-
-    private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
-
-    private bool switchingRelics = false;
-    private bool paused = false;
-
     public Elements elementChanger = null;
-    internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
-
     public AudioMixerSnapshot unpausedSound, pausedSound;
     public AudioSource audioSource;
     public string ammoChangeSound;
@@ -35,6 +27,9 @@ public class Player : CharacterBase
     public string damageSound;
     public string deathSound;
     public string enemyHitSound;
+    public float runSpeed;
+    public float shootTargetDistance = 0;
+    public int maxAmmo;
 
     public override void Awake()
     {

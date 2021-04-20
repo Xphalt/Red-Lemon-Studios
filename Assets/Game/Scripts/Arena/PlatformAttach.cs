@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlatformAttach : MonoBehaviour
 {
-    public Transform parentTransform;
     private Dictionary<Transform, Transform> objectsPreviousParents = new Dictionary<Transform, Transform>();
     private Dictionary<Transform, Vector3> previousScales = new Dictionary<Transform, Vector3>(); //For some reason scale was not consistent when unparenting
+
+    public Transform parentTransform;
     public bool playerOnly = true;
 
     private void OnCollisionEnter(Collision collision)
