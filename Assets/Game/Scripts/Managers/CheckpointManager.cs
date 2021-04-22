@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static EnumHelper;
 using static SaveManager;
 public class CheckpointManager : MonoBehaviour
@@ -25,6 +26,12 @@ public class CheckpointManager : MonoBehaviour
     public bool resetArena = false; //If true, clears all checkpoints saved in current arena
     public bool autoFind = true;
     public string ArenaName;
+    public Image saveIcon;
+    public float saveDuration;
+
+    private bool saving = false;
+    private float saveTimer = 0;
+    private Color iconColour;
 
     private void Awake()
     {
@@ -48,6 +55,8 @@ public class CheckpointManager : MonoBehaviour
         {
             FindArenaItems();
         }
+
+        iconColour = saveIcon.color;
     }
 
     private void Start()
@@ -98,10 +107,22 @@ public class CheckpointManager : MonoBehaviour
     void Update()
     {
         if (arenaManager.bCheckpointReady) Save();
+
+        if (saving)
+        {
+            saveTimer += Time.deltaTime;
+            if (saveTimer > saveDuration / 2)
+            {
+                saveIcon.color = Color.Lerp(iconColour, Color.clear, saveTimer * 2 - saveDuration);
+                if (saveTimer > saveDuration) HideIcon();
+            }
+        }
     }
 
     public void Save(string checkpointOverride = "")
     {
+        ShowIcon();
+        
         string saveID = (checkpointOverride == "") ? ArenaName + checkpointsReached.ToString() : checkpointOverride;
         if (previousCheckpoints.Contains(saveID)) previousCheckpoints.Remove(saveID);
         previousCheckpoints.Add(saveID);
@@ -174,6 +195,21 @@ public class CheckpointManager : MonoBehaviour
 
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bullet);
         sfxScript.StopSFX();
+    }
+
+    public void ShowIcon()
+    {
+        saving = true;
+        saveTimer = 0;
+        saveIcon.gameObject.SetActive(true);
+        saveIcon.color = iconColour;
+    }
+
+    public void HideIcon()
+    {
+        saving = false;
+        saveTimer = 0;
+        saveIcon.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
