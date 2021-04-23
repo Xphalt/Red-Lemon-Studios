@@ -17,13 +17,12 @@ public class VolumeManager : MonoBehaviour
         if (!SaveManager.HasFloat("Volume")) SaveManager.AddNewFloat("Volume", 1);
         if (!SaveManager.HasBool("Muted")) SaveManager.AddNewBool("Muted", false);
 
-        muted = SaveManager.GetBool("Muted");
         storedVolume = SaveManager.GetFloat("Volume");
-
-        SetVolume(muted ? 0 : storedVolume);
-
-        SetIcon();
         volumeSlider.value = storedVolume;
+
+        muted = SaveManager.GetBool("Muted");
+        SetVolume(muted ? 0 : storedVolume);
+        SetIcon();
     }
 
     private void Update()

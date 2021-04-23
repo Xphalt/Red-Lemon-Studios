@@ -21,11 +21,13 @@ public class CheckpointManager : MonoBehaviour
     public List<Interactable_Items> arenaInteractables;
     public Player arenaPlayer;
     public ArenaManager arenaManager = null;
+    public VolumeManager volume;
     public SFXScript sfxScript = null;
     public bool newGame = false; //If true, clears all saved values
     public bool resetArena = false; //If true, clears all checkpoints saved in current arena
     public bool autoFind = true;
     public string ArenaName;
+
     public Image saveIcon;
     public float saveDuration;
 
@@ -36,6 +38,7 @@ public class CheckpointManager : MonoBehaviour
     private void Awake()
     {
         if (arenaManager == null) arenaManager = GetComponent<ArenaManager>();
+        if (volume == null) volume = GetComponent<VolumeManager>();
         if (sfxScript == null) sfxScript = FindObjectOfType<SFXScript>();
 
         thisScene = SceneManager.GetActiveScene();
@@ -214,6 +217,7 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        volume.SaveVolumeSettings();
         SaveManager.SaveToFile();
     }
 }
