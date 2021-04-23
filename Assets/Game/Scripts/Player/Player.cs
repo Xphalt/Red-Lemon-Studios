@@ -63,7 +63,6 @@ public class Player : CharacterBase
         base.Start();
         team = Teams.Player;
 
-        AudioListener.volume = SaveManager.GetBool("Muted") ? 0 : 1;
         userInterface.HighlightSelectedAmmo();
         userInterface.ToggleSliderSelection(switchingRelics);
     }
@@ -151,7 +150,6 @@ public class Player : CharacterBase
 
         if (Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
         if (Input.GetButtonDown("Select")) TogglePause(true);
-        if (Input.GetKeyDown(KeyCode.M)) ToggleMute();
     }
 
     public void TogglePause(bool toolMenu)
@@ -185,12 +183,6 @@ public class Player : CharacterBase
             unpausedSound.TransitionTo(0);
             sfxScript.UnPauseSFX();
         }
-    }
-
-    public void ToggleMute()
-    {
-        AudioListener.volume = (AudioListener.volume == 1) ? 0 : 1;
-        SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
     }
 
     public override void FixedUpdate()

@@ -11,10 +11,12 @@ public class Main_Menu : MonoBehaviour
     public Transition transition;
     public float transitionDelay;
 
+    private VolumeManager volume;
+
     private void Awake()
     {
         SaveManager.LoadFromFile();
-        if (SaveManager.HasBool("Muted")) AudioListener.volume = SaveManager.GetBool("Muted") ? 0 : 1;
+        volume = GetComponent<VolumeManager>();
     }
 
     private void Start()
@@ -23,24 +25,11 @@ public class Main_Menu : MonoBehaviour
         creditsPanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-            Mute();
-    }
-
-    public void Mute()
-    {
-        AudioListener.volume = (AudioListener.volume == 1) ? 0 : 1;
-        SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
-    }
-
     public void StartGame(bool newGame)
     {
         if (newGame || !(SaveManager.HasString("LastOverallCheckpointID")))
         {
             SaveManager.ClearSaves();
-            SaveManager.UpdateSavedBool("Muted", AudioListener.volume == 0);
             StartCoroutine(transition.LoadLevel(FirstLevel));
         }
         else
@@ -68,6 +57,7 @@ public class Main_Menu : MonoBehaviour
 
     private void OnDestroy()
     {
+        volume.SaveVolumeSettings();
         SaveManager.SaveToFile();
     }
 }
