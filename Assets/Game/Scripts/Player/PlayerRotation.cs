@@ -1,8 +1,7 @@
-﻿//THIS IS A MODIFIED VERSION OF THE FIRST PERSON CHARACTER 'MOUSE LOOK' SCRIPT
+﻿    //THIS IS A MODIFIED VERSION OF THE FIRST PERSON CHARACTER 'MOUSE LOOK' SCRIPT
 
 using System;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerRotation : MonoBehaviour
 {
@@ -36,8 +35,8 @@ public class PlayerRotation : MonoBehaviour
         InternalLockUpdate();
         
 
-        float yRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : 0;
-        float xRot = (m_cursorIsLocked) ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : 0;
+        float yRot = (m_cursorIsLocked) ? Input.GetAxis("Mouse X") * XSensitivity : 0;
+        float xRot = (m_cursorIsLocked) ? Input.GetAxis("Mouse Y") * YSensitivity : 0;
 
         m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
         m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
