@@ -305,7 +305,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.19215687, g: 0.92941177, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4907,14 +4907,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbc16831443d804c994da3ef62650d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasEffect: 1
-  damage: 10
-  damageType: 1
-  statusEffectDuration: 3
-  statusMagnitude: 0
-  dieOnHit: 1
-  hitSound: WaterAmmoHit
   normalHitColour: {r: 0, g: 0.48874024, b: 0.8301887, a: 1}
   strongHitColour: {r: 0, g: 0.28880104, b: 0.49056602, a: 1}
   weakHitColour: {r: 0.22075468, g: 0.67950404, b: 1, a: 1}
+  damageType: 1
   changesColour: 1
+  dieOnHit: 1
+  hitSound: WaterAmmoHit
+  statusEffectDuration: 3
+  statusMagnitude: 0
+  hasEffect: 1
+  damage: 10
