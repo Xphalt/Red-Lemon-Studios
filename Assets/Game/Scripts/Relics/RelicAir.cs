@@ -34,7 +34,7 @@ public class RelicAir : RelicBase
         {
             grappleTimer += Time.deltaTime;
             Vector3 grappleDir = (grapplePoint - user.transform.position).normalized;
-            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+            characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
             if ((user.transform.position - startPos).magnitude > grappleRange || grappleTimer > grappleDuration) EndAbility();
         }
     }
@@ -53,7 +53,7 @@ public class RelicAir : RelicBase
             Vector3 grappleDir = (grapplePoint - startPos).normalized;
 
             characterRigid.useGravity = false;
-            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+            characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
 
             SetActive();
 
