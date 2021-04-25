@@ -6,11 +6,17 @@ public class HealthPickup : PickUpBase
 {
     public float RestoreValue;
 
-    private void OnCollisionEnter(Collision other)
+    public override void Update()
     {
-        if (other.gameObject.TryGetComponent(out Player player))
+        base.Update();
+        
+        foreach (Collider other in Physics.OverlapSphere(transform.position, detectionRadius))
         {
-            if (player.AddHealth(RestoreValue)) Collect();
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                if (player.AddHealth(RestoreValue)) Collect();
+                break;
+            }
         }
     }
 }

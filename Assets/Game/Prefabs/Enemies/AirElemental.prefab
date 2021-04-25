@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4354114679550863435}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6826123840257718947}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4394009200093262639}
   - component: {fileID: 4638809498539717324}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9220034092068900986}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254803750913724373}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5646468441211815042}
   - component: {fileID: 765132566680288621}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5333394980012703589}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4746583472177010589}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6092987655456349227}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1940604832353453565}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.006_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8231404323156721885}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6094932112698693498}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1855838349543100420}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9072977128046311022}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.009_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3271657404639207081}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -606,7 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1311140780419681768}
   - component: {fileID: 3864337383671841871}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 7503199250087295692}
   - component: {fileID: 1140679926596329740}
   - component: {fileID: 6205449447219901066}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AirElemental
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -798,37 +798,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01567f7173ec0c4b8a638d61f416c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxScript: {fileID: 0}
   characterRigid: {fileID: 5874482647727180406}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 4507703052418591449}
-  canFly: 0
   dontJumpFrom: []
+  canFly: 0
   jumpSpeed: 0
   gravityMult: 1
   floorDistance: 3
   airControl: 0
   maxHealth: 50
   knockbackRecovery: 0
-  sfxScript: {fileID: 0}
   myAnim: {fileID: 4372032724729686918}
   target: {fileID: 0}
-  elementType: 2
   ammoDrop: {fileID: 108466876190193936}
-  dropChance: 0.5
-  strongAgainstResist: 0.7
-  weakAgainstIncrease: 1.5
-  defaultColourChangeDuration: 0.1
+  elementType: 2
   skins:
   - {fileID: 3864337383671841871}
   - {fileID: 765132566680288621}
   - {fileID: 4638809498539717324}
   meshes: []
-  attackInterval: 1
   sentryMode: 0
+  attackInterval: 1
   chaseSpeed: 6
   patrolSpeed: 3
   playerDetectionRadius: 100
   wallDetectionRadius: 2
+  dropChance: 0.5
+  strongAgainstResist: 0.7
+  weakAgainstIncrease: 1.5
+  defaultColourChangeDuration: 0.1
   stationaryZone: 0.25
   attackSound: AirAttack
 --- !u!82 &6205449447219901066
@@ -936,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5747141953915052326}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -967,7 +967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927961438109593416}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5167292687948546956}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4111357261449502858}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8643502163521038030}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502406101790790225}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.013_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,7 +1121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5056647886067688691}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1157,6 +1157,10 @@ PrefabInstance:
     - target: {fileID: 1234860566754208359, guid: c45445cc756485f42b041c34a0429d55, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547132581513084615, guid: c45445cc756485f42b041c34a0429d55, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6212067505187540649, guid: c45445cc756485f42b041c34a0429d55, type: 3}
       propertyPath: m_RootOrder
@@ -1221,6 +1225,10 @@ PrefabInstance:
     - target: {fileID: 7982080456857979723, guid: c45445cc756485f42b041c34a0429d55, type: 3}
       propertyPath: enemyDrop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8062389818077800819, guid: c45445cc756485f42b041c34a0429d55, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c45445cc756485f42b041c34a0429d55, type: 3}
@@ -1304,6 +1312,10 @@ PrefabInstance:
     - target: {fileID: 2870609163769728810, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: m_Name
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870609163769728810, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5695862408374058990, guid: d73e872e0cb3bf546944eb1a4f956a54, type: 3}
       propertyPath: range

@@ -5,12 +5,14 @@ using static EnumHelper;
 
 public class RelicAir : RelicBase
 {    
-    private Vector3 grappleDir;
+    private Vector3 grapplePoint;
     private Vector3 startPos;
     private int hits;
+    private float grappleDuration;
+    private float grappleTimer;
 
     public float grappleRange = 100;
-    public float grappleSpeed = 5;
+    public float grappleSpeed = 25;
     public float grappleSwing = 1;
     public float bounceSpeed = 10;
     public float damage = 10;
@@ -22,6 +24,7 @@ public class RelicAir : RelicBase
 
         grappleSwing = Mathf.Clamp(grappleSwing, 0, 1);
         hits = maxHits;
+        grappleDuration = grappleRange / grappleSpeed;
         relicType = ElementTypes.Air;
     }
 
@@ -29,8 +32,10 @@ public class RelicAir : RelicBase
     {
         if (inUse)
         {
-            if (grappleSwing < 1) characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
-            if ((user.transform.position - startPos).magnitude > grappleRange) EndAbility();
+            grappleTimer += Time.deltaTime;
+            Vector3 grappleDir = (grapplePoint - user.transform.position).normalized;
+            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
+            if ((user.transform.position - startPos).magnitude > grappleRange || grappleTimer > grappleDuration) EndAbility();
         }
     }
 
@@ -43,20 +48,19 @@ public class RelicAir : RelicBase
         {
             RaycastHit target = grappleHits[0];
 
-            grappleDir = (target.point - user.transform.position).normalized * grappleSpeed;
-
-            if (characterScript.isGrounded && grappleDir.y < 0) return false;
+            grapplePoint = target.point;
+            startPos = user.transform.position;
+            Vector3 grappleDir = (grapplePoint - startPos).normalized;
 
             characterRigid.useGravity = false;
-            characterRigid.velocity = Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing);
+            characterScript.SetVelocity(Vector3.Lerp(characterRigid.velocity, grappleDir * grappleSpeed, grappleSwing));
 
             SetActive();
 
             characterScript.movementLocked = true;
             characterScript.impactDamage = damage;
 
-            startPos = user.transform.position;
-
+            grappleTimer = 0;
             return true;
         }
 
@@ -74,6 +78,7 @@ public class RelicAir : RelicBase
 
                 characterRigid.velocity = new Vector3(characterRigid.velocity.x, bounceSpeed, characterRigid.velocity.z);
                 hits = maxHits;
+                grappleTimer = 0;
                 characterScript.movementLocked = false;
                 characterScript.impactDamage = 0;
                 base.EndAbility();

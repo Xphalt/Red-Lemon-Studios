@@ -15,8 +15,8 @@ public class RotatingFan : MonoBehaviour
 
         if (blowSpeed != 0)
         {
-            foreach (RaycastHit hit in Physics.CapsuleCastAll(transform.position, transform.position + Vector3.up * blowRange,
-                Mathf.Min(blowRadius, blowRange), Vector3.up, blowRange))
+            foreach (Collider hit in Physics.OverlapCapsule(transform.position, transform.position + Vector3.up * blowRange,
+                Mathf.Min(blowRadius, blowRange)))
             {
                 if (hit.transform.TryGetComponent(out Player player))
                 {

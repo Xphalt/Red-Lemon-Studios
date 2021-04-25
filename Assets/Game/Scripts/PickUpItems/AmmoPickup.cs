@@ -8,11 +8,17 @@ public class AmmoPickup : PickUpBase
     public int AmmoValue;
     public ElementTypes Type;
 
-    private void OnCollisionEnter(Collision other)
+    public override void Update()
     {
-        if (other.gameObject.TryGetComponent(out Player player))
+        base.Update();
+
+        foreach (Collider other in Physics.OverlapSphere(transform.position, detectionRadius))
         {
-            if (player.AddAmmo(AmmoValue, Type)) Collect();
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                if (player.AddAmmo(AmmoValue, Type)) Collect();
+                break;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 881625275603221372}
   - component: {fileID: 4293041025302852825}
   - component: {fileID: 2051114034249990163}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HealthPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,10 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251a7b5aadc32cc4f9a51d9278f0734c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 0.5
+  sfxScript: {fileID: 0}
+  rotationSpeed: 90
   enemyDrop: 0
   spawned: 1
-  rotationSpeed: 90
-  sfxScript: {fileID: 0}
   collectionSound: PickupItem
   RestoreValue: 25
 --- !u!54 &9077478207314496006

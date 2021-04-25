@@ -5,7 +5,8 @@ using UnityEngine;
 public class PickUpBase : MonoBehaviour
 {
     protected bool collected = false;
- 
+
+    public float detectionRadius;
     public SFXScript sfxScript;
     public float rotationSpeed;
     public bool enemyDrop;
@@ -22,7 +23,7 @@ public class PickUpBase : MonoBehaviour
         gameObject.SetActive(spawned);
     }
 
-    private void Update()
+    public virtual void Update()
     {
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }

@@ -48,10 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3315d3fc31e7cc746acc3d1c2728920b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 0.5
+  sfxScript: {fileID: 0}
+  rotationSpeed: 90
   enemyDrop: 0
   spawned: 1
-  rotationSpeed: 90
-  sfxScript: {fileID: 0}
   collectionSound: PickupItem
   AmmoValue: 25
   Type: 0
@@ -111,7 +112,7 @@ GameObject:
   - component: {fileID: 7361197036810524459}
   - component: {fileID: 7420632140105039880}
   - component: {fileID: 5865235530378457793}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +193,7 @@ GameObject:
   - component: {fileID: 6252306180029584474}
   - component: {fileID: 5373854758740030425}
   - component: {fileID: 8548697407066777542}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

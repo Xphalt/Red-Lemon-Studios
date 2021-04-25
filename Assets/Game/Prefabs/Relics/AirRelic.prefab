@@ -247,6 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 5858754362478887929}
   relicType: 2
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  sfxScript: {fileID: 0}
   inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
@@ -257,13 +259,11 @@ MonoBehaviour:
   damageRecievedMultiplier: 1
   speedMultiplier: 1
   relicCooldownDuration: 4
-  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
   rotationSpeed: 90
-  sfxScript: {fileID: 0}
   collectionSound: PickupRelic
   activateSound: AirRelic
   grappleRange: 100
-  grappleSpeed: 5
+  grappleSpeed: 25
   grappleSwing: 1
   bounceSpeed: 10
   damage: 10

@@ -144,30 +144,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50735f0c0b8198b408488d5e913d9ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxScript: {fileID: 0}
   characterRigid: {fileID: 1784885376}
   relicPlaceHolder: {fileID: 0}
   weapon: {fileID: 0}
-  canFly: 0
   dontJumpFrom: []
+  canFly: 0
   jumpSpeed: 15
   gravityMult: 2
   floorDistance: 1.1
   airControl: 0.025
   maxHealth: 150
   knockbackRecovery: 0
-  sfxScript: {fileID: 0}
   canvas: {fileID: 0}
   crosshairPos: {x: 0.5, y: 0.5, z: 0}
   firstPersonCamera: {fileID: 7338099964422291514}
   userInterface: {fileID: 0}
   rotationScript: {fileID: 1784885381}
-  runSpeed: 15
-  shootTargetDistance: 50
-  maxAmmo: 100
   elementChanger: {fileID: 0}
   unpausedSound: {fileID: 24500006, guid: c7dfcfe22a31e9d4fa24619fb4d6e1ae, type: 2}
   pausedSound: {fileID: -3282501757649493536, guid: c7dfcfe22a31e9d4fa24619fb4d6e1ae, type: 2}
-  audioListener: {fileID: 7338099964422291513}
   audioSource: {fileID: 7338099962747303697}
   ammoChangeSound: ChangeAmmo
   jumpSound: PlayerJump
@@ -175,6 +171,9 @@ MonoBehaviour:
   damageSound: PlayerHurt
   deathSound: GameOver
   enemyHitSound: EnemyHit
+  runSpeed: 15
+  shootTargetDistance: 50
+  maxAmmo: 100
 --- !u!54 &1784885376
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -198,7 +197,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7338099962747303707}
-  m_Material: {fileID: 13400000, guid: ba92fb44336020f40bdf294bb66bc9da, type: 2}
+  m_Material: {fileID: 13400000, guid: b23b0ae98244150408cd148138dc5f51, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -217,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b14d924be332214cbf5ab1e0b411403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstPersonCamera: {fileID: 7338099964422291514}
   XSensitivity: 2
   YSensitivity: 2
   clampVerticalRotation: 1
@@ -225,7 +225,6 @@ MonoBehaviour:
   smooth: 0
   smoothTime: 5
   startLocked: 1
-  firstPersonCamera: {fileID: 7338099964422291514}
 --- !u!1 &7338099964422291462
 GameObject:
   m_ObjectHideFlags: 0

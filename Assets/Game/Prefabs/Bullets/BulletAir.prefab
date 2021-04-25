@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5160694132965469344}
   - component: {fileID: 4284167979252341246}
   - component: {fileID: 5952520574825530132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletAir
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -4907,14 +4907,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbc16831443d804c994da3ef62650d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasEffect: 1
-  damage: 10
-  damageType: 2
-  statusEffectDuration: 0.2
-  statusMagnitude: 15
-  dieOnHit: 1
-  hitSound: AirAmmoHit
   normalHitColour: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 0.7254902}
   strongHitColour: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.7254902}
   weakHitColour: {r: 1, g: 1, b: 1, a: 0.7254902}
+  damageType: 2
   changesColour: 1
+  dieOnHit: 1
+  hitSound: AirAmmoHit
+  statusEffectDuration: 0.2
+  statusMagnitude: 15
+  hasEffect: 1
+  damage: 10
