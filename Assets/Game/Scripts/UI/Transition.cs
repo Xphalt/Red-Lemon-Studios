@@ -5,20 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class Transition : MonoBehaviour
 {
+    private float volumeFade;
+    private float maxVolume;
+
     public Animator transition;
     public float delay;
     public float inputLockDelay;
     public Player player;
+    public bool fading = false;
 
     private void Awake()
     {
         StartCoroutine(StartLevel());
     }
 
+    private void Update()
+    {
+        if (fading)
+        {
+            AudioListener.volume = Mathf.Clamp(AudioListener.volume + volumeFade * Time.unscaledDeltaTime, 0, maxVolume);
+            if (AudioListener.volume <= 0 || AudioListener.volume >= maxVolume) fading = false;
+        }
+    }
+
     public IEnumerator LoadLevel(string level)
     {
         ToggleInput(true);
         transition.SetTrigger("exitScene");
+
+        fading = true;
+        maxVolume = AudioListener.volume;
+        volumeFade = -AudioListener.volume / delay;
+
         yield return new WaitForSecondsRealtime(delay);
         SceneManager.LoadScene(level);
     }

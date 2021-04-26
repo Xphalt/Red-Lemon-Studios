@@ -27,7 +27,7 @@ public class VolumeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))  ToggleMute();
+        if (Input.GetKeyDown(KeyCode.M)) ToggleMute();
     }
 
     public void ToggleMute()
