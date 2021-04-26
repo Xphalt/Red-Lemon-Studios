@@ -549,8 +549,8 @@ MonoBehaviour:
     hit (caps at double damage)\n\n\uF0A7-Reset combo and take 10% damage on miss"
   - "ACTIVE EFFECT: \nHeal over time at the cost of water ammo\n\nPASSIVE EFFECTS:\r\n\uF0A7+25%
     move speed when not in use\n\n\uF0A7-25% extra damage recieved "
-  - "ACTIVE EFFECT: \nGrapple towards target (Cannot grapple through floor)\n\nPASSIVE
-    EFFECTS:\r\n\uF0A7+Double jump\n\n\uF0A7-Twice as vulnerable to knockback"
+  - "ACTIVE EFFECT: \nGrapple towards target\n\nPASSIVE EFFECTS:\r\n\uF0A7+Double
+    jump\n\n\uF0A7-Twice as vulnerable to knockback"
   - "ACTIVE EFFECT: \nRaise pillar to launch yourself up and enemies away\n\nPASSIVE
     EFFECTS:\r\n\uF0A7+20% less damage recieved\n\n\uF0A7-20% move speed reduction"
   AmmoDescription:
@@ -3507,7 +3507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8205548009360085518, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -23.565674
+      value: -23.565704
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
