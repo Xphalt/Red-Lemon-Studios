@@ -45,8 +45,6 @@ public class Main_Menu : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #elif (UNITY_STANDALONE)
     Application.Quit();
-#elif (UNITY_WEBGL)
-    Application.OpenURL("https://fate-show.itch.io/arcane-supremacy");
 #endif
     }
 
