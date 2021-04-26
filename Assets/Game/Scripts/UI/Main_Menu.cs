@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject controlsPanel, creditsPanel;
+    public GameObject controlsPanel, creditsPanel, exitButton;
     public string FirstLevel;
 
     public Transition transition;
@@ -17,6 +17,10 @@ public class Main_Menu : MonoBehaviour
     {
         SaveManager.LoadFromFile();
         volume = GetComponent<VolumeManager>();
+
+#if UNITY_WEBGL
+        exitButton.SetActive(false);
+#endif
     }
 
     private void Start()
@@ -38,13 +42,10 @@ public class Main_Menu : MonoBehaviour
 
     public void ExitScene()
     {
-#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-        Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-#endif
 #if (UNITY_EDITOR)
         UnityEditor.EditorApplication.isPlaying = false;
-#elif (UNITY_STANDALONE)
-    Application.Quit();
+#else
+        Application.Quit();
 #endif
     }
 
