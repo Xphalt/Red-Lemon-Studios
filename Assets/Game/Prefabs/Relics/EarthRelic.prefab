@@ -1030,8 +1030,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.33
-  m_Height: 1.21
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!114 &6984414929879696740
@@ -1048,6 +1048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 4800386003923182298}
   relicType: 3
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  sfxScript: {fileID: 0}
   inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
@@ -1058,9 +1060,7 @@ MonoBehaviour:
   damageRecievedMultiplier: 0.8
   speedMultiplier: 0.8
   relicCooldownDuration: 4
-  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
   rotationSpeed: 90
-  sfxScript: {fileID: 0}
   collectionSound: PickupRelic
   activateSound: EarthRelic
   pillar: {fileID: 6984414929851687242}
