@@ -12,7 +12,6 @@ public class STController : MonoBehaviour
     private TextMeshProUGUI toolTipTextLeft;
     private TextMeshProUGUI toolTipTextRight;
     private RectTransform rect;
-    private int showInFrames = -1;
     private bool showNow = false;
     
     private void Awake()
@@ -60,18 +59,8 @@ public class STController : MonoBehaviour
 
     private void UpdateShow()
     {
-        if (showInFrames == -1)
-            return;
-
-        if (showInFrames == 0)
-            showNow = true;
-
         if (showNow)
-        {
             rect.position = Input.mousePosition;
-        }
-
-        showInFrames -= 1;
     }
 
     public void SetRawText(string text, TextAlign align = TextAlign.Left)
@@ -125,15 +114,11 @@ public class STController : MonoBehaviour
 
     public void ShowTooltip()
     {
-        // After 2 frames, showNow will be set to TRUE
-        // after that the frame count wont matter
-        if (showInFrames == -1)
-            showInFrames = 2;
+        showNow = true;
     }
 
     public void HideTooltip()
     {
-        showInFrames = -1;
         showNow = false;
         rect.anchoredPosition = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
     }

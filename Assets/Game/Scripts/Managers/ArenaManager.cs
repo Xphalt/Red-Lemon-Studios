@@ -36,7 +36,6 @@ public class ArenaManager : MonoBehaviour
     internal bool bCheckpointReady = false;
     #endregion
 
-    #region UnityCallbacks
     private void Awake()
     {
         if (AutoFind)
@@ -134,7 +133,6 @@ public class ArenaManager : MonoBehaviour
             bCheckpointReady = bEndRelicCollected;
         }
     }
-    #endregion
 
     public void SpawnNextWave()
     {

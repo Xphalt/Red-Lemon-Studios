@@ -52,19 +52,12 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         return Instantiate(Resources.Load<GameObject>("SimpleTooltip")).GetComponentInChildren<STController>();
     }
 
+    /*
     private void OnMouseOver()
     {
         if (isUIObject)
             return;
 
-        if (eventSystem)
-        {
-            if (eventSystem.IsPointerOverGameObject())
-            {
-                HideTooltip();
-                return;
-            }
-        }
         ShowTooltip();
     }
 
@@ -74,23 +67,27 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return;
         HideTooltip();
     }
+    */
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isUIObject)
-            return;
-        ShowTooltip();
+        //if (!isUIObject)
+        //    return;
+        //ShowTooltip();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isUIObject)
-            return;
-        HideTooltip();
+        //if (!isUIObject)
+        //    return;
+        //HideTooltip();
     }
+    
 
     public void ShowTooltip()
     {
+        if (showing)
+            return;
         showing = true;
         cursorInside = true;
 

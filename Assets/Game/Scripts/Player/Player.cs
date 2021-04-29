@@ -10,6 +10,7 @@ public class Player : CharacterBase
     private Dictionary<string, bool> axisActive = new Dictionary<string, bool>();
     private bool switchingRelics = false;
     private bool paused = false;
+    private SimpleTooltip activeToolTip;
 
     internal Dictionary<ElementTypes, int> Ammo = new Dictionary<ElementTypes, int>();
 
@@ -79,18 +80,38 @@ public class Player : CharacterBase
         //If relic is in use
         if (currentRelic != null)
         {
-            if (!currentRelic.readyToUse)
-                userInterface.UpdateRelicTimer(currentRelic.cooldownTimer);
+            if (!currentRelic.readyToUse) userInterface.UpdateRelicTimer(currentRelic.cooldownTimer);
         }
 
-        bool enemyScanned = false;
-        if (Physics.Raycast(GetForwardRay(), out RaycastHit enemyScan, shootTargetDistance)) enemyScanned = enemyScan.transform.CompareTag("Enemy");
+        ScanObjects();
+    }
 
+    private void ScanObjects()
+    {
+        bool enemyScanned = false;
+        bool toolTipScanned = false;
+        if (Physics.Raycast(GetForwardRay(), out RaycastHit objectScan, shootTargetDistance))
+        {
+            enemyScanned = objectScan.transform.CompareTag("Enemy");
+            if (objectScan.transform.TryGetComponent(out SimpleTooltip toolTip))
+            {
+                if (activeToolTip != toolTip)
+                {
+                    if (activeToolTip) activeToolTip.HideTooltip();
+                    activeToolTip = toolTip;
+                }
+                activeToolTip.ShowTooltip();
+                toolTipScanned = true;
+            }
+        }
+
+        if (!toolTipScanned && activeToolTip) activeToolTip.HideTooltip();
         userInterface.HighlightCrosshair(enemyScanned);
     }
+
     /*_______________________________________________________________________________________________________________
-    Player movement code
-    _________________________________________________________________________________________________________________*/
+Player movement code
+_________________________________________________________________________________________________________________*/
 
     private void Inputs()
     {
