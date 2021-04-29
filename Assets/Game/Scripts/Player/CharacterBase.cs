@@ -190,17 +190,14 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void MissShot(float bulletDamage)
     {
-        if (missPenalty) TakeDamage(bulletDamage * (damagePercentRecievedOnMiss / 100));
+        if (missPenalty && hitCombo > 1) TakeDamage(bulletDamage * (damagePercentRecievedOnMiss / 100));
         hitCombo = 0;
     }
 
     public virtual void TakeDamage(float value, ElementTypes damageType=ElementTypes.ElementTypesSize)
     {
         if (!immortal) curHealth -= value * damageRecievedMultiplier;     
-        if (curHealth <= 0)
-        {
-            Die();
-        }
+        if (curHealth <= 0) Die();
     }
 
     public virtual void Immortalise()
@@ -238,7 +235,6 @@ public class CharacterBase : MonoBehaviour
     }
 
     #region Relic
-
     public virtual void AddRelic(GameObject newRelic, bool playSound=false)
     {
         RelicBase relicScript = newRelic.GetComponent<RelicBase>();
@@ -318,8 +314,6 @@ public class CharacterBase : MonoBehaviour
 
         damageRecievedMultiplier = currentRelic.damageRecievedMultiplier;
         speedMultiplier = currentRelic.speedMultiplier;
-
-        hitCombo = 0;
     }
     #endregion
 
