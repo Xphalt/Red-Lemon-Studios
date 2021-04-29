@@ -83,7 +83,7 @@ public class Player : CharacterBase
             if (!currentRelic.readyToUse) userInterface.UpdateRelicTimer(currentRelic.cooldownTimer);
         }
 
-        ScanObjects();
+        if (!paused) ScanObjects();
     }
 
     private void ScanObjects()
@@ -198,6 +198,7 @@ ________________________________________________________________________________
         {
             pausedSound.TransitionTo(0);
             sfxScript.PauseSFX();
+            if (activeToolTip) activeToolTip.HideTooltip();
         }
         else
         {

@@ -309,7 +309,7 @@ MonoBehaviour:
   lightGreen: {r: 0.19215688, g: 0.38823533, b: 0.15294118, a: 1}
   scrollSelected: {r: 0.4528302, g: 0.3007476, b: 0.3007476, a: 1}
   scrollNormal: {r: 0.20784314, g: 0.13725491, b: 0.13725491, a: 1}
-  homeMenu: Scenes/Levels/MainMenu
+  homeMenu: Scenes/MainMenu
   pausePanel: {fileID: 6086566466049610495}
   toolbarPanel: {fileID: 2958121106303531915}
   controlsPanel: {fileID: 1950626760362389784}
@@ -322,47 +322,20 @@ MonoBehaviour:
   - "ACTIVE EFFECT:\nDash\r\n\nPASSIVE EFFECTS:\r\n\uF0A7+Damage increases 10% per
     hit (caps at double damage)\n\n\uF0A7-Reset combo and take 10% damage on miss"
   - "ACTIVE EFFECT: \nHeal over time at the cost of water ammo\n\nPASSIVE EFFECTS:\r\n\uF0A7+25%
-    move speed when not in use\n\n\uF0A7-25% extra damage recieved "
+    move speed increase when not in use\n\n\uF0A7-25% extra damage recieved"
   - "ACTIVE EFFECT: \nGrapple towards target\n\nPASSIVE EFFECTS:\r\n\uF0A7+Double
     jump\n\n\uF0A7-Twice as vulnerable to knockback"
   - "ACTIVE EFFECT: \nRaise pillar to launch yourself up and enemies away\n\nPASSIVE
     EFFECTS:\r\n\uF0A7+20% less damage recieved\n\n\uF0A7-20% move speed reduction"
   AmmoDescription:
-  - 'EFFECT: Stun air enemies and apply a D.O.T
-
-
-    STRONG AGAINST: Air (+50% damage)
-
-
-    WEAK
-    AGAINST: Water (-30% damage)'
-  - 'EFFECT: Prevent fire enemies from exploding on death
-
-
-    STRONG AGAINST: Fire
-    (+50% damage)
-
-
-    WEAK AGAINST: Earth (-30% damage)'
-  - 'EFFECT: Knock earth enemies away
-
-
-    STRONG AGAINST: Earth (+50% damage)
-
-
-    WEAK
-    AGAINST: Fire (-30% damage)'
-  - 'EFFECT: Slow water enemies*
-
-
-    STRONG AGAINST: Water (+50% damage)
-
-
-    WEAK
-    AGAINST: Air (-30% damage)
-
-
-    *Water enemy pending'
+  - "EFFECT: \nStun air enemies and apply a D.O.T\n\nSTRONG AGAINST: \nAir (+50%
+    damage)\n\nWEAK AGAINST: \nWater (-30% damage)"
+  - "EFFECT: \nPrevent fire enemies from exploding on death\n\nSTRONG AGAINST: \nFire
+    (+50% damage)\n\nWEAK AGAINST: \nEarth (-30% damage)"
+  - "EFFECT: \nKnock earth enemies away\n\nSTRONG AGAINST: \nEarth (+50% damage)\n\nWEAK
+    AGAINST: \nFire (-30% damage)"
+  - "EFFECT: \nSlow water enemies*\n\nSTRONG AGAINST: \nWater (+50% damage)\n\nWEAK
+    AGAINST: \nAir (-30% damage)\n\n*Water enemy pending"
   ToolNameHolder: {fileID: 5487588858774612583}
   ToolInfoHolder: {fileID: 5934713042130774284}
   ImageHolder: {fileID: 7446460850101496277}
@@ -931,7 +904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.009166664, y: 0.046000004}
   m_AnchorMax: {x: 0.03216667, y: 0.753}
-  m_AnchoredPosition: {x: 0, y: 0.49996948}
+  m_AnchoredPosition: {x: 0, y: 0.5}
   m_SizeDelta: {x: -39.847656, y: 317}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2315368836519472839
@@ -1958,13 +1931,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
-    - target: {fileID: 2032968634767864588, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+    - target: {fileID: 2667817498442996829, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.9555664
+      value: -0.014953613
       objectReference: {fileID: 0}
-    - target: {fileID: 2032968634767864588, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+    - target: {fileID: 2667817498442996829, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.053466797
+      value: -0.06555176
       objectReference: {fileID: 0}
     - target: {fileID: 2838621762294200075, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1994,6 +1967,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 4505299052889486038, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.29919434
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505299052889486038, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.8679199
+      objectReference: {fileID: 0}
     - target: {fileID: 5977660581921066347, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.0001984
@@ -2022,6 +2003,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285655825787680742}
+    - target: {fileID: 7140974119600722958, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.008361816
+      objectReference: {fileID: 0}
     - target: {fileID: 7843999041066900997, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -2.5
@@ -2031,8 +2016,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 285655825787680742}
     - target: {fileID: 8823775862779689751, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -1.5
+      propertyPath: m_AnchoredPosition.x
+      value: 0.072753906
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052653454118348928, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.3298645
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a28fadc13d8d0e4c8cbb0377d1177ad, type: 3}
@@ -2104,6 +2093,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114092713474056070, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.072753906
+      objectReference: {fileID: 0}
     - target: {fileID: 2972112932793934637, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2116,6 +2109,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5000076
       objectReference: {fileID: 0}
+    - target: {fileID: 7131282518639244144, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 285655825787680742}
     - target: {fileID: 7956025593126804951, guid: 67bfaf34cb3921f4db1bdd06a6ddd761, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2683,6 +2680,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8803972191420642508, guid: b1e9ec2c31b352349be36af7248a767b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.37323
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1e9ec2c31b352349be36af7248a767b, type: 3}
 --- !u!114 &5660974402485735887 stripped
@@ -3234,7 +3235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8205548009360085518, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -23.565643
+      value: -23.565704
       objectReference: {fileID: 0}
     - target: {fileID: 8205548009360085518, guid: 6c0beceb336f6524aa8f4efb31b65036, type: 3}
       propertyPath: m_AnchoredPosition.y

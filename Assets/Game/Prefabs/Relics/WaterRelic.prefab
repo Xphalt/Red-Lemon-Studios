@@ -1589,6 +1589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 4383185084371700692}
   relicType: 1
+  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
+  sfxScript: {fileID: 0}
   inArena: 0
   maxCombo: 1
   percentIncreasePerHit: 0
@@ -1599,9 +1601,7 @@ MonoBehaviour:
   damageRecievedMultiplier: 1.25
   speedMultiplier: 1.25
   relicCooldownDuration: 4
-  collectedRotation: {x: 0, y: 0, z: 0, w: 1}
   rotationSpeed: 90
-  sfxScript: {fileID: 0}
   collectionSound: PickupRelic
   activateSound: WaterRelic
   healAmount: 1
@@ -1636,8 +1636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: a104288cd74ebc84d80f27ae9b51d26c, type: 2}
-  infoLeft: "\"----------------------------------------------\r\n\"Effect: Heals
-    damage taken.\n\"Press Q for more information.\r"
+  infoLeft: "----------------------------------------------\r\nEffect: Heals damage
+    taken.\nPress Q for more information.\r"
   infoRight: '@Water'
 --- !u!199 &-5631559035533485520
 ParticleSystemRenderer:
